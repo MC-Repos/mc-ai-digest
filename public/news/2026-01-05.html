@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-01-05</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-01-05</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00777" style="color:#4ea8ff;">Investigating the Viability of Employing Multi-modal Large Language Models in the Context of Audio Deepfake Detection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper investigates whether Multimodal Large Language Models (MLLMs) like Qwen2-Audio-7B-Instruct and SALMONN can detect audio deepfakes by combining audio inputs with crafted text prompts for feature-guided reasoning, testing both zero-shot and fine-tuned evaluation modes. The approach leverages cross-modal understanding to enable robust feature learning for audio authenticity detection, addressing a gap where MLLMs have succeeded in image/video deepfake detection but remain largely unexplored for audio. The work suggests that context-rich, question-answer prompts may facilitate deeper multimodal understanding, offering a potential alternative to traditional audio-specific deepfake detection architectures.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Investigating the Viability of Employing Multi-modal Large Language Models in the Context of Audio Deepfake Detection", "This paper investigates whether Multimodal Large Language Models (MLLMs) like Qwen2-Audio-7B-Instruct and SALMONN can detect audio deepfakes by combining audio inputs with crafted text prompts for feature-guided reasoning, testing both zero-shot and fine-tuned evaluation modes. The approach leverages cross-modal understanding to enable robust feature learning for audio authenticity detection, addressing a gap where MLLMs have succeeded in image/video deepfake detection but remain largely unexplored for audio. The work suggests that context-rich, question-answer prompts may facilitate deeper multimodal understanding, offering a potential alternative to traditional audio-specific deepfake detection architectures.", "https://arxiv.org/abs/2601.00777")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.22905" style="color:#4ea8ff;">JavisGPT: A Unified Multi-modal LLM for Sounding-Video Comprehension and Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>JavisGPT introduces the first unified MLLM for joint audio-video comprehension and generation through an encoder-LLM-decoder architecture with a novel SyncFusion module that performs spatio-temporal audio-video fusion and maintains temporal coherence. The model leverages a three-stage training pipeline (pretraining, fine-tuning, instruction-tuning) and a 200K+ curated instruction dataset (JavisInst-Omni) to enable multimodal understanding and synchronized audio-video generation from natural language instructions. This represents a significant step toward end-to-end multimodal AI systems that can understand and generate temporally coherent audiovisual content, with practical applications in video synthesis, accessibility, and creative content generation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "JavisGPT: A Unified Multi-modal LLM for Sounding-Video Comprehension and Generation", "JavisGPT introduces the first unified MLLM for joint audio-video comprehension and generation through an encoder-LLM-decoder architecture with a novel SyncFusion module that performs spatio-temporal audio-video fusion and maintains temporal coherence. The model leverages a three-stage training pipeline (pretraining, fine-tuning, instruction-tuning) and a 200K+ curated instruction dataset (JavisInst-Omni) to enable multimodal understanding and synchronized audio-video generation from natural language instructions. This represents a significant step toward end-to-end multimodal AI systems that can understand and generate temporally coherent audiovisual content, with practical applications in video synthesis, accessibility, and creative content generation.", "https://arxiv.org/abs/2512.22905")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00217" style="color:#4ea8ff;">Latent Flow Matching for Expressive Singing Voice Synthesis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>FM-Singer addresses the prior-posterior mismatch problem in cVAE-based singing voice synthesis by introducing conditional flow matching in latent space, which learns a continuous vector field that transports prior samples toward posterior latents via optimal-transport-inspired paths. At inference, an ODE solver refines prior latents before waveform generation, enabling fine-grained expressiveness improvements (vibrato, micro-prosody) without sacrificing the parallel decoding efficiency of VAE-based systems. This approach elegantly bridges the train-test distribution gap that typically degrades synthesis quality in conditional generative models for audio.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Latent Flow Matching for Expressive Singing Voice Synthesis", "FM-Singer addresses the prior-posterior mismatch problem in cVAE-based singing voice synthesis by introducing conditional flow matching in latent space, which learns a continuous vector field that transports prior samples toward posterior latents via optimal-transport-inspired paths. At inference, an ODE solver refines prior latents before waveform generation, enabling fine-grained expressiveness improvements (vibrato, micro-prosody) without sacrificing the parallel decoding efficiency of VAE-based systems. This approach elegantly bridges the train-test distribution gap that typically degrades synthesis quality in conditional generative models for audio.", "https://arxiv.org/abs/2601.00217")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00306" style="color:#4ea8ff;">The Generative AI Paradox: GenAI and the Erosion of Trust, the Corrosion of Information Verification, and the Demise of Truth</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#6b7280;">⚡ 25</span></div>
+  <p>This arXiv paper argues that GenAI's core threat isn't isolated deepfakes but the systemic erosion of trust infrastructure through synthetic realities—coherent, interactive environments where content, identity, and interaction are jointly generated and self-reinforcing, making verification at scale technically infeasible. The authors reframe the problem as a socio-technical shift requiring examination of institutional practices rather than treating GenAI harms as incremental extensions of traditional misinformation. This suggests downstream implications for cryptographic verification, provenance systems, and architectural approaches to maintaining epistemic integrity in GenAI-saturated information ecosystems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "The Generative AI Paradox: GenAI and the Erosion of Trust, the Corrosion of Information Verification, and the Demise of Truth", "This arXiv paper argues that GenAI's core threat isn't isolated deepfakes but the systemic erosion of trust infrastructure through synthetic realities—coherent, interactive environments where content, identity, and interaction are jointly generated and self-reinforcing, making verification at scale technically infeasible. The authors reframe the problem as a socio-technical shift requiring examination of institutional practices rather than treating GenAI harms as incremental extensions of traditional misinformation. This suggests downstream implications for cryptographic verification, provenance systems, and architectural approaches to maintaining epistemic integrity in GenAI-saturated information ecosystems.", "https://arxiv.org/abs/2601.00306")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00504" style="color:#4ea8ff;">MotionPhysics: Learnable Motion Distillation for Text-Guided Simulation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>MotionPhysics introduces a text-guided physics simulation framework that leverages multimodal LLMs for material parameter estimation and distills motion priors from pretrained video diffusion models to infer realistic physical behavior without ground-truth trajectories. The key innovation is the learnable motion distillation loss that extracts dynamic motion semantics from generative models while decoupling appearance and geometry, enabling end-to-end differentiable parameter optimization from natural language alone. This approach significantly reduces expert tuning overhead for 3D simulation, potentially democratizing physics-based animation for non-specialists while bridging the gap between generative AI models and traditional physics engines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MotionPhysics: Learnable Motion Distillation for Text-Guided Simulation", "MotionPhysics introduces a text-guided physics simulation framework that leverages multimodal LLMs for material parameter estimation and distills motion priors from pretrained video diffusion models to infer realistic physical behavior without ground-truth trajectories. The key innovation is the learnable motion distillation loss that extracts dynamic motion semantics from generative models while decoupling appearance and geometry, enabling end-to-end differentiable parameter optimization from natural language alone. This approach significantly reduces expert tuning overhead for 3D simulation, potentially democratizing physics-based animation for non-specialists while bridging the gap between generative AI models and traditional physics engines.", "https://arxiv.org/abs/2601.00504")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00664" style="color:#4ea8ff;">Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Avatar Forcing introduces a diffusion forcing-based framework for generating interactive talking head avatars that respond in real-time to multimodal user inputs (audio, motion) with low-latency causal constraints, addressing the interaction authenticity gap in current one-way talking head models. The approach combines real-time motion generation under causality constraints with direct preference optimization to learn expressive reactions without requiring additional labeled data. This enables avatars to naturally react to verbal and non-verbal cues (speech, nods, laughter), significantly advancing practical virtual communication and metaverse applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation", "Avatar Forcing introduces a diffusion forcing-based framework for generating interactive talking head avatars that respond in real-time to multimodal user inputs (audio, motion) with low-latency causal constraints, addressing the interaction authenticity gap in current one-way talking head models. The approach combines real-time motion generation under causality constraints with direct preference optimization to learn expressive reactions without requiring additional labeled data. This enables avatars to naturally react to verbal and non-verbal cues (speech, nods, laughter), significantly advancing practical virtual communication and metaverse applications.", "https://arxiv.org/abs/2601.00664")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00051" style="color:#4ea8ff;">TeleWorld: Towards Dynamic Multimodal Synthesis with a 4D World Model</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>TeleWorld presents a 4D world modeling framework that addresses critical limitations in current video generation by introducing a closed-loop generation-reconstruction-guidance paradigm—where generated video streams are continuously reconstructed into dynamic spatio-temporal representations that feed back to guide subsequent generation, ensuring spatial-temporal-physical consistency. This approach enables real-time multimodal synthesis with long-horizon coherence and persistent scene memory, moving beyond static video generation toward interactive, practical world models suitable for embodied AI systems. The key innovation lies in treating world modeling as a bidirectional process rather than forward-only generation, enabling both improved consistency and the potential for real-time user interaction within coherent virtual environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TeleWorld: Towards Dynamic Multimodal Synthesis with a 4D World Model", "TeleWorld presents a 4D world modeling framework that addresses critical limitations in current video generation by introducing a closed-loop generation-reconstruction-guidance paradigm—where generated video streams are continuously reconstructed into dynamic spatio-temporal representations that feed back to guide subsequent generation, ensuring spatial-temporal-physical consistency. This approach enables real-time multimodal synthesis with long-horizon coherence and persistent scene memory, moving beyond static video generation toward interactive, practical world models suitable for embodied AI systems. The key innovation lies in treating world modeling as a bidirectional process rather than forward-only generation, enabling both improved consistency and the potential for real-time user interaction within coherent virtual environments.", "https://arxiv.org/abs/2601.00051")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00504" style="color:#4ea8ff;">MotionPhysics: Learnable Motion Distillation for Text-Guided Simulation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>MotionPhysics introduces a text-guided physics simulation framework that automatically infers material parameters and dynamic behavior from natural language prompts using multimodal LLMs and learnable motion distillation from video diffusion models—eliminating manual parameter tuning and dependency on ground-truth trajectories. The key innovation is extracting motion priors directly from pretrained diffusion models while decoupling appearance/geometry constraints, enabling physically plausible simulations across diverse 3D scenes without paired training data. This approach bridges generative AI and physics simulation, potentially democratizing realistic 3D scene animation for developers without domain expertise.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MotionPhysics: Learnable Motion Distillation for Text-Guided Simulation", "MotionPhysics introduces a text-guided physics simulation framework that automatically infers material parameters and dynamic behavior from natural language prompts using multimodal LLMs and learnable motion distillation from video diffusion models—eliminating manual parameter tuning and dependency on ground-truth trajectories. The key innovation is extracting motion priors directly from pretrained diffusion models while decoupling appearance/geometry constraints, enabling physically plausible simulations across diverse 3D scenes without paired training data. This approach bridges generative AI and physics simulation, potentially democratizing realistic 3D scene animation for developers without domain expertise.", "https://arxiv.org/abs/2601.00504")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00626" style="color:#4ea8ff;">HyperPriv-EPN: Hypergraph Learning with Privileged Knowledge for Ependymoma Prognosis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#6b7280;">⚡ 25</span></div>
+  <p>HyperPriv-EPN introduces a novel hypergraph-based Learning Using Privileged Information (LUPI) framework that leverages post-operative surgical reports as privileged knowledge to improve preoperative ependymoma prognosis from MRI alone. The key innovation is a "Severed Graph Strategy" using dual-stream distillation where a Teacher graph enriched with surgical data guides a Student graph to learn semantic community structures from visual features, enabling knowledge transfer without requiring text data at inference time. Validated on 311 multi-center patients, this approach achieves SOTA diagnostic accuracy and survival stratification—demonstrating practical value for clinical deployment where privileged surgical information is unavailable during real-time prognosis.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "HyperPriv-EPN: Hypergraph Learning with Privileged Knowledge for Ependymoma Prognosis", "HyperPriv-EPN introduces a novel hypergraph-based Learning Using Privileged Information (LUPI) framework that leverages post-operative surgical reports as privileged knowledge to improve preoperative ependymoma prognosis from MRI alone. The key innovation is a \"Severed Graph Strategy\" using dual-stream distillation where a Teacher graph enriched with surgical data guides a Student graph to learn semantic community structures from visual features, enabling knowledge transfer without requiring text data at inference time. Validated on 311 multi-center patients, this approach achieves SOTA diagnostic accuracy and survival stratification—demonstrating practical value for clinical deployment where privileged surgical information is unavailable during real-time prognosis.", "https://arxiv.org/abs/2601.00626")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00678" style="color:#4ea8ff;">Pixel-to-4D: Camera-Controlled Image-to-Video Generation with Dynamic 3D Gaussians</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>**Pixel-to-4D** addresses camera-controlled image-to-video generation by using dynamic 3D Gaussians as an explicit intermediate representation, enabling precise camera trajectory control while maintaining temporal coherence and geometric consistency—a significant improvement over two-stage approaches that decouple camera and object motion. This approach bridges the gap between single-image video generation models and user-controllable synthesis, with critical implications for content creation, VFX, and 3D scene understanding pipelines that require both photorealism and predictable camera dynamics.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Pixel-to-4D: Camera-Controlled Image-to-Video Generation with Dynamic 3D Gaussians", "**Pixel-to-4D** addresses camera-controlled image-to-video generation by using dynamic 3D Gaussians as an explicit intermediate representation, enabling precise camera trajectory control while maintaining temporal coherence and geometric consistency—a significant improvement over two-stage approaches that decouple camera and object motion. This approach bridges the gap between single-image video generation models and user-controllable synthesis, with critical implications for content creation, VFX, and 3D scene understanding pipelines that require both photorealism and predictable camera dynamics.", "https://arxiv.org/abs/2601.00678")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00664" style="color:#4ea8ff;">Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Avatar Forcing introduces a diffusion forcing-based framework for real-time interactive head avatar generation that processes multimodal inputs (audio + motion) under causal constraints, enabling sub-100ms latency responses to user verbal and non-verbal cues. The approach addresses a critical gap in existing talking head models by combining diffusion-based motion generation with direct preference optimization, enabling expressive avatar reactions without requiring additional labeled training data. This has significant implications for virtual communication and content creation systems requiring genuine bidirectional interactivity rather than one-way responses.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Avatar Forcing: Real-Time Interactive Head Avatar Generation for Natural Conversation", "Avatar Forcing introduces a diffusion forcing-based framework for real-time interactive head avatar generation that processes multimodal inputs (audio + motion) under causal constraints, enabling sub-100ms latency responses to user verbal and non-verbal cues. The approach addresses a critical gap in existing talking head models by combining diffusion-based motion generation with direct preference optimization, enabling expressive avatar reactions without requiring additional labeled training data. This has significant implications for virtual communication and content creation systems requiring genuine bidirectional interactivity rather than one-way responses.", "https://arxiv.org/abs/2601.00664")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.02660" style="color:#4ea8ff;">Spatially-Grounded Document Retrieval via Patch-to-Region Relevance Propagation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper presents a hybrid retrieval architecture that combines ColPali's fine-grained patch-level visual similarity scoring with OCR-extracted text regions and bounding boxes, enabling sub-page-level document retrieval for RAG applications. The key innovation is formalizing the coordinate mapping between vision transformer patch grids and OCR bounding boxes with intersection metrics for relevance propagation, bridging semantic visual understanding with structured spatial information. This addresses a critical gap where existing page-level retrieval lacks the granularity needed for precise context extraction, while pure OCR systems lack semantic relevance scoring.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Spatially-Grounded Document Retrieval via Patch-to-Region Relevance Propagation", "This paper presents a hybrid retrieval architecture that combines ColPali's fine-grained patch-level visual similarity scoring with OCR-extracted text regions and bounding boxes, enabling sub-page-level document retrieval for RAG applications. The key innovation is formalizing the coordinate mapping between vision transformer patch grids and OCR bounding boxes with intersection metrics for relevance propagation, bridging semantic visual understanding with structured spatial information. This addresses a critical gap where existing page-level retrieval lacks the granularity needed for precise context extraction, while pure OCR systems lack semantic relevance scoring.", "https://arxiv.org/abs/2512.02660")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.17168" style="color:#4ea8ff;">StyGazeTalk: Learning Stylized Generation of Gaze and Head Dynamics</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>StyGazeTalk introduces a multimodal framework that synthesizes stylized gaze-head dynamics synchronized with audio input, addressing the limitation of prior work that models facial components in isolation by enabling personalized, style-aware behavior generation. The authors contribute HAGE, a high-precision dataset combining eye-tracking, audio, head pose, and 3D facial parameters, which supports training models that produce temporally coherent outputs with consistent stylistic characteristics. This approach has direct applications in improving realism for virtual agents, telepresence systems, and 3D face animation by moving beyond generic facial motion synthesis to style-conditioned generation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "StyGazeTalk: Learning Stylized Generation of Gaze and Head Dynamics", "StyGazeTalk introduces a multimodal framework that synthesizes stylized gaze-head dynamics synchronized with audio input, addressing the limitation of prior work that models facial components in isolation by enabling personalized, style-aware behavior generation. The authors contribute HAGE, a high-precision dataset combining eye-tracking, audio, head pose, and 3D facial parameters, which supports training models that produce temporally coherent outputs with consistent stylistic characteristics. This approach has direct applications in improving realism for virtual agents, telepresence systems, and 3D face animation by moving beyond generic facial motion synthesis to style-conditioned generation.", "https://arxiv.org/abs/2509.17168")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00217" style="color:#4ea8ff;">Latent Flow Matching for Expressive Singing Voice Synthesis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>**FM-Singer** addresses the prior-posterior mismatch problem in cVAE-based singing synthesis by introducing conditional flow matching in latent space, using an ODE-based refinement process that transports prior samples toward posterior latents along optimal-transport paths. This approach improves fine-grained expressiveness (vibrato, micro-prosody) at inference without sacrificing the computational efficiency of parallel waveform decoding. The method bridges the training-inference gap that degrades synthesis quality by learning a continuous vector field rather than relying on discrete latent distributions.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Latent Flow Matching for Expressive Singing Voice Synthesis", "**FM-Singer** addresses the prior-posterior mismatch problem in cVAE-based singing synthesis by introducing conditional flow matching in latent space, using an ODE-based refinement process that transports prior samples toward posterior latents along optimal-transport paths. This approach improves fine-grained expressiveness (vibrato, micro-prosody) at inference without sacrificing the computational efficiency of parallel waveform decoding. The method bridges the training-inference gap that degrades synthesis quality by learning a continuous vector field rather than relying on discrete latent distributions.", "https://arxiv.org/abs/2601.00217")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.00004" style="color:#4ea8ff;">Finetuning Large Language Models for Automated Depression Screening in Nigerian Pidgin English: GENSCORE Pilot Study</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 62</span></div>
+  <p>This study addresses healthcare accessibility gaps in Nigeria by fine-tuning LLMs to conduct automated depression screening in Nigerian Pidgin English, circumventing language barriers that limit PHQ-9 adoption in low-resource settings. The researchers curated a 432-sample dataset of Pidgin audio responses with extensive preprocessing including semantic labeling and idiom interpretation—critical preprocessing steps for handling linguistic nuances in under-resourced languages. The approach demonstrates practical potential for scaling mental health screening in linguistically diverse populations where standard Western clinical tools and clinician access are severely constrained.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Finetuning Large Language Models for Automated Depression Screening in Nigerian Pidgin English: GENSCORE Pilot Study", "This study addresses healthcare accessibility gaps in Nigeria by fine-tuning LLMs to conduct automated depression screening in Nigerian Pidgin English, circumventing language barriers that limit PHQ-9 adoption in low-resource settings. The researchers curated a 432-sample dataset of Pidgin audio responses with extensive preprocessing including semantic labeling and idiom interpretation—critical preprocessing steps for handling linguistic nuances in under-resourced languages. The approach demonstrates practical potential for scaling mental health screening in linguistically diverse populations where standard Western clinical tools and clinician access are severely constrained.", "https://arxiv.org/abs/2601.00004")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
