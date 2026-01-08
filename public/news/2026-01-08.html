@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-01-08</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-01-08</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02927" style="color:#4ea8ff;">PrismVAU: Prompt-Refined Inference System for Multimodal Video Anomaly Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>PrismVAU introduces a two-stage VAU system that combines lightweight textual anchor-based anomaly scoring with MLLM-driven contextual refinement, eliminating expensive fine-tuning and external modules while maintaining real-time performance. The approach uses automatic prompt engineering with weak supervision to optimize both detection and explanation, enabling a single off-the-shelf MLLM to handle anomaly scoring, description, and reasoning without costly annotation pipelines or inference overhead.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PrismVAU: Prompt-Refined Inference System for Multimodal Video Anomaly Understanding", "PrismVAU introduces a two-stage VAU system that combines lightweight textual anchor-based anomaly scoring with MLLM-driven contextual refinement, eliminating expensive fine-tuning and external modules while maintaining real-time performance. The approach uses automatic prompt engineering with weak supervision to optimize both detection and explanation, enabling a single off-the-shelf MLLM to handle anomaly scoring, description, and reasoning without costly annotation pipelines or inference overhead.", "https://arxiv.org/abs/2601.02927")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.23379" style="color:#4ea8ff;">SoulX-FlashTalk: Real-Time Infinite Streaming of Audio-Driven Avatars via Self-Correcting Bidirectional Distillation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SoulX-FlashTalk addresses real-time audio-driven avatar generation by introducing Self-Correcting Bidirectional Distillation, which maintains bidirectional attention within video chunks rather than enforcing strictly unidirectional mechanisms, thereby preserving spatiotemporal correlations and improving motion coherence. The 14B-parameter framework incorporates a Multi-step Retrospective Self-Correction Mechanism to stabilize infinite-duration generation while meeting strict latency constraints, offering a practical solution to the computational load vs. real-time performance tradeoff that plagues existing diffusion-based approaches.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SoulX-FlashTalk: Real-Time Infinite Streaming of Audio-Driven Avatars via Self-Correcting Bidirectional Distillation", "SoulX-FlashTalk addresses real-time audio-driven avatar generation by introducing Self-Correcting Bidirectional Distillation, which maintains bidirectional attention within video chunks rather than enforcing strictly unidirectional mechanisms, thereby preserving spatiotemporal correlations and improving motion coherence. The 14B-parameter framework incorporates a Multi-step Retrospective Self-Correction Mechanism to stabilize infinite-duration generation while meeting strict latency constraints, offering a practical solution to the computational load vs. real-time performance tradeoff that plagues existing diffusion-based approaches.", "https://arxiv.org/abs/2512.23379")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.04073" style="color:#4ea8ff;">Analyzing Reasoning Consistency in Large Multimodal Models under Cross-Modal Conflicts</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 24</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper identifies **textual inertia** as a critical failure mode in Large Multimodal Models where erroneous text in reasoning chains causes models to ignore conflicting visual evidence, systematically evaluated via the LogicGraph Perturbation Protocol across diverse LMM architectures. The study reveals poor self-correction rates (&lt;10%) and proposes Active Visual-Context Refinement, a training-free inference method to mitigate blind error propagation in multimodal reasoning chains. The findings highlight fundamental robustness gaps in CoT reasoning for video understanding and suggest that cross-modal consistency verification is essential for production-grade LMMs.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Analyzing Reasoning Consistency in Large Multimodal Models under Cross-Modal Conflicts", "This paper identifies **textual inertia** as a critical failure mode in Large Multimodal Models where erroneous text in reasoning chains causes models to ignore conflicting visual evidence, systematically evaluated via the LogicGraph Perturbation Protocol across diverse LMM architectures. The study reveals poor self-correction rates (&lt;10%) and proposes Active Visual-Context Refinement, a training-free inference method to mitigate blind error propagation in multimodal reasoning chains. The findings highlight fundamental robustness gaps in CoT reasoning for video understanding and suggest that cross-modal consistency verification is essential for production-grade LMMs.", "https://arxiv.org/abs/2601.04073")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.16925" style="color:#4ea8ff;">V-Agent: An Interactive Video Search System Using Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>V-Agent introduces a multi-agent architecture combining fine-tuned vision-language models (VLMs) with multimodal embeddings to enable context-aware video retrieval that jointly processes visual frames and ASR-transcribed audio in a shared representation space, overcoming traditional text-only retrieval limitations. The system's three-agent design (routing, search, and chat agents) enables interactive refinement of search results and user dialogue, with the core innovation being VLM fine-tuning on preference data paired with retrieval vector enhancement for more semantically accurate video-to-query matching. This approach has immediate applications for multimodal information retrieval systems that must balance visual understanding, speech comprehension, and conversational UX in real-world video search scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "V-Agent: An Interactive Video Search System Using Vision-Language Models", "V-Agent introduces a multi-agent architecture combining fine-tuned vision-language models (VLMs) with multimodal embeddings to enable context-aware video retrieval that jointly processes visual frames and ASR-transcribed audio in a shared representation space, overcoming traditional text-only retrieval limitations. The system's three-agent design (routing, search, and chat agents) enables interactive refinement of search results and user dialogue, with the core innovation being VLM fine-tuning on preference data paired with retrieval vector enhancement for more semantically accurate video-to-query matching. This approach has immediate applications for multimodal information retrieval systems that must balance visual understanding, speech comprehension, and conversational UX in real-world video search scenarios.", "https://arxiv.org/abs/2512.16925")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.01513" style="color:#4ea8ff;">FastV-RAG: Towards Fast and Fine-Grained Video QA with Retrieval-Augmented Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>FastV-RAG introduces a two-stage speculative decoding framework for efficient video QA, using a lightweight draft model to generate answer candidates that a heavyweight model verifies and refines, reducing inference latency while maintaining accuracy. The approach addresses knowledge retrieval errors through similarity-based entity filtering to improve alignment between retrieved facts and video content, tackling a critical failure mode in VLM-based RAG systems. This technique is particularly relevant for production video understanding applications requiring both speed and fine-grained reasoning over external knowledge bases.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FastV-RAG: Towards Fast and Fine-Grained Video QA with Retrieval-Augmented Generation", "FastV-RAG introduces a two-stage speculative decoding framework for efficient video QA, using a lightweight draft model to generate answer candidates that a heavyweight model verifies and refines, reducing inference latency while maintaining accuracy. The approach addresses knowledge retrieval errors through similarity-based entity filtering to improve alignment between retrieved facts and video content, tackling a critical failure mode in VLM-based RAG systems. This technique is particularly relevant for production video understanding applications requiring both speed and fine-grained reasoning over external knowledge bases.", "https://arxiv.org/abs/2601.01513")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02854" style="color:#4ea8ff;">M3MAD-Bench: Are Multi-Agent Debates Really Effective Across Domains and Modalities?</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>M3MAD-Bench introduces the first unified benchmark for evaluating Multi-Agent Debate (MAD) systems across diverse domains (knowledge, math, medicine, science, reasoning) and modalities (text and vision-language), addressing fragmentation in prior MAD research that relied on inconsistent evaluation protocols. The benchmark's standardized evaluation framework enables systematic assessment of whether agent debate mechanisms actually improve reasoning quality across different input modalities and task complexities, providing critical empirical validation for this emerging coordination paradigm. This work has immediate implications for researchers developing multi-agent reasoning systems, as it establishes baseline comparisons and identifies which MAD approaches generalize across domains versus those with domain-specific brittleness.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "M3MAD-Bench: Are Multi-Agent Debates Really Effective Across Domains and Modalities?", "M3MAD-Bench introduces the first unified benchmark for evaluating Multi-Agent Debate (MAD) systems across diverse domains (knowledge, math, medicine, science, reasoning) and modalities (text and vision-language), addressing fragmentation in prior MAD research that relied on inconsistent evaluation protocols. The benchmark's standardized evaluation framework enables systematic assessment of whether agent debate mechanisms actually improve reasoning quality across different input modalities and task complexities, providing critical empirical validation for this emerging coordination paradigm. This work has immediate implications for researchers developing multi-agent reasoning systems, as it establishes baseline comparisons and identifies which MAD approaches generalize across domains versus those with domain-specific brittleness.", "https://arxiv.org/abs/2601.02854")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02968" style="color:#4ea8ff;">Rationale-Grounded In-Context Learning for Time Series Reasoning with Multimodal Large Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This work addresses a critical limitation in multimodal LLMs for time series: the lack of causal reasoning bridges between observations and outcomes, which causes models to learn spurious correlations rather than principled logic. RationaleTS solves this by pre-computing label-conditioned reasoning paths (rationales) and using hybrid retrieval to inject relevant causal explanations into in-context learning, enabling more robust few-shot generalization across temporal domains. The approach represents a meaningful step toward interpretable, reasoning-grounded time series forecasting with foundation models, particularly relevant for domains where explainability and transfer learning are critical.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Rationale-Grounded In-Context Learning for Time Series Reasoning with Multimodal Large Language Models", "This work addresses a critical limitation in multimodal LLMs for time series: the lack of causal reasoning bridges between observations and outcomes, which causes models to learn spurious correlations rather than principled logic. RationaleTS solves this by pre-computing label-conditioned reasoning paths (rationales) and using hybrid retrieval to inject relevant causal explanations into in-context learning, enabling more robust few-shot generalization across temporal domains. The approach represents a meaningful step toward interpretable, reasoning-grounded time series forecasting with foundation models, particularly relevant for domains where explainability and transfer learning are critical.", "https://arxiv.org/abs/2601.02968")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02365" style="color:#4ea8ff;">FUSE : Failure-aware Usage of Subagent Evidence for MultiModal Search and Recommendation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>FUSE introduces a multimodal search/recommendation system for creative assistants that replaces expensive raw-image processing with a compact Grounded Design Representation (GDR)—a structured JSON encoding canvas elements, layout, styles, and selections—enabling efficient task routing across specialized subagents. The system implements failure-aware mechanisms and seven context budgeting strategies to handle failures at multiple stages (intent understanding, content selection, recall, ranking) while maintaining practical computational costs for production deployment. This approach balances multimodal reasoning capabilities with efficiency constraints, making it particularly relevant for resource-constrained creative workflow systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FUSE : Failure-aware Usage of Subagent Evidence for MultiModal Search and Recommendation", "FUSE introduces a multimodal search/recommendation system for creative assistants that replaces expensive raw-image processing with a compact Grounded Design Representation (GDR)—a structured JSON encoding canvas elements, layout, styles, and selections—enabling efficient task routing across specialized subagents. The system implements failure-aware mechanisms and seven context budgeting strategies to handle failures at multiple stages (intent understanding, content selection, recall, ranking) while maintaining practical computational costs for production deployment. This approach balances multimodal reasoning capabilities with efficiency constraints, making it particularly relevant for resource-constrained creative workflow systems.", "https://arxiv.org/abs/2601.02365")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02414" style="color:#4ea8ff;">MIAR: Modality Interaction and Alignment Representation Fuison for Multimodal Emotion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>MIAR addresses multimodal emotion recognition (MER) by introducing a feature interaction mechanism that generates modal tokens capturing cross-modal information extraction, while using contrastive learning for alignment—tackling the core limitation of prior fusion approaches that ignored distributional discrepancies and unequal modal contributions. The key innovation is treating modalities as interactive agents rather than independent streams, improving generalization across diverse feature representations from different textual models in language-vision-audio fusion scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MIAR: Modality Interaction and Alignment Representation Fuison for Multimodal Emotion", "MIAR addresses multimodal emotion recognition (MER) by introducing a feature interaction mechanism that generates modal tokens capturing cross-modal information extraction, while using contrastive learning for alignment—tackling the core limitation of prior fusion approaches that ignored distributional discrepancies and unequal modal contributions. The key innovation is treating modalities as interactive agents rather than independent streams, improving generalization across diverse feature representations from different textual models in language-vision-audio fusion scenarios.", "https://arxiv.org/abs/2601.02414")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02415" style="color:#4ea8ff;">Multimodal Sentiment Analysis based on Multi-channel and Symmetric Mutual Promotion Feature Fusion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper addresses multimodal sentiment analysis by proposing dual-channel feature extraction for visual and audio modalities combined with a Symmetric Mutual Promotion (SMP) fusion method that captures both inter-modal consistency *and* differences—moving beyond prior approaches that only leverage feature agreement. The key innovation is the symmetric architecture enabling bidirectional feature promotion between modalities, potentially improving emotional state recognition in human-computer interaction systems where unimodal or basic fusion methods leave emotional nuances undetected.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multimodal Sentiment Analysis based on Multi-channel and Symmetric Mutual Promotion Feature Fusion", "This paper addresses multimodal sentiment analysis by proposing dual-channel feature extraction for visual and audio modalities combined with a Symmetric Mutual Promotion (SMP) fusion method that captures both inter-modal consistency *and* differences—moving beyond prior approaches that only leverage feature agreement. The key innovation is the symmetric architecture enabling bidirectional feature promotion between modalities, potentially improving emotional state recognition in human-computer interaction systems where unimodal or basic fusion methods leave emotional nuances undetected.", "https://arxiv.org/abs/2601.02415")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02646" style="color:#4ea8ff;">DreamLoop: Controllable Cinemagraph Generation from a Single Photograph</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>DreamLoop adapts general video diffusion models to generate controllable cinemagraphs from single images by introducing temporal bridging and motion conditioning objectives, eliminating the need for specialized cinemagraph training data. This approach overcomes prior limitations of domain-specific methods (water, smoke) and general video models by enabling seamless, controllable looping motion synthesis while maintaining static regions. The framework's ability to work without cinemagraph-specific datasets while leveraging pre-trained diffusion models represents a practical advance for content creators seeking artistic photo-animation without requiring video capture or specialized hardware.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "DreamLoop: Controllable Cinemagraph Generation from a Single Photograph", "DreamLoop adapts general video diffusion models to generate controllable cinemagraphs from single images by introducing temporal bridging and motion conditioning objectives, eliminating the need for specialized cinemagraph training data. This approach overcomes prior limitations of domain-specific methods (water, smoke) and general video models by enabling seamless, controllable looping motion synthesis while maintaining static regions. The framework's ability to work without cinemagraph-specific datasets while leveraging pre-trained diffusion models represents a practical advance for content creators seeking artistic photo-animation without requiring video capture or specialized hardware.", "https://arxiv.org/abs/2601.02646")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02908" style="color:#4ea8ff;">TA-Prompting: Enhancing Video Large Language Models for Dense Video Captioning via Temporal Anchors</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>TA-Prompting addresses a critical limitation in VideoLLMs for dense video captioning by introducing **Temporal Anchors**—learnable mechanisms that precisely localize event boundaries in untrimmed videos, enabling better temporal grounding of generated captions. The method incorporates an **event coherent sampling strategy** during inference to select high-quality captions that maintain temporal consistency across multiple events and cross-modal alignment with video content. This approach bridges the gap between LLM reasoning capabilities and fine-grained temporal localization, improving both accuracy and coherence in dense video understanding tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TA-Prompting: Enhancing Video Large Language Models for Dense Video Captioning via Temporal Anchors", "TA-Prompting addresses a critical limitation in VideoLLMs for dense video captioning by introducing **Temporal Anchors**—learnable mechanisms that precisely localize event boundaries in untrimmed videos, enabling better temporal grounding of generated captions. The method incorporates an **event coherent sampling strategy** during inference to select high-quality captions that maintain temporal consistency across multiple events and cross-modal alignment with video content. This approach bridges the gap between LLM reasoning capabilities and fine-grained temporal localization, improving both accuracy and coherence in dense video understanding tasks.", "https://arxiv.org/abs/2601.02908")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.02967" style="color:#4ea8ff;">MoE Adapter for Large Audio Language Models: Sparsity, Disentanglement, and Gradient-Conflict-Free</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>The paper introduces MoE-Adapter, a sparse Mixture-of-Experts architecture that addresses gradient conflicts in audio-language model adaptation by routing heterogeneous acoustic signals (speech, music, environmental context) to specialized experts rather than using dense, parameter-shared adapters. The dynamic gating mechanism decouples distinct audio attributes into complementary feature subspaces while maintaining shared experts for global context, enabling more efficient optimization and reducing contradictory parameter updates. This approach has significant implications for scaling multimodal LLMs to audio, offering a principled alternative to dense adapters that struggle with the intrinsic heterogeneity of acoustic information.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MoE Adapter for Large Audio Language Models: Sparsity, Disentanglement, and Gradient-Conflict-Free", "The paper introduces MoE-Adapter, a sparse Mixture-of-Experts architecture that addresses gradient conflicts in audio-language model adaptation by routing heterogeneous acoustic signals (speech, music, environmental context) to specialized experts rather than using dense, parameter-shared adapters. The dynamic gating mechanism decouples distinct audio attributes into complementary feature subspaces while maintaining shared experts for global context, enabling more efficient optimization and reducing contradictory parameter updates. This approach has significant implications for scaling multimodal LLMs to audio, offering a principled alternative to dense adapters that struggle with the intrinsic heterogeneity of acoustic information.", "https://arxiv.org/abs/2601.02967")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.03830" style="color:#4ea8ff;">A Multidimensional AI-powered Framework for Analyzing Tourist Perception in Historic Urban Quarters: A Case Study in Shanghai</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#f59e0b;">⚡ 55</span></div>
+  <p>This research presents a multimodal AI framework combining semantic segmentation, color clustering, and sentiment analysis on social media data to quantify tourist perception in historic urban environments. Key innovation: the framework identifies visual focal points from user-generated photos and compares aesthetic preferences (color themes) between social media imagery and ground-truth street views, revealing perceptual gaps that inform heritage preservation. The approach demonstrates practical value for data-driven urban planning that balances cultural heritage conservation with tourism demand.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Multidimensional AI-powered Framework for Analyzing Tourist Perception in Historic Urban Quarters: A Case Study in Shanghai", "This research presents a multimodal AI framework combining semantic segmentation, color clustering, and sentiment analysis on social media data to quantify tourist perception in historic urban environments. Key innovation: the framework identifies visual focal points from user-generated photos and compares aesthetic preferences (color themes) between social media imagery and ground-truth street views, revealing perceptual gaps that inform heritage preservation. The approach demonstrates practical value for data-driven urban planning that balances cultural heritage conservation with tourism demand.", "https://arxiv.org/abs/2509.03830")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.10069" style="color:#4ea8ff;">SyncLipMAE: Contrastive Masked Pretraining for Audio-Visual Talking-Face Representation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-08
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>SyncLipMAE introduces a self-supervised framework that disentangles talking-face representation into three explicit components—identity, speech-synchronized facial dynamics (vocal motion), and audio-agnostic movements—using masked visual modeling coupled with cross-modal contrastive alignment. The key innovation is leveraging time-aligned audio-visual synchronization at the token level to drive both modalities into a shared embedding space, enabling robust transfer learning without labeled data. This approach addresses a critical challenge in audio-visual processing by decomposing entangled facial dynamics, making the learned representations more generalizable across diverse downstream tasks in talking-face understanding and generation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SyncLipMAE: Contrastive Masked Pretraining for Audio-Visual Talking-Face Representation", "SyncLipMAE introduces a self-supervised framework that disentangles talking-face representation into three explicit components—identity, speech-synchronized facial dynamics (vocal motion), and audio-agnostic movements—using masked visual modeling coupled with cross-modal contrastive alignment. The key innovation is leveraging time-aligned audio-visual synchronization at the token level to drive both modalities into a shared embedding space, enabling robust transfer learning without labeled data. This approach addresses a critical challenge in audio-visual processing by decomposing entangled facial dynamics, making the learned representations more generalizable across diverse downstream tasks in talking-face understanding and generation.", "https://arxiv.org/abs/2510.10069")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
