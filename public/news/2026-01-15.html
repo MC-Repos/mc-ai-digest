@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-01-15</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-01-15</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.08871" style="color:#4ea8ff;">Semantic visually-guided acoustic highlighting with large vision-language models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper systematically investigates which visual-semantic features from large vision-language models most effectively guide audio remixing for film/video production, using textual descriptions as proxies for visual analysis. Through empirical evaluation, the authors identify camera focus, tone, and scene background as the most impactful conditioning signals for improving perceptual mix quality, addressing a key gap in automating the previously manual audio balancing workflow. The work demonstrates that semantic video understanding can substantially reduce labor-intensive mixing tasks by leveraging multimodal LVLMs rather than low-level visual features.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Semantic visually-guided acoustic highlighting with large vision-language models", "This paper systematically investigates which visual-semantic features from large vision-language models most effectively guide audio remixing for film/video production, using textual descriptions as proxies for visual analysis. Through empirical evaluation, the authors identify camera focus, tone, and scene background as the most impactful conditioning signals for improving perceptual mix quality, addressing a key gap in automating the previously manual audio balancing workflow. The work demonstrates that semantic video understanding can substantially reduce labor-intensive mixing tasks by leveraging multimodal LVLMs rather than low-level visual features.", "https://arxiv.org/abs/2601.08871")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.11423" style="color:#4ea8ff;">JoyAvatar-Flash: Real-time and Infinite Audio-Driven Avatar Generation with Autoregressive Diffusion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>JoyAvatar-Flash introduces an autoregressive diffusion approach for real-time audio-driven avatar generation that overcomes computational constraints and enables infinite-length video synthesis through three key innovations: Progressive Step Bootstrapping prioritizes denoising early frames to minimize error accumulation, Motion Condition Injection maintains temporal coherence using noise-corrupted frame conditioning, and Unbounded RoPE with cache-reset handling extends sequence length without position encoding limitations. This addresses critical bottlenecks in DiT-based methods, making long-form avatar generation practical for deployment while maintaining quality across extended sequences.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "JoyAvatar-Flash: Real-time and Infinite Audio-Driven Avatar Generation with Autoregressive Diffusion", "JoyAvatar-Flash introduces an autoregressive diffusion approach for real-time audio-driven avatar generation that overcomes computational constraints and enables infinite-length video synthesis through three key innovations: Progressive Step Bootstrapping prioritizes denoising early frames to minimize error accumulation, Motion Condition Injection maintains temporal coherence using noise-corrupted frame conditioning, and Unbounded RoPE with cache-reset handling extends sequence length without position encoding limitations. This addresses critical bottlenecks in DiT-based methods, making long-form avatar generation practical for deployment while maintaining quality across extended sequences.", "https://arxiv.org/abs/2512.11423")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.08871" style="color:#4ea8ff;">Semantic visually-guided acoustic highlighting with large vision-language models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper investigates which visual semantic features best guide automatic audio remixing for video by leveraging vision-language models to extract six categories of visual cues (camera focus, tone, scene background, object/character appearance, emotion, and sound-related inferences) that condition audio rebalancing. The study demonstrates that camera focus, tone, and scene background are the most effective visual signals for improving perceptual mix quality, moving beyond manual audio mixing workflows through multimodal guidance. This work provides actionable insights for developing semantically-aware audio mixing systems that can significantly reduce the manual labor in post-production audio work.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Semantic visually-guided acoustic highlighting with large vision-language models", "This paper investigates which visual semantic features best guide automatic audio remixing for video by leveraging vision-language models to extract six categories of visual cues (camera focus, tone, scene background, object/character appearance, emotion, and sound-related inferences) that condition audio rebalancing. The study demonstrates that camera focus, tone, and scene background are the most effective visual signals for improving perceptual mix quality, moving beyond manual audio mixing workflows through multimodal guidance. This work provides actionable insights for developing semantically-aware audio mixing systems that can significantly reduce the manual labor in post-production audio work.", "https://arxiv.org/abs/2601.08871")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09105" style="color:#4ea8ff;">AviationLMM: A Large Multimodal Foundation Model for Civil Aviation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>AviationLMM proposes a unified multimodal foundation model for civil aviation that integrates disparate data streams—voice communications, radar tracks, sensor telemetry, and textual reports—to overcome the limitations of siloed, single-modality AI systems currently deployed in the industry. The architecture enables comprehensive situational awareness and real-time decision support by jointly processing heterogeneous inputs for understanding, reasoning, and generation tasks. This foundational approach could significantly advance aviation safety and operational efficiency by leveraging multimodal reasoning capabilities similar to recent breakthroughs in general-purpose LMMs, though practical deployment would require extensive validation on safety-critical aviation datasets.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AviationLMM: A Large Multimodal Foundation Model for Civil Aviation", "AviationLMM proposes a unified multimodal foundation model for civil aviation that integrates disparate data streams—voice communications, radar tracks, sensor telemetry, and textual reports—to overcome the limitations of siloed, single-modality AI systems currently deployed in the industry. The architecture enables comprehensive situational awareness and real-time decision support by jointly processing heterogeneous inputs for understanding, reasoning, and generation tasks. This foundational approach could significantly advance aviation safety and operational efficiency by leveraging multimodal reasoning capabilities similar to recent breakthroughs in general-purpose LMMs, though practical deployment would require extensive validation on safety-critical aviation datasets.", "https://arxiv.org/abs/2601.09105")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09113" style="color:#4ea8ff;">The AI Hippocampus: How Far are We From Human Memory?</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>This survey systematizes memory mechanisms in LLMs/MLLMs across three paradigms—implicit (parameter-embedded knowledge), explicit (external storage), and agentic (adaptive recall)—addressing how memory augments reasoning and contextual fidelity as models evolve toward continual learning systems. The work bridges the gap between static prediction and interactive, personalized inference by providing a structured taxonomy for understanding memory's role in modern foundation models. Key implications include directions for interpretability methods, memory architecture innovations, and pathways toward systems with human-like contextual adaptability.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "The AI Hippocampus: How Far are We From Human Memory?", "This survey systematizes memory mechanisms in LLMs/MLLMs across three paradigms—implicit (parameter-embedded knowledge), explicit (external storage), and agentic (adaptive recall)—addressing how memory augments reasoning and contextual fidelity as models evolve toward continual learning systems. The work bridges the gap between static prediction and interactive, personalized inference by providing a structured taxonomy for understanding memory's role in modern foundation models. Key implications include directions for interpretability methods, memory architecture innovations, and pathways toward systems with human-like contextual adaptability.", "https://arxiv.org/abs/2601.09113")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.08868" style="color:#4ea8ff;">Residual Cross-Modal Fusion Networks for Audio-Visual Navigation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>The paper proposes Cross-Modal Residual Fusion Networks (CRFN) for audio-visual navigation, addressing the critical problem of balanced multimodal fusion by using bidirectional residual interactions instead of conventional concatenation or attention gating—this approach maintains modality independence while enabling complementary modeling and fine-grained alignment. The method incorporates stabilization techniques to improve convergence and robustness, tested on standard benchmarks (Replica and M-series datasets), representing a meaningful advancement over simple fusion strategies that risk single-modality dominance. The technical innovation is particularly relevant for embodied AI systems requiring robust cross-domain sound localization in unseen 3D environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Residual Cross-Modal Fusion Networks for Audio-Visual Navigation", "The paper proposes Cross-Modal Residual Fusion Networks (CRFN) for audio-visual navigation, addressing the critical problem of balanced multimodal fusion by using bidirectional residual interactions instead of conventional concatenation or attention gating—this approach maintains modality independence while enabling complementary modeling and fine-grained alignment. The method incorporates stabilization techniques to improve convergence and robustness, tested on standard benchmarks (Replica and M-series datasets), representing a meaningful advancement over simple fusion strategies that risk single-modality dominance. The technical innovation is particularly relevant for embodied AI systems requiring robust cross-domain sound localization in unseen 3D environments.", "https://arxiv.org/abs/2601.08868")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09031" style="color:#4ea8ff;">Generalizable Geometric Prior and Recurrent Spiking Feature Learning for Humanoid Robot Manipulation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 28</span></div>
+  <p>This paper introduces RGMP-S, a novel framework combining recurrent spiking neural features with 2D geometric priors to improve humanoid robot manipulation by enabling efficient high-level semantic reasoning grounded in precise 3D scene understanding. The key innovation is leveraging lightweight geometric inductive biases within vision-language models to bridge the gap between semantic instructions and spatial constraints, addressing critical challenges in sample efficiency and cross-environment generalization. This approach suggests a promising direction for data-efficient learning from demonstrations by integrating neuromorphic computing with geometric reasoning rather than relying solely on end-to-end deep learning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Generalizable Geometric Prior and Recurrent Spiking Feature Learning for Humanoid Robot Manipulation", "This paper introduces RGMP-S, a novel framework combining recurrent spiking neural features with 2D geometric priors to improve humanoid robot manipulation by enabling efficient high-level semantic reasoning grounded in precise 3D scene understanding. The key innovation is leveraging lightweight geometric inductive biases within vision-language models to bridge the gap between semantic instructions and spatial constraints, addressing critical challenges in sample efficiency and cross-environment generalization. This approach suggests a promising direction for data-efficient learning from demonstrations by integrating neuromorphic computing with geometric reasoning rather than relying solely on end-to-end deep learning.", "https://arxiv.org/abs/2601.09031")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2506.02955" style="color:#4ea8ff;">UniConFlow: A Unified Constrained Flow-Matching Framework for Certified Motion Planning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 15</span></div>
+  <p>UniConFlow presents a unified flow-matching framework that systematically handles multiple constraint types (collision, actuation, dynamic consistency) simultaneously during trajectory generation, moving beyond heuristic constraint handling in prior generative approaches. The key innovation is a prescribed-time zeroing function that dynamically shapes guidance fields during inference, enabling adaptation to varying system models and task requirements while addressing computational challenges in long-horizon, high-dimensional planning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "UniConFlow: A Unified Constrained Flow-Matching Framework for Certified Motion Planning", "UniConFlow presents a unified flow-matching framework that systematically handles multiple constraint types (collision, actuation, dynamic consistency) simultaneously during trajectory generation, moving beyond heuristic constraint handling in prior generative approaches. The key innovation is a prescribed-time zeroing function that dynamically shapes guidance fields during inference, enabling adaptation to varying system models and task requirements while addressing computational challenges in long-horizon, high-dimensional planning.", "https://arxiv.org/abs/2506.02955")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.05966" style="color:#4ea8ff;">VideoAR: Autoregressive Video Generation via Next-Frame &amp; Scale Prediction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>VideoAR introduces the first large-scale autoregressive video generation framework that replaces computationally expensive diffusion/flow-matching models with multi-scale next-frame prediction and VAR modeling, using a 3D tokenizer to jointly handle spatial-temporal dynamics. The approach addresses error accumulation in autoregressive generation through novel techniques (Multi-scale Temporal RoPE, Cross-Frame Error Correction, Random Frame Mask) that stabilize long-term temporal coherence. This represents a significant shift toward more efficient, scalable video synthesis that could reduce inference costs while maintaining quality—particularly relevant for practitioners seeking faster generation pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "VideoAR: Autoregressive Video Generation via Next-Frame &amp; Scale Prediction", "VideoAR introduces the first large-scale autoregressive video generation framework that replaces computationally expensive diffusion/flow-matching models with multi-scale next-frame prediction and VAR modeling, using a 3D tokenizer to jointly handle spatial-temporal dynamics. The approach addresses error accumulation in autoregressive generation through novel techniques (Multi-scale Temporal RoPE, Cross-Frame Error Correction, Random Frame Mask) that stabilize long-term temporal coherence. This represents a significant shift toward more efficient, scalable video synthesis that could reduce inference costs while maintaining quality—particularly relevant for practitioners seeking faster generation pipelines.", "https://arxiv.org/abs/2601.05966")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.06037" style="color:#4ea8ff;">TeleMem: Building Long-Term and Multimodal Memory for Agentic AI</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>TeleMem addresses LLMs' context window limitations by introducing a unified long-term multimodal memory system that uses narrative dynamic extraction to maintain coherent user profiles while filtering dialogue-grounded information, eliminating schema-driven hallucinations inherent in traditional RAG approaches. The system implements a structured writing pipeline with batching, retrieval, clustering, and consolidation mechanisms that significantly reduce token usage and improve storage efficiency, while a multimodal reasoning module enables coherent reasoning across text and visual modalities in extended agentic interactions.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TeleMem: Building Long-Term and Multimodal Memory for Agentic AI", "TeleMem addresses LLMs' context window limitations by introducing a unified long-term multimodal memory system that uses narrative dynamic extraction to maintain coherent user profiles while filtering dialogue-grounded information, eliminating schema-driven hallucinations inherent in traditional RAG approaches. The system implements a structured writing pipeline with batching, retrieval, clustering, and consolidation mechanisms that significantly reduce token usage and improve storage efficiency, while a multimodal reasoning module enables coherent reasoning across text and visual modalities in extended agentic interactions.", "https://arxiv.org/abs/2601.06037")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.08868" style="color:#4ea8ff;">Residual Cross-Modal Fusion Networks for Audio-Visual Navigation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper proposes Cross-Modal Residual Fusion Networks (CRFN) for audio-visual navigation, addressing the challenge of balanced multimodal fusion by using bidirectional residual connections between audio and visual streams instead of conventional concatenation or attention mechanisms. The approach explicitly models cross-modal interactions while preserving modality independence, with stabilization techniques to improve training robustness—particularly valuable for avoiding single-modality dominance in heterogeneous feature spaces. The method demonstrates practical improvements on benchmark environments (Replica, Matterport3D) for embodied AI navigation tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Residual Cross-Modal Fusion Networks for Audio-Visual Navigation", "This paper proposes Cross-Modal Residual Fusion Networks (CRFN) for audio-visual navigation, addressing the challenge of balanced multimodal fusion by using bidirectional residual connections between audio and visual streams instead of conventional concatenation or attention mechanisms. The approach explicitly models cross-modal interactions while preserving modality independence, with stabilization techniques to improve training robustness—particularly valuable for avoiding single-modality dominance in heterogeneous feature spaces. The method demonstrates practical improvements on benchmark environments (Replica, Matterport3D) for embodied AI navigation tasks.", "https://arxiv.org/abs/2601.08868")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09118" style="color:#4ea8ff;">LPCAN: Lightweight Pyramid Cross-Attention Network for Rail Surface Defect Detection Using RGB-D Data</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>LPCANet proposes a lightweight multimodal deep learning architecture for rail defect detection that combines MobileNetv2 backbone with a novel cross-attention mechanism for RGB-D fusion, achieving SOTA results with only 9.9M parameters and 162.6 fps inference speed—addressing the computational bottleneck in vision-based inspection systems. The key innovation lies in the lightweight pyramid module paired with spatial feature extraction for efficient depth processing, demonstrating that careful architectural design can match or exceed heavier models' accuracy while maintaining real-time deployment feasibility for industrial applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "LPCAN: Lightweight Pyramid Cross-Attention Network for Rail Surface Defect Detection Using RGB-D Data", "LPCANet proposes a lightweight multimodal deep learning architecture for rail defect detection that combines MobileNetv2 backbone with a novel cross-attention mechanism for RGB-D fusion, achieving SOTA results with only 9.9M parameters and 162.6 fps inference speed—addressing the computational bottleneck in vision-based inspection systems. The key innovation lies in the lightweight pyramid module paired with spatial feature extraction for efficient depth processing, demonstrating that careful architectural design can match or exceed heavier models' accuracy while maintaining real-time deployment feasibility for industrial applications.", "https://arxiv.org/abs/2601.09118")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09255" style="color:#4ea8ff;">PhyRPR: Training-Free Physics-Constrained Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>PhyRPR introduces a training-free three-stage pipeline that decouples physical reasoning from visual synthesis in video generation—using multimodal models for physics understanding, deterministic motion planning for coarse scaffold generation, and latent space fusion during diffusion sampling to enforce physical constraints. This approach addresses a critical limitation in current diffusion-based video models that conflate high-level physics with low-level visual details, enabling physically plausible synthesis without model retraining. The method's practical significance lies in enabling physics-aware video generation through post-hoc constraint injection rather than requiring physics-specific training objectives.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PhyRPR: Training-Free Physics-Constrained Video Generation", "PhyRPR introduces a training-free three-stage pipeline that decouples physical reasoning from visual synthesis in video generation—using multimodal models for physics understanding, deterministic motion planning for coarse scaffold generation, and latent space fusion during diffusion sampling to enforce physical constraints. This approach addresses a critical limitation in current diffusion-based video models that conflate high-level physics with low-level visual details, enabling physically plausible synthesis without model retraining. The method's practical significance lies in enabling physics-aware video generation through post-hoc constraint injection rather than requiring physics-specific training objectives.", "https://arxiv.org/abs/2601.09255")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09350" style="color:#4ea8ff;">See More, Store Less: Memory-Efficient Resolution for Video Moment Retrieval</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SMORE introduces a memory-efficient framework for Video Moment Retrieval that combines query-guided semantic encoding, importance modulation, and adaptive frame compression to overcome the memory constraints limiting dense frame processing in MLLMs. The approach maintains high information resolution while enabling efficient processing of lengthy videos, achieving SOTA results across three benchmarks without sparse sampling's information loss tradeoff. The key innovation lies in intelligently selecting and compressing frames based on query relevance rather than uniform sampling, enabling scalable video understanding within practical memory constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "See More, Store Less: Memory-Efficient Resolution for Video Moment Retrieval", "SMORE introduces a memory-efficient framework for Video Moment Retrieval that combines query-guided semantic encoding, importance modulation, and adaptive frame compression to overcome the memory constraints limiting dense frame processing in MLLMs. The approach maintains high information resolution while enabling efficient processing of lengthy videos, achieving SOTA results across three benchmarks without sparse sampling's information loss tradeoff. The key innovation lies in intelligently selecting and compressing frames based on query relevance rather than uniform sampling, enabling scalable video understanding within practical memory constraints.", "https://arxiv.org/abs/2601.09350")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.09430" style="color:#4ea8ff;">Video-MSR: Benchmarking Multi-hop Spatial Reasoning Capabilities of MLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-01-15
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Video-MSR introduces the first benchmark for evaluating multi-hop spatial reasoning in MLLMs across dynamic video scenarios, addressing a critical gap where existing benchmarks only assess single-step perception tasks. The benchmark features 3,052 curated video instances with 4,993 QA pairs spanning four reasoning tasks: constrained localization, chain-based reference retrieval, route planning, and counterfactual physical deduction. This work establishes rigorous evaluation methodology for complex visual-spatial reasoning chains, enabling systematic assessment of MLLM capabilities beyond static image understanding.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Video-MSR: Benchmarking Multi-hop Spatial Reasoning Capabilities of MLLMs", "Video-MSR introduces the first benchmark for evaluating multi-hop spatial reasoning in MLLMs across dynamic video scenarios, addressing a critical gap where existing benchmarks only assess single-step perception tasks. The benchmark features 3,052 curated video instances with 4,993 QA pairs spanning four reasoning tasks: constrained localization, chain-based reference retrieval, route planning, and counterfactual physical deduction. This work establishes rigorous evaluation methodology for complex visual-spatial reasoning chains, enabling systematic assessment of MLLM capabilities beyond static image understanding.", "https://arxiv.org/abs/2601.09430")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
