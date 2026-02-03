@@ -1,0 +1,489 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-03</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-03</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2507.20198" style="color:#4ea8ff;">A Survey of Token Compression for Efficient Multimodal Large Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>This survey systematizes token compression techniques for MLLMs, addressing the quadratic self-attention complexity bottleneck that emerges when processing high-resolution images, long video sequences, and extended audio—critical for scaling context windows without proportional computational cost. The work emphasizes modality-specific compression strategies, recognizing that redundancy patterns differ across vision, audio, and text modalities, enabling more targeted efficiency optimizations during both training and inference phases. For practitioners, this represents a shift from naive context expansion to intelligent token reduction, directly impacting feasibility of real-time multimodal inference on resource-constrained deployments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Survey of Token Compression for Efficient Multimodal Large Language Models", "This survey systematizes token compression techniques for MLLMs, addressing the quadratic self-attention complexity bottleneck that emerges when processing high-resolution images, long video sequences, and extended audio—critical for scaling context windows without proportional computational cost. The work emphasizes modality-specific compression strategies, recognizing that redundancy patterns differ across vision, audio, and text modalities, enabling more targeted efficiency optimizations during both training and inference phases. For practitioners, this represents a shift from naive context expansion to intelligent token reduction, directly impacting feasibility of real-time multimodal inference on resource-constrained deployments.", "https://arxiv.org/abs/2507.20198")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>CamReasoner reformulates camera movement classification from black-box prediction to structured geometric reasoning by implementing an Observation-Thinking-Answer paradigm that explicitly decodes spatio-temporal cues like trajectories and view frustums. The framework is trained on 18k SFT reasoning chains and 38k RL feedback samples, marking the first application of reinforcement learning for logical alignment in camera motion understanding to ensure physics-grounded inferences. This approach addresses a critical gap in multimodal video understanding by prioritizing cinematic geometry over superficial visual patterns, enabling more robust discrimination between physically distinct camera motions.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "CamReasoner reformulates camera movement classification from black-box prediction to structured geometric reasoning by implementing an Observation-Thinking-Answer paradigm that explicitly decodes spatio-temporal cues like trajectories and view frustums. The framework is trained on 18k SFT reasoning chains and 38k RL feedback samples, marking the first application of reinforcement learning for logical alignment in camera motion understanding to ensure physics-grounded inferences. This approach addresses a critical gap in multimodal video understanding by prioritizing cinematic geometry over superficial visual patterns, enabling more robust discrimination between physically distinct camera motions.", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.02100" style="color:#4ea8ff;">The Verification Crisis: Expert Perceptions of GenAI Disinformation and the Case for Reproducible Provenance</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 52</span></div>
+  <p>GenAI has democratized disinformation production at scale, with expert consensus suggesting text-based synthetic content poses greater systemic risk than deepfakes through epistemic fragmentation and manufactured consensus, particularly in political domains. Current detection tools face skepticism from researchers; instead, experts advocate for reproducible provenance standards and regulatory frameworks to establish content authenticity and traceability, though implementation remains challenging.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "The Verification Crisis: Expert Perceptions of GenAI Disinformation and the Case for Reproducible Provenance", "GenAI has democratized disinformation production at scale, with expert consensus suggesting text-based synthetic content poses greater systemic risk than deepfakes through epistemic fragmentation and manufactured consensus, particularly in political domains. Current detection tools face skepticism from researchers; instead, experts advocate for reproducible provenance standards and regulatory frameworks to establish content authenticity and traceability, though implementation remains challenging.", "https://arxiv.org/abs/2602.02100")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.21033" style="color:#4ea8ff;">SupCLAP: Controlling Optimization Trajectory Drift in Audio-Text Contrastive Learning with Support Vector Regularization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>This paper addresses optimization instability in audio-text contrastive learning (CLAP) by identifying that negative sample gradients' perpendicular components cause trajectory drift, proposing Support Vector Regularization (SVR) with an auxiliary support vector to constrain this component while preserving useful negative information. The method's effectiveness depends on semantic radius estimation, with unsupervised modeling strategies explored to avoid additional hyperparameter tuning. The work has direct implications for improving multimodal foundation models and cross-modal retrieval systems by enabling more stable, efficient pretraining.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SupCLAP: Controlling Optimization Trajectory Drift in Audio-Text Contrastive Learning with Support Vector Regularization", "This paper addresses optimization instability in audio-text contrastive learning (CLAP) by identifying that negative sample gradients' perpendicular components cause trajectory drift, proposing Support Vector Regularization (SVR) with an auxiliary support vector to constrain this component while preserving useful negative information. The method's effectiveness depends on semantic radius estimation, with unsupervised modeling strategies explored to avoid additional hyperparameter tuning. The work has direct implications for improving multimodal foundation models and cross-modal retrieval systems by enabling more stable, efficient pretraining.", "https://arxiv.org/abs/2509.21033")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.06199" style="color:#4ea8ff;">FastSLM: Hierarchical Frame Q-Former for Effective Speech Modality Adaptation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>FastSLM introduces a Hierarchical Frame Q-Former that achieves extreme temporal compression of speech inputs, reducing them to just 1.67 tokens/second—a 93% reduction—by progressively distilling acoustic features across multiple scales rather than projecting raw high-frame-rate features directly to LLM space. This token-efficient architecture specifically targets the scalability bottleneck that makes long-form speech processing computationally prohibitive in Multimodal LLMs, enabling practical deployment of speech-language models without sacrificing semantic information through aggressive compression.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FastSLM: Hierarchical Frame Q-Former for Effective Speech Modality Adaptation", "FastSLM introduces a Hierarchical Frame Q-Former that achieves extreme temporal compression of speech inputs, reducing them to just 1.67 tokens/second—a 93% reduction—by progressively distilling acoustic features across multiple scales rather than projecting raw high-frame-rate features directly to LLM space. This token-efficient architecture specifically targets the scalability bottleneck that makes long-form speech processing computationally prohibitive in Multimodal LLMs, enabling practical deployment of speech-language models without sacrificing semantic information through aggressive compression.", "https://arxiv.org/abs/2601.06199")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00132" style="color:#4ea8ff;">Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Researchers propose SCANNER, a novel Test-Time Adaptation (TTA) framework specifically designed for Hate Video Detection that adapts models at inference time to handle severe semantic drift as hateful content evolves to evade detection. The key innovation leverages invariant core attributes of hate speech (targeting criteria like race, gender) as stable bridges between training and shifting deployment distributions, addressing a critical limitation where conventional TTA methods fail on the severe domain gaps inherent in hate content evolution. This addresses a significant practical gap in content moderation systems that currently assume static training distributions, enabling more robust detection of obfuscated hateful content in production environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Shedding the Facades, Connecting the Domains: Detecting Shifting Multimodal Hate Video with Test-Time Adaptation", "Researchers propose SCANNER, a novel Test-Time Adaptation (TTA) framework specifically designed for Hate Video Detection that adapts models at inference time to handle severe semantic drift as hateful content evolves to evade detection. The key innovation leverages invariant core attributes of hate speech (targeting criteria like race, gender) as stable bridges between training and shifting deployment distributions, addressing a critical limitation where conventional TTA methods fail on the severe domain gaps inherent in hate content evolution. This addresses a significant practical gap in content moderation systems that currently assume static training distributions, enabling more robust detection of obfuscated hateful content in production environments.", "https://arxiv.org/abs/2602.00132")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>CamReasoner reformulates camera motion understanding from black-box classification to structured spatial reasoning, using an Observation-Thinking-Answer paradigm that explicitly reasons about trajectories and view frustums rather than relying on superficial visual patterns. The framework is trained with 18k supervised reasoning chains and 38k RL-generated samples, marking the first application of reinforcement learning for logical alignment in camera motion inference, enabling physically-grounded predictions over geometric cues. This approach has significant implications for video understanding systems, enabling more robust 3D-aware video analysis for applications requiring precise camera dynamics interpretation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "CamReasoner reformulates camera motion understanding from black-box classification to structured spatial reasoning, using an Observation-Thinking-Answer paradigm that explicitly reasons about trajectories and view frustums rather than relying on superficial visual patterns. The framework is trained with 18k supervised reasoning chains and 38k RL-generated samples, marking the first application of reinforcement learning for logical alignment in camera motion inference, enabling physically-grounded predictions over geometric cues. This approach has significant implications for video understanding systems, enabling more robust 3D-aware video analysis for applications requiring precise camera dynamics interpretation.", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01850" style="color:#4ea8ff;">WS-IMUBench: Can Weakly Supervised Methods from Audio, Image, and Video Be Adapted for IMU-based Temporal Action Localization?</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>WS-IMUBench introduces a systematic benchmark for weakly supervised IMU-based Temporal Action Localization (WS-IMU-TAL), addressing the critical bottleneck of expensive frame-level annotations by enabling training on sequence-level labels alone. The study evaluates how established weakly supervised localization methods from audio, image, and video domains transfer to IMU sensor streams, providing empirical guidance for practitioners scaling HAR systems to continuous activity streams without dense temporal annotations. This work shifts IMU-based activity recognition from clip classification toward fine-grained temporal localization while maintaining practical scalability through weak supervision.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "WS-IMUBench: Can Weakly Supervised Methods from Audio, Image, and Video Be Adapted for IMU-based Temporal Action Localization?", "WS-IMUBench introduces a systematic benchmark for weakly supervised IMU-based Temporal Action Localization (WS-IMU-TAL), addressing the critical bottleneck of expensive frame-level annotations by enabling training on sequence-level labels alone. The study evaluates how established weakly supervised localization methods from audio, image, and video domains transfer to IMU sensor streams, providing empirical guidance for practitioners scaling HAR systems to continuous activity streams without dense temporal annotations. This work shifts IMU-based activity recognition from clip classification toward fine-grained temporal localization while maintaining practical scalability through weak supervision.", "https://arxiv.org/abs/2602.01850")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01284" style="color:#4ea8ff;">Seeing, Hearing, and Knowing Together: Multimodal Strategies in Deepfake Videos Detection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p># Summary
+
+This study analyzed how 195 participants detected deepfakes by examining multimodal cue usage across visual, audio, and knowledge strategies, using association rule mining to identify successful cue combinations. Key findings reveal that humans leverage multimodal signals—particularly visual appearance, vocal characteristics, and intuition—together for accurate detection, while showing systematic vulnerabilities to deepfake manipulation. The research provides evidence-based guidance for designing media literacy interventions that can train users toward more reliable multimodal detection heuristics rather than single-modality reliance.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Seeing, Hearing, and Knowing Together: Multimodal Strategies in Deepfake Videos Detection", "# Summary\n\nThis study analyzed how 195 participants detected deepfakes by examining multimodal cue usage across visual, audio, and knowledge strategies, using association rule mining to identify successful cue combinations. Key findings reveal that humans leverage multimodal signals—particularly visual appearance, vocal characteristics, and intuition—together for accurate detection, while showing systematic vulnerabilities to deepfake manipulation. The research provides evidence-based guidance for designing media literacy interventions that can train users toward more reliable multimodal detection heuristics rather than single-modality reliance.", "https://arxiv.org/abs/2602.01284")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.04282" style="color:#4ea8ff;">Inference-time Stochastic Refinement of GRU-Normalizing Flow for Real-time Video Motion Transfer</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper proposes an inference-time refinement technique that augments GRU-Normalizing Flows with MCMC sampling to improve multimodal diversity in video motion transfer predictions, enabling richer exploration of the output distribution without model retraining. The approach addresses a key limitation of deterministic normalizing flows by leveraging stochastic sampling at inference, making it practical for real-time applications like immersive gaming and anomaly detection that require both accuracy and prediction diversity. This represents an elegant post-hoc enhancement strategy for sequential generative models that avoids the computational overhead of retraining while maintaining temporal coherence through the GRU component.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Inference-time Stochastic Refinement of GRU-Normalizing Flow for Real-time Video Motion Transfer", "This paper proposes an inference-time refinement technique that augments GRU-Normalizing Flows with MCMC sampling to improve multimodal diversity in video motion transfer predictions, enabling richer exploration of the output distribution without model retraining. The approach addresses a key limitation of deterministic normalizing flows by leveraging stochastic sampling at inference, making it practical for real-time applications like immersive gaming and anomaly detection that require both accuracy and prediction diversity. This represents an elegant post-hoc enhancement strategy for sequential generative models that avoids the computational overhead of retraining while maintaining temporal coherence through the GRU component.", "https://arxiv.org/abs/2512.04282")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.06199" style="color:#4ea8ff;">FastSLM: Hierarchical Frame Q-Former for Effective Speech Modality Adaptation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 88</span></div>
+  <p>FastSLM introduces a Hierarchical Frame Q-Former that achieves 93% token reduction for speech in MLLMs by progressively compressing acoustic features across multiple temporal scales down to 1.67 tokens/second, enabling efficient long-form audio processing. This hierarchical abstraction approach directly addresses the computational bottleneck of high frame-rate speech feature projection, making multimodal models practical for extended audio contexts while maintaining semantic fidelity through multi-scale distillation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FastSLM: Hierarchical Frame Q-Former for Effective Speech Modality Adaptation", "FastSLM introduces a Hierarchical Frame Q-Former that achieves 93% token reduction for speech in MLLMs by progressively compressing acoustic features across multiple temporal scales down to 1.67 tokens/second, enabling efficient long-form audio processing. This hierarchical abstraction approach directly addresses the computational bottleneck of high frame-rate speech feature projection, making multimodal models practical for extended audio contexts while maintaining semantic fidelity through multi-scale distillation.", "https://arxiv.org/abs/2601.06199")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00053" style="color:#4ea8ff;">Scalable and Secure AI Inference in Healthcare: A Comparative Benchmarking of FastAPI and Triton Inference Server on Kubernetes</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper benchmarks FastAPI versus NVIDIA Triton Inference Server for deploying healthcare ML models on Kubernetes, evaluating latency (p50/p95), throughput, and compliance with HIPAA requirements using DistilBERT as a reference workload. The comparative analysis provides production-grade insights into the trade-offs between lightweight, Python-native REST services and specialized inference engines for regulated domains requiring real-time clinical decision support alongside batch processing capabilities. Key implications address the critical challenge of balancing inference performance, scalability, and data governance in healthcare AI deployments—essential for practitioners selecting infrastructure for production ML systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Scalable and Secure AI Inference in Healthcare: A Comparative Benchmarking of FastAPI and Triton Inference Server on Kubernetes", "This paper benchmarks FastAPI versus NVIDIA Triton Inference Server for deploying healthcare ML models on Kubernetes, evaluating latency (p50/p95), throughput, and compliance with HIPAA requirements using DistilBERT as a reference workload. The comparative analysis provides production-grade insights into the trade-offs between lightweight, Python-native REST services and specialized inference engines for regulated domains requiring real-time clinical decision support alongside batch processing capabilities. Key implications address the critical challenge of balancing inference performance, scalability, and data governance in healthcare AI deployments—essential for practitioners selecting infrastructure for production ML systems.", "https://arxiv.org/abs/2602.00053")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00415" style="color:#4ea8ff;">PolarMem: A Training-Free Polarized Latent Graph Memory for Verifiable Multimodal Agents</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>PolarMem addresses a critical gap in multimodal agent memory by introducing a training-free system that converts probabilistic vision-language model outputs into verifiable logical constraints through non-parametric partitioning and polarized graph topology with explicit inhibitory connections. The key innovation is encoding negative constraints as primary cognitive states rather than treating them implicitly, enabling logic-dominant retrieval that grounds long-horizon agent reasoning in provable evidence rather than semantic affinity alone. This approach is particularly significant for safety-critical applications where distinguishing what an agent knows from what it merely perceives with high confidence is essential.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PolarMem: A Training-Free Polarized Latent Graph Memory for Verifiable Multimodal Agents", "PolarMem addresses a critical gap in multimodal agent memory by introducing a training-free system that converts probabilistic vision-language model outputs into verifiable logical constraints through non-parametric partitioning and polarized graph topology with explicit inhibitory connections. The key innovation is encoding negative constraints as primary cognitive states rather than treating them implicitly, enabling logic-dominant retrieval that grounds long-horizon agent reasoning in provable evidence rather than semantic affinity alone. This approach is particularly significant for safety-critical applications where distinguishing what an agent knows from what it merely perceives with high confidence is essential.", "https://arxiv.org/abs/2602.00415")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01167" style="color:#4ea8ff;">Do All Individual Layers Help? An Empirical Study of Task-Interfering Layers in Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper reveals that Vision-Language Models contain "task-interfering layers" that actively degrade performance on specific downstream tasks, and demonstrates that selectively zeroing parameters in these layers can improve results—suggesting current VLM architectures are sub-optimal. The authors introduce Task-Layer Interaction Vectors as a diagnostic tool to systematically identify harmful layers, with findings generalizable across models and datasets, opening new optimization avenues beyond standard fine-tuning. This work challenges the assumption that all pre-trained layers contribute positively and suggests pruning-aware training or adaptive layer selection could significantly improve VLM efficiency and performance.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Do All Individual Layers Help? An Empirical Study of Task-Interfering Layers in Vision-Language Models", "This paper reveals that Vision-Language Models contain \"task-interfering layers\" that actively degrade performance on specific downstream tasks, and demonstrates that selectively zeroing parameters in these layers can improve results—suggesting current VLM architectures are sub-optimal. The authors introduce Task-Layer Interaction Vectors as a diagnostic tool to systematically identify harmful layers, with findings generalizable across models and datasets, opening new optimization avenues beyond standard fine-tuning. This work challenges the assumption that all pre-trained layers contribute positively and suggests pruning-aware training or adaptive layer selection could significantly improve VLM efficiency and performance.", "https://arxiv.org/abs/2602.01167")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01740" style="color:#4ea8ff;">MACD: Model-Aware Contrastive Decoding via Counterfactual Data</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>MACD introduces a model-aware contrastive decoding approach that reduces hallucinations in Video-LLMs by using the model's own attention/feedback to identify and surgically modify object-level regions that trigger false outputs, rather than relying on random perturbations. This targeted counterfactual construction enables more effective evidence-grounded token selection during inference, addressing a key weakness of existing contrastive decoding methods that lack precision in controlling which visual cues are altered. The approach has significant practical implications for deploying Video-LLMs in accuracy-critical applications where grounding to actual visual content is essential.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MACD: Model-Aware Contrastive Decoding via Counterfactual Data", "MACD introduces a model-aware contrastive decoding approach that reduces hallucinations in Video-LLMs by using the model's own attention/feedback to identify and surgically modify object-level regions that trigger false outputs, rather than relying on random perturbations. This targeted counterfactual construction enables more effective evidence-grounded token selection during inference, addressing a key weakness of existing contrastive decoding methods that lack precision in controlling which visual cues are altered. The approach has significant practical implications for deploying Video-LLMs in accuracy-critical applications where grounding to actual visual content is essential.", "https://arxiv.org/abs/2602.01740")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
