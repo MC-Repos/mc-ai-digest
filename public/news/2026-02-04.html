@@ -1,0 +1,489 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-04</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-04</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>CamReasoner addresses a critical gap in video understanding by reformulating camera movement classification from black-box prediction into structured geometric reasoning, using an Observation-Thinking-Answer paradigm that explicitly models spatio-temporal cues like trajectories and view frustums. The framework leverages 18k supervised reasoning chains and 38k RL-aligned samples to ground motion inferences in physics rather than superficial visual patterns, marking the first application of reinforcement learning for logical alignment in camera motion understanding. This approach has significant implications for video analysis, 3D scene understanding, and cinematic AI applications where accurate geometric motion decomposition is essential.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "CamReasoner addresses a critical gap in video understanding by reformulating camera movement classification from black-box prediction into structured geometric reasoning, using an Observation-Thinking-Answer paradigm that explicitly models spatio-temporal cues like trajectories and view frustums. The framework leverages 18k supervised reasoning chains and 38k RL-aligned samples to ground motion inferences in physics rather than superficial visual patterns, marking the first application of reinforcement learning for logical alignment in camera motion understanding. This approach has significant implications for video analysis, 3D scene understanding, and cinematic AI applications where accurate geometric motion decomposition is essential.", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.02100" style="color:#4ea8ff;">The Verification Crisis: Expert Perceptions of GenAI Disinformation and the Case for Reproducible Provenance</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>GenAI-enabled disinformation has shifted from manual to automated mass-production, with expert consensus that large-scale text generation poses greater systemic risk than deepfake video through "epistemic fragmentation" and synthetic consensus manipulation. A longitudinal survey of AI researchers and policymakers reveals widespread skepticism toward technical detection tools, instead favoring cryptographic provenance standards and regulatory frameworks as more viable mitigation strategies despite significant implementation challenges.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "The Verification Crisis: Expert Perceptions of GenAI Disinformation and the Case for Reproducible Provenance", "GenAI-enabled disinformation has shifted from manual to automated mass-production, with expert consensus that large-scale text generation poses greater systemic risk than deepfake video through \"epistemic fragmentation\" and synthetic consensus manipulation. A longitudinal survey of AI researchers and policymakers reveals widespread skepticism toward technical detection tools, instead favoring cryptographic provenance standards and regulatory frameworks as more viable mitigation strategies despite significant implementation challenges.", "https://arxiv.org/abs/2602.02100")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.21033" style="color:#4ea8ff;">SupCLAP: Controlling Optimization Trajectory Drift in Audio-Text Contrastive Learning with Support Vector Regularization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>SupCLAP addresses a fundamental instability in audio-text contrastive learning by introducing Support Vector Regularization (SVR) to constrain the perpendicular component of negative sample gradients, which simultaneously carries useful information yet causes optimization drift. The method uses an auxiliary support vector with an unsupervised semantic radius to balance this trade-off, improving both training stability and downstream performance in multimodal tasks like cross-modal retrieval and multimodal LLM integration.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SupCLAP: Controlling Optimization Trajectory Drift in Audio-Text Contrastive Learning with Support Vector Regularization", "SupCLAP addresses a fundamental instability in audio-text contrastive learning by introducing Support Vector Regularization (SVR) to constrain the perpendicular component of negative sample gradients, which simultaneously carries useful information yet causes optimization drift. The method uses an auxiliary support vector with an unsupervised semantic radius to balance this trade-off, improving both training stability and downstream performance in multimodal tasks like cross-modal retrieval and multimodal LLM integration.", "https://arxiv.org/abs/2509.21033")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.06199" style="color:#4ea8ff;">FastSLM: Hierarchical Frame Q-Former for Effective Speech Modality Adaptation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>FastSLM addresses the token explosion problem in speech-language models through a Hierarchical Frame Q-Former that progressively compresses acoustic features across multiple temporal scales, reducing speech representation to just 1.67 tokens/second—a 93% reduction compared to standard approaches. This extreme token efficiency enables MLLMs to handle long-form speech processing that would otherwise be computationally prohibitive, making end-to-end speech understanding practical for resource-constrained deployment scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FastSLM: Hierarchical Frame Q-Former for Effective Speech Modality Adaptation", "FastSLM addresses the token explosion problem in speech-language models through a Hierarchical Frame Q-Former that progressively compresses acoustic features across multiple temporal scales, reducing speech representation to just 1.67 tokens/second—a 93% reduction compared to standard approaches. This extreme token efficiency enables MLLMs to handle long-form speech processing that would otherwise be computationally prohibitive, making end-to-end speech understanding practical for resource-constrained deployment scenarios.", "https://arxiv.org/abs/2601.06199")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.02994" style="color:#4ea8ff;">Video-OPD: Efficient Post-Training of Multimodal Large Language Models for Temporal Video Grounding via On-Policy Distillation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Video-OPD introduces an on-policy distillation framework for temporal video grounding that addresses the computational inefficiency and sparse reward limitations of existing GRPO-based methods by leveraging a frontier teacher to provide dense, token-level supervision via reverse KL divergence. The approach maintains on-policy optimization benefits while converting sparse episode-level feedback into fine-grained step-wise learning signals, with an additional Teacher-Validated Disagreement Focusing (TVDF) mechanism for optimized curriculum training. This represents a practical efficiency gain for post-training multimodal LLMs on video understanding tasks while preserving the distributional alignment critical for RL-based approaches.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Video-OPD: Efficient Post-Training of Multimodal Large Language Models for Temporal Video Grounding via On-Policy Distillation", "Video-OPD introduces an on-policy distillation framework for temporal video grounding that addresses the computational inefficiency and sparse reward limitations of existing GRPO-based methods by leveraging a frontier teacher to provide dense, token-level supervision via reverse KL divergence. The approach maintains on-policy optimization benefits while converting sparse episode-level feedback into fine-grained step-wise learning signals, with an additional Teacher-Validated Disagreement Focusing (TVDF) mechanism for optimized curriculum training. This represents a practical efficiency gain for post-training multimodal LLMs on video understanding tasks while preserving the distributional alignment critical for RL-based approaches.", "https://arxiv.org/abs/2602.02994")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2505.12728" style="color:#4ea8ff;">SpecFLASH: A Latent-Guided Semi-autoregressive Speculative Decoding Framework for Efficient Multimodal Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SpecFLASH addresses the bottleneck of slow multimodal decoding in LMMs by introducing a latent-guided draft model that explicitly exploits visual token redundancy rather than relying on text-only drafting strategies. The framework combines speculative decoding with intelligent token compression to accelerate inference on multimodal inputs while maintaining generation quality. This approach is particularly impactful for vision-language models where visual sequences contain significantly more low-information-density tokens than text, making compression-aware drafting substantially more effective than existing methods.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SpecFLASH: A Latent-Guided Semi-autoregressive Speculative Decoding Framework for Efficient Multimodal Generation", "SpecFLASH addresses the bottleneck of slow multimodal decoding in LMMs by introducing a latent-guided draft model that explicitly exploits visual token redundancy rather than relying on text-only drafting strategies. The framework combines speculative decoding with intelligent token compression to accelerate inference on multimodal inputs while maintaining generation quality. This approach is particularly impactful for vision-language models where visual sequences contain significantly more low-information-density tokens than text, making compression-aware drafting substantially more effective than existing methods.", "https://arxiv.org/abs/2505.12728")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.11129" style="color:#4ea8ff;">video-SALMONN S: Memory-Enhanced Streaming Audio-Visual LLM</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 88</span></div>
+  <p>**video-SALMONN S** introduces test-time training (TTT) as a novel streaming memory mechanism for long-duration audio-visual understanding, enabling efficient processing of 3+ hour videos at 1 FPS by continuously consolidating short-term multimodal representations into long-term parameter-embedded memory. Key innovations include a TTT_MEM layer with long-span prediction objectives, modality-aware memory readers, and a two-stage training scheme that outperforms non-streaming baselines under comparable memory budgets. This approach addresses a critical bottleneck in video agents by replacing traditional KV-cache limitations with learnable parameter-based memory, opening new directions for efficient long-context multimodal models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "video-SALMONN S: Memory-Enhanced Streaming Audio-Visual LLM", "**video-SALMONN S** introduces test-time training (TTT) as a novel streaming memory mechanism for long-duration audio-visual understanding, enabling efficient processing of 3+ hour videos at 1 FPS by continuously consolidating short-term multimodal representations into long-term parameter-embedded memory. Key innovations include a TTT_MEM layer with long-span prediction objectives, modality-aware memory readers, and a two-stage training scheme that outperforms non-streaming baselines under comparable memory budgets. This approach addresses a critical bottleneck in video agents by replacing traditional KV-cache limitations with learnable parameter-based memory, opening new directions for efficient long-context multimodal models.", "https://arxiv.org/abs/2510.11129")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.23232" style="color:#4ea8ff;">ShotFinder: Imagination-Driven Open-Domain Video Shot Retrieval via Web Search</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>ShotFinder introduces the first systematic benchmark for open-domain video shot retrieval, curating 1,210 annotated YouTube samples with five controllable constraint types (temporal, color, style, audio, resolution) to address the gap between text retrieval advances and complex video semantics. The proposed pipeline leverages LLM-based video imagination for query expansion followed by web search and description-based localization, enabling practical retrieval of specific shots from unconstrained video collections—a significant challenge beyond static multimodal retrieval due to temporal dependencies and semantic complexity.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ShotFinder: Imagination-Driven Open-Domain Video Shot Retrieval via Web Search", "ShotFinder introduces the first systematic benchmark for open-domain video shot retrieval, curating 1,210 annotated YouTube samples with five controllable constraint types (temporal, color, style, audio, resolution) to address the gap between text retrieval advances and complex video semantics. The proposed pipeline leverages LLM-based video imagination for query expansion followed by web search and description-based localization, enabling practical retrieval of specific shots from unconstrained video collections—a significant challenge beyond static multimodal retrieval due to temporal dependencies and semantic complexity.", "https://arxiv.org/abs/2601.23232")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00053" style="color:#4ea8ff;">Scalable and Secure AI Inference in Healthcare: A Comparative Benchmarking of FastAPI and Triton Inference Server on Kubernetes</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper benchmarks FastAPI versus NVIDIA Triton Inference Server for deploying healthcare ML models on Kubernetes, evaluating trade-offs between latency (p50/p95), throughput, and regulatory compliance (HIPAA). The comparative analysis of a DistilBERT model provides production-relevant metrics for practitioners choosing between lightweight Python REST services and specialized GPU-optimized inference engines in regulated clinical environments. Key implications center on deployment architecture selection when balancing real-time inference demands against batch processing and strict data governance requirements in healthcare.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Scalable and Secure AI Inference in Healthcare: A Comparative Benchmarking of FastAPI and Triton Inference Server on Kubernetes", "This paper benchmarks FastAPI versus NVIDIA Triton Inference Server for deploying healthcare ML models on Kubernetes, evaluating trade-offs between latency (p50/p95), throughput, and regulatory compliance (HIPAA). The comparative analysis of a DistilBERT model provides production-relevant metrics for practitioners choosing between lightweight Python REST services and specialized GPU-optimized inference engines in regulated clinical environments. Key implications center on deployment architecture selection when balancing real-time inference demands against batch processing and strict data governance requirements in healthcare.", "https://arxiv.org/abs/2602.00053")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00415" style="color:#4ea8ff;">PolarMem: A Training-Free Polarized Latent Graph Memory for Verifiable Multimodal Agents</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>PolarMem addresses a critical gap in multimodal agent memory by introducing a training-free system that converts probabilistic vision-language model outputs into verifiable logical constraints through non-parametric distributional partitioning, explicitly encoding negative facts via polarized graph topology with inhibitory connections. This approach resolves the epistemic asymmetry problem where current dense memories conflate semantic similarity with factual truth, enabling logic-dominant retrieval that supports verifiable long-horizon reasoning. The training-free nature and discrete constraint representation make this particularly valuable for safety-critical applications where agents must distinguish between "not found" and "found to be false"—a distinction essential for reliable autonomous decision-making.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PolarMem: A Training-Free Polarized Latent Graph Memory for Verifiable Multimodal Agents", "PolarMem addresses a critical gap in multimodal agent memory by introducing a training-free system that converts probabilistic vision-language model outputs into verifiable logical constraints through non-parametric distributional partitioning, explicitly encoding negative facts via polarized graph topology with inhibitory connections. This approach resolves the epistemic asymmetry problem where current dense memories conflate semantic similarity with factual truth, enabling logic-dominant retrieval that supports verifiable long-horizon reasoning. The training-free nature and discrete constraint representation make this particularly valuable for safety-critical applications where agents must distinguish between \"not found\" and \"found to be false\"—a distinction essential for reliable autonomous decision-making.", "https://arxiv.org/abs/2602.00415")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01167" style="color:#4ea8ff;">Do All Individual Layers Help? An Empirical Study of Task-Interfering Layers in Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p># Summary
+
+Researchers discovered that zeroing specific layers in vision-language models can paradoxically improve downstream task performance, revealing "task-interfering layers" that actively harm predictions despite being pre-trained. They introduce Task-Layer Interaction Vectors as a diagnostic metric to systematically identify which layers negatively impact specific tasks, with findings showing this phenomenon generalizes across different models and datasets—suggesting VLM architectures contain unnecessary or conflicting computations that could be pruned for efficiency gains.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Do All Individual Layers Help? An Empirical Study of Task-Interfering Layers in Vision-Language Models", "# Summary\n\nResearchers discovered that zeroing specific layers in vision-language models can paradoxically improve downstream task performance, revealing \"task-interfering layers\" that actively harm predictions despite being pre-trained. They introduce Task-Layer Interaction Vectors as a diagnostic metric to systematically identify which layers negatively impact specific tasks, with findings showing this phenomenon generalizes across different models and datasets—suggesting VLM architectures contain unnecessary or conflicting computations that could be pruned for efficiency gains.", "https://arxiv.org/abs/2602.01167")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01740" style="color:#4ea8ff;">MACD: Model-Aware Contrastive Decoding via Counterfactual Data</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>MACD addresses hallucination in Video-LLMs by replacing random perturbations in contrastive decoding with model-guided counterfactual data generation—leveraging the model's own feedback to identify and surgically modify object regions most responsible for hallucinations rather than arbitrary frame-level changes. This targeted approach enables more precise alignment between counterfactual construction and model weaknesses, forcing the decoder to select tokens grounded in visual evidence. The method represents a meaningful shift from black-box perturbation strategies to interpretable, model-aware inference that could improve reliability in vision-language reasoning tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MACD: Model-Aware Contrastive Decoding via Counterfactual Data", "MACD addresses hallucination in Video-LLMs by replacing random perturbations in contrastive decoding with model-guided counterfactual data generation—leveraging the model's own feedback to identify and surgically modify object regions most responsible for hallucinations rather than arbitrary frame-level changes. This targeted approach enables more precise alignment between counterfactual construction and model weaknesses, forcing the decoder to select tokens grounded in visual evidence. The method represents a meaningful shift from black-box perturbation strategies to interpretable, model-aware inference that could improve reliability in vision-language reasoning tasks.", "https://arxiv.org/abs/2602.01740")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.01983" style="color:#4ea8ff;">Evolving from Tool User to Creator via Training-Free Experience Reuse in Multimodal Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>This paper introduces UCT, a training-free framework that enables LLM-based agents to automatically synthesize new tools from their own reasoning traces rather than relying on fixed, manually-constructed tools—addressing the scalability and adaptability limitations of current tool-integrated reasoning systems. The key innovation is harvesting implicit problem-solving patterns from LLM reasoning to create reusable, task-specific tools that can self-update during inference, eliminating both the manual engineering bottleneck and vulnerability to erroneous tool outputs. This approach could significantly accelerate multimodal reasoning by enabling dynamic tool creation without additional training or human intervention.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Evolving from Tool User to Creator via Training-Free Experience Reuse in Multimodal Reasoning", "This paper introduces UCT, a training-free framework that enables LLM-based agents to automatically synthesize new tools from their own reasoning traces rather than relying on fixed, manually-constructed tools—addressing the scalability and adaptability limitations of current tool-integrated reasoning systems. The key innovation is harvesting implicit problem-solving patterns from LLM reasoning to create reusable, task-specific tools that can self-update during inference, eliminating both the manual engineering bottleneck and vulnerability to erroneous tool outputs. This approach could significantly accelerate multimodal reasoning by enabling dynamic tool creation without additional training or human intervention.", "https://arxiv.org/abs/2602.01983")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.02453" style="color:#4ea8ff;">Thinking with Comics: Enhancing Multimodal Reasoning through Structured Visual Storytelling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper introduces "Thinking with Comics" as an intermediate modality between static images and videos for multimodal chain-of-thought reasoning, leveraging comics' ability to encode temporal structure, text, and narrative coherence with lower computational overhead than video processing. The approach demonstrates superior performance on multi-step temporal and causal reasoning tasks compared to image-based reasoning while maintaining computational efficiency advantages over video-based methods. The work addresses a key limitation in current multimodal LLMs: the trade-off between representational capacity (temporal structure) and computational cost, suggesting comics as an optimized alternative for structured visual reasoning tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Thinking with Comics: Enhancing Multimodal Reasoning through Structured Visual Storytelling", "This paper introduces \"Thinking with Comics\" as an intermediate modality between static images and videos for multimodal chain-of-thought reasoning, leveraging comics' ability to encode temporal structure, text, and narrative coherence with lower computational overhead than video processing. The approach demonstrates superior performance on multi-step temporal and causal reasoning tasks compared to image-based reasoning while maintaining computational efficiency advantages over video-based methods. The work addresses a key limitation in current multimodal LLMs: the trade-off between representational capacity (temporal structure) and computational cost, suggesting comics as an optimized alternative for structured visual reasoning tasks.", "https://arxiv.org/abs/2602.02453")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00103" style="color:#4ea8ff;">Autonomous Multi-Agent AI for High-Throughput Polymer Informatics: From Property Prediction to Generative Design Across Synthetic and Bio-Polymers</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-04
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#6b7280;">⚡ 28</span></div>
+  <p>This work presents a multi-agent AI system that orchestrates specialized LLM-based agents (DeepSeek-V2/Coder) for end-to-end polymer discovery, combining high-throughput workflows with property prediction and generative design across synthetic and bio-polymers. The system demonstrates metacognitive self-assessment capabilities, enabling agents to monitor and improve execution strategies autonomously, achieving high predictive accuracy on polymer property prediction via a PolyGNN architecture. The practical impact lies in automating the complete materials discovery pipeline—from retrieval and reasoning over scientific literature to domain-specific code execution—potentially accelerating polymer research cycles significantly.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Autonomous Multi-Agent AI for High-Throughput Polymer Informatics: From Property Prediction to Generative Design Across Synthetic and Bio-Polymers", "This work presents a multi-agent AI system that orchestrates specialized LLM-based agents (DeepSeek-V2/Coder) for end-to-end polymer discovery, combining high-throughput workflows with property prediction and generative design across synthetic and bio-polymers. The system demonstrates metacognitive self-assessment capabilities, enabling agents to monitor and improve execution strategies autonomously, achieving high predictive accuracy on polymer property prediction via a PolyGNN architecture. The practical impact lies in automating the complete materials discovery pipeline—from retrieval and reasoning over scientific literature to domain-specific code execution—potentially accelerating polymer research cycles significantly.", "https://arxiv.org/abs/2602.00103")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
