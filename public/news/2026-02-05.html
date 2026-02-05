@@ -1,0 +1,495 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-05</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-05</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03892" style="color:#4ea8ff;">Audit After Segmentation: Reference-Free Mask Quality Assessment for Language-Referred Audio-Visual Segmentation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper introduces MQA-RefAVS, a novel reference-free quality assessment task for language-referred audio-visual segmentation that evaluates mask quality without ground-truth annotations by estimating IoU, classifying error types, and recommending quality-control decisions. The authors contribute MQ-RAVSBench, a benchmark encompassing diverse mask error modes spanning geometric and semantic issues, enabling robust evaluation of multimodal segmentation quality in practical deployment scenarios. This work addresses a critical gap in interpretability for multimodal segmentation systems, moving beyond mask generation toward actionable diagnostic feedback—crucial for real-world applications where ground-truth labels are unavailable at inference time.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Audit After Segmentation: Reference-Free Mask Quality Assessment for Language-Referred Audio-Visual Segmentation", "This paper introduces MQA-RefAVS, a novel reference-free quality assessment task for language-referred audio-visual segmentation that evaluates mask quality without ground-truth annotations by estimating IoU, classifying error types, and recommending quality-control decisions. The authors contribute MQ-RAVSBench, a benchmark encompassing diverse mask error modes spanning geometric and semantic issues, enabling robust evaluation of multimodal segmentation quality in practical deployment scenarios. This work addresses a critical gap in interpretability for multimodal segmentation systems, moving beyond mask generation toward actionable diagnostic feedback—crucial for real-world applications where ground-truth labels are unavailable at inference time.", "https://arxiv.org/abs/2602.03892")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03892" style="color:#4ea8ff;">Audit After Segmentation: Reference-Free Mask Quality Assessment for Language-Referred Audio-Visual Segmentation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work introduces MQA-RefAVS, a novel reference-free quality assessment task for language-referred audio-visual segmentation masks that estimates IoU and diagnoses error types without ground-truth annotations, addressing a critical gap in multimodal segmentation interpretability. The authors construct MQ-RAVSBench benchmark with diverse mask error modes covering geometric and semantic failures, enabling systems to provide actionable quality-control feedback during inference—a practical necessity for deployed AV-language understanding systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Audit After Segmentation: Reference-Free Mask Quality Assessment for Language-Referred Audio-Visual Segmentation", "This work introduces MQA-RefAVS, a novel reference-free quality assessment task for language-referred audio-visual segmentation masks that estimates IoU and diagnoses error types without ground-truth annotations, addressing a critical gap in multimodal segmentation interpretability. The authors construct MQ-RAVSBench benchmark with diverse mask error modes covering geometric and semantic failures, enabling systems to provide actionable quality-control feedback during inference—a practical necessity for deployed AV-language understanding systems.", "https://arxiv.org/abs/2602.03892")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.18321" style="color:#4ea8ff;">Integrating Fine-Grained Audio-Visual Evidence for Robust Multimodal Emotion Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p># Summary
+
+This paper addresses a critical gap in multimodal emotion analysis by introducing SABER-LLM, a framework that enhances fine-grained audio-visual perception in MLLMs through better cross-modal fusion and a new 600K-clip emotion reasoning dataset (SABER). The work specifically tackles unimodal dominance and hallucination issues when processing subtle or contradictory signals like micro-expressions and prosody, shifting the task from simple classification to generative reasoning that can decode complex social contexts including sarcasm.
+
+**Key implication**: This represents an important step toward more robust multimodal reasoning by moving beyond label prediction to causal understanding, which could significantly improve real-world applications in human-computer interaction and affective computing.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Integrating Fine-Grained Audio-Visual Evidence for Robust Multimodal Emotion Reasoning", "# Summary\n\nThis paper addresses a critical gap in multimodal emotion analysis by introducing SABER-LLM, a framework that enhances fine-grained audio-visual perception in MLLMs through better cross-modal fusion and a new 600K-clip emotion reasoning dataset (SABER). The work specifically tackles unimodal dominance and hallucination issues when processing subtle or contradictory signals like micro-expressions and prosody, shifting the task from simple classification to generative reasoning that can decode complex social contexts including sarcasm.\n\n**Key implication**: This represents an important step toward more robust multimodal reasoning by moving beyond label prediction to causal understanding, which could significantly improve real-world applications in human-computer interaction and affective computing.", "https://arxiv.org/abs/2601.18321")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03873" style="color:#4ea8ff;">Decoding Ambiguous Emotions with Test-Time Scaling in Audio-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper introduces the first benchmark for evaluating audio-language models on ambiguous emotion recognition in speech, leveraging test-time scaling (TTS) techniques to move beyond traditional categorical classification frameworks. The key innovation is applying inference-time scaling methods—previously validated for NLP—to affective computing, enabling ALMs to handle overlapping, context-dependent emotional states without requiring explicit emotion supervision. This work has practical implications for building more robust conversational AI systems that can reason about nuanced affective states reflecting real-world emotional complexity.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Decoding Ambiguous Emotions with Test-Time Scaling in Audio-Language Models", "This paper introduces the first benchmark for evaluating audio-language models on ambiguous emotion recognition in speech, leveraging test-time scaling (TTS) techniques to move beyond traditional categorical classification frameworks. The key innovation is applying inference-time scaling methods—previously validated for NLP—to affective computing, enabling ALMs to handle overlapping, context-dependent emotional states without requiring explicit emotion supervision. This work has practical implications for building more robust conversational AI systems that can reason about nuanced affective states reflecting real-world emotional complexity.", "https://arxiv.org/abs/2602.03873")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03891" style="color:#4ea8ff;">Sounding Highlights: Dual-Pathway Audio Encoders for Audio-Visual Video Highlight Detection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper introduces DAViHD, a dual-pathway audio encoder architecture that addresses underutilization of audio in multimodal highlight detection by decoupling semantic content understanding from spectro-temporal dynamics modeling using frequency-adaptive mechanisms. The approach enables more precise identification of salient moments by capturing both high-level audio events (speech, music) and transient acoustic phenomena, particularly through selective spectral band attention. This technique has implications for improved multimodal video understanding systems where audio dynamics—often ignored in favor of semantic-only features—provide critical temporal cues for moment salience detection.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Sounding Highlights: Dual-Pathway Audio Encoders for Audio-Visual Video Highlight Detection", "This paper introduces DAViHD, a dual-pathway audio encoder architecture that addresses underutilization of audio in multimodal highlight detection by decoupling semantic content understanding from spectro-temporal dynamics modeling using frequency-adaptive mechanisms. The approach enables more precise identification of salient moments by capturing both high-level audio events (speech, music) and transient acoustic phenomena, particularly through selective spectral band attention. This technique has implications for improved multimodal video understanding systems where audio dynamics—often ignored in favor of semantic-only features—provide critical temporal cues for moment salience detection.", "https://arxiv.org/abs/2602.03891")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03924" style="color:#4ea8ff;">WIND: Weather Inverse Diffusion for Zero-Shot Atmospheric Modeling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 25</span></div>
+  <p>WIND introduces a unified foundation model for atmospheric modeling using self-supervised video diffusion pre-training, enabling zero-shot performance across diverse weather and climate tasks without task-specific fine-tuning by framing inference as inverse problems solved via posterior sampling. This approach fundamentally shifts from training specialized models to leveraging a single robust prior of atmospheric dynamics, offering significant computational efficiency gains and generalization capabilities for real-world weather prediction and climate analysis.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "WIND: Weather Inverse Diffusion for Zero-Shot Atmospheric Modeling", "WIND introduces a unified foundation model for atmospheric modeling using self-supervised video diffusion pre-training, enabling zero-shot performance across diverse weather and climate tasks without task-specific fine-tuning by framing inference as inverse problems solved via posterior sampling. This approach fundamentally shifts from training specialized models to leveraging a single robust prior of atmospheric dynamics, offering significant computational efficiency gains and generalization capabilities for real-world weather prediction and climate analysis.", "https://arxiv.org/abs/2602.03924")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03949" style="color:#4ea8ff;">Semantic Rate Distortion and Posterior Design: Compute Constraints, Multimodality, and Strategic Inference</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper extends semantic rate-distortion theory to strategic settings where encoder and decoder have misaligned objectives under joint rate and compute constraints, deriving closed-form solutions for Gaussian posterior covariance design via semantic waterfilling. Key findings show that compute limits act as implicit rate constraints, enabling exponential semantic accuracy improvements with model depth, while multimodal observations eliminate efficiency penalties from remote encoding—with direct applications to strategic communication and inference optimization.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Semantic Rate Distortion and Posterior Design: Compute Constraints, Multimodality, and Strategic Inference", "This paper extends semantic rate-distortion theory to strategic settings where encoder and decoder have misaligned objectives under joint rate and compute constraints, deriving closed-form solutions for Gaussian posterior covariance design via semantic waterfilling. Key findings show that compute limits act as implicit rate constraints, enabling exponential semantic accuracy improvements with model depth, while multimodal observations eliminate efficiency penalties from remote encoding—with direct applications to strategic communication and inference optimization.", "https://arxiv.org/abs/2602.03949")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.25458" style="color:#4ea8ff;">Plug-and-Play Emotion Graphs for Compositional Prompting in Zero-Shot Speech Emotion Recognition</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p># Summary
+
+Researchers propose **CCoT-Emo**, a zero-shot framework that enhances large audio-language models' (LALMs) emotion recognition by embedding structured **Emotion Graphs** into chain-of-thought prompts—encoding acoustic features (pitch, jitter, shimmer), sentiment, and cross-modal associations without requiring fine-tuning. This compositional prompting approach addresses LALMs' weak paralinguistic modeling through interpretable feature graphs that guide structured reasoning, achieving SOTA results on speech emotion recognition benchmarks.
+
+**Key implication**: Demonstrates that explicit acoustic-semantic coupling through graph-based prompt engineering can unlock zero-shot capability in paralinguistic tasks, relevant for prompt engineering best practices and multimodal foundation model design.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Plug-and-Play Emotion Graphs for Compositional Prompting in Zero-Shot Speech Emotion Recognition", "# Summary\n\nResearchers propose **CCoT-Emo**, a zero-shot framework that enhances large audio-language models' (LALMs) emotion recognition by embedding structured **Emotion Graphs** into chain-of-thought prompts—encoding acoustic features (pitch, jitter, shimmer), sentiment, and cross-modal associations without requiring fine-tuning. This compositional prompting approach addresses LALMs' weak paralinguistic modeling through interpretable feature graphs that guide structured reasoning, achieving SOTA results on speech emotion recognition benchmarks.\n\n**Key implication**: Demonstrates that explicit acoustic-semantic coupling through graph-based prompt engineering can unlock zero-shot capability in paralinguistic tasks, relevant for prompt engineering best practices and multimodal foundation model design.", "https://arxiv.org/abs/2509.25458")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.08585" style="color:#4ea8ff;">Simulating the Visual World with Artificial Intelligence: A Roadmap</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Video generation is evolving from passive content creation toward interactive world models that simulate physics, dynamics, and agent behavior—decomposable into latent simulation engines (world models) and visual renderers. This architectural shift enables foundation models to perform coherent long-horizon reasoning, maintain temporal consistency, and support goal-driven planning, positioning them as implicit simulators of real or imagined environments rather than simple generative models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Simulating the Visual World with Artificial Intelligence: A Roadmap", "Video generation is evolving from passive content creation toward interactive world models that simulate physics, dynamics, and agent behavior—decomposable into latent simulation engines (world models) and visual renderers. This architectural shift enables foundation models to perform coherent long-horizon reasoning, maintain temporal consistency, and support goal-driven planning, positioning them as implicit simulators of real or imagined environments rather than simple generative models.", "https://arxiv.org/abs/2511.08585")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2507.10419" style="color:#4ea8ff;">Multiple Choice Learning of Low-Rank Adapters for Language Modeling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>LoRA-MCL introduces Multiple Choice Learning to language modeling via low-rank adapters, enabling models to decode multiple plausible continuations by treating next-token prediction as an inherently ambiguous task and applying Winner-Takes-All loss to handle mixture-of-distributions data. The approach demonstrates improved output diversity and relevance across visual/audio captioning and machine translation while maintaining computational efficiency through LoRA's parameter-efficient fine-tuning, providing both theoretical grounding (mixture model interpretation) and practical applicability via released code.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multiple Choice Learning of Low-Rank Adapters for Language Modeling", "LoRA-MCL introduces Multiple Choice Learning to language modeling via low-rank adapters, enabling models to decode multiple plausible continuations by treating next-token prediction as an inherently ambiguous task and applying Winner-Takes-All loss to handle mixture-of-distributions data. The approach demonstrates improved output diversity and relevance across visual/audio captioning and machine translation while maintaining computational efficiency through LoRA's parameter-efficient fine-tuning, providing both theoretical grounding (mixture model interpretation) and practical applicability via released code.", "https://arxiv.org/abs/2507.10419")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2508.03365" style="color:#4ea8ff;">When Good Sounds Go Adversarial: Jailbreaking Audio-Language Models with Benign Inputs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper demonstrates a critical vulnerability in audio-language models through WhisperInject, a two-stage adversarial attack that embeds harmful payloads as imperceptible audio perturbations while maintaining human intelligibility. The novel approach combines RL-PGD (Reinforcement Learning with Projected Gradient Descent) for jailbreak optimization with gradient-based payload injection, bypassing safety mechanisms in state-of-the-art models. This work highlights that audio interfaces represent an understudied attack surface for LLMs, requiring new defensive strategies beyond text-based safety measures as multimodal AI systems gain broader deployment.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "When Good Sounds Go Adversarial: Jailbreaking Audio-Language Models with Benign Inputs", "This paper demonstrates a critical vulnerability in audio-language models through WhisperInject, a two-stage adversarial attack that embeds harmful payloads as imperceptible audio perturbations while maintaining human intelligibility. The novel approach combines RL-PGD (Reinforcement Learning with Projected Gradient Descent) for jailbreak optimization with gradient-based payload injection, bypassing safety mechanisms in state-of-the-art models. This work highlights that audio interfaces represent an understudied attack surface for LLMs, requiring new defensive strategies beyond text-based safety measures as multimodal AI systems gain broader deployment.", "https://arxiv.org/abs/2508.03365")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.24385" style="color:#4ea8ff;">Vid-LLM: A Compact Video-based 3D Multimodal LLM with Reconstruction-Reasoning Synergy</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Vid-LLM introduces a practical approach to 3D scene understanding by leveraging video input directly rather than requiring external 3D data, using a Cross-Task Adapter module to integrate geometric priors (via metric depth estimation) with vision-language representations for improved spatial reasoning. This reconstruction-reasoning synergy enables compact 3D-MLLM inference while maintaining geometric consistency, addressing scalability bottlenecks in existing 3D multimodal models that depend on pre-computed 3D representations. The work demonstrates significant potential for real-world deployment scenarios where 3D annotations are unavailable, offering developers a more practical alternative to geometry-dependent 3D-MLLMs.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Vid-LLM: A Compact Video-based 3D Multimodal LLM with Reconstruction-Reasoning Synergy", "Vid-LLM introduces a practical approach to 3D scene understanding by leveraging video input directly rather than requiring external 3D data, using a Cross-Task Adapter module to integrate geometric priors (via metric depth estimation) with vision-language representations for improved spatial reasoning. This reconstruction-reasoning synergy enables compact 3D-MLLM inference while maintaining geometric consistency, addressing scalability bottlenecks in existing 3D multimodal models that depend on pre-computed 3D representations. The work demonstrates significant potential for real-world deployment scenarios where 3D annotations are unavailable, offering developers a more practical alternative to geometry-dependent 3D-MLLMs.", "https://arxiv.org/abs/2509.24385")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.23174" style="color:#4ea8ff;">Beyond Fixed Frames: Dynamic Character-Aligned Speech Tokenization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>DyCAST introduces dynamic, character-aligned speech tokenization that replaces fixed frame-rate codecs with variable-rate encoding tied to linguistic units, reducing token sequence length while maintaining quality through soft alignment and explicit duration modeling. The system enables LLM-friendly speech compression with inference-time control over bitrate and incorporates retrieval-augmented decoding to improve reconstruction fidelity at low frame rates without additional overhead. This approach addresses a key bottleneck in speech-to-LLM pipelines by producing more efficient, semantically-grounded token sequences that could significantly improve both model efficiency and conversational AI responsiveness.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond Fixed Frames: Dynamic Character-Aligned Speech Tokenization", "DyCAST introduces dynamic, character-aligned speech tokenization that replaces fixed frame-rate codecs with variable-rate encoding tied to linguistic units, reducing token sequence length while maintaining quality through soft alignment and explicit duration modeling. The system enables LLM-friendly speech compression with inference-time control over bitrate and incorporates retrieval-augmented decoding to improve reconstruction fidelity at low frame rates without additional overhead. This approach addresses a key bottleneck in speech-to-LLM pipelines by producing more efficient, semantically-grounded token sequences that could significantly improve both model efficiency and conversational AI responsiveness.", "https://arxiv.org/abs/2601.23174")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.04204" style="color:#4ea8ff;">AGMA: Adaptive Gaussian Mixture Anchors for Prior-Guided Multimodal Human Trajectory Forecasting</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>AGMA introduces a two-stage prior learning framework that adaptively constructs scene-aware Gaussian mixture priors from training data, theoretically proving that prediction error is fundamentally lower-bounded by prior quality—shifting focus from model architecture to prior modeling as the key performance bottleneck in multimodal trajectory forecasting. The approach extracts diverse behavioral patterns and distills them into global priors for inference, achieving SOTA results on standard benchmarks (ETH-UCY, Stanford Drone, JRDB) by better capturing the full distribution of plausible pedestrian futures compared to fixed or misaligned priors. This work has implications for improving both prediction accuracy and mode coverage in downstream applications like autonomous vehicles and crowd simulation, where prior misalignment has historically limited diversity in generated trajectories.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AGMA: Adaptive Gaussian Mixture Anchors for Prior-Guided Multimodal Human Trajectory Forecasting", "AGMA introduces a two-stage prior learning framework that adaptively constructs scene-aware Gaussian mixture priors from training data, theoretically proving that prediction error is fundamentally lower-bounded by prior quality—shifting focus from model architecture to prior modeling as the key performance bottleneck in multimodal trajectory forecasting. The approach extracts diverse behavioral patterns and distills them into global priors for inference, achieving SOTA results on standard benchmarks (ETH-UCY, Stanford Drone, JRDB) by better capturing the full distribution of plausible pedestrian futures compared to fixed or misaligned priors. This work has implications for improving both prediction accuracy and mode coverage in downstream applications like autonomous vehicles and crowd simulation, where prior misalignment has historically limited diversity in generated trajectories.", "https://arxiv.org/abs/2602.04204")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.04268" style="color:#4ea8ff;">KVSmooth: Mitigating Hallucination in Multi-modal Large Language Models through Key-Value Smoothing</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-05
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>KVSmooth introduces a training-free, plug-and-play technique that reduces hallucinations in MLLMs by applying entropy-guided adaptive exponential moving average smoothing to KV-Cache keys and values, dynamically adjusting based on token attention entropy to combat semantic drift during decoding. This approach is particularly valuable because it requires no retraining and directly addresses the core issue of visual grounding inconsistency as sequence length increases—a critical bottleneck for reliable MLLM deployment in production environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "KVSmooth: Mitigating Hallucination in Multi-modal Large Language Models through Key-Value Smoothing", "KVSmooth introduces a training-free, plug-and-play technique that reduces hallucinations in MLLMs by applying entropy-guided adaptive exponential moving average smoothing to KV-Cache keys and values, dynamically adjusting based on token attention entropy to combat semantic drift during decoding. This approach is particularly valuable because it requires no retraining and directly addresses the core issue of visual grounding inconsistency as sequence length increases—a critical bottleneck for reliable MLLM deployment in production environments.", "https://arxiv.org/abs/2602.04268")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
