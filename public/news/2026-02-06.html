@@ -1,0 +1,489 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-06</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-06</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.04904" style="color:#4ea8ff;">DCER: Dual-Stage Compression and Energy-Based Reconstruction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>DCER introduces a dual-stage compression framework for robust multimodal fusion: within-modality frequency transforms (wavelet/DCT) denoise individual streams while cross-modality bottleneck tokens enforce true fusion, and energy-based models reconstruct missing modalities via learnable energy functions that simultaneously provide uncertainty quantification (ρ &gt; 0.72 correlation with error). The approach achieves SOTA on sentiment analysis benchmarks while maintaining robustness to both noisy inputs and missing modalities—a critical advance for real-world multimodal systems where modality availability and quality are unpredictable.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "DCER: Dual-Stage Compression and Energy-Based Reconstruction", "DCER introduces a dual-stage compression framework for robust multimodal fusion: within-modality frequency transforms (wavelet/DCT) denoise individual streams while cross-modality bottleneck tokens enforce true fusion, and energy-based models reconstruct missing modalities via learnable energy functions that simultaneously provide uncertainty quantification (ρ &gt; 0.72 correlation with error). The approach achieves SOTA on sentiment analysis benchmarks while maintaining robustness to both noisy inputs and missing modalities—a critical advance for real-world multimodal systems where modality availability and quality are unpredictable.", "https://arxiv.org/abs/2602.04904")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05496" style="color:#4ea8ff;">XEmoGPT: An Explainable Multimodal Emotion Recognition Framework with Cue-Level Perception and Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>XEmoGPT addresses explainable multimodal emotion recognition by introducing specialized encoding modules that perceive fine-grained emotional cues rather than relying on general-purpose encoders, tackling the core limitation that standard modality encoders miss subtle emotional signals. The framework incorporates cue-level reasoning capabilities and proposes new evaluation metrics specifically designed for assessing fine-grained emotional understanding, moving beyond dataset annotation quality/scale trade-offs that typically limit supervision signals. This approach has direct implications for improving emotion understanding in human-computer interaction and social media analytics where explainability and precise cue attribution are critical.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "XEmoGPT: An Explainable Multimodal Emotion Recognition Framework with Cue-Level Perception and Reasoning", "XEmoGPT addresses explainable multimodal emotion recognition by introducing specialized encoding modules that perceive fine-grained emotional cues rather than relying on general-purpose encoders, tackling the core limitation that standard modality encoders miss subtle emotional signals. The framework incorporates cue-level reasoning capabilities and proposes new evaluation metrics specifically designed for assessing fine-grained emotional understanding, moving beyond dataset annotation quality/scale trade-offs that typically limit supervision signals. This approach has direct implications for improving emotion understanding in human-computer interaction and social media analytics where explainability and precise cue attribution are critical.", "https://arxiv.org/abs/2602.05496")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05496" style="color:#4ea8ff;">XEmoGPT: An Explainable Multimodal Emotion Recognition Framework with Cue-Level Perception and Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>XEmoGPT addresses multimodal emotion recognition's fundamental limitations by introducing specialized emotion-centric encoders and cue-level reasoning capabilities, moving beyond general-purpose vision-language models that miss fine-grained emotional signals. The framework tackles the annotation-scale tradeoff through a novel approach to leverage limited high-quality cue annotations alongside larger datasets, enabling both fine-grained emotion perception and explainable reasoning that current metrics fail to capture. This work has significant implications for HCI and social media analysis applications requiring interpretable emotion understanding rather than black-box predictions.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "XEmoGPT: An Explainable Multimodal Emotion Recognition Framework with Cue-Level Perception and Reasoning", "XEmoGPT addresses multimodal emotion recognition's fundamental limitations by introducing specialized emotion-centric encoders and cue-level reasoning capabilities, moving beyond general-purpose vision-language models that miss fine-grained emotional signals. The framework tackles the annotation-scale tradeoff through a novel approach to leverage limited high-quality cue annotations alongside larger datasets, enabling both fine-grained emotion perception and explainable reasoning that current metrics fail to capture. This work has significant implications for HCI and social media analysis applications requiring interpretable emotion understanding rather than black-box predictions.", "https://arxiv.org/abs/2602.05496")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.23646" style="color:#4ea8ff;">Active Perception Agent for Omnimodal Audio-Video Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#10b981;">⚡ 88</span></div>
+  <p>OmniAgent introduces an active perception paradigm for audio-video understanding by dynamically orchestrating specialized unimodal tools rather than relying on static multimodal pipelines, with a novel coarse-to-fine audio-guided approach that uses audio cues to temporally localize and focus visual perception on task-relevant events. This shift from passive omnimodal encoding to active, demand-driven tool invocation addresses fundamental limitations in cross-modal alignment and enables more fine-grained reasoning without the computational overhead of dense frame captioning. The architecture suggests practical efficiency gains for real-world multimodal AI systems through selective, intelligent perception rather than exhaustive modality processing.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Active Perception Agent for Omnimodal Audio-Video Understanding", "OmniAgent introduces an active perception paradigm for audio-video understanding by dynamically orchestrating specialized unimodal tools rather than relying on static multimodal pipelines, with a novel coarse-to-fine audio-guided approach that uses audio cues to temporally localize and focus visual perception on task-relevant events. This shift from passive omnimodal encoding to active, demand-driven tool invocation addresses fundamental limitations in cross-modal alignment and enables more fine-grained reasoning without the computational overhead of dense frame captioning. The architecture suggests practical efficiency gains for real-world multimodal AI systems through selective, intelligent perception rather than exhaustive modality processing.", "https://arxiv.org/abs/2512.23646")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05515" style="color:#4ea8ff;">A Unified Multimodal Framework for Dataset Construction and Model-Based Diagnosis of Ameloblastoma</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This work addresses a critical gap in AI-driven dental pathology by constructing a multimodal dataset integrating radiology, histopathology, and clinical images with NLP-extracted features from case reports to enable variant classification and recurrence prediction for ameloblastoma. The unified framework demonstrates how domain-specific preprocessing combined with multimodal learning can operationalize unstructured clinical data for surgical planning support, establishing a replicable methodology for structured dataset construction in specialized medical domains.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Unified Multimodal Framework for Dataset Construction and Model-Based Diagnosis of Ameloblastoma", "This work addresses a critical gap in AI-driven dental pathology by constructing a multimodal dataset integrating radiology, histopathology, and clinical images with NLP-extracted features from case reports to enable variant classification and recurrence prediction for ameloblastoma. The unified framework demonstrates how domain-specific preprocessing combined with multimodal learning can operationalize unstructured clinical data for surgical planning support, establishing a replicable methodology for structured dataset construction in specialized medical domains.", "https://arxiv.org/abs/2602.05515")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05847" style="color:#4ea8ff;">OmniVideo-R1: Reinforcing Audio-visual Reasoning with Query Intention and Modality Attention</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>OmniVideo-R1 addresses audio-visual reasoning limitations through two technical innovations: query-intensive grounding using self-supervised learning and modality-attentive fusion via contrastive learning, enabling more effective cross-modal alignment for video understanding tasks. The framework demonstrates consistent improvements over baselines across multiple benchmarks, suggesting practical applicability for multimodal video AI systems that require robust synchronization between audio and visual streams.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "OmniVideo-R1: Reinforcing Audio-visual Reasoning with Query Intention and Modality Attention", "OmniVideo-R1 addresses audio-visual reasoning limitations through two technical innovations: query-intensive grounding using self-supervised learning and modality-attentive fusion via contrastive learning, enabling more effective cross-modal alignment for video understanding tasks. The framework demonstrates consistent improvements over baselines across multiple benchmarks, suggesting practical applicability for multimodal video AI systems that require robust synchronization between audio and visual streams.", "https://arxiv.org/abs/2602.05847")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.04900" style="color:#4ea8ff;">Evaluating Kubernetes Performance for GenAI Inference: From Automatic Speech Recognition to LLM Summarization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>This paper demonstrates how Kubernetes-native tools (Kueue for job orchestration, Dynamic Accelerator Slicer for GPU parallelization, and llm-d leveraging the Gateway API) can efficiently manage multi-stage GenAI inference pipelines, combining batch (speech recognition via Whisper) and online (LLM summarization) workloads. The work highlights emerging patterns for scaling AI inference through container orchestration while optimizing resource utilization and latency characteristics across heterogeneous computational demands. Key implication: as GenAI inference becomes production-critical, Kubernetes extensibility via CRDs and standard APIs provides a practical path toward unified, scalable AI infrastructure without proprietary lock-in.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Evaluating Kubernetes Performance for GenAI Inference: From Automatic Speech Recognition to LLM Summarization", "This paper demonstrates how Kubernetes-native tools (Kueue for job orchestration, Dynamic Accelerator Slicer for GPU parallelization, and llm-d leveraging the Gateway API) can efficiently manage multi-stage GenAI inference pipelines, combining batch (speech recognition via Whisper) and online (LLM summarization) workloads. The work highlights emerging patterns for scaling AI inference through container orchestration while optimizing resource utilization and latency characteristics across heterogeneous computational demands. Key implication: as GenAI inference becomes production-critical, Kubernetes extensibility via CRDs and standard APIs provides a practical path toward unified, scalable AI infrastructure without proprietary lock-in.", "https://arxiv.org/abs/2602.04900")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.04913" style="color:#4ea8ff;">A$^2$-LLM: An End-to-end Conversational Audio Avatar Large Language Model</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 24</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>A²-LLM proposes an end-to-end architecture that unifies language, audio prosody, and 3D facial motion generation for conversational avatars, eliminating cascaded pipeline errors and latency while enabling emotional expressiveness grounded in semantic context. The authors introduce FLAME-QA, a multimodal QA dataset aligning semantic intent with facial dynamics, enabling joint reasoning across modalities within a single LLM framework rather than traditional disconnected modules.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A$^2$-LLM: An End-to-end Conversational Audio Avatar Large Language Model", "A²-LLM proposes an end-to-end architecture that unifies language, audio prosody, and 3D facial motion generation for conversational avatars, eliminating cascaded pipeline errors and latency while enabling emotional expressiveness grounded in semantic context. The authors introduce FLAME-QA, a multimodal QA dataset aligning semantic intent with facial dynamics, enabling joint reasoning across modalities within a single LLM framework rather than traditional disconnected modules.", "https://arxiv.org/abs/2602.04913")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05207" style="color:#4ea8ff;">ARCHI-TTS: A flow-matching-based Text-to-Speech Model with Self-supervised Semantic Aligner and Accelerated Inference</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>ARCHI-TTS addresses two critical bottlenecks in diffusion-based TTS by introducing a self-supervised semantic aligner for robust text-audio alignment and an efficient feature-reuse strategy that accelerates iterative denoising inference without quality loss. The auxiliary CTC loss on the condition encoder enhances semantic understanding, achieving competitive phoneme error rates (1.98% WER on LibriSpeech test-clean) with substantially reduced computational overhead—a meaningful advancement for deploying zero-shot TTS systems in resource-constrained environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ARCHI-TTS: A flow-matching-based Text-to-Speech Model with Self-supervised Semantic Aligner and Accelerated Inference", "ARCHI-TTS addresses two critical bottlenecks in diffusion-based TTS by introducing a self-supervised semantic aligner for robust text-audio alignment and an efficient feature-reuse strategy that accelerates iterative denoising inference without quality loss. The auxiliary CTC loss on the condition encoder enhances semantic understanding, achieving competitive phoneme error rates (1.98% WER on LibriSpeech test-clean) with substantially reduced computational overhead—a meaningful advancement for deploying zero-shot TTS systems in resource-constrained environments.", "https://arxiv.org/abs/2602.05207")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05305" style="color:#4ea8ff;">FlashBlock: Attention Caching for Efficient Long-Context Block Diffusion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>FlashBlock addresses computational bottlenecks in long-context block diffusion by exploiting cross-step attention redundancy—specifically, that attention outputs from tokens outside the current block remain stable across diffusion steps while internal attention varies. The proposed cached block-external attention mechanism reuses these stable outputs to reduce both attention computation and KV cache accesses, offering significant efficiency gains for long-form video and text generation without architectural modifications. This work is particularly relevant for scaling diffusion models to minute-long videos and extended sequences where KV cache overhead becomes a critical bottleneck.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FlashBlock: Attention Caching for Efficient Long-Context Block Diffusion", "FlashBlock addresses computational bottlenecks in long-context block diffusion by exploiting cross-step attention redundancy—specifically, that attention outputs from tokens outside the current block remain stable across diffusion steps while internal attention varies. The proposed cached block-external attention mechanism reuses these stable outputs to reduce both attention computation and KV cache accesses, offering significant efficiency gains for long-form video and text generation without architectural modifications. This work is particularly relevant for scaling diffusion models to minute-long videos and extended sequences where KV cache overhead becomes a critical bottleneck.", "https://arxiv.org/abs/2602.05305")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05966" style="color:#4ea8ff;">LSA: Localized Semantic Alignment for Enhancing Temporal Consistency in Traffic Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>**LSA introduces a fine-tuning approach for video generation models that improves temporal consistency by aligning semantic features between ground-truth and generated clips localized around dynamic objects**, using a feature consistency loss combined with standard diffusion training. This addresses a critical limitation of inference-time control signals by creating a more scalable data generation engine for autonomous driving scenarios, where temporal coherence of traffic objects is essential. The method's elegance lies in leveraging existing feature extractors to enforce localized semantic alignment rather than requiring explicit control signals during generation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "LSA: Localized Semantic Alignment for Enhancing Temporal Consistency in Traffic Video Generation", "**LSA introduces a fine-tuning approach for video generation models that improves temporal consistency by aligning semantic features between ground-truth and generated clips localized around dynamic objects**, using a feature consistency loss combined with standard diffusion training. This addresses a critical limitation of inference-time control signals by creating a more scalable data generation engine for autonomous driving scenarios, where temporal coherence of traffic objects is essential. The method's elegance lies in leveraging existing feature extractors to enforce localized semantic alignment rather than requiring explicit control signals during generation.", "https://arxiv.org/abs/2602.05966")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05986" style="color:#4ea8ff;">RISE-Video: Can Video Generators Decode Implicit World Rules?</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p># RISE-Video Summary
+
+RISE-Video introduces a reasoning-focused benchmark for evaluating Text-Image-to-Video models beyond visual fidelity, addressing the critical gap of whether generative video systems can internalize implicit world rules and physical constraints. The benchmark comprises 467 annotated samples across eight categories with a four-metric evaluation protocol (Reasoning Alignment, Temporal Consistency, Physical Rationality, Visual Quality) to systematically assess commonsense reasoning, spatial dynamics, and domain-specific knowledge in generated videos. This shifts video generation evaluation from surface-level aesthetics toward measuring true cognitive reasoning capabilities—particularly relevant as video models increasingly need to demonstrate physical plausibility and logical coherence for real-world applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "RISE-Video: Can Video Generators Decode Implicit World Rules?", "# RISE-Video Summary\n\nRISE-Video introduces a reasoning-focused benchmark for evaluating Text-Image-to-Video models beyond visual fidelity, addressing the critical gap of whether generative video systems can internalize implicit world rules and physical constraints. The benchmark comprises 467 annotated samples across eight categories with a four-metric evaluation protocol (Reasoning Alignment, Temporal Consistency, Physical Rationality, Visual Quality) to systematically assess commonsense reasoning, spatial dynamics, and domain-specific knowledge in generated videos. This shifts video generation evaluation from surface-level aesthetics toward measuring true cognitive reasoning capabilities—particularly relevant as video models increasingly need to demonstrate physical plausibility and logical coherence for real-world applications.", "https://arxiv.org/abs/2602.05986")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.08176" style="color:#4ea8ff;">Leveraging Whisper Embeddings for Audio-based Lyrics Matching</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>WEALY introduces a reproducible pipeline for audio-based lyrics matching that leverages Whisper decoder embeddings, establishing transparent baselines while exploring multimodal fusion of acoustic and textual features—addressing a critical reproducibility gap in music information retrieval. The work includes comprehensive ablation studies on loss functions, embedding strategies, and language robustness, demonstrating competitive performance with existing black-box methods and positioning Whisper's speech representations as a viable foundation for music retrieval tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Leveraging Whisper Embeddings for Audio-based Lyrics Matching", "WEALY introduces a reproducible pipeline for audio-based lyrics matching that leverages Whisper decoder embeddings, establishing transparent baselines while exploring multimodal fusion of acoustic and textual features—addressing a critical reproducibility gap in music information retrieval. The work includes comprehensive ablation studies on loss functions, embedding strategies, and language robustness, demonstrating competitive performance with existing black-box methods and positioning Whisper's speech representations as a viable foundation for music retrieval tasks.", "https://arxiv.org/abs/2510.08176")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.25502" style="color:#4ea8ff;">TempoPFN: Synthetic Pre-training of Linear RNNs for Zero-shot Time Series Forecasting</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>TempoPFN introduces a linear RNN foundation model (GatedDeltaProduct architecture with state-weaving) pre-trained entirely on synthetic data that achieves competitive zero-shot time series forecasting through fully parallelizable training without windowing. The key innovation is a unified synthetic data pipeline combining SDEs, Gaussian processes, and audio synthesis with novel augmentations, enabling efficient long-horizon prediction while maintaining temporal state tracking. This approach addresses reproducibility and efficiency challenges in existing foundation models, with demonstrated top-tier performance on multiple benchmarks despite synthetic-only training.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TempoPFN: Synthetic Pre-training of Linear RNNs for Zero-shot Time Series Forecasting", "TempoPFN introduces a linear RNN foundation model (GatedDeltaProduct architecture with state-weaving) pre-trained entirely on synthetic data that achieves competitive zero-shot time series forecasting through fully parallelizable training without windowing. The key innovation is a unified synthetic data pipeline combining SDEs, Gaussian processes, and audio synthesis with novel augmentations, enabling efficient long-horizon prediction while maintaining temporal state tracking. This approach addresses reproducibility and efficiency challenges in existing foundation models, with demonstrated top-tier performance on multiple benchmarks despite synthetic-only training.", "https://arxiv.org/abs/2510.25502")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.03891" style="color:#4ea8ff;">Sounding Highlights: Dual-Pathway Audio Encoders for Audio-Visual Video Highlight Detection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-06
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>This paper introduces DAViHD, a dual-pathway audio encoder architecture that addresses the underutilization of audio in video highlight detection by independently modeling semantic content (speech/music/sound events) and spectro-temporal dynamics through frequency-adaptive mechanisms. The key innovation is decomposing audio processing into complementary pathways—one for high-level understanding and another for capturing transient acoustic events and salient spectral changes—enabling more nuanced audio-visual fusion for highlight detection. This approach has practical implications for content curation applications where subtle acoustic cues (sudden music swells, crowd reactions) are equally important as visual composition for identifying video highlights.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Sounding Highlights: Dual-Pathway Audio Encoders for Audio-Visual Video Highlight Detection", "This paper introduces DAViHD, a dual-pathway audio encoder architecture that addresses the underutilization of audio in video highlight detection by independently modeling semantic content (speech/music/sound events) and spectro-temporal dynamics through frequency-adaptive mechanisms. The key innovation is decomposing audio processing into complementary pathways—one for high-level understanding and another for capturing transient acoustic events and salient spectral changes—enabling more nuanced audio-visual fusion for highlight detection. This approach has practical implications for content curation applications where subtle acoustic cues (sudden music swells, crowd reactions) are equally important as visual composition for identifying video highlights.", "https://arxiv.org/abs/2602.03891")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
