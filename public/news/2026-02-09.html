@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-09</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-09</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.06139" style="color:#4ea8ff;">EgoAVU: Egocentric Audio-Visual Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>EgoAVU addresses a critical gap in multimodal AI by introducing a scalable data engine that automatically generates coherent audio-visual narrations and QA pairs for egocentric videos through cross-modal correlation modeling, overcoming the scarcity of joint-modality labeled data that limits current MLLMs. The framework combines token-based video filtering and graph-based curation to ensure dataset quality and diversity, resulting in a 3M-sample training dataset (EgoAVU-Instruct) and manually-verified benchmark, enabling proper evaluation of audio-visual understanding in embodied AI scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EgoAVU: Egocentric Audio-Visual Understanding", "EgoAVU addresses a critical gap in multimodal AI by introducing a scalable data engine that automatically generates coherent audio-visual narrations and QA pairs for egocentric videos through cross-modal correlation modeling, overcoming the scarcity of joint-modality labeled data that limits current MLLMs. The framework combines token-based video filtering and graph-based curation to ensure dataset quality and diversity, resulting in a 3M-sample training dataset (EgoAVU-Instruct) and manually-verified benchmark, enabling proper evaluation of audio-visual understanding in embodied AI scenarios.", "https://arxiv.org/abs/2602.06139")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.08585" style="color:#4ea8ff;">Simulating the Visual World with Artificial Intelligence: A Roadmap</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Video foundation models are evolving beyond passive visual generation toward implicit world models that simulate physics, agent interactions, and task planning—decomposing into structured world model components (encoding physical laws and dynamics) and video renderers for coherent long-term temporal reasoning. This paradigm shift enables interactive virtual environments with physical plausibility, positioning video models as latent simulation engines capable of goal-driven planning rather than simple generative systems. The approach has significant implications for embodied AI, robotics, and interactive content generation, where maintaining coherent world dynamics across extended sequences is critical.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Simulating the Visual World with Artificial Intelligence: A Roadmap", "Video foundation models are evolving beyond passive visual generation toward implicit world models that simulate physics, agent interactions, and task planning—decomposing into structured world model components (encoding physical laws and dynamics) and video renderers for coherent long-term temporal reasoning. This paradigm shift enables interactive virtual environments with physical plausibility, positioning video models as latent simulation engines capable of goal-driven planning rather than simple generative systems. The approach has significant implications for embodied AI, robotics, and interactive content generation, where maintaining coherent world dynamics across extended sequences is critical.", "https://arxiv.org/abs/2511.08585")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2501.00382" style="color:#4ea8ff;">Adventures in Demand Analysis Using AI</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper demonstrates how multimodal AI embeddings (combining text, images, and tabular data via transformer models) can significantly improve empirical demand analysis by capturing product attributes that traditional methods miss. The authors fine-tune these embeddings specifically for causal inference, achieving better predictions of sales ranks/prices and revealing heterogeneous price elasticity patterns driven by product-specific features. The work shows practical value for e-commerce analytics by bridging the gap between modern deep learning representations and classical econometric demand estimation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Adventures in Demand Analysis Using AI", "This paper demonstrates how multimodal AI embeddings (combining text, images, and tabular data via transformer models) can significantly improve empirical demand analysis by capturing product attributes that traditional methods miss. The authors fine-tune these embeddings specifically for causal inference, achieving better predictions of sales ranks/prices and revealing heterogeneous price elasticity patterns driven by product-specific features. The work shows practical value for e-commerce analytics by bridging the gap between modern deep learning representations and classical econometric demand estimation.", "https://arxiv.org/abs/2501.00382")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.05885" style="color:#4ea8ff;">An item is worth one token in Multimodal Large Language Models-based Sequential Recommendation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper proposes Speeder, a multimodal LLM-based sequential recommendation system that addresses three critical bottlenecks: inefficient item tokenization (replacing lengthy descriptions with single-token representations), modality bias in predominantly text-trained LLMs, and attention degradation over long interaction sequences. The key innovation appears to be compressing item representations to one token per item while maintaining multimodal information (images, relationships), improving both computational efficiency and the model's ability to capture long-range sequential dependencies. For practitioners, this approach offers significant inference speedups and better handling of rich item metadata without expanding context length—critical for deploying MLLMs in real-world recommendation systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "An item is worth one token in Multimodal Large Language Models-based Sequential Recommendation", "This paper proposes Speeder, a multimodal LLM-based sequential recommendation system that addresses three critical bottlenecks: inefficient item tokenization (replacing lengthy descriptions with single-token representations), modality bias in predominantly text-trained LLMs, and attention degradation over long interaction sequences. The key innovation appears to be compressing item representations to one token per item while maintaining multimodal information (images, relationships), improving both computational efficiency and the model's ability to capture long-range sequential dependencies. For practitioners, this approach offers significant inference speedups and better handling of rich item metadata without expanding context length—critical for deploying MLLMs in real-world recommendation systems.", "https://arxiv.org/abs/2511.05885")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05305" style="color:#4ea8ff;">FlashBlock: Attention Caching for Efficient Long-Context Block Diffusion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>FlashBlock introduces cached block-external attention to optimize long-context diffusion models by exploiting cross-step redundancy—attention outputs from tokens outside the current block remain stable across diffusion steps, enabling reuse without recomputation. This approach reduces both attention computation and KV cache memory access overhead while maintaining the efficiency gains of block-wise causal inference used in diffusion language models and video generation. The technique addresses a critical bottleneck in scaling diffusion to minute-long videos and extended texts by avoiding redundant attention calculations without architectural modifications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FlashBlock: Attention Caching for Efficient Long-Context Block Diffusion", "FlashBlock introduces cached block-external attention to optimize long-context diffusion models by exploiting cross-step redundancy—attention outputs from tokens outside the current block remain stable across diffusion steps, enabling reuse without recomputation. This approach reduces both attention computation and KV cache memory access overhead while maintaining the efficiency gains of block-wise causal inference used in diffusion language models and video generation. The technique addresses a critical bottleneck in scaling diffusion to minute-long videos and extended texts by avoiding redundant attention calculations without architectural modifications.", "https://arxiv.org/abs/2602.05305")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.06226" style="color:#4ea8ff;">ForeHOI: Feed-forward 3D Object Reconstruction from Daily Hand-Object Interaction Videos</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>ForeHOI presents a feed-forward neural model for reconstructing 3D object geometry from monocular hand-object interaction videos in under one minute, addressing the severe occlusion challenge through joint 2D mask inpainting and 3D shape completion. The key innovation is coupling these two tasks within a single feed-forward framework, which outperforms traditional optimization-based approaches while eliminating preprocessing requirements. This approach has significant implications for embodied AI systems that need real-time 3D scene understanding from egocentric video without expensive per-scene optimization.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ForeHOI: Feed-forward 3D Object Reconstruction from Daily Hand-Object Interaction Videos", "ForeHOI presents a feed-forward neural model for reconstructing 3D object geometry from monocular hand-object interaction videos in under one minute, addressing the severe occlusion challenge through joint 2D mask inpainting and 3D shape completion. The key innovation is coupling these two tasks within a single feed-forward framework, which outperforms traditional optimization-based approaches while eliminating preprocessing requirements. This approach has significant implications for embodied AI systems that need real-time 3D scene understanding from egocentric video without expensive per-scene optimization.", "https://arxiv.org/abs/2602.06226")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05847" style="color:#4ea8ff;">OmniVideo-R1: Reinforcing Audio-visual Reasoning with Query Intention and Modality Attention</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>OmniVideo-R1 addresses audio-visual understanding gaps through two key mechanisms: query-intensive grounding leveraging self-supervised learning and modality-attentive fusion via contrastive learning, enabling more synergistic cross-modal reasoning than existing omnivideo models. The framework's consistent benchmark improvements suggest practical value for multimodal video understanding tasks where coordinated audio-visual perception is critical for holistic scene comprehension.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "OmniVideo-R1: Reinforcing Audio-visual Reasoning with Query Intention and Modality Attention", "OmniVideo-R1 addresses audio-visual understanding gaps through two key mechanisms: query-intensive grounding leveraging self-supervised learning and modality-attentive fusion via contrastive learning, enabling more synergistic cross-modal reasoning than existing omnivideo models. The framework's consistent benchmark improvements suggest practical value for multimodal video understanding tasks where coordinated audio-visual perception is critical for holistic scene comprehension.", "https://arxiv.org/abs/2602.05847")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.06292" style="color:#4ea8ff;">Zero-shot Multi-Contrast Brain MRI Registration by Intensity Randomizing T1-weighted MRI (LUMIR25)</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 28</span></div>
+  <p>This work tackles zero-shot multi-contrast brain MRI registration using a T1-weighted-only training set through three key innovations: MIND-based multimodal loss for contrast-invariant matching, intensity randomization for domain generalization, and lightweight instance-specific optimization at inference time. The approach achieves first place on LUMIR25 by enabling effective cross-contrast registration despite domain shifts (high-field MRI, pathologies) without seeing diverse contrasts during training. The practical implication is significant for clinical MRI workflows where registration must handle variable acquisition protocols and scanner types with minimal retraining.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Zero-shot Multi-Contrast Brain MRI Registration by Intensity Randomizing T1-weighted MRI (LUMIR25)", "This work tackles zero-shot multi-contrast brain MRI registration using a T1-weighted-only training set through three key innovations: MIND-based multimodal loss for contrast-invariant matching, intensity randomization for domain generalization, and lightweight instance-specific optimization at inference time. The approach achieves first place on LUMIR25 by enabling effective cross-contrast registration despite domain shifts (high-field MRI, pathologies) without seeing diverse contrasts during training. The practical implication is significant for clinical MRI workflows where registration must handle variable acquisition protocols and scanner types with minimal retraining.", "https://arxiv.org/abs/2602.06292")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.06761" style="color:#4ea8ff;">Orientation-Robust Latent Motion Trajectory Learning for Annotation-free Cardiac Phase Detection in Fetal Echocardiography</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>ORBIT is a self-supervised framework that detects cardiac phases (end-diastolic and end-systolic) in fetal echocardiography without manual annotations by learning latent motion trajectories through image registration, addressing the critical bottleneck of automated CHD analysis. The key innovation is orientation-robustness, enabling reliable phase detection across varying fetal heart positions without requiring ECG signals or frame-level labels. This approach has significant clinical implications for scaling automated congenital heart disease screening in prenatal settings.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Orientation-Robust Latent Motion Trajectory Learning for Annotation-free Cardiac Phase Detection in Fetal Echocardiography", "ORBIT is a self-supervised framework that detects cardiac phases (end-diastolic and end-systolic) in fetal echocardiography without manual annotations by learning latent motion trajectories through image registration, addressing the critical bottleneck of automated CHD analysis. The key innovation is orientation-robustness, enabling reliable phase detection across varying fetal heart positions without requiring ECG signals or frame-level labels. This approach has significant clinical implications for scaling automated congenital heart disease screening in prenatal settings.", "https://arxiv.org/abs/2602.06761")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.14469" style="color:#4ea8ff;">CompEvent: Complex-valued Event-RGB Fusion for Low-light Video Enhancement and Deblurring</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>**CompEvent** introduces a complex-valued neural network that fuses event camera data with RGB frames for low-light video enhancement, moving beyond staged fusion approaches through a Complex Temporal Alignment GRU that iteratively processes both modalities and a Complex Space-Frequency Learning module operating in spatial-frequency domains. This holistic fusion strategy addresses the fundamental challenge of simultaneous low-light sensitivity and motion deblurring degradations common in surveillance and autonomous driving by leveraging event cameras' superior temporal resolution and inherent low-light performance. The complex-valued formulation enables more sophisticated signal representations during joint restoration, suggesting improved handling of the intertwined temporal and spatial artifacts typical in extreme low-light scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CompEvent: Complex-valued Event-RGB Fusion for Low-light Video Enhancement and Deblurring", "**CompEvent** introduces a complex-valued neural network that fuses event camera data with RGB frames for low-light video enhancement, moving beyond staged fusion approaches through a Complex Temporal Alignment GRU that iteratively processes both modalities and a Complex Space-Frequency Learning module operating in spatial-frequency domains. This holistic fusion strategy addresses the fundamental challenge of simultaneous low-light sensitivity and motion deblurring degradations common in surveillance and autonomous driving by leveraging event cameras' superior temporal resolution and inherent low-light performance. The complex-valued formulation enables more sophisticated signal representations during joint restoration, suggesting improved handling of the intertwined temporal and spatial artifacts typical in extreme low-light scenarios.", "https://arxiv.org/abs/2511.14469")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.21736" style="color:#4ea8ff;">SyncAnyone: Implicit Disentanglement via Progressive Self-Correction for Lip-Syncing in the wild</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SyncAnyone addresses a critical limitation in AI lip-sync by replacing mask-based training with a two-stage diffusion-based framework that preserves spatiotemporal context, enabling accurate audio-driven lip movements without the facial instability and background artifacts plaguing existing methods. The approach uses a video transformer for masked mouth inpainting in Stage 1, implicitly disentangling speech-driven motion from identity/background through progressive self-correction rather than explicit masking. This technique offers practical advantages for high-fidelity video dubbing by maintaining facial structure coherence and dynamic motion realism while achieving precise synchronization.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SyncAnyone: Implicit Disentanglement via Progressive Self-Correction for Lip-Syncing in the wild", "SyncAnyone addresses a critical limitation in AI lip-sync by replacing mask-based training with a two-stage diffusion-based framework that preserves spatiotemporal context, enabling accurate audio-driven lip movements without the facial instability and background artifacts plaguing existing methods. The approach uses a video transformer for masked mouth inpainting in Stage 1, implicitly disentangling speech-driven motion from identity/background through progressive self-correction rather than explicit masking. This technique offers practical advantages for high-fidelity video dubbing by maintaining facial structure coherence and dynamic motion realism while achieving precise synchronization.", "https://arxiv.org/abs/2512.21736")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.05305" style="color:#4ea8ff;">FlashBlock: Attention Caching for Efficient Long-Context Block Diffusion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 75</span></div>
+  <p>FlashBlock exploits cross-step attention redundancy in block diffusion by caching stable out-of-block attention computations across diffusion steps, reducing both attention computation and KV cache I/O overhead for long-context generation. This approach maintains generation quality while significantly improving inference efficiency for extended video and text synthesis without requiring architectural modifications. The key insight—that external block attention converges quickly while internal attention changes substantially—enables a practical optimization layer for existing diffusion-based language models and video generators.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FlashBlock: Attention Caching for Efficient Long-Context Block Diffusion", "FlashBlock exploits cross-step attention redundancy in block diffusion by caching stable out-of-block attention computations across diffusion steps, reducing both attention computation and KV cache I/O overhead for long-context generation. This approach maintains generation quality while significantly improving inference efficiency for extended video and text synthesis without requiring architectural modifications. The key insight—that external block attention converges quickly while internal attention changes substantially—enables a practical optimization layer for existing diffusion-based language models and video generators.", "https://arxiv.org/abs/2602.05305")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.06041" style="color:#4ea8ff;">Predicting Camera Pose from Perspective Descriptions for Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 42</span></div>
+  <p>**CAMCUE introduces a pose-aware framework that tackles multi-view spatial reasoning in MLLMs by explicitly anchoring camera pose information to visual tokens, enabling coherent 3D scene understanding across viewpoints.** The key innovation is grounding natural-language viewpoint descriptions directly to target camera poses and synthesizing pose-conditioned imagined views, addressing a critical gap where current models struggle with perspective-taking and cross-view fusion. This approach, validated on a new 27K+ instance dataset, has direct implications for embodied AI, 3D scene understanding, and spatial reasoning tasks requiring viewpoint-agnostic scene representations.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Predicting Camera Pose from Perspective Descriptions for Spatial Reasoning", "**CAMCUE introduces a pose-aware framework that tackles multi-view spatial reasoning in MLLMs by explicitly anchoring camera pose information to visual tokens, enabling coherent 3D scene understanding across viewpoints.** The key innovation is grounding natural-language viewpoint descriptions directly to target camera poses and synthesizing pose-conditioned imagined views, addressing a critical gap where current models struggle with perspective-taking and cross-view fusion. This approach, validated on a new 27K+ instance dataset, has direct implications for embodied AI, 3D scene understanding, and spatial reasoning tasks requiring viewpoint-agnostic scene representations.", "https://arxiv.org/abs/2602.06041")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.08585" style="color:#4ea8ff;">Simulating the Visual World with Artificial Intelligence: A Roadmap</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Video foundation models are evolving beyond passive visual generation toward implicit world models that simulate physics, agent interactions, and task planning—decomposable into a latent dynamics engine and video renderer. This architectural shift enables coherent long-term temporal reasoning and goal-driven planning, positioning these models as interactive virtual environments rather than mere clip generators. The framework addresses a critical limitation in current video AI: moving from stateless visual synthesis to structured world simulation that maintains physical plausibility across extended sequences.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Simulating the Visual World with Artificial Intelligence: A Roadmap", "Video foundation models are evolving beyond passive visual generation toward implicit world models that simulate physics, agent interactions, and task planning—decomposable into a latent dynamics engine and video renderer. This architectural shift enables coherent long-term temporal reasoning and goal-driven planning, positioning these models as interactive virtual environments rather than mere clip generators. The framework addresses a critical limitation in current video AI: moving from stateless visual synthesis to structured world simulation that maintains physical plausibility across extended sequences.", "https://arxiv.org/abs/2511.08585")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.06180" style="color:#4ea8ff;">STACodec: Semantic Token Assignment for Balancing Acoustic Fidelity and Semantic Information in Audio Codecs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-02-09
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>STACodec addresses the trade-off between acoustic fidelity and semantic richness in neural audio codecs by embedding semantic information directly into the first RVQ layer via semantic token assignment, rather than through lossy distillation. The proposed semantic pre-distillation module eliminates dependency on external SSL-based tokenizers during inference, improving efficiency while maintaining superior reconstruction quality compared to existing hybrid approaches. This design enables neural codecs to serve dual roles—high-fidelity audio compression and token-based language model integration—without sacrificing either capability.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "STACodec: Semantic Token Assignment for Balancing Acoustic Fidelity and Semantic Information in Audio Codecs", "STACodec addresses the trade-off between acoustic fidelity and semantic richness in neural audio codecs by embedding semantic information directly into the first RVQ layer via semantic token assignment, rather than through lossy distillation. The proposed semantic pre-distillation module eliminates dependency on external SSL-based tokenizers during inference, improving efficiency while maintaining superior reconstruction quality compared to existing hybrid approaches. This design enables neural codecs to serve dual roles—high-fidelity audio compression and token-based language model integration—without sacrificing either capability.", "https://arxiv.org/abs/2602.06180")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
