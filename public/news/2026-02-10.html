@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-10</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-10</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.08794" style="color:#4ea8ff;">MOVA: Towards Scalable and Synchronized Video-Audio Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>MOVA introduces the first open-source joint video-audio generation model using a scalable 32B-parameter Mixture-of-Experts architecture that simultaneously produces synchronized video and audio (including lip-synced speech, sound effects, and music), addressing critical limitations of cascaded pipelines that accumulate errors and increase computational cost. The IT2VA (Image-Text to Video-Audio) framework enables multimodal generation in a single forward pass, advancing beyond closed-source systems like Sora 2 by providing transparency and accessibility to the research community for tackling audio-visual synchronization challenges at scale.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MOVA: Towards Scalable and Synchronized Video-Audio Generation", "MOVA introduces the first open-source joint video-audio generation model using a scalable 32B-parameter Mixture-of-Experts architecture that simultaneously produces synchronized video and audio (including lip-synced speech, sound effects, and music), addressing critical limitations of cascaded pipelines that accumulate errors and increase computational cost. The IT2VA (Image-Text to Video-Audio) framework enables multimodal generation in a single forward pass, advancing beyond closed-source systems like Sora 2 by providing transparency and accessibility to the research community for tackling audio-visual synchronization challenges at scale.", "https://arxiv.org/abs/2602.08794")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.11579" style="color:#4ea8ff;">MS-Mix: Unveiling the Power of Mixup for Multimodal Sentiment Analysis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>MS-Mix introduces an emotion-aware data augmentation framework that addresses a critical limitation of standard Mixup approaches in multimodal sentiment analysis by intelligently selecting compatible samples to mix, preventing label ambiguity when combining text, audio, and video. The proposed Sentiment-Aware Sample Selection (SASS) strategy and adaptive mixing mechanism tackle the scarce-data problem inherent in multimodal datasets while maintaining semantic consistency across heterogeneous modalities. This approach has significant implications for improving generalization in MSA tasks where training data is limited, offering a practical solution to a well-known challenge in multimodal learning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MS-Mix: Unveiling the Power of Mixup for Multimodal Sentiment Analysis", "MS-Mix introduces an emotion-aware data augmentation framework that addresses a critical limitation of standard Mixup approaches in multimodal sentiment analysis by intelligently selecting compatible samples to mix, preventing label ambiguity when combining text, audio, and video. The proposed Sentiment-Aware Sample Selection (SASS) strategy and adaptive mixing mechanism tackle the scarce-data problem inherent in multimodal datasets while maintaining semantic consistency across heterogeneous modalities. This approach has significant implications for improving generalization in MSA tasks where training data is limited, offering a practical solution to a well-known challenge in multimodal learning.", "https://arxiv.org/abs/2510.11579")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2506.08277" style="color:#4ea8ff;">Task-Conditioned Probing Reveals Brain-Alignment Patterns in Instruction-Tuned Multimodal LLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This study demonstrates that instruction-tuned multimodal LLMs exhibit task-dependent brain alignment patterns when predicting fMRI activity during naturalistic audiovisual stimulation, suggesting these models organize representations around functional task demands rather than just semantic surface features. The researchers use voxel-wise encoding analysis across eight different IT-MLLMs and thirteen video instructions to probe whether instruction-tuning genuinely drives functional organization aligned with human neural processing. This finding has implications for understanding how prompt-conditioning shapes internal representations in multimodal models and validates instruction-tuning as a mechanism for achieving neurobiologically-plausible task-specific encoding.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Task-Conditioned Probing Reveals Brain-Alignment Patterns in Instruction-Tuned Multimodal LLMs", "This study demonstrates that instruction-tuned multimodal LLMs exhibit task-dependent brain alignment patterns when predicting fMRI activity during naturalistic audiovisual stimulation, suggesting these models organize representations around functional task demands rather than just semantic surface features. The researchers use voxel-wise encoding analysis across eight different IT-MLLMs and thirteen video instructions to probe whether instruction-tuning genuinely drives functional organization aligned with human neural processing. This finding has implications for understanding how prompt-conditioning shapes internal representations in multimodal models and validates instruction-tuning as a mechanism for achieving neurobiologically-plausible task-specific encoding.", "https://arxiv.org/abs/2506.08277")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07064" style="color:#4ea8ff;">Exploring Physical Intelligence Emergence via Omni-Modal Architecture and Physical Data Engine</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>OmniFysics addresses the challenge of brittle physical reasoning in multimodal models by combining an omni-modal architecture (images, audio, video, text) with a novel physical data engine that explicitly injects physics knowledge through hierarchical retrieval-based supervision and audio-visual consistency filtering. The approach uses two key components—FysicsAny for generating physics-grounded image-instruction pairs via verified prototype databases and physics-law constraints, and FysicsOmniCap for distilling high-fidelity video-instruction pairs from web data. This work is significant for robotics, simulation, and embodied AI applications where visual ambiguity traditionally undermines physical understanding, offering a scalable method to leverage structured physical priors in foundation models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Exploring Physical Intelligence Emergence via Omni-Modal Architecture and Physical Data Engine", "OmniFysics addresses the challenge of brittle physical reasoning in multimodal models by combining an omni-modal architecture (images, audio, video, text) with a novel physical data engine that explicitly injects physics knowledge through hierarchical retrieval-based supervision and audio-visual consistency filtering. The approach uses two key components—FysicsAny for generating physics-grounded image-instruction pairs via verified prototype databases and physics-law constraints, and FysicsOmniCap for distilling high-fidelity video-instruction pairs from web data. This work is significant for robotics, simulation, and embodied AI applications where visual ambiguity traditionally undermines physical understanding, offering a scalable method to leverage structured physical priors in foundation models.", "https://arxiv.org/abs/2602.07064")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07449" style="color:#4ea8ff;">SoulX-FlashHead: Oracle-guided Generation of Infinite Real-time Streaming Talking Heads</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SoulX-FlashHead addresses the critical latency-fidelity tradeoff in audio-driven portrait generation through a 1.3B-parameter model featuring Streaming-Aware Spatiotemporal Pre-training with Temporal Audio Context Caching to stabilize feature extraction from fragmented audio streams. The key innovation is Oracle-Guided Bidirectional Distillation, which mitigates error accumulation and identity drift in long-sequence autoregressive generation, enabling real-time infinite-length streaming while maintaining high visual fidelity—a significant practical advancement for live video synthesis applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SoulX-FlashHead: Oracle-guided Generation of Infinite Real-time Streaming Talking Heads", "SoulX-FlashHead addresses the critical latency-fidelity tradeoff in audio-driven portrait generation through a 1.3B-parameter model featuring Streaming-Aware Spatiotemporal Pre-training with Temporal Audio Context Caching to stabilize feature extraction from fragmented audio streams. The key innovation is Oracle-Guided Bidirectional Distillation, which mitigates error accumulation and identity drift in long-sequence autoregressive generation, enabling real-time infinite-length streaming while maintaining high visual fidelity—a significant practical advancement for live video synthesis applications.", "https://arxiv.org/abs/2602.07449")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2503.03803" style="color:#4ea8ff;">EgoLife: Towards Egocentric Life Assistant</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>EgoLife introduces a comprehensive egocentric AI assistant framework built on a novel 300-hour multimodal dataset capturing synchronized first-person and third-person video of daily activities with intensive annotations. The project addresses long-context understanding challenges through EgoLifeQA, a task suite designed for practical life assistance like activity recall and contextual decision-making from egocentric wearable video. This work bridges computer vision and embodied AI, enabling future egocentric systems to understand interpersonal interactions and complex daily scenarios beyond isolated tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EgoLife: Towards Egocentric Life Assistant", "EgoLife introduces a comprehensive egocentric AI assistant framework built on a novel 300-hour multimodal dataset capturing synchronized first-person and third-person video of daily activities with intensive annotations. The project addresses long-context understanding challenges through EgoLifeQA, a task suite designed for practical life assistance like activity recall and contextual decision-making from egocentric wearable video. This work bridges computer vision and embodied AI, enabling future egocentric systems to understand interpersonal interactions and complex daily scenarios beyond isolated tasks.", "https://arxiv.org/abs/2503.03803")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2506.08277" style="color:#4ea8ff;">Task-Conditioned Probing Reveals Brain-Alignment Patterns in Instruction-Tuned Multimodal LLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This study investigates whether instruction-tuned multimodal LLMs achieve brain alignment through functional task organization or surface-level semantics by predicting fMRI responses during naturalistic movie watching using task-conditioned embeddings from eight IT-MLLMs across 13 video instructions. The research reveals that instruction-tuning creates task-specific representational structures that correlate with brain activity, suggesting IT-MLLMs develop functionally-organized internal representations rather than merely capturing semantic content. These findings have implications for understanding how instruction-tuning shapes neural representation learning and could inform the design of more brain-aligned multimodal models for neuroscience and AI interpretability applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Task-Conditioned Probing Reveals Brain-Alignment Patterns in Instruction-Tuned Multimodal LLMs", "This study investigates whether instruction-tuned multimodal LLMs achieve brain alignment through functional task organization or surface-level semantics by predicting fMRI responses during naturalistic movie watching using task-conditioned embeddings from eight IT-MLLMs across 13 video instructions. The research reveals that instruction-tuning creates task-specific representational structures that correlate with brain activity, suggesting IT-MLLMs develop functionally-organized internal representations rather than merely capturing semantic content. These findings have implications for understanding how instruction-tuning shapes neural representation learning and could inform the design of more brain-aligned multimodal models for neuroscience and AI interpretability applications.", "https://arxiv.org/abs/2506.08277")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07034" style="color:#4ea8ff;">ST-Raptor: An Agentic System for Semi-Structured Table QA</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>ST-Raptor addresses the gap in semi-structured table QA by introducing an agentic system that preserves hierarchical and semantic relationships without lossy conversion to SQL, combining visual editing with tree-based structural modeling instead of relying on traditional Text-to-SQL or multimodal LLM approaches. This approach tackles the core limitation of existing methods: information loss from schema conversion and poor handling of implicit logical structures in complex table layouts, offering a more faithful representation of table semantics for accurate question answering.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ST-Raptor: An Agentic System for Semi-Structured Table QA", "ST-Raptor addresses the gap in semi-structured table QA by introducing an agentic system that preserves hierarchical and semantic relationships without lossy conversion to SQL, combining visual editing with tree-based structural modeling instead of relying on traditional Text-to-SQL or multimodal LLM approaches. This approach tackles the core limitation of existing methods: information loss from schema conversion and poor handling of implicit logical structures in complex table layouts, offering a more faithful representation of table semantics for accurate question answering.", "https://arxiv.org/abs/2602.07034")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07399" style="color:#4ea8ff;">VGAS: Value-Guided Action-Chunk Selection for Few-Shot Vision-Language-Action Adaptation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>VGAS addresses few-shot VLA adaptation by decoupling generation from selection: a fine-tuned VLA generates multiple action-chunk candidates while a specialized Q-Chunk-Former critic uses geometric grounding to select trajectories that are both semantically correct and geometrically precise, resolving ambiguities that cause failures under limited supervision. This inference-time best-of-N selection approach leverages learned value functions to overcome the common failure mode where semantically plausible but geometrically imprecise actions diverge during execution with scarce demonstrations.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "VGAS: Value-Guided Action-Chunk Selection for Few-Shot Vision-Language-Action Adaptation", "VGAS addresses few-shot VLA adaptation by decoupling generation from selection: a fine-tuned VLA generates multiple action-chunk candidates while a specialized Q-Chunk-Former critic uses geometric grounding to select trajectories that are both semantically correct and geometrically precise, resolving ambiguities that cause failures under limited supervision. This inference-time best-of-N selection approach leverages learned value functions to overcome the common failure mode where semantically plausible but geometrically imprecise actions diverge during execution with scarce demonstrations.", "https://arxiv.org/abs/2602.07399")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.08241" style="color:#4ea8ff;">Do MLLMs Really See It: Reinforcing Visual Attention in Multimodal LLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper identifies a critical weakness in MLLMs: early visual misalignment persists throughout reasoning chains without correction, causing cascading errors. The authors propose SAYO, an RL-based framework that uses region-level visual attention rewards to explicitly supervise attention dynamics, enabling models to learn stable visual grounding rather than relying on post-hoc textual reasoning alone. This approach represents a significant shift from CoT-centric improvements toward mechanistic attention control, with practical implications for improving reliability in vision-language tasks where visual grounding actually matters.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Do MLLMs Really See It: Reinforcing Visual Attention in Multimodal LLMs", "This paper identifies a critical weakness in MLLMs: early visual misalignment persists throughout reasoning chains without correction, causing cascading errors. The authors propose SAYO, an RL-based framework that uses region-level visual attention rewards to explicitly supervise attention dynamics, enabling models to learn stable visual grounding rather than relying on post-hoc textual reasoning alone. This approach represents a significant shift from CoT-centric improvements toward mechanistic attention control, with practical implications for improving reliability in vision-language tasks where visual grounding actually matters.", "https://arxiv.org/abs/2602.08241")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07056" style="color:#4ea8ff;">MTS-CSNet: Multiscale Tensor Factorization for Deep Compressive Sensing on RGB Images</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MTS-CSNet introduces Multiscale Tensor Summation (MTS) factorization as a learnable compressive sensing operator that overcomes receptive field limitations of convolutional approaches by performing mode-wise linear transformations across tensor dimensions, enabling efficient modeling of cross-dimensional correlations in RGB image reconstruction. The framework achieves direct tensor-space dimensionality reduction without iterative optimization, combining the MTS operator as both the sampling mechanism and reconstruction refinement stage in a parameter-efficient feed-forward architecture. This structured approach addresses scalability challenges in deep CS methods while maintaining computational efficiency for high-dimensional image data.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MTS-CSNet: Multiscale Tensor Factorization for Deep Compressive Sensing on RGB Images", "MTS-CSNet introduces Multiscale Tensor Summation (MTS) factorization as a learnable compressive sensing operator that overcomes receptive field limitations of convolutional approaches by performing mode-wise linear transformations across tensor dimensions, enabling efficient modeling of cross-dimensional correlations in RGB image reconstruction. The framework achieves direct tensor-space dimensionality reduction without iterative optimization, combining the MTS operator as both the sampling mechanism and reconstruction refinement stage in a parameter-efficient feed-forward architecture. This structured approach addresses scalability challenges in deep CS methods while maintaining computational efficiency for high-dimensional image data.", "https://arxiv.org/abs/2602.07056")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07082" style="color:#4ea8ff;">MosaicThinker: On-Device Visual Spatial Reasoning for Embodied AI via Iterative Construction of Space Representation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MosaicThinker introduces an inference-time technique that enhances on-device visual language models' spatial reasoning for embodied AI by constructing unified global semantic maps from fragmented multi-frame video data, addressing VLMs' inherent weakness in 3D spatial understanding needed for robot manipulation tasks. The approach enables complex cross-frame spatial relationship reasoning without requiring model retraining, making it practical for resource-constrained edge devices. This addresses a critical gap in embodied AI by bridging the semantic understanding of VLMs with explicit geometric reasoning required for precise robotic action planning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MosaicThinker: On-Device Visual Spatial Reasoning for Embodied AI via Iterative Construction of Space Representation", "MosaicThinker introduces an inference-time technique that enhances on-device visual language models' spatial reasoning for embodied AI by constructing unified global semantic maps from fragmented multi-frame video data, addressing VLMs' inherent weakness in 3D spatial understanding needed for robot manipulation tasks. The approach enables complex cross-frame spatial relationship reasoning without requiring model retraining, making it practical for resource-constrained edge devices. This addresses a critical gap in embodied AI by bridging the semantic understanding of VLMs with explicit geometric reasoning required for precise robotic action planning.", "https://arxiv.org/abs/2602.07082")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07125" style="color:#4ea8ff;">Reasoning-Augmented Representations for Multimodal Retrieval</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper addresses brittleness in universal multimodal retrieval by decoupling reasoning from embedding compression—using VLMs to densely caption images, disambiguate queries, and rewrite instructions *before* retrieval rather than forcing a single embedding to handle both reasoning and matching simultaneously. The key insight is that "silent" visual evidence and implicit query semantics force spurious feature alignment, which a data-centric approach mitigates by making latent semantics explicit through VLM-augmented representations. This requires retraining retrievers on semantically enriched data, suggesting that retrieval robustness for complex reasoning tasks demands explicit intermediate representations rather than end-to-end embedding optimization.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Reasoning-Augmented Representations for Multimodal Retrieval", "This paper addresses brittleness in universal multimodal retrieval by decoupling reasoning from embedding compression—using VLMs to densely caption images, disambiguate queries, and rewrite instructions *before* retrieval rather than forcing a single embedding to handle both reasoning and matching simultaneously. The key insight is that \"silent\" visual evidence and implicit query semantics force spurious feature alignment, which a data-centric approach mitigates by making latent semantics explicit through VLM-augmented representations. This requires retraining retrievers on semantically enriched data, suggesting that retrieval robustness for complex reasoning tasks demands explicit intermediate representations rather than end-to-end embedding optimization.", "https://arxiv.org/abs/2602.07125")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07322" style="color:#4ea8ff;">Action-to-Action Flow Matching</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>Action-to-Action Flow Matching (A2A) replaces random Gaussian noise initialization in diffusion-based robotic policies with learned latent representations of historical action sequences, eliminating the need for multiple iterative denoising steps during inference. By embedding proprioceptive feedback as informed starting points rather than static conditioning, A2A significantly reduces inference latency while better capturing robot dynamics—a critical advancement for real-time control in robotics. This shift from denoising-centric to flow-matching approaches represents a paradigm change in how generative models can be adapted for low-latency sequential decision-making tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Action-to-Action Flow Matching", "Action-to-Action Flow Matching (A2A) replaces random Gaussian noise initialization in diffusion-based robotic policies with learned latent representations of historical action sequences, eliminating the need for multiple iterative denoising steps during inference. By embedding proprioceptive feedback as informed starting points rather than static conditioning, A2A significantly reduces inference latency while better capturing robot dynamics—a critical advancement for real-time control in robotics. This shift from denoising-centric to flow-matching approaches represents a paradigm change in how generative models can be adapted for low-latency sequential decision-making tasks.", "https://arxiv.org/abs/2602.07322")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07506" style="color:#4ea8ff;">VividFace: Real-Time and Realistic Facial Expression Shadowing for Humanoid Robots</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-10
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>VividFace introduces X2CNet++, an optimized facial expression transfer framework that enables real-time, realistic expression shadowing for humanoid robots through enhanced human-to-robot motion mapping and feature-adaptation training for cross-domain alignment. The system addresses critical limitations of existing approaches by achieving both real-time performance and expressive detail capture, enabling more natural affective human-robot interaction through livestream-compatible inference. This work represents a practical advancement in embodied AI, moving beyond offline video processing toward genuine synchronous facial mimicry suitable for deployed robotic systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "VividFace: Real-Time and Realistic Facial Expression Shadowing for Humanoid Robots", "VividFace introduces X2CNet++, an optimized facial expression transfer framework that enables real-time, realistic expression shadowing for humanoid robots through enhanced human-to-robot motion mapping and feature-adaptation training for cross-domain alignment. The system addresses critical limitations of existing approaches by achieving both real-time performance and expressive detail capture, enabling more natural affective human-robot interaction through livestream-compatible inference. This work represents a practical advancement in embodied AI, moving beyond offline video processing toward genuine synchronous facial mimicry suitable for deployed robotic systems.", "https://arxiv.org/abs/2602.07506")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
