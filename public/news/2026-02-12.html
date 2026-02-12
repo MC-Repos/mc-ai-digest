@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-12</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-12</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 75</span></div>
+  <p>CamReasoner reformulates camera motion understanding from black-box classification to structured reasoning by requiring models to explicitly decode spatio-temporal cues (trajectories, view frustums) through an Observation-Thinking-Answer paradigm, addressing confusion between physically distinct motions. The framework is trained on 18k supervised reasoning chains and 38k RL feedback samples—notably the first application of reinforcement learning for logical alignment in camera understanding, grounding predictions in geometric principles rather than superficial visual patterns. This approach bridges multimodal perception with cinematic logic, enabling more robust video spatial intelligence for applications requiring precise camera dynamics interpretation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "CamReasoner reformulates camera motion understanding from black-box classification to structured reasoning by requiring models to explicitly decode spatio-temporal cues (trajectories, view frustums) through an Observation-Thinking-Answer paradigm, addressing confusion between physically distinct motions. The framework is trained on 18k supervised reasoning chains and 38k RL feedback samples—notably the first application of reinforcement learning for logical alignment in camera understanding, grounding predictions in geometric principles rather than superficial visual patterns. This approach bridges multimodal perception with cinematic logic, enabling more robust video spatial intelligence for applications requiring precise camera dynamics interpretation.", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 75</span></div>
+  <p>CamReasoner reformulates camera motion understanding from black-box classification to structured geometric reasoning using an Observation-Thinking-Answer paradigm that explicitly decodes spatio-temporal cues like trajectories and view frustums. The framework introduces the first reinforcement learning application for logical alignment in camera dynamics, trained on 18k SFT reasoning chains and 38k RL feedback samples to ground predictions in physical rather than superficial visual patterns. This approach bridges multimodal model perception with cinematic logic, addressing a critical gap where standard models confuse geometrically distinct camera movements.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "CamReasoner reformulates camera motion understanding from black-box classification to structured geometric reasoning using an Observation-Thinking-Answer paradigm that explicitly decodes spatio-temporal cues like trajectories and view frustums. The framework introduces the first reinforcement learning application for logical alignment in camera dynamics, trained on 18k SFT reasoning chains and 38k RL feedback samples to ground predictions in physical rather than superficial visual patterns. This approach bridges multimodal model perception with cinematic logic, addressing a critical gap where standard models confuse geometrically distinct camera movements.", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.07449" style="color:#4ea8ff;">SoulX-FlashHead: Oracle-guided Generation of Infinite Real-time Streaming Talking Heads</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SoulX-FlashHead presents a 1.3B-parameter model addressing the critical challenge of real-time streaming talking head generation by introducing Streaming-Aware Spatiotemporal Pre-training with Temporal Audio Context Cache to stabilize audio feature extraction from short fragments, and Oracle-Guided Bidirectional Distillation to prevent error accumulation and identity drift in long-sequence generation. This approach achieves a practical balance between computational efficiency and visual fidelity, enabling infinite-length streaming without the prohibitive costs of large-scale models or quality degradation of lightweight alternatives. The work's focus on streaming-specific challenges—temporal audio coherence and autoregressive error propagation—represents meaningful progress toward production-ready audio-driven video synthesis for applications like live telepresence and real-time content generation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SoulX-FlashHead: Oracle-guided Generation of Infinite Real-time Streaming Talking Heads", "SoulX-FlashHead presents a 1.3B-parameter model addressing the critical challenge of real-time streaming talking head generation by introducing Streaming-Aware Spatiotemporal Pre-training with Temporal Audio Context Cache to stabilize audio feature extraction from short fragments, and Oracle-Guided Bidirectional Distillation to prevent error accumulation and identity drift in long-sequence generation. This approach achieves a practical balance between computational efficiency and visual fidelity, enabling infinite-length streaming without the prohibitive costs of large-scale models or quality degradation of lightweight alternatives. The work's focus on streaming-specific challenges—temporal audio coherence and autoregressive error propagation—represents meaningful progress toward production-ready audio-driven video synthesis for applications like live telepresence and real-time content generation.", "https://arxiv.org/abs/2602.07449")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11103" style="color:#4ea8ff;">GameDevBench: Evaluating Agentic Capabilities Through Game Development</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>GameDevBench introduces the first benchmark for evaluating multimodal AI agents on game development tasks, addressing a critical gap where agents must simultaneously manage complex codebases and manipulate visual assets like shaders, sprites, and animations. The benchmark comprises 132 real-world tasks derived from tutorials with significantly higher complexity than existing software development benchmarks (3x more code/file changes), revealing that current best-performing agents achieve only 54.5% success—highlighting the substantial challenges in multimodal reasoning for game development. This testbed bridges the gap between coding agent evaluation and multimodal AI capabilities, providing researchers with a realistic, high-complexity domain for advancing agentic systems that require both deep code understanding and visual-spatial reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "GameDevBench: Evaluating Agentic Capabilities Through Game Development", "GameDevBench introduces the first benchmark for evaluating multimodal AI agents on game development tasks, addressing a critical gap where agents must simultaneously manage complex codebases and manipulate visual assets like shaders, sprites, and animations. The benchmark comprises 132 real-world tasks derived from tutorials with significantly higher complexity than existing software development benchmarks (3x more code/file changes), revealing that current best-performing agents achieve only 54.5% success—highlighting the substantial challenges in multimodal reasoning for game development. This testbed bridges the gap between coding agent evaluation and multimodal AI capabilities, providing researchers with a realistic, high-complexity domain for advancing agentic systems that require both deep code understanding and visual-spatial reasoning.", "https://arxiv.org/abs/2602.11103")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.10266" style="color:#4ea8ff;">From Classical to Topological Neural Networks Under Uncertainty</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 24</span> <span class="score-badge" style="background:#3b82f6;">⚡ 62</span></div>
+  <p>This paper integrates topological deep learning with Bayesian uncertainty quantification to enhance neural network robustness across multimodal data (images, video, audio, time series, graphs), leveraging topological invariants to improve interpretability and generalization. The approach bridges classical neural architectures with topological data analysis, addressing key challenges in fraud detection, link prediction, and temporal modeling through uncertainty-aware representations that resist adversarial perturbations and distribution shift.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "From Classical to Topological Neural Networks Under Uncertainty", "This paper integrates topological deep learning with Bayesian uncertainty quantification to enhance neural network robustness across multimodal data (images, video, audio, time series, graphs), leveraging topological invariants to improve interpretability and generalization. The approach bridges classical neural architectures with topological data analysis, addressing key challenges in fraud detection, link prediction, and temporal modeling through uncertainty-aware representations that resist adversarial perturbations and distribution shift.", "https://arxiv.org/abs/2602.10266")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.10549" style="color:#4ea8ff;">Enhancing Weakly Supervised Multimodal Video Anomaly Detection through Text Guidance</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work addresses weak supervision challenges in multimodal video anomaly detection by leveraging text as an underutilized semantic signal through in-context learning-based text augmentation and a bottleneck Transformer fusion architecture. The key innovations are generating anomaly-specific text descriptions via multi-stage augmentation to fine-tune text encoders, and using compressed bottleneck tokens for progressive cross-modal integration to reduce redundancy and modality imbalance. This approach directly improves anomaly characterization accuracy while reducing false positives by better exploiting semantic information that visual and audio modalities alone cannot capture.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Enhancing Weakly Supervised Multimodal Video Anomaly Detection through Text Guidance", "This work addresses weak supervision challenges in multimodal video anomaly detection by leveraging text as an underutilized semantic signal through in-context learning-based text augmentation and a bottleneck Transformer fusion architecture. The key innovations are generating anomaly-specific text descriptions via multi-stage augmentation to fine-tune text encoders, and using compressed bottleneck tokens for progressive cross-modal integration to reduce redundancy and modality imbalance. This approach directly improves anomaly characterization accuracy while reducing false positives by better exploiting semantic information that visual and audio modalities alone cannot capture.", "https://arxiv.org/abs/2602.10549")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.10675" style="color:#4ea8ff;">TwiFF (Think With Future Frames): A Large-Scale Dataset for Dynamic Visual Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>TwiFF introduces the first large-scale dataset (2.7M video clips) for dynamic Visual Chain-of-Thought reasoning, extending VCoT beyond static images to temporal domains with grounded intermediate reasoning steps for video-based QA tasks. The accompanying TwiFF-Bench evaluation framework assesses both reasoning trajectory plausibility and answer correctness, while the TwiFF model integrates pre-trained video generation and image understanding capabilities—addressing a critical gap where existing multimodal reasoning systems fail on temporal dynamics, prediction, and camera motion reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TwiFF (Think With Future Frames): A Large-Scale Dataset for Dynamic Visual Reasoning", "TwiFF introduces the first large-scale dataset (2.7M video clips) for dynamic Visual Chain-of-Thought reasoning, extending VCoT beyond static images to temporal domains with grounded intermediate reasoning steps for video-based QA tasks. The accompanying TwiFF-Bench evaluation framework assesses both reasoning trajectory plausibility and answer correctness, while the TwiFF model integrates pre-trained video generation and image understanding capabilities—addressing a critical gap where existing multimodal reasoning systems fail on temporal dynamics, prediction, and camera motion reasoning.", "https://arxiv.org/abs/2602.10675")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11096" style="color:#4ea8ff;">Safety Recovery in Reasoning Models Is Only a Few Early Steering Steps Away</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>SafeThink addresses a critical safety degradation problem in RL-optimized reasoning models (like GRPO) by introducing a lightweight inference-time defense that monitors reasoning traces with a safety reward model and surgically injects corrective prefixes only when safety thresholds are breached. This satisficing-based approach (rather than maximizing safety) achieves 30-60% attack success rate reduction across multiple MLRMs and jailbreak benchmarks while maintaining reasoning performance—offering a practical post-hoc solution that doesn't require retraining. The method's elegance lies in treating safety as a constraint that guides reasoning rather than competing with it, suggesting a more nuanced approach to aligning models trained with reasoning-optimized RL objectives.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Safety Recovery in Reasoning Models Is Only a Few Early Steering Steps Away", "SafeThink addresses a critical safety degradation problem in RL-optimized reasoning models (like GRPO) by introducing a lightweight inference-time defense that monitors reasoning traces with a safety reward model and surgically injects corrective prefixes only when safety thresholds are breached. This satisficing-based approach (rather than maximizing safety) achieves 30-60% attack success rate reduction across multiple MLRMs and jailbreak benchmarks while maintaining reasoning performance—offering a practical post-hoc solution that doesn't require retraining. The method's elegance lies in treating safety as a constraint that guides reasoning rather than competing with it, suggesting a more nuanced approach to aligning models trained with reasoning-optimized RL objectives.", "https://arxiv.org/abs/2602.11096")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11146" style="color:#4ea8ff;">Beyond VLM-Based Rewards: Diffusion-Native Latent Reward Modeling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>DiNa-LRM proposes a diffusion-native latent reward model that eliminates the pixel-space domain mismatch of VLM-based rewards by directly operating on noisy diffusion latents with noise-calibrated uncertainty estimation. The method leverages a pretrained latent diffusion backbone with a timestep-conditioned reward head and inference-time noise ensembling, offering computational efficiency gains and improved alignment for preference optimization in diffusion/flow-matching models. This approach enables test-time scaling without external multimodal priors, addressing both the memory overhead and domain alignment limitations of traditional VLM-based reward functions.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond VLM-Based Rewards: Diffusion-Native Latent Reward Modeling", "DiNa-LRM proposes a diffusion-native latent reward model that eliminates the pixel-space domain mismatch of VLM-based rewards by directly operating on noisy diffusion latents with noise-calibrated uncertainty estimation. The method leverages a pretrained latent diffusion backbone with a timestep-conditioned reward head and inference-time noise ensembling, offering computational efficiency gains and improved alignment for preference optimization in diffusion/flow-matching models. This approach enables test-time scaling without external multimodal priors, addressing both the memory overhead and domain alignment limitations of traditional VLM-based reward functions.", "https://arxiv.org/abs/2602.11146")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2508.09210" style="color:#4ea8ff;">MME-Emotion: A Holistic Evaluation Benchmark for Emotional Intelligence in Multimodal Large Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>**MME-Emotion** introduces a comprehensive benchmark with 6,000+ video clips and task-specific QA pairs to evaluate both emotional understanding and causal reasoning in MLLMs across diverse scenarios—addressing critical gaps in current affective computing evaluation. This systematic approach enables assessment of generalization abilities and the models' capacity to identify emotion-triggering factors, moving beyond simple emotion classification toward interpretable emotional intelligence in multimodal systems. The benchmark's scalable, protocol-unified design positions it as a foundational resource for advancing emotionally-aware AI systems that require reasoning transparency.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MME-Emotion: A Holistic Evaluation Benchmark for Emotional Intelligence in Multimodal Large Language Models", "**MME-Emotion** introduces a comprehensive benchmark with 6,000+ video clips and task-specific QA pairs to evaluate both emotional understanding and causal reasoning in MLLMs across diverse scenarios—addressing critical gaps in current affective computing evaluation. This systematic approach enables assessment of generalization abilities and the models' capacity to identify emotion-triggering factors, moving beyond simple emotion classification toward interpretable emotional intelligence in multimodal systems. The benchmark's scalable, protocol-unified design positions it as a foundational resource for advancing emotionally-aware AI systems that require reasoning transparency.", "https://arxiv.org/abs/2508.09210")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.10222" style="color:#4ea8ff;">Speech-Audio Compositional Attacks on Multimodal LLMs and Their Mitigation with SALMONN-Guard</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>Researchers introduce SACRED-Bench, a black-box red-teaming framework that exploits speech-audio composition attacks (overlapping harmful/benign speech, audio mixtures, and multi-speaker dialogue) to expose safety vulnerabilities in multimodal LLMs that current defenses fail to handle. The work proposes SALMONN-Guard as a mitigation strategy, addressing a critical gap where audio-based attacks can bypass traditional safeguards by embedding harmful intent within acoustically complex, naturalistic scenes rather than relying on explicit textual prompts or white-box perturbations.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Speech-Audio Compositional Attacks on Multimodal LLMs and Their Mitigation with SALMONN-Guard", "Researchers introduce SACRED-Bench, a black-box red-teaming framework that exploits speech-audio composition attacks (overlapping harmful/benign speech, audio mixtures, and multi-speaker dialogue) to expose safety vulnerabilities in multimodal LLMs that current defenses fail to handle. The work proposes SALMONN-Guard as a mitigation strategy, addressing a critical gap where audio-based attacks can bypass traditional safeguards by embedding harmful intent within acoustically complex, naturalistic scenes rather than relying on explicit textual prompts or white-box perturbations.", "https://arxiv.org/abs/2511.10222")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.20022" style="color:#4ea8ff;">WaymoQA: A Multi-View Visual Question Answering Dataset for Safety-Critical Reasoning in Autonomous Driving</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>WaymoQA introduces a 35,000-question VQA dataset with multi-view inputs to address safety-critical reasoning in autonomous driving—a two-stage task requiring MLLMs to both resolve immediate risks and anticipate downstream consequences. The dataset's novel focus on scenarios where single-view perception is insufficient reflects a critical gap in current autonomous driving systems, where trade-off decisions between competing risks demand comprehensive environmental understanding. This addresses a fundamental limitation of existing MLLMs in safety-critical applications where greedy risk mitigation can inadvertently create secondary hazards.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "WaymoQA: A Multi-View Visual Question Answering Dataset for Safety-Critical Reasoning in Autonomous Driving", "WaymoQA introduces a 35,000-question VQA dataset with multi-view inputs to address safety-critical reasoning in autonomous driving—a two-stage task requiring MLLMs to both resolve immediate risks and anticipate downstream consequences. The dataset's novel focus on scenarios where single-view perception is insufficient reflects a critical gap in current autonomous driving systems, where trade-off decisions between competing risks demand comprehensive environmental understanding. This addresses a fundamental limitation of existing MLLMs in safety-critical applications where greedy risk mitigation can inadvertently create secondary hazards.", "https://arxiv.org/abs/2511.20022")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.12768" style="color:#4ea8ff;">CoRe3D: Collaborative Reasoning as a Foundation for 3D Intelligence</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>CoRe3D introduces a reasoning-centric framework that extends chain-of-thought mechanisms to 3D understanding and generation by decomposing latent space into spatially-grounded, localized regions for compositional reasoning. The key innovation is tight coupling semantic reasoning (language intent) with structured spatial representations, enabling procedurally-guided 3D content formation that achieves improved local consistency and cross-modal alignment. This approach addresses a significant gap in multimodal AI—explicit reasoning for 3D tasks—with implications for more interpretable and controllable 3D generation systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CoRe3D: Collaborative Reasoning as a Foundation for 3D Intelligence", "CoRe3D introduces a reasoning-centric framework that extends chain-of-thought mechanisms to 3D understanding and generation by decomposing latent space into spatially-grounded, localized regions for compositional reasoning. The key innovation is tight coupling semantic reasoning (language intent) with structured spatial representations, enabling procedurally-guided 3D content formation that achieves improved local consistency and cross-modal alignment. This approach addresses a significant gap in multimodal AI—explicit reasoning for 3D tasks—with implications for more interpretable and controllable 3D generation systems.", "https://arxiv.org/abs/2512.12768")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.04900" style="color:#4ea8ff;">Evaluating Kubernetes Performance for GenAI Inference: From Automatic Speech Recognition to LLM Summarization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper demonstrates how Kubernetes-native tools (Kueue, Dynamic Accelerator Slicer, and llm-d) can efficiently orchestrate multi-stage GenAI inference pipelines, combining batch processing for speech recognition with online LLM summarization. The work addresses critical infrastructure challenges—job scheduling, accelerator utilization, and request routing—showing that container orchestration can match specialized inference platforms' efficiency while maintaining deployment flexibility. The approach is particularly significant for teams building complex AI workflows requiring heterogeneous compute resources and variable latency requirements.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Evaluating Kubernetes Performance for GenAI Inference: From Automatic Speech Recognition to LLM Summarization", "This paper demonstrates how Kubernetes-native tools (Kueue, Dynamic Accelerator Slicer, and llm-d) can efficiently orchestrate multi-stage GenAI inference pipelines, combining batch processing for speech recognition with online LLM summarization. The work addresses critical infrastructure challenges—job scheduling, accelerator utilization, and request routing—showing that container orchestration can match specialized inference platforms' efficiency while maintaining deployment flexibility. The approach is particularly significant for teams building complex AI workflows requiring heterogeneous compute resources and variable latency requirements.", "https://arxiv.org/abs/2602.04900")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.10518" style="color:#4ea8ff;">MapVerse: A Benchmark for Geospatial Question Answering on Diverse Real-World Maps</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-12
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>MapVerse introduces a large-scale benchmark with 11,837 human-annotated QA pairs across 1,025 real-world maps spanning ten diverse categories, directly addressing the limitation of existing map-reasoning datasets that rely on synthetic data and narrow domain coverage. The benchmark is designed to evaluate VLMs and LLMs on genuine geospatial reasoning tasks requiring integration of spatial relationships, visual cues, real-world context, and domain expertise—capabilities that current multimodal models struggle to handle consistently. This resource enables more rigorous evaluation of vision-language models on complex spatial understanding, potentially driving development of models better suited for real-world geospatial applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MapVerse: A Benchmark for Geospatial Question Answering on Diverse Real-World Maps", "MapVerse introduces a large-scale benchmark with 11,837 human-annotated QA pairs across 1,025 real-world maps spanning ten diverse categories, directly addressing the limitation of existing map-reasoning datasets that rely on synthetic data and narrow domain coverage. The benchmark is designed to evaluate VLMs and LLMs on genuine geospatial reasoning tasks requiring integration of spatial relationships, visual cues, real-world context, and domain expertise—capabilities that current multimodal models struggle to handle consistently. This resource enables more rigorous evaluation of vision-language models on complex spatial understanding, potentially driving development of models better suited for real-world geospatial applications.", "https://arxiv.org/abs/2602.10518")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
