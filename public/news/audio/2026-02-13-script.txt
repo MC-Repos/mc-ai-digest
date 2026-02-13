@@ -1,0 +1,131 @@
+Chris: Okay, so we've got three papers today that are all hitting the same problem from different angles - multimodal models are fundamentally broken when it comes to actually using multiple modalities effectively.
+
+Lily: [pauses] That's a bold claim. Broken how?
+
+Chris: Let's start with MAPLE. The core insight here is that current training treats all modalities equally, right? You've got a batch with vision, audio, text - whatever - and you're just throwing gradient descent at it like it's all the same problem. But it's not.
+
+Lily: So they're stratifying batches based on what modalities are actually required for each task?
+
+Chris: Exactly. And the technical reason this matters is variance reduction in policy gradients. When you mix samples that need vision with samples that only need text, your advantage estimates are all over the place. High variance means slower convergence, which means you're burning compute for no reason.
+
+Lily: Right, and this is addressing real-world deployment issues - missing modalities, corrupted inputs. That's not academic, that's what actually happens when you ship this stuff.
+
+Chris: Yeah, and that's what caught my attention. They've built MAPLE-bench to annotate what signals are actually needed, then MAPO does the modality-stratified optimization. Plus adaptive curriculum scheduling to prioritize the hard combinations.
+
+Lily: Okay, but [pauses] how much does this actually move the needle? Are we talking incremental improvements or is this fundamentally changing how we should think about multimodal training?
+
+Chris: It's addressing a real inefficiency, but let's be honest - this is optimization work. Important? Yes. Revolutionary? No. The bigger story is that we're still figuring out basics like "don't mix incompatible training samples."
+
+Lily: Which brings us to the attribution problem. MuRGAt.
+
+Chris: Right, so this one's about verifiability. You ask a multimodal model to reason across video and audio, it gives you an answer - but can it actually cite its sources? Can it tell you "at timestamp 2:34 in the video, this thing happened"?
+
+Lily: And the answer is currently no.
+
+Chris: Current benchmarks don't even test for this. They're testing observation tasks - "what's in this image?" MuRGAt is the first benchmark that requires fact-level attribution with temporal grounding across reasoning chains.
+
+Lily: This matters for high-stakes applications. Medical, legal, anything where "the AI said so" isn't good enough.
+
+Chris: Exactly. You need to trace back every claim to a specific source. [pauses] The problem is, this paper is just a benchmark. They're showing that models suck at this, which... we kind of already knew.
+
+Lily: So where's the solution?
+
+Chris: That's the thing - there isn't one yet. This is diagnostic work. Useful for measuring progress, but it's not giving us the architecture or training method that actually solves attribution.
+
+Lily: Fair enough. And the third paper - bootstrapping dynamics prediction. This one's actually clever.
+
+Chris: Yeah, this one surprised me. The insight is that vision-language models are weirdly asymmetric. They're bad at forward dynamics - predicting what happens next given an action - but they're good at inverse dynamics, which is basically action captioning.
+
+Lily: So if you show them two frames, they can describe what action happened between them.
+
+Chris: Right. And the researchers are exploiting this asymmetry. First approach: use the inverse model to annotate unlabeled video, generate more training data for the forward model.
+
+Lily: That's clever - you're bootstrapping supervision from the easier task.
+
+Chris: Second approach is even better. Use inverse dynamics as a reward signal at inference time. Generate multiple forward predictions, use the inverse model to check which ones are consistent.
+
+Lily: Okay, that's actually practical. [pauses] What's the business angle here? Who needs this?
+
+Chris: Robotics, simulation, anything that needs to predict physical outcomes. Right now, if you want an AI to understand "if I move this object, what happens," you need massive amounts of paired data - action labels with outcomes.
+
+Lily: And this lets you scale without that supervision.
+
+Chris: Exactly. You can use unlabeled video, which is abundant. The limitation is you're still constrained by what the inverse model knows - if it can't caption certain actions, the whole bootstrapping breaks down.
+
+Lily: So these three papers together are painting a picture of multimodal models that are fundamentally limited in ways we're just starting to understand.
+
+Chris: Yeah, and what frustrates me is how much of this is basic infrastructure work. We're still figuring out how to train these models efficiently, how to verify their outputs, how to handle missing modalities.
+
+Lily: The hype cycle has moved way past the actual capabilities.
+
+Chris: [sighs] That's always the case. Everyone's talking about AGI and we can't even get reliable citations from multimodal reasoning.
+
+Lily: Let's talk deployment. If you're a company looking at these papers, what's actionable?
+
+Chris: MAPLE's approach is probably the most immediately useful. If you're fine-tuning multimodal models, stratifying your batches by modality requirements will improve convergence. That's compute savings, which is real money.
+
+Lily: And the technical lift?
+
+Chris: Not trivial but not insane. You need to annotate your training data with modality requirements, which could be automated with some heuristics. Then modify your data loader to create stratified batches. The MAPO algorithm adds some complexity to the RL training loop.
+
+Lily: MuRGAt is more of a benchmarking tool.
+
+Chris: Yeah, if you're building applications that need verifiability, this gives you a way to measure whether your models are actually capable of attribution. But it's not going to make your model better, it's just going to tell you how bad it is.
+
+Lily: Which is valuable for risk assessment.
+
+Chris: Absolutely. If you're deploying in healthcare or legal, you need to know this failure mode exists. MuRGAt quantifies it.
+
+Lily: And the dynamics prediction work?
+
+Chris: That's more specialized. If you're in robotics or building simulation systems, the bootstrapping approach is worth exploring. But for general multimodal applications, it's not immediately relevant.
+
+Lily: One thing that strikes me across all three papers - they're all addressing gaps in our evaluation and training infrastructure. We don't have the right benchmarks, we don't have efficient training strategies, we don't have good ways to verify outputs.
+
+Chris: And that's the real story. [pauses] The field moved too fast from "can we make these models work" to "let's ship them in production" without building the proper foundations.
+
+Lily: Which is why we're seeing all this research on basics like batch composition and attribution.
+
+Chris: Exactly. And look, this work is important. I don't want to sound dismissive. But we need to be realistic about where we actually are versus where the marketing says we are.
+
+Lily: The gap between capability and deployment readiness.
+
+Chris: Right. These models can do impressive things in controlled settings. But missing modalities, adversarial inputs, need for verifiable reasoning - these are all unsolved problems that matter in production.
+
+Lily: So if you're a technical leader evaluating multimodal AI for your company, what's the takeaway?
+
+Chris: Test the hell out of edge cases. Don't assume the model will gracefully handle missing or corrupted inputs. If you need explainability or attribution, verify that the model can actually do it - most can't. And budget for serious infrastructure work around training and evaluation.
+
+Lily: Not exactly the plug-and-play solution vendors are selling.
+
+Chris: [chuckles] Yeah, not quite. The technology is promising but it's still early. These papers are basically saying "here are fundamental problems we haven't solved yet."
+
+Lily: Which is more useful than papers claiming everything works perfectly.
+
+Chris: Agreed. I'd rather see honest assessment of limitations than more hype about capabilities.
+
+Lily: Alright, anything else worth highlighting from these?
+
+Chris: The bootstrapping work has a interesting general principle - if you have two related tasks with asymmetric difficulty, you can potentially use the easier one to improve the harder one. That's a pattern that might apply beyond just dynamics prediction.
+
+Lily: Transfer learning with extra steps.
+
+Chris: Sort of, yeah. But the key is identifying those asymmetries in your specific domain. Not every inverse problem is easier than the forward problem.
+
+Lily: Fair point. And on MAPLE, the curriculum scheduling aspect is worth noting - they're not just stratifying batches, they're adaptively prioritizing difficult modality combinations.
+
+Chris: Right, which is addressing a common problem in multimodal learning where the model just ignores harder modalities and relies on shortcuts. If text alone can solve most tasks, why learn to use vision?
+
+Lily: So you have to force it to engage with the difficult combinations.
+
+Chris: Exactly. That's what the adaptive weighting does - it's preventing the model from taking easy paths.
+
+Lily: Okay, I think we've covered the key points. Bottom line for listeners?
+
+Chris: Multimodal AI has serious infrastructure gaps. These papers are addressing training efficiency, verifiability, and handling real-world distribution shifts. Important work, but it highlights how much basic research still needs to happen before these systems are truly production-ready.
+
+Lily: And if you're deploying these systems, test edge cases, verify capabilities, and don't trust the marketing.
+
+Chris: That should be tattooed on every CTO's forehead.
+
+Lily: [chuckles] That's a bit much, but yeah. Alright, that's it for today.

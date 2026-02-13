@@ -1,0 +1,493 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-13</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-13</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11596" style="color:#4ea8ff;">MAPLE: Modality-Aware Post-training and Learning Ecosystem</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>MAPLE addresses a critical inefficiency in multimodal LLM post-training by introducing modality-aware RL optimization that stratifies training batches based on actual task requirements rather than treating all modalities equally—reducing policy-gradient variance and improving convergence on heterogeneous inputs. The framework comprises three components: MAPLE-bench (a benchmark annotating minimal required signal combinations), MAPO (modality-stratified batch optimization to reduce variance from mixed group advantages), and adaptive weighting/curriculum scheduling for prioritizing difficult modality combinations. This approach directly improves robustness to real-world distribution shifts where modalities may be missing, corrupted, or reweighted.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MAPLE: Modality-Aware Post-training and Learning Ecosystem", "MAPLE addresses a critical inefficiency in multimodal LLM post-training by introducing modality-aware RL optimization that stratifies training batches based on actual task requirements rather than treating all modalities equally—reducing policy-gradient variance and improving convergence on heterogeneous inputs. The framework comprises three components: MAPLE-bench (a benchmark annotating minimal required signal combinations), MAPO (modality-stratified batch optimization to reduce variance from mixed group advantages), and adaptive weighting/curriculum scheduling for prioritizing difficult modality combinations. This approach directly improves robustness to real-world distribution shifts where modalities may be missing, corrupted, or reweighted.", "https://arxiv.org/abs/2602.11596")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11509" style="color:#4ea8ff;">Multimodal Fact-Level Attribution for Verifiable Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>MuRGAt introduces the first benchmark for evaluating fact-level attribution in multimodal reasoning tasks, requiring models to ground complex multi-step reasoning across video, audio, and other modalities with precise citations specifying both source modality and temporal segments. This addresses a critical gap in MLLM evaluation—existing benchmarks ignore attribution in reasoning-heavy scenarios, while MuRGAt enables automatic assessment of whether models can verify claims against heterogeneous sources beyond simple observation tasks. The work has immediate implications for deploying MLLMs in high-stakes applications requiring explainability and verifiability.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multimodal Fact-Level Attribution for Verifiable Reasoning", "MuRGAt introduces the first benchmark for evaluating fact-level attribution in multimodal reasoning tasks, requiring models to ground complex multi-step reasoning across video, audio, and other modalities with precise citations specifying both source modality and temporal segments. This addresses a critical gap in MLLM evaluation—existing benchmarks ignore attribution in reasoning-heavy scenarios, while MuRGAt enables automatic assessment of whether models can verify claims against heterogeneous sources beyond simple observation tasks. The work has immediate implications for deploying MLLMs in high-stakes applications requiring explainability and verifiability.", "https://arxiv.org/abs/2602.11509")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2506.06006" style="color:#4ea8ff;">Bootstrapping Action-Grounded Visual Dynamics in Unified Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p># Summary
+
+This work reveals that unified VLMs struggle with forward dynamics prediction (FDP) but excel at the inverse task—predicting actions from frame pairs—creating an exploitable asymmetry. The researchers leverage this by using learned inverse dynamics prediction (IDP) to bootstrap FDP through two mechanisms: annotating unlabeled video frames to scale training data, and using IDP as a reward signal for inference-time search, effectively converting a harder prediction problem into a more tractable supervised learning task.
+
+**Key implication**: This bootstrapping approach suggests a general principle for multimodal models—identifying and exploiting asymmetries in learning difficulty between related tasks can circumvent training challenges in physically grounded reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Bootstrapping Action-Grounded Visual Dynamics in Unified Vision-Language Models", "# Summary\n\nThis work reveals that unified VLMs struggle with forward dynamics prediction (FDP) but excel at the inverse task—predicting actions from frame pairs—creating an exploitable asymmetry. The researchers leverage this by using learned inverse dynamics prediction (IDP) to bootstrap FDP through two mechanisms: annotating unlabeled video frames to scale training data, and using IDP as a reward signal for inference-time search, effectively converting a harder prediction problem into a more tractable supervised learning task.\n\n**Key implication**: This bootstrapping approach suggests a general principle for multimodal models—identifying and exploiting asymmetries in learning difficulty between related tasks can circumvent training challenges in physically grounded reasoning.", "https://arxiv.org/abs/2506.06006")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11509" style="color:#4ea8ff;">Multimodal Fact-Level Attribution for Verifiable Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work introduces MuRGAt, a benchmark for evaluating fact-level attribution in multimodal LLMs that goes beyond simple observation tasks by requiring models to perform multi-step reasoning across video, audio, and other modalities while providing explicit citations with modality and temporal grounding. The key innovation is enabling automatic evaluation of whether generated facts are properly attributed to specific input sources, addressing a critical gap in current multimodal benchmarks that fail to assess reliability in complex reasoning scenarios. This is particularly important for deploying MLLMs in real-world applications where verifiable, traceable outputs are essential for building user trust and detecting hallucinations.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multimodal Fact-Level Attribution for Verifiable Reasoning", "This work introduces MuRGAt, a benchmark for evaluating fact-level attribution in multimodal LLMs that goes beyond simple observation tasks by requiring models to perform multi-step reasoning across video, audio, and other modalities while providing explicit citations with modality and temporal grounding. The key innovation is enabling automatic evaluation of whether generated facts are properly attributed to specific input sources, addressing a critical gap in current multimodal benchmarks that fail to assess reliability in complex reasoning scenarios. This is particularly important for deploying MLLMs in real-world applications where verifiable, traceable outputs are essential for building user trust and detecting hallucinations.", "https://arxiv.org/abs/2602.11509")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2506.06006" style="color:#4ea8ff;">Bootstrapping Action-Grounded Visual Dynamics in Unified Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper demonstrates that unified VLMs can learn forward dynamics prediction (FDP) more effectively by first bootstrapping inverse dynamics prediction (IDP)—leveraging the asymmetry that action captioning between frames is easier than generating future frames from language instructions. The authors propose two concrete strategies: using IDP to annotate unlabeled video frames for expanded FDP training data, and employing IDP as a reward function for inference-time verification to guide FDP sample selection. This approach addresses a fundamental limitation in multimodal grounding and offers a practical pathway for scaling action-conditional video generation without extensive paired supervision.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Bootstrapping Action-Grounded Visual Dynamics in Unified Vision-Language Models", "This paper demonstrates that unified VLMs can learn forward dynamics prediction (FDP) more effectively by first bootstrapping inverse dynamics prediction (IDP)—leveraging the asymmetry that action captioning between frames is easier than generating future frames from language instructions. The authors propose two concrete strategies: using IDP to annotate unlabeled video frames for expanded FDP training data, and employing IDP as a reward function for inference-time verification to guide FDP sample selection. This approach addresses a fundamental limitation in multimodal grounding and offers a practical pathway for scaling action-conditional video generation without extensive paired supervision.", "https://arxiv.org/abs/2506.06006")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11455" style="color:#4ea8ff;">Credit Where It is Due: Cross-Modality Connectivity Drives Precise Reinforcement Learning for MLLM Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p># Summary
+
+Researchers identified that only ~15% of tokens in MLLMs exhibit strong cross-modal attention connectivity during visual reasoning, acting as semantic anchors that ground reasoning in images while others follow linguistic patterns. They propose Anchor-Token Reinforcement Learning (AT-RL), which selectively applies RLVR to these high-connectivity tokens via graph-based attention clustering, achieving performance gains with minimal computational overhead (~1.2% increase). This work provides mechanistic insight into multimodal reasoning and offers a practical optimization for credit assignment in MLLM reinforcement learning pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Credit Where It is Due: Cross-Modality Connectivity Drives Precise Reinforcement Learning for MLLM Reasoning", "# Summary\n\nResearchers identified that only ~15% of tokens in MLLMs exhibit strong cross-modal attention connectivity during visual reasoning, acting as semantic anchors that ground reasoning in images while others follow linguistic patterns. They propose Anchor-Token Reinforcement Learning (AT-RL), which selectively applies RLVR to these high-connectivity tokens via graph-based attention clustering, achieving performance gains with minimal computational overhead (~1.2% increase). This work provides mechanistic insight into multimodal reasoning and offers a practical optimization for credit assignment in MLLM reinforcement learning pipelines.", "https://arxiv.org/abs/2602.11455")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11790" style="color:#4ea8ff;">Beyond End-to-End Video Models: An LLM-Based Multi-Agent System for Educational Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>LAVES introduces a hierarchical LLM-based multi-agent architecture that decomposes educational video generation into specialized sub-tasks (reasoning, narration, visual demonstration, audio-visual sync), addressing end-to-end models' failure to maintain logical rigor and pedagogical coherence in instructional content. The system uses a central Orchestrating Agent to coordinate agents with explicit quality constraints, enabling precise control over procedural fidelity and reducing production complexity compared to monolithic approaches. This decomposition strategy represents a shift toward task-specific reasoning over generalist video generation, particularly valuable for knowledge-intensive domains requiring verifiable correctness and structured learning progression.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond End-to-End Video Models: An LLM-Based Multi-Agent System for Educational Video Generation", "LAVES introduces a hierarchical LLM-based multi-agent architecture that decomposes educational video generation into specialized sub-tasks (reasoning, narration, visual demonstration, audio-visual sync), addressing end-to-end models' failure to maintain logical rigor and pedagogical coherence in instructional content. The system uses a central Orchestrating Agent to coordinate agents with explicit quality constraints, enabling precise control over procedural fidelity and reducing production complexity compared to monolithic approaches. This decomposition strategy represents a shift toward task-specific reasoning over generalist video generation, particularly valuable for knowledge-intensive domains requiring verifiable correctness and structured learning progression.", "https://arxiv.org/abs/2602.11790")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11858" style="color:#4ea8ff;">Zooming without Zooming: Region-to-Image Distillation for Fine-Grained Multimodal Perception</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper introduces Region-to-Image Distillation, a training-time technique that distills fine-grained perception knowledge from zoomed micro-crops into MLLMs, eliminating the inference-time latency overhead of iterative zooming tools while preserving accuracy gains. The approach leverages teacher models to generate region-specific VQA supervision from high-resolution crops, then distills this region-grounded knowledge back to full-image representations, enabling single-pass fine-grained understanding. This is particularly valuable for production deployments where latency is critical, trading training compute for inference efficiency in visual reasoning tasks requiring small-detail detection.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Zooming without Zooming: Region-to-Image Distillation for Fine-Grained Multimodal Perception", "This paper introduces Region-to-Image Distillation, a training-time technique that distills fine-grained perception knowledge from zoomed micro-crops into MLLMs, eliminating the inference-time latency overhead of iterative zooming tools while preserving accuracy gains. The approach leverages teacher models to generate region-specific VQA supervision from high-resolution crops, then distills this region-grounded knowledge back to full-image representations, enabling single-pass fine-grained understanding. This is particularly valuable for production deployments where latency is critical, trading training compute for inference efficiency in visual reasoning tasks requiring small-detail detection.", "https://arxiv.org/abs/2602.11858")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.12117" style="color:#4ea8ff;">KAN-FIF: Spline-Parameterized Lightweight Physics-based Tropical Cyclone Estimation on Meteorological Satellite</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>KAN-FIF introduces spline-parameterized Kolmogorov-Arnold Networks (KAN) combined with CNN-MLP layers to enable lightweight, physics-guided tropical cyclone intensity estimation on edge devices, addressing the model bloat and computational inefficiency of existing approaches. The key innovation is replacing linear feature interactions with KAN's polynomial basis functions to capture high-order relationships between meteorological variables while maintaining parameter efficiency for resource-constrained satellite processing systems. This approach demonstrates practical value for real-time cyclone monitoring in operational meteorology where deployment on edge hardware is critical for coastal hazard prediction.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "KAN-FIF: Spline-Parameterized Lightweight Physics-based Tropical Cyclone Estimation on Meteorological Satellite", "KAN-FIF introduces spline-parameterized Kolmogorov-Arnold Networks (KAN) combined with CNN-MLP layers to enable lightweight, physics-guided tropical cyclone intensity estimation on edge devices, addressing the model bloat and computational inefficiency of existing approaches. The key innovation is replacing linear feature interactions with KAN's polynomial basis functions to capture high-order relationships between meteorological variables while maintaining parameter efficiency for resource-constrained satellite processing systems. This approach demonstrates practical value for real-time cyclone monitoring in operational meteorology where deployment on edge hardware is critical for coastal hazard prediction.", "https://arxiv.org/abs/2602.12117")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.12279" style="color:#4ea8ff;">UniT: Unified Multimodal Chain-of-Thought Test-time Scaling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>UniT extends test-time scaling (TTS)—a technique that improves LLM performance through iterative inference—to unified multimodal models, enabling multi-round reasoning, verification, and refinement across vision and language tasks within a single architecture. The approach combines agentic data synthesis with flexible test-time inference to handle complex multimodal problems requiring iterative decomposition and correction, addressing the limitation that current unified models operate in single-pass mode. This work opens pathways for more sophisticated multimodal reasoning at inference time, particularly valuable for spatially complex tasks and dynamic instruction-following scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "UniT: Unified Multimodal Chain-of-Thought Test-time Scaling", "UniT extends test-time scaling (TTS)—a technique that improves LLM performance through iterative inference—to unified multimodal models, enabling multi-round reasoning, verification, and refinement across vision and language tasks within a single architecture. The approach combines agentic data synthesis with flexible test-time inference to handle complex multimodal problems requiring iterative decomposition and correction, addressing the limitation that current unified models operate in single-pass mode. This work opens pathways for more sophisticated multimodal reasoning at inference time, particularly valuable for spatially complex tasks and dynamic instruction-following scenarios.", "https://arxiv.org/abs/2602.12279")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.04899" style="color:#4ea8ff;">Human Behavior Atlas: Benchmarking Unified Psychological and Social Behavior Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Human Behavior Atlas introduces a unified multimodal benchmark with 100,000+ samples across text, audio, and visual data to enable foundation models that understand psychological and social behaviors (affective/cognitive states, pathologies, social processes) at scale. This addresses a critical gap where specialized single-task datasets prevent cross-task transfer and generalization, offering researchers a consolidated resource to develop more scalable and generalizable behavior understanding systems. The benchmark's multimodal scope and task diversity position it as a foundational dataset for developing robust psychological AI systems with improved transfer learning capabilities across different behavioral domains.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Human Behavior Atlas: Benchmarking Unified Psychological and Social Behavior Understanding", "Human Behavior Atlas introduces a unified multimodal benchmark with 100,000+ samples across text, audio, and visual data to enable foundation models that understand psychological and social behaviors (affective/cognitive states, pathologies, social processes) at scale. This addresses a critical gap where specialized single-task datasets prevent cross-task transfer and generalization, offering researchers a consolidated resource to develop more scalable and generalizable behavior understanding systems. The benchmark's multimodal scope and task diversity position it as a foundational dataset for developing robust psychological AI systems with improved transfer learning capabilities across different behavioral domains.", "https://arxiv.org/abs/2510.04899")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.08891" style="color:#4ea8ff;">Designing and Evaluating an AI-enhanced Immersive Multidisciplinary Simulation (AIMS) for Interprofessional Education</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 25</span></div>
+  <p>AIMS leverages Gemini-2.5-Flash LLM integrated with Unity-based VR to create dynamic, scalable interprofessional clinical simulations that overcome cost and complexity limitations of traditional standardized patient training. The system enables synchronized multimodal interactions between users and AI-driven virtual patients, targeting collaborative reasoning and health promotion competencies across pharmacy, medicine, nursing, and social work disciplines. This approach addresses the critical gap between static case studies and real-world clinical complexity while demonstrating how LLMs can augment immersive educational environments for healthcare team training.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Designing and Evaluating an AI-enhanced Immersive Multidisciplinary Simulation (AIMS) for Interprofessional Education", "AIMS leverages Gemini-2.5-Flash LLM integrated with Unity-based VR to create dynamic, scalable interprofessional clinical simulations that overcome cost and complexity limitations of traditional standardized patient training. The system enables synchronized multimodal interactions between users and AI-driven virtual patients, targeting collaborative reasoning and health promotion competencies across pharmacy, medicine, nursing, and social work disciplines. This approach addresses the critical gap between static case studies and real-world clinical complexity while demonstrating how LLMs can augment immersive educational environments for healthcare team training.", "https://arxiv.org/abs/2510.08891")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.20629" style="color:#4ea8ff;">MapReduce LoRA: Advancing the Pareto Front in Multi-Preference Optimization for Generative Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 62</span></div>
+  <p>This paper addresses multi-objective alignment in generative models by introducing MapReduce LoRA—a method that trains preference-specific LoRA experts in parallel and iteratively merges them—combined with Reward-aware Token Embedding (RaTE) for runtime preference composition, eliminating the typical alignment tax where optimizing one reward dimension degrades others. Empirical validation across text-to-image (Stable Diffusion 3.5, FLUX.1) and text-to-video (HunyuanVideo) models shows significant gains (32-67% improvements on vision metrics, 48-90% on video quality), offering a practical path for efficient multi-reward optimization without expensive retraining. The approach's modularity—training experts independently then merging—provides both computational efficiency and inference-time flexibility for weighted preference control.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MapReduce LoRA: Advancing the Pareto Front in Multi-Preference Optimization for Generative Models", "This paper addresses multi-objective alignment in generative models by introducing MapReduce LoRA—a method that trains preference-specific LoRA experts in parallel and iteratively merges them—combined with Reward-aware Token Embedding (RaTE) for runtime preference composition, eliminating the typical alignment tax where optimizing one reward dimension degrades others. Empirical validation across text-to-image (Stable Diffusion 3.5, FLUX.1) and text-to-video (HunyuanVideo) models shows significant gains (32-67% improvements on vision metrics, 48-90% on video quality), offering a practical path for efficient multi-reward optimization without expensive retraining. The approach's modularity—training experts independently then merging—provides both computational efficiency and inference-time flexibility for weighted preference control.", "https://arxiv.org/abs/2511.20629")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.10081" style="color:#4ea8ff;">Anagent For Enhancing Scientific Table &amp; Figure Analysis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This paper introduces **AnaBench**, a comprehensive 63,178-instance benchmark across nine scientific domains with seven complexity dimensions, to systematize challenges in scientific table and figure analysis. The authors propose **Anagent**, a multi-agent framework leveraging specialized agents (Planner, Expert retriever, and others) to decompose and solve complex multimodal scientific interpretation tasks that require long-context reasoning and domain-specific knowledge integration. This addresses a critical gap in AI systems' ability to handle heterogeneous scientific data structures, with implications for automating literature review, data extraction, and evidence synthesis in research workflows.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Anagent For Enhancing Scientific Table &amp; Figure Analysis", "This paper introduces **AnaBench**, a comprehensive 63,178-instance benchmark across nine scientific domains with seven complexity dimensions, to systematize challenges in scientific table and figure analysis. The authors propose **Anagent**, a multi-agent framework leveraging specialized agents (Planner, Expert retriever, and others) to decompose and solve complex multimodal scientific interpretation tasks that require long-context reasoning and domain-specific knowledge integration. This addresses a critical gap in AI systems' ability to handle heterogeneous scientific data structures, with implications for automating literature review, data extraction, and evidence synthesis in research workflows.", "https://arxiv.org/abs/2602.10081")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.11858" style="color:#4ea8ff;">Zooming without Zooming: Region-to-Image Distillation for Fine-Grained Multimodal Perception</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-13
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper introduces Region-to-Image Distillation, a training-time knowledge distillation approach that eliminates the inference-time latency bottleneck of iterative zooming methods by baking fine-grained perception directly into MLLMs during training—teacher models generate high-quality VQA annotations from micro-cropped regions, which are then distilled back to full-image understanding. The key innovation is converting zooming from a costly agentic tool requiring repeated visual encoding into an implicit capability, enabling single-pass fine-grained perception without sacrificing speed or requiring external tools at inference. This approach addresses a critical limitation in vision-language models where small discriminative details get lost in global context, with direct applications to document understanding, medical imaging, and other detail-dependent multimodal tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Zooming without Zooming: Region-to-Image Distillation for Fine-Grained Multimodal Perception", "This paper introduces Region-to-Image Distillation, a training-time knowledge distillation approach that eliminates the inference-time latency bottleneck of iterative zooming methods by baking fine-grained perception directly into MLLMs during training—teacher models generate high-quality VQA annotations from micro-cropped regions, which are then distilled back to full-image understanding. The key innovation is converting zooming from a costly agentic tool requiring repeated visual encoding into an implicit capability, enabling single-pass fine-grained perception without sacrificing speed or requiring external tools at inference. This approach addresses a critical limitation in vision-language models where small discriminative details get lost in global context, with direct applications to document understanding, medical imaging, and other detail-dependent multimodal tasks.", "https://arxiv.org/abs/2602.11858")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
