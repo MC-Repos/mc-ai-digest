@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-17</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-17</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.10689" style="color:#4ea8ff;">OmniVideoBench: Towards Audio-Visual Understanding Evaluation for Omni MLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>OmniVideoBench introduces a rigorously designed benchmark with 1,000 QA pairs across 628 diverse videos to evaluate multimodal LLMs' true audio-visual synergistic reasoning—moving beyond existing benchmarks that treat modalities in isolation or logically inconsistent ways. The dataset includes step-by-step reasoning traces and 13 question types specifically designed to assess modality complementarity, addressing a critical gap in MLLM evaluation where audio-visual integration remains poorly understood. This benchmark enables more rigorous assessment of how contemporary video MLLMs leverage cross-modal dependencies rather than falling back on single-modality shortcuts.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "OmniVideoBench: Towards Audio-Visual Understanding Evaluation for Omni MLLMs", "OmniVideoBench introduces a rigorously designed benchmark with 1,000 QA pairs across 628 diverse videos to evaluate multimodal LLMs' true audio-visual synergistic reasoning—moving beyond existing benchmarks that treat modalities in isolation or logically inconsistent ways. The dataset includes step-by-step reasoning traces and 13 question types specifically designed to assess modality complementarity, addressing a critical gap in MLLM evaluation where audio-visual integration remains poorly understood. This benchmark enables more rigorous assessment of how contemporary video MLLMs leverage cross-modal dependencies rather than falling back on single-modality shortcuts.", "https://arxiv.org/abs/2510.10689")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13669" style="color:#4ea8ff;">EchoTorrent: Towards Swift, Sustained, and Streaming Multi-Modal Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>EchoTorrent addresses the latency and temporal stability challenges in streaming multi-modal video generation through a four-component approach: multi-teacher domain-expert training for knowledge transfer, Adaptive CFG Calibration to eliminate redundant computations via phased scheduling, and hybrid long-tail forcing for alignment—enabling single-pass inference per diffusion step. The method specifically tackles streaming-specific degradation artifacts (spatial blurring, temporal drift, lip desynchronization) that emerge when balancing real-time performance with multi-modal coherence, resolving a critical efficiency-performance trade-off for practical deployment. This represents a significant optimization path for streaming video generation by combining knowledge distillation, adaptive guidance calibration, and architectural constraints rather than architectural redesign alone.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EchoTorrent: Towards Swift, Sustained, and Streaming Multi-Modal Video Generation", "EchoTorrent addresses the latency and temporal stability challenges in streaming multi-modal video generation through a four-component approach: multi-teacher domain-expert training for knowledge transfer, Adaptive CFG Calibration to eliminate redundant computations via phased scheduling, and hybrid long-tail forcing for alignment—enabling single-pass inference per diffusion step. The method specifically tackles streaming-specific degradation artifacts (spatial blurring, temporal drift, lip desynchronization) that emerge when balancing real-time performance with multi-modal coherence, resolving a critical efficiency-performance trade-off for practical deployment. This represents a significant optimization path for streaming video generation by combining knowledge distillation, adaptive guidance calibration, and architectural constraints rather than architectural redesign alone.", "https://arxiv.org/abs/2602.13669")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.23232" style="color:#4ea8ff;">ShotFinder: Imagination-Driven Open-Domain Video Shot Retrieval via Web Search</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>ShotFinder introduces a benchmark and retrieval pipeline for open-domain video shot localization by combining LLM-based query expansion ("video imagination") with web search and temporal localization, addressing a gap in video-specific multimodal IR beyond static content. The benchmark systematizes editing use cases through 1,210 annotated YouTube samples with five controllable constraint types (temporal, color, style, audio, resolution), enabling systematic evaluation of video retrieval systems that must handle complex temporal semantics. This work highlights the challenge of scaling multimodal retrieval to video's temporal dimension and demonstrates that LLM-augmented search outperforms direct semantic matching for domain-specific creative workflows.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ShotFinder: Imagination-Driven Open-Domain Video Shot Retrieval via Web Search", "ShotFinder introduces a benchmark and retrieval pipeline for open-domain video shot localization by combining LLM-based query expansion (\"video imagination\") with web search and temporal localization, addressing a gap in video-specific multimodal IR beyond static content. The benchmark systematizes editing use cases through 1,210 annotated YouTube samples with five controllable constraint types (temporal, color, style, audio, resolution), enabling systematic evaluation of video retrieval systems that must handle complex temporal semantics. This work highlights the challenge of scaling multimodal retrieval to video's temporal dimension and demonstrates that LLM-augmented search outperforms direct semantic matching for domain-specific creative workflows.", "https://arxiv.org/abs/2601.23232")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.14122" style="color:#4ea8ff;">EgoSound: Benchmarking Sound Understanding in Egocentric Videos</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>EgoSound introduces the first benchmark for evaluating multimodal LLMs' egocentric sound understanding, addressing a critical gap where current vision-language models neglect audio as a crucial reasoning modality. The benchmark spans 7,315 QA pairs across 900 videos with a seven-task taxonomy covering sound perception, spatial localization, causal inference, and cross-modal reasoning—leveraging both Ego4D and EgoBlind datasets to test performance on sighted and sound-dependent scenarios. This work highlights that audio provides essential contextual cues for off-screen events and spatial reasoning in egocentric contexts, establishing systematic evaluation methodology for building more perceptually complete multimodal AI systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EgoSound: Benchmarking Sound Understanding in Egocentric Videos", "EgoSound introduces the first benchmark for evaluating multimodal LLMs' egocentric sound understanding, addressing a critical gap where current vision-language models neglect audio as a crucial reasoning modality. The benchmark spans 7,315 QA pairs across 900 videos with a seven-task taxonomy covering sound perception, spatial localization, causal inference, and cross-modal reasoning—leveraging both Ego4D and EgoBlind datasets to test performance on sighted and sound-dependent scenarios. This work highlights that audio provides essential contextual cues for off-screen events and spatial reasoning in egocentric contexts, establishing systematic evaluation methodology for building more perceptually complete multimodal AI systems.", "https://arxiv.org/abs/2602.14122")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.23232" style="color:#4ea8ff;">ShotFinder: Imagination-Driven Open-Domain Video Shot Retrieval via Web Search</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>ShotFinder introduces the first systematic benchmark for open-domain video shot retrieval with 1,210 curated YouTube samples constrained by five controllable factors (temporal order, color, visual style, audio, resolution), addressing a gap in LLM-based multimodal retrieval beyond static settings. The proposed three-stage pipeline leverages video imagination for query expansion, web search for candidate retrieval, and precise shot localization—enabling LLMs to reason about complex temporal-semantic relationships in video editing workflows.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ShotFinder: Imagination-Driven Open-Domain Video Shot Retrieval via Web Search", "ShotFinder introduces the first systematic benchmark for open-domain video shot retrieval with 1,210 curated YouTube samples constrained by five controllable factors (temporal order, color, visual style, audio, resolution), addressing a gap in LLM-based multimodal retrieval beyond static settings. The proposed three-stage pipeline leverages video imagination for query expansion, web search for candidate retrieval, and precise shot localization—enabling LLMs to reason about complex temporal-semantic relationships in video editing workflows.", "https://arxiv.org/abs/2601.23232")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2503.10522" style="color:#4ea8ff;">AudioX: A Unified Framework for Anything-to-Audio Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>AudioX introduces a unified multimodal framework for audio/music generation that accepts text, video, and audio inputs through a novel Multimodal Adaptive Fusion module designed to optimize cross-modal alignment. The authors address the critical bottleneck of training data by curating IF-caps, a 7M+ sample dataset with structured annotations, enabling comprehensive multimodal-conditioned audio synthesis at scale. This represents a significant step toward flexible, production-ready audio generation systems where diverse input modalities can seamlessly condition output quality.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AudioX: A Unified Framework for Anything-to-Audio Generation", "AudioX introduces a unified multimodal framework for audio/music generation that accepts text, video, and audio inputs through a novel Multimodal Adaptive Fusion module designed to optimize cross-modal alignment. The authors address the critical bottleneck of training data by curating IF-caps, a 7M+ sample dataset with structured annotations, enabling comprehensive multimodal-conditioned audio synthesis at scale. This represents a significant step toward flexible, production-ready audio generation systems where diverse input modalities can seamlessly condition output quality.", "https://arxiv.org/abs/2503.10522")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2503.10522" style="color:#4ea8ff;">AudioX: A Unified Framework for Anything-to-Audio Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#10b981;">⚡ 92</span></div>
+  <p>AudioX presents a unified multimodal-to-audio generation framework addressing two critical bottlenecks: heterogeneous input integration and training data scarcity. The core innovation is a Multimodal Adaptive Fusion module that aligns diverse conditions (text, video, audio) for improved cross-modal coherence, supported by a novel 7M-sample dataset (IF-caps) with structured annotations enabling supervised training at scale.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AudioX: A Unified Framework for Anything-to-Audio Generation", "AudioX presents a unified multimodal-to-audio generation framework addressing two critical bottlenecks: heterogeneous input integration and training data scarcity. The core innovation is a Multimodal Adaptive Fusion module that aligns diverse conditions (text, video, audio) for improved cross-modal coherence, supported by a novel 7M-sample dataset (IF-caps) with structured annotations enabling supervised training at scale.", "https://arxiv.org/abs/2503.10522")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13319" style="color:#4ea8ff;">Situation Graph Prediction: Structured Perspective Inference for User Modeling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#f59e0b;">⚡ 52</span></div>
+  <p>This work introduces Situation Graph Prediction (SGP), a novel framework that models user perspective states (goals, emotions, contexts) as structured, ontology-aligned graphs inferred from multimodal observable data, addressing the data scarcity problem through synthetic generation where latent labels are aligned with observable traces by design. The researchers demonstrate that perspective inference significantly outperforms surface-level extraction using GPT-4o with retrieval-augmented in-context learning, revealing that latent-state modeling requires fundamentally different approaches than shallow behavioral extraction. This approach has implications for privacy-preserving user modeling systems where direct perspective annotation is infeasible.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Situation Graph Prediction: Structured Perspective Inference for User Modeling", "This work introduces Situation Graph Prediction (SGP), a novel framework that models user perspective states (goals, emotions, contexts) as structured, ontology-aligned graphs inferred from multimodal observable data, addressing the data scarcity problem through synthetic generation where latent labels are aligned with observable traces by design. The researchers demonstrate that perspective inference significantly outperforms surface-level extraction using GPT-4o with retrieval-augmented in-context learning, revealing that latent-state modeling requires fundamentally different approaches than shallow behavioral extraction. This approach has implications for privacy-preserving user modeling systems where direct perspective annotation is infeasible.", "https://arxiv.org/abs/2602.13319")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13294" style="color:#4ea8ff;">VisPhyWorld: Probing Physical Reasoning via Code-Driven Video Reconstruction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>VisPhyWorld introduces an execution-based benchmark that evaluates MLLMs' physical reasoning by requiring models to generate executable simulator code from video observations, rather than relying on recognition tasks (VQA/VoE) that can be answered without explicit physical hypotheses. The framework separates physical reasoning from rendering by making inferred world representations directly inspectable, editable, and falsifiable through runnable code. VisPhyBench, containing 209 scenes from 108 physical templates, systematically evaluates both appearance reconstruction and motion plausibility—providing a more rigorous test of genuine physical understanding versus pattern matching.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "VisPhyWorld: Probing Physical Reasoning via Code-Driven Video Reconstruction", "VisPhyWorld introduces an execution-based benchmark that evaluates MLLMs' physical reasoning by requiring models to generate executable simulator code from video observations, rather than relying on recognition tasks (VQA/VoE) that can be answered without explicit physical hypotheses. The framework separates physical reasoning from rendering by making inferred world representations directly inspectable, editable, and falsifiable through runnable code. VisPhyBench, containing 209 scenes from 108 physical templates, systematically evaluates both appearance reconstruction and motion plausibility—providing a more rigorous test of genuine physical understanding versus pattern matching.", "https://arxiv.org/abs/2602.13294")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13315" style="color:#4ea8ff;">IDPruner: Harmonizing Importance and Diversity in Visual Token Pruning for MLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>IDPruner addresses the computational bottleneck in MLLMs by proposing a principled framework that balances token importance and semantic diversity in visual token pruning, using the Maximal Marginal Relevance (MMR) algorithm to achieve Pareto-optimal solutions without requiring attention maps. This approach advances beyond ad-hoc combinations of importance and diversity metrics by systematically characterizing their trade-offs, enabling more efficient inference while maintaining representational quality. The attention-map-free design makes it broadly applicable across different MLLM architectures and potentially more computationally efficient than attention-dependent pruning methods.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "IDPruner: Harmonizing Importance and Diversity in Visual Token Pruning for MLLMs", "IDPruner addresses the computational bottleneck in MLLMs by proposing a principled framework that balances token importance and semantic diversity in visual token pruning, using the Maximal Marginal Relevance (MMR) algorithm to achieve Pareto-optimal solutions without requiring attention maps. This approach advances beyond ad-hoc combinations of importance and diversity metrics by systematically characterizing their trade-offs, enabling more efficient inference while maintaining representational quality. The attention-map-free design makes it broadly applicable across different MLLM architectures and potentially more computationally efficient than attention-dependent pruning methods.", "https://arxiv.org/abs/2602.13315")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13332" style="color:#4ea8ff;">MedScope: Incentivizing "Think with Videos" for Clinical Reasoning via Coarse-to-Fine Tool Calling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MedScope introduces a tool-calling framework that enables multimodal LLMs to perform iterative, coarse-to-fine evidence seeking over long-form clinical videos—moving beyond passive sampling to actively locate and verify temporally-grounded observations that justify predictions. The approach interleaves intermediate reasoning with targeted tool calls, significantly improving interpretability and accuracy for applications like surgical robotics by anchoring outputs in specific video timestamps rather than global frame sampling. The authors address the supervision bottleneck by introducing ClinVideoSuite, a fine-grained clinical video dataset designed to support evidence-centric training for this active inspection paradigm.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MedScope: Incentivizing \"Think with Videos\" for Clinical Reasoning via Coarse-to-Fine Tool Calling", "MedScope introduces a tool-calling framework that enables multimodal LLMs to perform iterative, coarse-to-fine evidence seeking over long-form clinical videos—moving beyond passive sampling to actively locate and verify temporally-grounded observations that justify predictions. The approach interleaves intermediate reasoning with targeted tool calls, significantly improving interpretability and accuracy for applications like surgical robotics by anchoring outputs in specific video timestamps rather than global frame sampling. The authors address the supervision bottleneck by introducing ClinVideoSuite, a fine-grained clinical video dataset designed to support evidence-centric training for this active inspection paradigm.", "https://arxiv.org/abs/2602.13332")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13357" style="color:#4ea8ff;">AdaCorrection: Adaptive Offset Cache Correction for Accurate Diffusion Transformers</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>AdaCorrection introduces an adaptive framework for accelerating Diffusion Transformer inference by dynamically correcting cached layer activations using lightweight spatio-temporal signals, addressing the cache misalignment and temporal drift issues that plague static caching strategies. The method achieves significant speedups while maintaining generation fidelity without requiring model retraining or additional supervision, making it a practical optimization for scaling efficient diffusion-based image and video generation. This work represents an important advancement in making high-quality DiT inference computationally feasible for production applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AdaCorrection: Adaptive Offset Cache Correction for Accurate Diffusion Transformers", "AdaCorrection introduces an adaptive framework for accelerating Diffusion Transformer inference by dynamically correcting cached layer activations using lightweight spatio-temporal signals, addressing the cache misalignment and temporal drift issues that plague static caching strategies. The method achieves significant speedups while maintaining generation fidelity without requiring model retraining or additional supervision, making it a practical optimization for scaling efficient diffusion-based image and video generation. This work represents an important advancement in making high-quality DiT inference computationally feasible for production applications.", "https://arxiv.org/abs/2602.13357")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13444" style="color:#4ea8ff;">FlowHOI: Flow-based Semantics-Grounded Generation of Hand-Object Interactions for Dexterous Robot Manipulation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#6b7280;">⚡ 32</span></div>
+  <p>FlowHOI introduces a flow-matching framework that explicitly models hand-object interaction (HOI) structure—including hand poses, object poses, and contact states—to overcome limitations of standard VLA models in contact-rich manipulation tasks. By decoupling grasping from semantics-driven manipulation and leveraging 3D scene tokens from Gaussian splatting with motion-text alignment, the approach enables embodiment-agnostic interaction representations that can transfer across different robot morphologies. This addresses a critical gap in long-horizon dexterous manipulation where implicit end-effector prediction fails, offering better interpretability and cross-robot generalization for robotic systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FlowHOI: Flow-based Semantics-Grounded Generation of Hand-Object Interactions for Dexterous Robot Manipulation", "FlowHOI introduces a flow-matching framework that explicitly models hand-object interaction (HOI) structure—including hand poses, object poses, and contact states—to overcome limitations of standard VLA models in contact-rich manipulation tasks. By decoupling grasping from semantics-driven manipulation and leveraging 3D scene tokens from Gaussian splatting with motion-text alignment, the approach enables embodiment-agnostic interaction representations that can transfer across different robot morphologies. This addresses a critical gap in long-horizon dexterous manipulation where implicit end-effector prediction fails, offering better interpretability and cross-robot generalization for robotic systems.", "https://arxiv.org/abs/2602.13444")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.13640" style="color:#4ea8ff;">Hierarchical Audio-Visual-Proprioceptive Fusion for Precise Robotic Manipulation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work introduces a hierarchical multimodal fusion architecture that leverages acoustic signals as a primary conditioning modality for robotic manipulation, addressing the limitation that vision and proprioception alone struggle to infer contact dynamics in partially observable environments. The key innovation is moving beyond symmetric fusion designs to a hierarchical structure that conditions visual and proprioceptive representations on audio cues first, acknowledging that acoustic signals are inherently sparse but contact-rich and thus should guide perception rather than be treated as equal modalities. This approach has significant implications for tactile-sensitive manipulation tasks where sound provides direct evidence of physical interactions that visual occlusion or proprioceptive latency might obscure.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Hierarchical Audio-Visual-Proprioceptive Fusion for Precise Robotic Manipulation", "This work introduces a hierarchical multimodal fusion architecture that leverages acoustic signals as a primary conditioning modality for robotic manipulation, addressing the limitation that vision and proprioception alone struggle to infer contact dynamics in partially observable environments. The key innovation is moving beyond symmetric fusion designs to a hierarchical structure that conditions visual and proprioceptive representations on audio cues first, acknowledging that acoustic signals are inherently sparse but contact-rich and thus should guide perception rather than be treated as equal modalities. This approach has significant implications for tactile-sensitive manipulation tasks where sound provides direct evidence of physical interactions that visual occlusion or proprioceptive latency might obscure.", "https://arxiv.org/abs/2602.13640")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.14041" style="color:#4ea8ff;">BitDance: Scaling Autoregressive Generative Models with Binary Tokens</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-17
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>BitDance introduces a novel approach to autoregressive image generation by replacing traditional codebook indices with binary tokens, enabling each token to represent up to 2^256 states through high-entropy latent representations. The key innovation is a binary diffusion head that uses continuous-space diffusion instead of softmax classification for sampling, combined with a "next-patch diffusion" decoding method that parallelize token prediction while maintaining accuracy. This achieves state-of-the-art FID (1.24) on ImageNet 256×256 with 5.4× parameter reduction (260M vs 1.4B) and 8.7× faster inference compared to existing parallel AR models, suggesting a promising direction for efficient and compact generative models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "BitDance: Scaling Autoregressive Generative Models with Binary Tokens", "BitDance introduces a novel approach to autoregressive image generation by replacing traditional codebook indices with binary tokens, enabling each token to represent up to 2^256 states through high-entropy latent representations. The key innovation is a binary diffusion head that uses continuous-space diffusion instead of softmax classification for sampling, combined with a \"next-patch diffusion\" decoding method that parallelize token prediction while maintaining accuracy. This achieves state-of-the-art FID (1.24) on ImageNet 256×256 with 5.4× parameter reduction (260M vs 1.4B) and 8.7× faster inference compared to existing parallel AR models, suggesting a promising direction for efficient and compact generative models.", "https://arxiv.org/abs/2602.14041")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
