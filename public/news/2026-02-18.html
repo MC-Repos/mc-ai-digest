@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-18</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-18</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15349" style="color:#4ea8ff;">CREMD: Crowd-Sourced Emotional Multimodal Dogs Dataset</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>CREMD introduces a multimodal dog emotion dataset with 923 video clips annotated across three presentation modes (context/audio variations) to investigate how information accessibility and annotator demographics affect emotional perception labeling. The dataset uniquely addresses the subjectivity problem in canine emotion recognition by systematically studying the influence of multimodal cues and annotator characteristics on ground truth annotations, providing empirical insights for developing more robust automated dog emotion recognition systems for veterinary and human-animal interaction applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CREMD: Crowd-Sourced Emotional Multimodal Dogs Dataset", "CREMD introduces a multimodal dog emotion dataset with 923 video clips annotated across three presentation modes (context/audio variations) to investigate how information accessibility and annotator demographics affect emotional perception labeling. The dataset uniquely addresses the subjectivity problem in canine emotion recognition by systematically studying the influence of multimodal cues and annotator characteristics on ground truth annotations, providing empirical insights for developing more robust automated dog emotion recognition systems for veterinary and human-animal interaction applications.", "https://arxiv.org/abs/2602.15349")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15381" style="color:#4ea8ff;">Automatic Funny Scene Extraction from Long-form Cinematic Videos</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper presents an end-to-end system for extracting humorous scenes from long-form films by combining shot detection, multimodal scene localization, and humor tagging—addressing the challenge of identifying contextually relevant comedy moments across extended narratives through integrated visual and textual analysis. Key technical innovations include guided triplet mining for improved shot representations and a multimodal framework leveraging both audio and text signals, achieving an 18.3% AP improvement over prior methods. The approach has immediate commercial value for streaming platforms seeking to automatically generate engaging short-form content and video previews from theatrical releases.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Automatic Funny Scene Extraction from Long-form Cinematic Videos", "This paper presents an end-to-end system for extracting humorous scenes from long-form films by combining shot detection, multimodal scene localization, and humor tagging—addressing the challenge of identifying contextually relevant comedy moments across extended narratives through integrated visual and textual analysis. Key technical innovations include guided triplet mining for improved shot representations and a multimodal framework leveraging both audio and text signals, achieving an 18.3% AP improvement over prior methods. The approach has immediate commercial value for streaming platforms seeking to automatically generate engaging short-form content and video previews from theatrical releases.", "https://arxiv.org/abs/2602.15381")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15318" style="color:#4ea8ff;">Sparrow: Text-Anchored Window Attention with Visual-Semantic Glimpsing for Speculative Decoding in Video LLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Sparrow addresses the critical failure of speculative decoding in Video LLMs by leveraging a key insight: visual semantics are implicitly encoded into text hidden states during inference, making raw visual inputs redundant in deeper layers. The framework employs text-anchored window attention with hidden state reuse to offload visual computation to the target model while using intermediate-layer visual state bridging to train the draft model with semantically-rich representations, effectively circumventing attention dilution and KV cache explosion. This approach enables practical acceleration of Video LLM inference while maintaining performance—crucial for real-world deployment of long-context video understanding systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Sparrow: Text-Anchored Window Attention with Visual-Semantic Glimpsing for Speculative Decoding in Video LLMs", "Sparrow addresses the critical failure of speculative decoding in Video LLMs by leveraging a key insight: visual semantics are implicitly encoded into text hidden states during inference, making raw visual inputs redundant in deeper layers. The framework employs text-anchored window attention with hidden state reuse to offload visual computation to the target model while using intermediate-layer visual state bridging to train the draft model with semantically-rich representations, effectively circumventing attention dilution and KV cache explosion. This approach enables practical acceleration of Video LLM inference while maintaining performance—crucial for real-world deployment of long-context video understanding systems.", "https://arxiv.org/abs/2602.15318")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15757" style="color:#4ea8ff;">Beyond Binary Classification: Detecting Fine-Grained Sexism in Social Media Videos</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Researchers introduce FineMuSe, a Spanish-language multimodal dataset with hierarchical fine-grained annotations that moves beyond binary sexism classification to capture subtle manifestations including irony and humor as contextual factors. Evaluation of multimodal LLMs shows competitive performance with human annotators on nuanced detection but reveals a critical limitation: models struggle with co-occurring sexist patterns, suggesting that context-aware, hierarchical approaches are essential for real-world content moderation systems that must handle linguistic and visual complexity simultaneously.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond Binary Classification: Detecting Fine-Grained Sexism in Social Media Videos", "Researchers introduce FineMuSe, a Spanish-language multimodal dataset with hierarchical fine-grained annotations that moves beyond binary sexism classification to capture subtle manifestations including irony and humor as contextual factors. Evaluation of multimodal LLMs shows competitive performance with human annotators on nuanced detection but reveals a critical limitation: models struggle with co-occurring sexist patterns, suggesting that context-aware, hierarchical approaches are essential for real-world content moderation systems that must handle linguistic and visual complexity simultaneously.", "https://arxiv.org/abs/2602.15757")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.10853" style="color:#4ea8ff;">Advanced Assistance for Traffic Crash Analysis: An AI-Driven Multi-Agent Approach to Pre-Crash Reconstruction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This paper presents a multi-agent AI framework for reconstructing pre-crash vehicle scenarios by combining multimodal data (narrative reports, tabular variables, scene diagrams) with Event Data Recorder signals through a two-phase collaborative approach: natural language reconstruction followed by EDR-guided behavior inference. The system demonstrates practical applicability to real-world crash analysis by processing 277 rear-end collisions from CISS, addressing a traditionally difficult problem where pre-crash reconstruction has been more challenging than post-collision analysis. The approach leverages agentic AI coordination to isolate vehicle identities and extract temporally-relevant EDR records, enabling automated inference of critical pre-impact driver behaviors from fragmented collision data.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Advanced Assistance for Traffic Crash Analysis: An AI-Driven Multi-Agent Approach to Pre-Crash Reconstruction", "This paper presents a multi-agent AI framework for reconstructing pre-crash vehicle scenarios by combining multimodal data (narrative reports, tabular variables, scene diagrams) with Event Data Recorder signals through a two-phase collaborative approach: natural language reconstruction followed by EDR-guided behavior inference. The system demonstrates practical applicability to real-world crash analysis by processing 277 rear-end collisions from CISS, addressing a traditionally difficult problem where pre-crash reconstruction has been more challenging than post-collision analysis. The approach leverages agentic AI coordination to isolate vehicle identities and extract temporally-relevant EDR records, enabling automated inference of critical pre-impact driver behaviors from fragmented collision data.", "https://arxiv.org/abs/2511.10853")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2505.12254" style="color:#4ea8ff;">MMS-VPR: Multimodal Street-Level Visual Place Recognition Dataset and Benchmark</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MMS-VPR introduces a large-scale multimodal visual place recognition dataset with 110K+ images and 2.5K video clips from pedestrian-only urban environments, addressing a critical gap in existing vehicle-centric VPR benchmarks by providing day-night coverage, multi-angle views, and seven years of temporal diversity across a commercial district in Chengdu. The dataset includes GPS coordinates, timestamps, and semantic annotations, complemented by MMS-VPRlib—a unified benchmarking platform that enables standardized evaluation of place recognition models in challenging real-world conditions underrepresented in current datasets. This represents a significant advancement for developing robust VPR systems for autonomous navigation, urban robotics, and street-level localization in non-Western contexts.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MMS-VPR: Multimodal Street-Level Visual Place Recognition Dataset and Benchmark", "MMS-VPR introduces a large-scale multimodal visual place recognition dataset with 110K+ images and 2.5K video clips from pedestrian-only urban environments, addressing a critical gap in existing vehicle-centric VPR benchmarks by providing day-night coverage, multi-angle views, and seven years of temporal diversity across a commercial district in Chengdu. The dataset includes GPS coordinates, timestamps, and semantic annotations, complemented by MMS-VPRlib—a unified benchmarking platform that enables standardized evaluation of place recognition models in challenging real-world conditions underrepresented in current datasets. This represents a significant advancement for developing robust VPR systems for autonomous navigation, urban robotics, and street-level localization in non-Western contexts.", "https://arxiv.org/abs/2505.12254")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.10509" style="color:#4ea8ff;">MARS-Sep: Multimodal-Aligned Reinforced Sound Separation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>MARS-Sep reformulates universal sound separation as a reinforcement learning decision-making problem using a factorized Beta mask policy guided by a multimodal preference reward model, directly addressing the core misalignment where traditional signal-metric optimization produces semantically contaminated outputs despite low-level accuracy. By leveraging an audio-text-vision encoder for reward signals, the approach achieves better perceptual quality and semantic consistency across text-, audio-, and image-queried separation tasks compared to conventional mask regression methods. This preference-alignment perspective mirrors recent LLM techniques, offering a principled way to optimize for human-perceived quality rather than just reconstruction fidelity in complex acoustic scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MARS-Sep: Multimodal-Aligned Reinforced Sound Separation", "MARS-Sep reformulates universal sound separation as a reinforcement learning decision-making problem using a factorized Beta mask policy guided by a multimodal preference reward model, directly addressing the core misalignment where traditional signal-metric optimization produces semantically contaminated outputs despite low-level accuracy. By leveraging an audio-text-vision encoder for reward signals, the approach achieves better perceptual quality and semantic consistency across text-, audio-, and image-queried separation tasks compared to conventional mask regression methods. This preference-alignment perspective mirrors recent LLM techniques, offering a principled way to optimize for human-perceived quality rather than just reconstruction fidelity in complex acoustic scenarios.", "https://arxiv.org/abs/2510.10509")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.05705" style="color:#4ea8ff;">Long Grounded Thoughts: Synthesizing Visual Problems and Reasoning Chains at Scale</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work presents a scalable framework for synthesizing vision-centric reasoning datasets, generating over 1M problems through a two-stage process: verifiable question generation from images, followed by compositional merging to create complex problems with reasoning traces and preference data. The synthetic dataset enables both SFT and RL training, with Qwen2.5-VL-7B finetuned on this data matching or exceeding closed-model baselines (MiMo-VL-7B-RL) on multiple vision-language benchmarks. This addresses a critical gap in multimodal ML by demonstrating that systematic, scalable synthesis of vision problems can rival expensive proprietary datasets for improving visual reasoning capabilities.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Long Grounded Thoughts: Synthesizing Visual Problems and Reasoning Chains at Scale", "This work presents a scalable framework for synthesizing vision-centric reasoning datasets, generating over 1M problems through a two-stage process: verifiable question generation from images, followed by compositional merging to create complex problems with reasoning traces and preference data. The synthetic dataset enables both SFT and RL training, with Qwen2.5-VL-7B finetuned on this data matching or exceeding closed-model baselines (MiMo-VL-7B-RL) on multiple vision-language benchmarks. This addresses a critical gap in multimodal ML by demonstrating that systematic, scalable synthesis of vision problems can rival expensive proprietary datasets for improving visual reasoning capabilities.", "https://arxiv.org/abs/2511.05705")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15318" style="color:#4ea8ff;">Sparrow: Text-Anchored Window Attention with Visual-Semantic Glimpsing for Speculative Decoding in Video LLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>**Sparrow** addresses speculative decoding failures in Video LLMs by introducing text-anchored window attention that reuses hidden states to eliminate redundant visual computation, and trains draft models on semantic-rich intermediate visual states rather than raw frames. The key insight is that critical visual semantics are implicitly encoded in text representations during deep layers, enabling the framework to offload visual processing to the target model while maintaining inference efficiency and avoiding attention dilution from key-value cache explosion.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Sparrow: Text-Anchored Window Attention with Visual-Semantic Glimpsing for Speculative Decoding in Video LLMs", "**Sparrow** addresses speculative decoding failures in Video LLMs by introducing text-anchored window attention that reuses hidden states to eliminate redundant visual computation, and trains draft models on semantic-rich intermediate visual states rather than raw frames. The key insight is that critical visual semantics are implicitly encoded in text representations during deep layers, enabling the framework to offload visual processing to the target model while maintaining inference efficiency and avoiding attention dilution from key-value cache explosion.", "https://arxiv.org/abs/2602.15318")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15329" style="color:#4ea8ff;">EventMemAgent: Hierarchical Event-Centric Memory for Online Video Understanding with Adaptive Tool Use</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>**EventMemAgent** introduces a hierarchical event-centric memory architecture to overcome MLLMs' context window limitations in streaming video understanding, using dual-layer short-term (event boundary detection with reservoir sampling) and long-term (structured event archival) memory to enable active reasoning over infinite visual streams. This approach addresses the critical trade-off between maintaining long-range context and preserving fine-grained details by organizing memory at event granularity rather than frame-level, enabling more efficient context management for complex downstream tasks. The framework's adaptive tool use capability suggests dynamic selection of processing strategies based on streaming content, improving computational efficiency for real-time video understanding applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EventMemAgent: Hierarchical Event-Centric Memory for Online Video Understanding with Adaptive Tool Use", "**EventMemAgent** introduces a hierarchical event-centric memory architecture to overcome MLLMs' context window limitations in streaming video understanding, using dual-layer short-term (event boundary detection with reservoir sampling) and long-term (structured event archival) memory to enable active reasoning over infinite visual streams. This approach addresses the critical trade-off between maintaining long-range context and preserving fine-grained details by organizing memory at event granularity rather than frame-level, enabling more efficient context management for complex downstream tasks. The framework's adaptive tool use capability suggests dynamic selection of processing strategies based on streaming content, improving computational efficiency for real-time video understanding applications.", "https://arxiv.org/abs/2602.15329")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2505.12254" style="color:#4ea8ff;">MMS-VPR: Multimodal Street-Level Visual Place Recognition Dataset and Benchmark</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MMS-VPR addresses a critical gap in VPR benchmarks by introducing the first large-scale multimodal dataset (110k+ images, 2.5k videos) specifically designed for pedestrian street-level place recognition with dense temporal coverage (2019-2025) and comprehensive day-night viewing angles across an urban environment. The dataset uniquely combines real-time field collection with historical social media data, enabling evaluation of both fine-grained and long-term temporal robustness—a capability absent in vehicle-centric VPR datasets that typically ignore non-Western urban contexts. The accompanying MMS-VPRlib benchmarking platform standardizes VPR evaluation methodologies, facilitating reproducible comparison of place recognition algorithms for emerging applications in autonomous pedestrian navigation and urban robotics.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MMS-VPR: Multimodal Street-Level Visual Place Recognition Dataset and Benchmark", "MMS-VPR addresses a critical gap in VPR benchmarks by introducing the first large-scale multimodal dataset (110k+ images, 2.5k videos) specifically designed for pedestrian street-level place recognition with dense temporal coverage (2019-2025) and comprehensive day-night viewing angles across an urban environment. The dataset uniquely combines real-time field collection with historical social media data, enabling evaluation of both fine-grained and long-term temporal robustness—a capability absent in vehicle-centric VPR datasets that typically ignore non-Western urban contexts. The accompanying MMS-VPRlib benchmarking platform standardizes VPR evaluation methodologies, facilitating reproducible comparison of place recognition algorithms for emerging applications in autonomous pedestrian navigation and urban robotics.", "https://arxiv.org/abs/2505.12254")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.05705" style="color:#4ea8ff;">Long Grounded Thoughts: Synthesizing Visual Problems and Reasoning Chains at Scale</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work presents a scalable framework for synthesizing over 1M diverse vision-centric reasoning problems through a two-stage process: generating verifiable questions from images and composing complex problems by merging simpler ones, producing datasets with reasoning traces and preference data for SFT and RL training. Finetuning Qwen2.5-VL-7B on this synthetic data achieves competitive or superior performance to closed-source models like MiMo-VL-7B-RL on multiple vision reasoning benchmarks, demonstrating that systematic data synthesis at scale can effectively train open multimodal models without expensive proprietary data collection.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Long Grounded Thoughts: Synthesizing Visual Problems and Reasoning Chains at Scale", "This work presents a scalable framework for synthesizing over 1M diverse vision-centric reasoning problems through a two-stage process: generating verifiable questions from images and composing complex problems by merging simpler ones, producing datasets with reasoning traces and preference data for SFT and RL training. Finetuning Qwen2.5-VL-7B on this synthetic data achieves competitive or superior performance to closed-source models like MiMo-VL-7B-RL on multiple vision reasoning benchmarks, demonstrating that systematic data synthesis at scale can effectively train open multimodal models without expensive proprietary data collection.", "https://arxiv.org/abs/2511.05705")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.14027" style="color:#4ea8ff;">Train Short, Inference Long: Training-free Horizon Extension for Autoregressive Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper addresses temporal degradation in autoregressive video diffusion models when generating beyond training horizons by identifying spectral bias in 3D positional embeddings as the root cause. FLEX proposes a training-free solution combining Frequency-aware RoPE Modulation (adaptively interpolating low-frequencies while extrapolating high-frequencies) with Antiphase Noise Sampling to inject dynamic priors, enabling length extension without retraining. The approach is practically significant for enabling efficient long-form video generation from models trained on shorter sequences, with potential applications across content creation and scientific visualization.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Train Short, Inference Long: Training-free Horizon Extension for Autoregressive Video Generation", "This paper addresses temporal degradation in autoregressive video diffusion models when generating beyond training horizons by identifying spectral bias in 3D positional embeddings as the root cause. FLEX proposes a training-free solution combining Frequency-aware RoPE Modulation (adaptively interpolating low-frequencies while extrapolating high-frequencies) with Antiphase Noise Sampling to inject dynamic priors, enabling length extension without retraining. The approach is practically significant for enabling efficient long-form video generation from models trained on shorter sequences, with potential applications across content creation and scientific visualization.", "https://arxiv.org/abs/2602.14027")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15749" style="color:#4ea8ff;">A Generative-First Neural Audio Autoencoder</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>This paper presents a generative-first neural audio autoencoder that achieves 3360x temporal downsampling (vs. 2048x in prior work) while supporting both continuous and discrete latent representations in a single unified model. The approach delivers 10x faster encoding and 1.6x lower latent rates compared to reconstruction-first alternatives, eliminating the need for separate architectures across different audio formats while maintaining competitive reconstruction quality. This architectural paradigm shift enables previously impractical applications by fundamentally improving the efficiency-quality tradeoff critical for large-scale generative audio modeling and real-time conditioning pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Generative-First Neural Audio Autoencoder", "This paper presents a generative-first neural audio autoencoder that achieves 3360x temporal downsampling (vs. 2048x in prior work) while supporting both continuous and discrete latent representations in a single unified model. The approach delivers 10x faster encoding and 1.6x lower latent rates compared to reconstruction-first alternatives, eliminating the need for separate architectures across different audio formats while maintaining competitive reconstruction quality. This architectural paradigm shift enables previously impractical applications by fundamentally improving the efficiency-quality tradeoff critical for large-scale generative audio modeling and real-time conditioning pipelines.", "https://arxiv.org/abs/2602.15749")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15156" style="color:#4ea8ff;">Panini: Continual Learning in Token Space via Structured Memory</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 32</span></div>
+  <p>Panini introduces a continual learning framework that replaces traditional RAG's inefficient document retrieval with Generative Semantic Workspaces (GSW)—structured semantic memory that consolidates new documents into an entity and event-aware network while keeping the base model frozen. This approach reduces redundant reasoning over repeated documents and mitigates irrelevant context injection, improving both computational efficiency and generation fidelity during inference. The method demonstrates a human-like learning paradigm where knowledge accumulation happens externally through semantic consolidation rather than through parametric model updates.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Panini: Continual Learning in Token Space via Structured Memory", "Panini introduces a continual learning framework that replaces traditional RAG's inefficient document retrieval with Generative Semantic Workspaces (GSW)—structured semantic memory that consolidates new documents into an entity and event-aware network while keeping the base model frozen. This approach reduces redundant reasoning over repeated documents and mitigates irrelevant context injection, improving both computational efficiency and generation fidelity during inference. The method demonstrates a human-like learning paradigm where knowledge accumulation happens externally through semantic consolidation rather than through parametric model updates.", "https://arxiv.org/abs/2602.15156")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
