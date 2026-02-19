@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-19</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-19</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16334" style="color:#4ea8ff;">Spatial Audio Question Answering and Reasoning on Dynamic Source Movements</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>This work addresses spatial audio understanding by introducing a movement-centric data augmentation framework that synthesizes dynamic source trajectories from mono audio, enabling scalable training for motion reasoning tasks. The authors propose an end-to-end multimodal approach with explicit intermediate reasoning steps (chain-of-thought style) to help audio-language models answer questions about object positions and directional changes from stereo audio. The study evaluates query-conditioned source separation as a preprocessing technique, suggesting practical pathways for improving spatial audio QA systems through better audio grounding and masking strategies.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Spatial Audio Question Answering and Reasoning on Dynamic Source Movements", "This work addresses spatial audio understanding by introducing a movement-centric data augmentation framework that synthesizes dynamic source trajectories from mono audio, enabling scalable training for motion reasoning tasks. The authors propose an end-to-end multimodal approach with explicit intermediate reasoning steps (chain-of-thought style) to help audio-language models answer questions about object positions and directional changes from stereo audio. The study evaluates query-conditioned source separation as a preprocessing technique, suggesting practical pathways for improving spatial audio QA systems through better audio grounding and masking strategies.", "https://arxiv.org/abs/2602.16334")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15866" style="color:#4ea8ff;">NLP Privacy Risk Identification in Social Media (NLP-PRISM): A Survey</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This survey introduces NLP-PRISM, a comprehensive framework evaluating privacy vulnerabilities across six dimensions (data collection, preprocessing, visibility, fairness, computational risk, and regulatory compliance) in social media NLP applications that frequently process PII and behavioral data. The analysis of 203 papers reveals a critical performance-privacy tradeoff: transformer models drop 1-23% in F1-score when privacy-preserving fine-tuning is applied, establishing baseline degradation metrics for practitioners. The framework systematically maps privacy risks across six common NLP tasks, providing researchers and developers with actionable vulnerability assessment methodology for building privacy-aware social media analytics systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "NLP Privacy Risk Identification in Social Media (NLP-PRISM): A Survey", "This survey introduces NLP-PRISM, a comprehensive framework evaluating privacy vulnerabilities across six dimensions (data collection, preprocessing, visibility, fairness, computational risk, and regulatory compliance) in social media NLP applications that frequently process PII and behavioral data. The analysis of 203 papers reveals a critical performance-privacy tradeoff: transformer models drop 1-23% in F1-score when privacy-preserving fine-tuning is applied, establishing baseline degradation metrics for practitioners. The framework systematically maps privacy risks across six common NLP tasks, providing researchers and developers with actionable vulnerability assessment methodology for building privacy-aware social media analytics systems.", "https://arxiv.org/abs/2602.15866")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15875" style="color:#4ea8ff;">Fly0: Decoupling Semantic Grounding from Geometric Planning for Zero-Shot Aerial Navigation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Fly0 decouples semantic understanding from control by using MLLMs for high-level instruction grounding to 2D coordinates, then offloading geometric planning to a dedicated depth-based 3D localization and trajectory generation pipeline—eliminating the latency and instability of end-to-end MLLM control. This modular architecture enables zero-shot aerial navigation with robustness to visual occlusion and reduced computational overhead through single-pass semantic inference rather than continuous model deployment.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Fly0: Decoupling Semantic Grounding from Geometric Planning for Zero-Shot Aerial Navigation", "Fly0 decouples semantic understanding from control by using MLLMs for high-level instruction grounding to 2D coordinates, then offloading geometric planning to a dedicated depth-based 3D localization and trajectory generation pipeline—eliminating the latency and instability of end-to-end MLLM control. This modular architecture enables zero-shot aerial navigation with robustness to visual occlusion and reduced computational overhead through single-pass semantic inference rather than continuous model deployment.", "https://arxiv.org/abs/2602.15875")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15882" style="color:#4ea8ff;">FUTURE-VLA: Forecasting Unified Trajectories Under Real-time Execution</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>FUTURE-VLA addresses the real-time deployment challenge for vision-language models on robots by unifying long-horizon control and future forecasting into a single sequence-generation task, using temporally adaptive compression to maintain constant inference latency despite processing extensive multi-view histories. The key innovation is latent-space autoregression that simultaneously predicts actionable robot dynamics and visual future states in one forward pass, enabling prediction-guided human-in-the-loop control without the typical latency bottleneck of processing long video contexts. This approach is particularly significant for embodied AI systems requiring real-time decision-making, as it decouples inference cost from history length through intelligent spatiotemporal compression rather than naive token reduction.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FUTURE-VLA: Forecasting Unified Trajectories Under Real-time Execution", "FUTURE-VLA addresses the real-time deployment challenge for vision-language models on robots by unifying long-horizon control and future forecasting into a single sequence-generation task, using temporally adaptive compression to maintain constant inference latency despite processing extensive multi-view histories. The key innovation is latent-space autoregression that simultaneously predicts actionable robot dynamics and visual future states in one forward pass, enabling prediction-guided human-in-the-loop control without the typical latency bottleneck of processing long video contexts. This approach is particularly significant for embodied AI systems requiring real-time decision-making, as it decouples inference cost from history length through intelligent spatiotemporal compression rather than naive token reduction.", "https://arxiv.org/abs/2602.15882")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.15909" style="color:#4ea8ff;">Resp-Agent: An Agent-Based System for Multimodal Respiratory Sound Generation and Disease Diagnosis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Resp-Agent introduces an agent-based framework addressing critical limitations in respiratory disease diagnosis by combining an Active Adversarial Curriculum Agent that dynamically identifies diagnostic weaknesses and schedules targeted data synthesis, with a Modality-Weaving Diagnoser that fuses EHR data and raw audio tokens via Strategic Global Attention to preserve transient acoustic events lost in spectrogram conversion. The system tackles both information loss (through multimodal fusion preserving millisecond-level details) and severe class imbalance (via adaptive Flow Matching generation), moving beyond static pipelines to a closed-loop learning approach that could significantly improve robustness in clinical respiratory auscultation tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Resp-Agent: An Agent-Based System for Multimodal Respiratory Sound Generation and Disease Diagnosis", "Resp-Agent introduces an agent-based framework addressing critical limitations in respiratory disease diagnosis by combining an Active Adversarial Curriculum Agent that dynamically identifies diagnostic weaknesses and schedules targeted data synthesis, with a Modality-Weaving Diagnoser that fuses EHR data and raw audio tokens via Strategic Global Attention to preserve transient acoustic events lost in spectrogram conversion. The system tackles both information loss (through multimodal fusion preserving millisecond-level details) and severe class imbalance (via adaptive Flow Matching generation), moving beyond static pipelines to a closed-loop learning approach that could significantly improve robustness in clinical respiratory auscultation tasks.", "https://arxiv.org/abs/2602.15909")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16019" style="color:#4ea8ff;">MedProbCLIP: Probabilistic Adaptation of Vision-Language Foundation Model for Reliable Radiograph-Report Retrieval</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MedProbCLIP extends vision-language foundation models (like CLIP) to medical imaging by replacing deterministic embeddings with probabilistic Gaussian representations, enabling uncertainty quantification and many-to-many correspondences between chest X-rays and radiology reports. The framework uses variational information bottlenecks to prevent overconfident predictions and incorporates multi-view image/multi-section text encoding for clinically-aligned fine-grained supervision, directly addressing reliability concerns critical for high-stakes biomedical applications. This probabilistic approach enables more robust retrieval systems that can express confidence in radiograph-report matches—essential for clinical deployment where false positives carry significant diagnostic risk.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MedProbCLIP: Probabilistic Adaptation of Vision-Language Foundation Model for Reliable Radiograph-Report Retrieval", "MedProbCLIP extends vision-language foundation models (like CLIP) to medical imaging by replacing deterministic embeddings with probabilistic Gaussian representations, enabling uncertainty quantification and many-to-many correspondences between chest X-rays and radiology reports. The framework uses variational information bottlenecks to prevent overconfident predictions and incorporates multi-view image/multi-section text encoding for clinically-aligned fine-grained supervision, directly addressing reliability concerns critical for high-stakes biomedical applications. This probabilistic approach enables more robust retrieval systems that can express confidence in radiograph-report matches—essential for clinical deployment where false positives carry significant diagnostic risk.", "https://arxiv.org/abs/2602.16019")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16430" style="color:#4ea8ff;">Designing Production-Scale OCR for India: Multilingual and Domain-Specific Systems</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 62</span></div>
+  <p>This paper presents Chitrapathak, a production-scale OCR system optimized for Indian languages, demonstrating that fine-tuning existing OCR models outperforms training multilingual vision-language models from scratch in achieving superior accuracy-latency trade-offs. Key finding: the fine-tuning approach yields 3-6x speedup improvements while achieving state-of-the-art results on Indic language benchmarks (notably 6.69 char ANLS for Telugu), suggesting that transfer learning from non-target language OCR models is more practical for low-resource language deployment than end-to-end multimodal training.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Designing Production-Scale OCR for India: Multilingual and Domain-Specific Systems", "This paper presents Chitrapathak, a production-scale OCR system optimized for Indian languages, demonstrating that fine-tuning existing OCR models outperforms training multilingual vision-language models from scratch in achieving superior accuracy-latency trade-offs. Key finding: the fine-tuning approach yields 3-6x speedup improvements while achieving state-of-the-art results on Indic language benchmarks (notably 6.69 char ANLS for Telugu), suggesting that transfer learning from non-target language OCR models is more practical for low-resource language deployment than end-to-end multimodal training.", "https://arxiv.org/abs/2602.16430")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.00074" style="color:#4ea8ff;">Language and Experience: A Computational Model of Social Learning in Complex Tasks</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#f59e0b;">⚡ 42</span></div>
+  <p>This paper presents a probabilistic framework that models social learning by performing Bayesian inference over executable world models using both sensorimotor and linguistic inputs, leveraging a pretrained language model as a prior over human advice-giving behavior. The approach enables agents to both generate and interpret linguistic guidance, demonstrating across 10 video games that language can substantially reduce exploration risk and accelerate learning discovery in both humans and AI systems. The work bridges computational cognitive science and AI by formalizing how humans integrate social information with direct experience—a capability critical for safe, sample-efficient learning in novel environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Language and Experience: A Computational Model of Social Learning in Complex Tasks", "This paper presents a probabilistic framework that models social learning by performing Bayesian inference over executable world models using both sensorimotor and linguistic inputs, leveraging a pretrained language model as a prior over human advice-giving behavior. The approach enables agents to both generate and interpret linguistic guidance, demonstrating across 10 video games that language can substantially reduce exploration risk and accelerate learning discovery in both humans and AI systems. The work bridges computational cognitive science and AI by formalizing how humans integrate social information with direct experience—a capability critical for safe, sample-efficient learning in novel environments.", "https://arxiv.org/abs/2509.00074")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2409.17091" style="color:#4ea8ff;">Ctrl-GenAug: Controllable Generative Augmentation for Medical Sequence Classification</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Ctrl-GenAug addresses critical limitations in medical sequence generation by combining diffusion-based synthesis with multimodal conditioning and quality filtering mechanisms to produce semantically coherent and sequentially valid augmented data for video/3D sequence classification. The framework introduces controllable generation capabilities that previous approaches lacked, alongside sample validation to eliminate noisy synthetic data, directly improving downstream medical recognition performance despite limited annotated datasets. This represents a practical advancement for data-scarce medical domains where both generation fidelity and semantic consistency are essential for reliable model training.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Ctrl-GenAug: Controllable Generative Augmentation for Medical Sequence Classification", "Ctrl-GenAug addresses critical limitations in medical sequence generation by combining diffusion-based synthesis with multimodal conditioning and quality filtering mechanisms to produce semantically coherent and sequentially valid augmented data for video/3D sequence classification. The framework introduces controllable generation capabilities that previous approaches lacked, alongside sample validation to eliminate noisy synthetic data, directly improving downstream medical recognition performance despite limited annotated datasets. This represents a practical advancement for data-scarce medical domains where both generation fidelity and semantic consistency are essential for reliable model training.", "https://arxiv.org/abs/2409.17091")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2505.12707" style="color:#4ea8ff;">PLAICraft: Large-Scale Time-Aligned Vision-Speech-Action Dataset for Embodied AI</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>PLAICraft introduces a large-scale, time-aligned multimodal dataset of 10,000+ hours from 10,000+ Minecraft players capturing synchronized video, game audio, speech, and input actions with millisecond precision—enabling training of embodied AI agents that understand real-time sensorimotor coordination in complex, interactive environments. The platform's novel contribution lies in its five-modality temporal alignment and real-world social interaction dynamics, addressing a critical gap in datasets needed for training human-level embodied agents. This infrastructure could accelerate development of multimodal foundation models for embodied AI by providing the synchronous sensory-motor complexity previously unavailable at scale.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PLAICraft: Large-Scale Time-Aligned Vision-Speech-Action Dataset for Embodied AI", "PLAICraft introduces a large-scale, time-aligned multimodal dataset of 10,000+ hours from 10,000+ Minecraft players capturing synchronized video, game audio, speech, and input actions with millisecond precision—enabling training of embodied AI agents that understand real-time sensorimotor coordination in complex, interactive environments. The platform's novel contribution lies in its five-modality temporal alignment and real-world social interaction dynamics, addressing a critical gap in datasets needed for training human-level embodied agents. This infrastructure could accelerate development of multimodal foundation models for embodied AI by providing the synchronous sensory-motor complexity previously unavailable at scale.", "https://arxiv.org/abs/2505.12707")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2506.08822" style="color:#4ea8ff;">FreqPolicy: Efficient Flow-based Visuomotor Policy via Frequency Consistency</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>FreqPolicy addresses the critical inference latency bottleneck in flow-based visuomotor policies by introducing frequency consistency constraints that enforce temporal coherence in generated action trajectories—enabling single-step sampling instead of multi-step diffusion while preserving the multimodal action distribution modeling needed for robotic manipulation. This approach fundamentally differs from adapted image generation acceleration techniques by explicitly accounting for temporal dependencies between sequential robot actions, offering practical real-time performance gains for robotic systems without sacrificing action quality or diversity.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "FreqPolicy: Efficient Flow-based Visuomotor Policy via Frequency Consistency", "FreqPolicy addresses the critical inference latency bottleneck in flow-based visuomotor policies by introducing frequency consistency constraints that enforce temporal coherence in generated action trajectories—enabling single-step sampling instead of multi-step diffusion while preserving the multimodal action distribution modeling needed for robotic manipulation. This approach fundamentally differs from adapted image generation acceleration techniques by explicitly accounting for temporal dependencies between sequential robot actions, offering practical real-time performance gains for robotic systems without sacrificing action quality or diversity.", "https://arxiv.org/abs/2506.08822")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16019" style="color:#4ea8ff;">MedProbCLIP: Probabilistic Adaptation of Vision-Language Foundation Model for Reliable Radiograph-Report Retrieval</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>MedProbCLIP extends CLIP-style vision-language models for medical imaging by replacing deterministic embeddings with probabilistic Gaussian representations that capture uncertainty—critical for high-stakes clinical applications where confidence estimates matter. The framework uses variational information bottleneck regularization and multi-view/multi-section encoding to learn fine-grained correspondences between radiographs and reports while modeling many-to-many relationships, addressing the inherent ambiguity in radiology-text matching. This approach could significantly improve retrieval reliability and calibration in biomedical multimodal systems where overconfident predictions pose clinical risks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MedProbCLIP: Probabilistic Adaptation of Vision-Language Foundation Model for Reliable Radiograph-Report Retrieval", "MedProbCLIP extends CLIP-style vision-language models for medical imaging by replacing deterministic embeddings with probabilistic Gaussian representations that capture uncertainty—critical for high-stakes clinical applications where confidence estimates matter. The framework uses variational information bottleneck regularization and multi-view/multi-section encoding to learn fine-grained correspondences between radiographs and reports while modeling many-to-many relationships, addressing the inherent ambiguity in radiology-text matching. This approach could significantly improve retrieval reliability and calibration in biomedical multimodal systems where overconfident predictions pose clinical risks.", "https://arxiv.org/abs/2602.16019")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16132" style="color:#4ea8ff;">CHAI: CacHe Attention Inference for text2video</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>CHAI introduces Cache Attention, a novel cross-inference caching mechanism that enables text-to-video diffusion models to reuse latent representations across semantically related prompts, achieving 1.65-3.35x speedup over baseline OpenSora 1.2 while maintaining quality with as few as 8 denoising steps. The key innovation is a selective attention mechanism that maximizes cache hit rates by identifying and attending to shared objects/scenes across inference calls, bypassing expensive model retraining while avoiding quality degradation from naive step-skipping heuristics. This approach is particularly significant for production video generation systems where batch processing similar prompts is common.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CHAI: CacHe Attention Inference for text2video", "CHAI introduces Cache Attention, a novel cross-inference caching mechanism that enables text-to-video diffusion models to reuse latent representations across semantically related prompts, achieving 1.65-3.35x speedup over baseline OpenSora 1.2 while maintaining quality with as few as 8 denoising steps. The key innovation is a selective attention mechanism that maximizes cache hit rates by identifying and attending to shared objects/scenes across inference calls, bypassing expensive model retraining while avoiding quality degradation from naive step-skipping heuristics. This approach is particularly significant for production video generation systems where batch processing similar prompts is common.", "https://arxiv.org/abs/2602.16132")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16160" style="color:#4ea8ff;">Uncertainty-Guided Inference-Time Depth Adaptation for Transformer-Based Visual Tracking</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 62</span></div>
+  <p>UncL-STARK introduces dynamic depth adaptation for transformer-based visual trackers, allowing variable encoder-decoder truncation at inference time based on frame uncertainty rather than executing full-depth processing on every frame. The approach uses random-depth training with knowledge distillation to ensure robustness at intermediate depths, while deriving lightweight uncertainty estimates directly from corner localization heatmaps to guide a feedback-driven depth selection policy. This architecture-preserving method delivers computational efficiency gains on temporally coherent video sequences without modifying the underlying tracker network or adding auxiliary components.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Uncertainty-Guided Inference-Time Depth Adaptation for Transformer-Based Visual Tracking", "UncL-STARK introduces dynamic depth adaptation for transformer-based visual trackers, allowing variable encoder-decoder truncation at inference time based on frame uncertainty rather than executing full-depth processing on every frame. The approach uses random-depth training with knowledge distillation to ensure robustness at intermediate depths, while deriving lightweight uncertainty estimates directly from corner localization heatmaps to guide a feedback-driven depth selection policy. This architecture-preserving method delivers computational efficiency gains on temporally coherent video sequences without modifying the underlying tracker network or adding auxiliary components.", "https://arxiv.org/abs/2602.16160")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.16412" style="color:#4ea8ff;">ReMoRa: Multimodal Large Language Model based on Refined Motion Representation for Long-Video Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-19
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>ReMoRa addresses long-form video understanding in MLLMs by replacing dense RGB frame processing with a hybrid approach: sparse keyframes for appearance information paired with refined motion representations that act as lightweight optical flow proxies, eliminating quadratic self-attention complexity. The key innovation is a denoising module that improves block-based motion quality, enabling efficient temporal dynamics capture without full frame decoding—a crucial efficiency gain for scaling MLLMs to longer videos.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ReMoRa: Multimodal Large Language Model based on Refined Motion Representation for Long-Video Understanding", "ReMoRa addresses long-form video understanding in MLLMs by replacing dense RGB frame processing with a hybrid approach: sparse keyframes for appearance information paired with refined motion representations that act as lightweight optical flow proxies, eliminating quadratic self-attention complexity. The key innovation is a denoising module that improves block-based motion quality, enabling efficient temporal dynamics capture without full frame decoding—a crucial efficiency gain for scaling MLLMs to longer videos.", "https://arxiv.org/abs/2602.16412")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
