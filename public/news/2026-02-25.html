@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-25</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-25</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20981" style="color:#4ea8ff;">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>This paper introduces MMHNet, a hierarchical video-to-audio generation model that enables length generalization by combining hierarchical processing with non-causal Mamba, allowing models trained on short sequences to generate coherent audio exceeding 5 minutes without exposure to long training data. The approach addresses the multimodal alignment challenge in video-to-audio synthesis by decoupling training and testing sequence lengths, demonstrating that architectural innovations can overcome data scarcity constraints in cross-modal generation tasks. For practitioners, this suggests that length generalization is achievable through structural design rather than simply scaling datasets, with practical implications for generating extended audiovisual content.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models", "This paper introduces MMHNet, a hierarchical video-to-audio generation model that enables length generalization by combining hierarchical processing with non-causal Mamba, allowing models trained on short sequences to generate coherent audio exceeding 5 minutes without exposure to long training data. The approach addresses the multimodal alignment challenge in video-to-audio synthesis by decoupling training and testing sequence lengths, demonstrating that architectural innovations can overcome data scarcity constraints in cross-modal generation tasks. For practitioners, this suggests that length generalization is achievable through structural design rather than simply scaling datasets, with practical implications for generating extended audiovisual content.", "https://arxiv.org/abs/2602.20981")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.00037" style="color:#4ea8ff;">On Robustness of Vision-Language-Action Model against Multi-Modal Perturbations</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper systematically evaluates Vision-Language-Action (VLA) models across 17 multi-modal perturbations, revealing that actions are the most vulnerable modality while existing visual robustness techniques don't transfer to other modalities. The authors propose RobustVLA, which uses offline robust optimization with worst-case action noise adversarial training on flow matching objectives combined with input consistency enforcement to build genuinely multi-modal robust VLAs for real-world deployment. This work is significant for robotics and embodied AI practitioners, as it addresses a critical gap between lab conditions and production robustness across all input/output modalities rather than just vision.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "On Robustness of Vision-Language-Action Model against Multi-Modal Perturbations", "This paper systematically evaluates Vision-Language-Action (VLA) models across 17 multi-modal perturbations, revealing that actions are the most vulnerable modality while existing visual robustness techniques don't transfer to other modalities. The authors propose RobustVLA, which uses offline robust optimization with worst-case action noise adversarial training on flow matching objectives combined with input consistency enforcement to build genuinely multi-modal robust VLAs for real-world deployment. This work is significant for robotics and embodied AI practitioners, as it addresses a critical gap between lab conditions and production robustness across all input/output modalities rather than just vision.", "https://arxiv.org/abs/2510.00037")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20913" style="color:#4ea8ff;">LongVideo-R1: Smart Navigation for Low-cost Long Video Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>LongVideo-R1 introduces an active reasoning-equipped MLLM agent that efficiently navigates long videos under computational constraints by using hierarchical visual summaries to intelligently select informative clips rather than processing entire videos exhaustively. The approach employs a chain-of-thought reasoning module trained on 33K synthetic trajectories derived from CGBench, enabling iterative refinement and early stopping once sufficient context is acquired to answer queries. This addresses a critical gap in video understanding by balancing task accuracy with computational efficiency—particularly valuable for deployment scenarios with restricted budgets.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "LongVideo-R1: Smart Navigation for Low-cost Long Video Understanding", "LongVideo-R1 introduces an active reasoning-equipped MLLM agent that efficiently navigates long videos under computational constraints by using hierarchical visual summaries to intelligently select informative clips rather than processing entire videos exhaustively. The approach employs a chain-of-thought reasoning module trained on 33K synthetic trajectories derived from CGBench, enabling iterative refinement and early stopping once sufficient context is acquired to answer queries. This addresses a critical gap in video understanding by balancing task accuracy with computational efficiency—particularly valuable for deployment scenarios with restricted budgets.", "https://arxiv.org/abs/2602.20913")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20981" style="color:#4ea8ff;">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>This paper addresses length generalization in video-to-audio generation by introducing MMHNet, which combines hierarchical networks with non-causal Mamba architecture to enable models trained on short sequences to generalize to 5+ minute long-form audio at test time. The key innovation is demonstrating that effective video-audio alignment can scale beyond training distribution through architectural design rather than requiring longer training data, which has significant implications for reducing data requirements in multimodal generation tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models", "This paper addresses length generalization in video-to-audio generation by introducing MMHNet, which combines hierarchical networks with non-causal Mamba architecture to enable models trained on short sequences to generalize to 5+ minute long-form audio at test time. The key innovation is demonstrating that effective video-audio alignment can scale beyond training distribution through architectural design rather than requiring longer training data, which has significant implications for reducing data requirements in multimodal generation tasks.", "https://arxiv.org/abs/2602.20981")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21137" style="color:#4ea8ff;">UDVideoQA: A Traffic Video Question Answering Dataset for Multi-Object Spatio-Temporal Reasoning in Urban Dynamics</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>UDVideoQA introduces a 28K QA-pair dataset from 16 hours of real traffic footage with hierarchical reasoning tasks spanning visual grounding to counterfactual inference, addressing the gap in multi-agent spatio-temporal understanding for video language models. The dataset employs event-driven dynamic blur for privacy preservation and densely annotates one question per second across diverse urban conditions, enabling systematic evaluation of causal reasoning capabilities beyond basic visual recognition. This benchmark targets a critical limitation in current VLMs—their inability to reason about complex interactive dynamics in unscripted real-world scenes—making it essential for developing traffic prediction and autonomous system evaluation applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "UDVideoQA: A Traffic Video Question Answering Dataset for Multi-Object Spatio-Temporal Reasoning in Urban Dynamics", "UDVideoQA introduces a 28K QA-pair dataset from 16 hours of real traffic footage with hierarchical reasoning tasks spanning visual grounding to counterfactual inference, addressing the gap in multi-agent spatio-temporal understanding for video language models. The dataset employs event-driven dynamic blur for privacy preservation and densely annotates one question per second across diverse urban conditions, enabling systematic evaluation of causal reasoning capabilities beyond basic visual recognition. This benchmark targets a critical limitation in current VLMs—their inability to reason about complex interactive dynamics in unscripted real-world scenes—making it essential for developing traffic prediction and autonomous system evaluation applications.", "https://arxiv.org/abs/2602.21137")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.00037" style="color:#4ea8ff;">On Robustness of Vision-Language-Action Model against Multi-Modal Perturbations</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>This paper addresses a critical gap in VLA model robustness by systematically evaluating 17 perturbations across vision, language, action, and environment modalities, revealing that actions are the most vulnerable modality and existing visual robustness methods don't transfer across modalities. The authors propose RobustVLA, which combines offline adversarial optimization against worst-case action noise in the flow matching objective with input-level consistency enforcement, effectively combining adversarial training, label smoothing, and outlier penalization techniques. This work has significant implications for real-world robotic deployment where multi-modal noise is unavoidable, moving beyond narrow visual robustness toward comprehensive end-to-end perturbation resilience.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "On Robustness of Vision-Language-Action Model against Multi-Modal Perturbations", "This paper addresses a critical gap in VLA model robustness by systematically evaluating 17 perturbations across vision, language, action, and environment modalities, revealing that actions are the most vulnerable modality and existing visual robustness methods don't transfer across modalities. The authors propose RobustVLA, which combines offline adversarial optimization against worst-case action noise in the flow matching objective with input-level consistency enforcement, effectively combining adversarial training, label smoothing, and outlier penalization techniques. This work has significant implications for real-world robotic deployment where multi-modal noise is unavoidable, moving beyond narrow visual robustness toward comprehensive end-to-end perturbation resilience.", "https://arxiv.org/abs/2510.00037")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20624" style="color:#4ea8ff;">Physics-based phenomenological characterization of cross-modal bias in multimodal models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This position paper introduces a phenomenological framework for understanding cross-modal bias in multimodal LLMs by analyzing the physical entities and interactions models encounter during training/inference, rather than relying on traditional symbolic or metaphysical explanations. The authors argue that complex multimodal interaction dynamics create systematic, often invisible distortions that current algorithmic fairness metrics fail to capture, proposing physics-based characterization as a more grounded approach to explainability. The work bridges fairness evaluation with embodied AI perspectives, offering researchers a novel lens for debugging fairness issues in multimodal systems at the level of actual data representations rather than high-level abstractions.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Physics-based phenomenological characterization of cross-modal bias in multimodal models", "This position paper introduces a phenomenological framework for understanding cross-modal bias in multimodal LLMs by analyzing the physical entities and interactions models encounter during training/inference, rather than relying on traditional symbolic or metaphysical explanations. The authors argue that complex multimodal interaction dynamics create systematic, often invisible distortions that current algorithmic fairness metrics fail to capture, proposing physics-based characterization as a more grounded approach to explainability. The work bridges fairness evaluation with embodied AI perspectives, offering researchers a novel lens for debugging fairness issues in multimodal systems at the level of actual data representations rather than high-level abstractions.", "https://arxiv.org/abs/2602.20624")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20739" style="color:#4ea8ff;">PyVision-RL: Forging Open Agentic Vision Models via RL</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>PyVision-RL addresses the critical "interaction collapse" problem in agentic multimodal models by introducing an oversampling-filtering-ranking rollout strategy paired with accumulative tool rewards, preventing models from abandoning multi-turn reasoning and tool usage during RL training. The framework extends to video understanding via on-demand context construction—selectively sampling task-relevant frames to reduce visual tokens while maintaining reasoning quality—enabling both stronger performance and improved computational efficiency in open-weight multimodal agents.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PyVision-RL: Forging Open Agentic Vision Models via RL", "PyVision-RL addresses the critical \"interaction collapse\" problem in agentic multimodal models by introducing an oversampling-filtering-ranking rollout strategy paired with accumulative tool rewards, preventing models from abandoning multi-turn reasoning and tool usage during RL training. The framework extends to video understanding via on-demand context construction—selectively sampling task-relevant frames to reduce visual tokens while maintaining reasoning quality—enabling both stronger performance and improved computational efficiency in open-weight multimodal agents.", "https://arxiv.org/abs/2602.20739")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.12815" style="color:#4ea8ff;">Multimodal Multi-Agent Empowered Legal Judgment Prediction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>JurisMMA introduces a multi-agent framework that decomposes legal judgment prediction into distinct task stages, moving beyond traditional statistical methods to handle complex multi-allegation cases with improved adaptability. The accompanying JurisMM dataset (100K+ Chinese judicial records with multimodal video-text data) enables evaluation of this approach, with experiments validating effectiveness on both this dataset and the LawBench benchmark. This work establishes a new paradigm for legal AI systems by incorporating multimodal evidence processing and agent-based task decomposition, extending beyond judgment prediction to broader legal applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multimodal Multi-Agent Empowered Legal Judgment Prediction", "JurisMMA introduces a multi-agent framework that decomposes legal judgment prediction into distinct task stages, moving beyond traditional statistical methods to handle complex multi-allegation cases with improved adaptability. The accompanying JurisMM dataset (100K+ Chinese judicial records with multimodal video-text data) enables evaluation of this approach, with experiments validating effectiveness on both this dataset and the LawBench benchmark. This work establishes a new paradigm for legal AI systems by incorporating multimodal evidence processing and agent-based task decomposition, extending beyond judgment prediction to broader legal applications.", "https://arxiv.org/abs/2601.12815")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20210" style="color:#4ea8ff;">Multimodal Crystal Flow: Any-to-Any Modality Generation for Unified Crystal Modeling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#6b7280;">⚡ 22</span></div>
+  <p>Multimodal Crystal Flow introduces a unified flow-based generative model that consolidates disparate crystal generation tasks (structure prediction, *de novo* generation) into a single framework by decoupling atom type and structural evolution through independent time variables. The key innovation is a composition- and symmetry-aware atom ordering with hierarchical permutation augmentation that embeds crystallographic priors directly into a standard transformer architecture, eliminating the need for explicit structural templates while maintaining physical constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multimodal Crystal Flow: Any-to-Any Modality Generation for Unified Crystal Modeling", "Multimodal Crystal Flow introduces a unified flow-based generative model that consolidates disparate crystal generation tasks (structure prediction, *de novo* generation) into a single framework by decoupling atom type and structural evolution through independent time variables. The key innovation is a composition- and symmetry-aware atom ordering with hierarchical permutation augmentation that embeds crystallographic priors directly into a standard transformer architecture, eliminating the need for explicit structural templates while maintaining physical constraints.", "https://arxiv.org/abs/2602.20210")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20219" style="color:#4ea8ff;">An Approach to Combining Video and Speech with Large Language Models in Human-Robot Interaction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This work presents a multimodal HRI system integrating Florence-2 vision models, Llama 3.1 LLM, and Whisper speech recognition with fuzzy logic to enable voice-controlled robotic manipulation, achieving 75% command execution accuracy on consumer hardware. The key innovation is joint optimization of scene perception and action planning to improve intent interpretation reliability, demonstrating practical feasibility of multimodal LLM pipelines for real-world robotics applications. This approach suggests that combining specialized models (vision, language, speech) with classical logic frameworks can bridge the gap between advanced AI capabilities and robust, affordable robotic systems without requiring high-end computational resources.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "An Approach to Combining Video and Speech with Large Language Models in Human-Robot Interaction", "This work presents a multimodal HRI system integrating Florence-2 vision models, Llama 3.1 LLM, and Whisper speech recognition with fuzzy logic to enable voice-controlled robotic manipulation, achieving 75% command execution accuracy on consumer hardware. The key innovation is joint optimization of scene perception and action planning to improve intent interpretation reliability, demonstrating practical feasibility of multimodal LLM pipelines for real-world robotics applications. This approach suggests that combining specialized models (vision, language, speech) with classical logic frameworks can bridge the gap between advanced AI capabilities and robust, affordable robotic systems without requiring high-end computational resources.", "https://arxiv.org/abs/2602.20219")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20317" style="color:#4ea8ff;">Fast Spectrogram Event Extraction via Offline Self-Supervised Learning: From Fusion Diagnostics to Bioacoustics</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Researchers developed a self-supervised learning framework for automated extraction of coherent and transient modes from multi-diagnostic spectrograms in fusion tokamaks, addressing the data bottleneck at next-generation facilities like ITER through a "signals-first" approach using non-linear optimal techniques and neural network surrogates. The method achieves 0.5-second inference latency across diverse sensor modalities (fast magnetics, ECE, interferometry, BES), enabling real-time plasma mode identification and scalable database generation for advanced control systems. The framework's general-purpose design demonstrates cross-facility transferability (DIII-D, TJ-II) and applicability beyond fusion to bioacoustics, making it relevant for any high-noise, multi-channel time-frequency analysis problem.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Fast Spectrogram Event Extraction via Offline Self-Supervised Learning: From Fusion Diagnostics to Bioacoustics", "Researchers developed a self-supervised learning framework for automated extraction of coherent and transient modes from multi-diagnostic spectrograms in fusion tokamaks, addressing the data bottleneck at next-generation facilities like ITER through a \"signals-first\" approach using non-linear optimal techniques and neural network surrogates. The method achieves 0.5-second inference latency across diverse sensor modalities (fast magnetics, ECE, interferometry, BES), enabling real-time plasma mode identification and scalable database generation for advanced control systems. The framework's general-purpose design demonstrates cross-facility transferability (DIII-D, TJ-II) and applicability beyond fusion to bioacoustics, making it relevant for any high-noise, multi-channel time-frequency analysis problem.", "https://arxiv.org/abs/2602.20317")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20980" style="color:#4ea8ff;">CrystaL: Spontaneous Emergence of Visual Latents in MLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>CrystaL introduces a novel single-stage framework for MLLMs that crystallizes visual latent representations by processing parallel paths of intact and corrupted images, using attention pattern alignment to preserve task-relevant visual semantics without auxiliary supervision. This approach improves upon existing latent Chain-of-Thought methods by explicitly optimizing what visual information flows through intermediate hidden states, enabling more efficient vision-language integration. The method's self-supervised design (no external annotations required) and single-stage architecture suggest practical advantages for training efficiency and inference speed in multimodal reasoning tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CrystaL: Spontaneous Emergence of Visual Latents in MLLMs", "CrystaL introduces a novel single-stage framework for MLLMs that crystallizes visual latent representations by processing parallel paths of intact and corrupted images, using attention pattern alignment to preserve task-relevant visual semantics without auxiliary supervision. This approach improves upon existing latent Chain-of-Thought methods by explicitly optimizing what visual information flows through intermediate hidden states, enabling more efficient vision-language integration. The method's self-supervised design (no external annotations required) and single-stage architecture suggest practical advantages for training efficiency and inference speed in multimodal reasoning tasks.", "https://arxiv.org/abs/2602.20980")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.24787" style="color:#4ea8ff;">HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning and Multi-Objective Preference Alignment</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 25</span></div>
+  <p>HiGR addresses critical inefficiencies in generative slate recommendation by introducing hierarchical planning (decoupling item tokenization and using efficient decoding) combined with listwise preference alignment to simultaneously optimize user satisfaction and business objectives. The framework leverages residual quantization and contrastive learning within an auto-encoder architecture to reduce inference overhead while improving semantic representation quality. This approach enables practical industrial deployment of generative recommendation systems by resolving the token entanglement and planning myopia that plagued prior autoregressive sequence models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "HiGR: Efficient Generative Slate Recommendation via Hierarchical Planning and Multi-Objective Preference Alignment", "HiGR addresses critical inefficiencies in generative slate recommendation by introducing hierarchical planning (decoupling item tokenization and using efficient decoding) combined with listwise preference alignment to simultaneously optimize user satisfaction and business objectives. The framework leverages residual quantization and contrastive learning within an auto-encoder architecture to reduce inference overhead while improving semantic representation quality. This approach enables practical industrial deployment of generative recommendation systems by resolving the token entanglement and planning myopia that plagued prior autoregressive sequence models.", "https://arxiv.org/abs/2512.24787")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20575" style="color:#4ea8ff;">An interactive enhanced driving dataset for autonomous driving</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-25
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper introduces IEDD, a large-scale interactive driving dataset addressing the critical gap in Vision-Language-Action (VLA) model development by mining million-level interactive scenarios from naturalistic driving data with strict multimodal alignment between BEV videos, semantic actions, and language annotations. The authors provide a scalable mining pipeline based on interactive trajectories and quantitative interaction metrics, plus an IEDD-VQA benchmark evaluating ten VLMs to measure reasoning capabilities essential for handling edge cases in autonomous driving. This work directly tackles multimodal dataset sparsity—a fundamental bottleneck limiting VLA model generalization—by ensuring semantic coherence across vision, language, and action modalities critical for interactive reasoning in real-world driving scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "An interactive enhanced driving dataset for autonomous driving", "This paper introduces IEDD, a large-scale interactive driving dataset addressing the critical gap in Vision-Language-Action (VLA) model development by mining million-level interactive scenarios from naturalistic driving data with strict multimodal alignment between BEV videos, semantic actions, and language annotations. The authors provide a scalable mining pipeline based on interactive trajectories and quantitative interaction metrics, plus an IEDD-VQA benchmark evaluating ten VLMs to measure reasoning capabilities essential for handling edge cases in autonomous driving. This work directly tackles multimodal dataset sparsity—a fundamental bottleneck limiting VLA model generalization—by ensuring semantic coherence across vision, language, and action modalities critical for interactive reasoning in real-world driving scenarios.", "https://arxiv.org/abs/2602.20575")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
