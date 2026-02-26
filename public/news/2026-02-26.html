@@ -1,0 +1,491 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-02-26</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-02-26</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21233" style="color:#4ea8ff;">AngelSlim: A more accessible, comprehensive, and efficient toolkit for large model compression</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>AngelSlim consolidates multiple compression techniques (quantization, speculative decoding, token pruning, distillation) into a unified toolkit that bridges research and industrial deployment, featuring innovations like HY-1.8B-int2 (the first production-viable 2-bit LLM) and FP8/INT8 PTQ algorithms. The toolkit introduces a training-aligned speculative decoding framework achieving 1.8-2.0x throughput gains on multimodal models without output degradation, plus training-free sparse attention mechanisms. This represents a significant step toward practical, cost-effective LLM inference at scale, particularly valuable for resource-constrained deployment scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AngelSlim: A more accessible, comprehensive, and efficient toolkit for large model compression", "AngelSlim consolidates multiple compression techniques (quantization, speculative decoding, token pruning, distillation) into a unified toolkit that bridges research and industrial deployment, featuring innovations like HY-1.8B-int2 (the first production-viable 2-bit LLM) and FP8/INT8 PTQ algorithms. The toolkit introduces a training-aligned speculative decoding framework achieving 1.8-2.0x throughput gains on multimodal models without output degradation, plus training-free sparse attention mechanisms. This represents a significant step toward practical, cost-effective LLM inference at scale, particularly valuable for resource-constrained deployment scenarios.", "https://arxiv.org/abs/2602.21233")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20981" style="color:#4ea8ff;">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>MMHNet addresses a critical scaling challenge in video-to-audio generation by enabling length generalization—models trained on short video-audio pairs can now synthesize coherent audio exceeding 5 minutes at test time through hierarchical processing and non-causal Mamba architectures. This approach bypasses the need for expensive long-form training data while maintaining temporal alignment, making practical long-form audiovisual synthesis more feasible for resource-constrained settings.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models", "MMHNet addresses a critical scaling challenge in video-to-audio generation by enabling length generalization—models trained on short video-audio pairs can now synthesize coherent audio exceeding 5 minutes at test time through hierarchical processing and non-causal Mamba architectures. This approach bypasses the need for expensive long-form training data while maintaining temporal alignment, making practical long-form audiovisual synthesis more feasible for resource-constrained settings.", "https://arxiv.org/abs/2602.20981")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21596" style="color:#4ea8ff;">A Hidden Semantic Bottleneck in Conditional Embeddings of Diffusion Transformers</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This work reveals a critical inefficiency in Diffusion Transformers' conditional embeddings: class and continuous conditions exhibit extreme angular similarity (&gt;99%) with semantic information concentrated in a minority of dimensions, creating a "semantic bottleneck." The authors demonstrate that two-thirds of the embedding space can be pruned without degradation—and sometimes with improved generation quality—suggesting current diffusion models dramatically overparameterize their conditioning mechanisms. This finding opens opportunities for more efficient model architectures and provides insights into how these models encode and utilize control signals during generation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Hidden Semantic Bottleneck in Conditional Embeddings of Diffusion Transformers", "This work reveals a critical inefficiency in Diffusion Transformers' conditional embeddings: class and continuous conditions exhibit extreme angular similarity (&gt;99%) with semantic information concentrated in a minority of dimensions, creating a \"semantic bottleneck.\" The authors demonstrate that two-thirds of the embedding space can be pruned without degradation—and sometimes with improved generation quality—suggesting current diffusion models dramatically overparameterize their conditioning mechanisms. This finding opens opportunities for more efficient model architectures and provides insights into how these models encode and utilize control signals during generation.", "https://arxiv.org/abs/2602.21596")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21760" style="color:#4ea8ff;">Accelerating Diffusion via Hybrid Data-Pipeline Parallelism Based on Conditional Guidance Scheduling</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper introduces a hybrid parallelism framework for accelerating diffusion model inference by partitioning data along conditional/unconditional denoising paths and dynamically switching between data and pipeline parallelism based on denoising discrepancy. The key innovation leverages the structural difference between guidance and non-guidance branches to optimize GPU utilization while maintaining generation quality, achieving 2.31× speedup with better artifact mitigation than existing distributed approaches. This addresses a critical bottleneck in diffusion model deployment—current scaling methods suffer from quality degradation and sublinear speedup, making this conditional guidance scheduling approach particularly relevant for production systems requiring both speed and fidelity.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Accelerating Diffusion via Hybrid Data-Pipeline Parallelism Based on Conditional Guidance Scheduling", "This paper introduces a hybrid parallelism framework for accelerating diffusion model inference by partitioning data along conditional/unconditional denoising paths and dynamically switching between data and pipeline parallelism based on denoising discrepancy. The key innovation leverages the structural difference between guidance and non-guidance branches to optimize GPU utilization while maintaining generation quality, achieving 2.31× speedup with better artifact mitigation than existing distributed approaches. This addresses a critical bottleneck in diffusion model deployment—current scaling methods suffer from quality degradation and sublinear speedup, making this conditional guidance scheduling approach particularly relevant for production systems requiring both speed and fidelity.", "https://arxiv.org/abs/2602.21760")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21818" style="color:#4ea8ff;">SkyReels-V4: Multi-modal Video-Audio Generation, Inpainting and Editing model</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 92</span></div>
+  <p>SkyReels-V4 introduces a dual-stream Multimodal Diffusion Transformer architecture that unifies video-audio generation, inpainting, and editing by sharing an MLLM-based text encoder while maintaining separate synthesis branches for temporally-aligned video and audio outputs. The model's key innovation is accepting rich multi-modal conditioning (text, images, video, masks, audio references) through in-context learning, enabling fine-grained visual guidance and audio-reference-aware sound synthesis simultaneously. This unified approach consolidates multiple video-audio tasks into a single foundation model, potentially reducing model fragmentation and enabling more coherent cross-modal content generation compared to separate pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SkyReels-V4: Multi-modal Video-Audio Generation, Inpainting and Editing model", "SkyReels-V4 introduces a dual-stream Multimodal Diffusion Transformer architecture that unifies video-audio generation, inpainting, and editing by sharing an MLLM-based text encoder while maintaining separate synthesis branches for temporally-aligned video and audio outputs. The model's key innovation is accepting rich multi-modal conditioning (text, images, video, masks, audio references) through in-context learning, enabling fine-grained visual guidance and audio-reference-aware sound synthesis simultaneously. This unified approach consolidates multiple video-audio tasks into a single foundation model, potentially reducing model fragmentation and enabling more coherent cross-modal content generation compared to separate pipelines.", "https://arxiv.org/abs/2602.21818")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.22142" style="color:#4ea8ff;">WeaveTime: Stream from Earlier Frames into Emergent Memory in VideoLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>WeaveTime addresses a critical limitation in Video-LLMs for streaming scenarios by introducing temporal order perception through a lightweight Temporal Reconstruction objective, enabling models to distinguish chronological sequence and differentiate present observations from historical context—problems that arise from treating videos as unordered evidence collections. The framework is model-agnostic and designed to overcome quadratic attention bottlenecks and offline-training constraints, making it practical for real-time sequential frame processing where future frames are unavailable. This represents a fundamental shift from treating video as static multi-modal input to handling it as causally-ordered temporal data, with significant implications for real-time video understanding and streaming applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "WeaveTime: Stream from Earlier Frames into Emergent Memory in VideoLLMs", "WeaveTime addresses a critical limitation in Video-LLMs for streaming scenarios by introducing temporal order perception through a lightweight Temporal Reconstruction objective, enabling models to distinguish chronological sequence and differentiate present observations from historical context—problems that arise from treating videos as unordered evidence collections. The framework is model-agnostic and designed to overcome quadratic attention bottlenecks and offline-training constraints, making it practical for real-time sequential frame processing where future frames are unavailable. This represents a fundamental shift from treating video as static multi-modal input to handling it as causally-ordered temporal data, with significant implications for real-time video understanding and streaming applications.", "https://arxiv.org/abs/2602.22142")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.01552" style="color:#4ea8ff;">Variation-aware Vision Token Dropping for Faster Large Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper introduces Variation-aware Vision Token Dropping, a dynamic compression method that exploits task-agnostic variation patterns in visual tokens to accelerate large vision-language models without architectural modifications. The key innovation addresses critical limitations of prior compression approaches—positional bias and incompatibility with efficient operators—by identifying which tokens contribute least to model performance based on inherent variation characteristics rather than task-specific criteria. This approach enables practical speedups for high-resolution and video processing in LVLMs, which are otherwise bottlenecked by exponentially growing token counts in the vision encoder pathway.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Variation-aware Vision Token Dropping for Faster Large Vision-Language Models", "This paper introduces Variation-aware Vision Token Dropping, a dynamic compression method that exploits task-agnostic variation patterns in visual tokens to accelerate large vision-language models without architectural modifications. The key innovation addresses critical limitations of prior compression approaches—positional bias and incompatibility with efficient operators—by identifying which tokens contribute least to model performance based on inherent variation characteristics rather than task-specific criteria. This approach enables practical speedups for high-resolution and video processing in LVLMs, which are otherwise bottlenecked by exponentially growing token counts in the vision encoder pathway.", "https://arxiv.org/abs/2509.01552")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.11910" style="color:#4ea8ff;">Seeing the Forest and the Trees: Query-Aware Tokenizer for Long-Video Multimodal Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>QTSplus addresses the quadratic attention complexity bottleneck in long-video MLLMs by introducing a query-aware token selection module that dynamically filters vision tokens based on text query complexity, using cross-attention scoring and differentiable top-k selection with learnable instance-specific retention budgets. This approach reduces memory and latency overhead while maintaining video understanding performance, enabling efficient processing of extended temporal content without the linear token explosion that previously plagued video multimodal models. The method's practical impact lies in making long-form video analysis computationally feasible for deployed MLLMs while maintaining end-to-end differentiability for training.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Seeing the Forest and the Trees: Query-Aware Tokenizer for Long-Video Multimodal Language Models", "QTSplus addresses the quadratic attention complexity bottleneck in long-video MLLMs by introducing a query-aware token selection module that dynamically filters vision tokens based on text query complexity, using cross-attention scoring and differentiable top-k selection with learnable instance-specific retention budgets. This approach reduces memory and latency overhead while maintaining video understanding performance, enabling efficient processing of extended temporal content without the linear token explosion that previously plagued video multimodal models. The method's practical impact lies in making long-form video analysis computationally feasible for deployed MLLMs while maintaining end-to-end differentiability for training.", "https://arxiv.org/abs/2511.11910")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.20981" style="color:#4ea8ff;">Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 88</span></div>
+  <p>**Summary:**
+
+MMHNet introduces hierarchical processing with non-causal Mamba architecture to enable video-to-audio models trained on short sequences to generalize to long-form generation (5+ minutes) without explicit long-duration training data. The approach addresses critical scaling bottlenecks in multimodal alignment by decoupling frame-level video information from text descriptions, demonstrating that length generalization is achievable through architectural innovations rather than massive dataset expansion.
+
+**Key implications:** This work reduces computational and data collection overhead for long-form audio synthesis while establishing a generalizable framework for handling temporal misalignment in multimodal generation tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Echoes Over Time: Unlocking Length Generalization in Video-to-Audio Generation Models", "**Summary:**\n\nMMHNet introduces hierarchical processing with non-causal Mamba architecture to enable video-to-audio models trained on short sequences to generalize to long-form generation (5+ minutes) without explicit long-duration training data. The approach addresses critical scaling bottlenecks in multimodal alignment by decoupling frame-level video information from text descriptions, demonstrating that length generalization is achievable through architectural innovations rather than massive dataset expansion.\n\n**Key implications:** This work reduces computational and data collection overhead for long-form audio synthesis while establishing a generalizable framework for handling temporal misalignment in multimodal generation tasks.", "https://arxiv.org/abs/2602.20981")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21222" style="color:#4ea8ff;">Task-Aware LoRA Adapter Composition via Similarity Retrieval in Vector Databases</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This paper introduces a dynamic LoRA adapter composition framework that uses vector database similarity retrieval to enable zero-shot generalization by retrieving semantically similar training examples and merging task-relevant adapters through weighted fusion strategies. The approach constructs task-aware embeddings across 22 diverse NLP datasets and evaluates multiple merging methods (Linear, Concatenation, TIES, Magnitude Prune) to determine optimal adapter combination. The key innovation lies in replacing fixed adapter selection with retrieval-weighted fusion, potentially reducing the need for dataset-specific fine-tuning while improving compositional generalization across unseen tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Task-Aware LoRA Adapter Composition via Similarity Retrieval in Vector Databases", "This paper introduces a dynamic LoRA adapter composition framework that uses vector database similarity retrieval to enable zero-shot generalization by retrieving semantically similar training examples and merging task-relevant adapters through weighted fusion strategies. The approach constructs task-aware embeddings across 22 diverse NLP datasets and evaluates multiple merging methods (Linear, Concatenation, TIES, Magnitude Prune) to determine optimal adapter combination. The key innovation lies in replacing fixed adapter selection with retrieval-weighted fusion, potentially reducing the need for dataset-specific fine-tuning while improving compositional generalization across unseen tasks.", "https://arxiv.org/abs/2602.21222")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21447" style="color:#4ea8ff;">Adversarial Intent is a Latent Variable: Stateful Trust Inference for Securing Multimodal Agentic RAG</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This work addresses a critical gap in RAG security by modeling adversarial intent as a latent variable within a POMDP framework, enabling detection of distributed attacks that exploit transitions between retrieval, planning, and generation stages—a capability stateless defenses miss. The proposed MMA-RAG^T framework uses a Modular Trust Agent to maintain belief state through structured LLM reasoning, achieving 6.5x reduction in attack success rates with minimal utility overhead. The approach is model-agnostic and its factorial ablation validates that statefulness is essential for defense-in-depth against sophisticated multi-stage attack strategies.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Adversarial Intent is a Latent Variable: Stateful Trust Inference for Securing Multimodal Agentic RAG", "This work addresses a critical gap in RAG security by modeling adversarial intent as a latent variable within a POMDP framework, enabling detection of distributed attacks that exploit transitions between retrieval, planning, and generation stages—a capability stateless defenses miss. The proposed MMA-RAG^T framework uses a Modular Trust Agent to maintain belief state through structured LLM reasoning, achieving 6.5x reduction in attack success rates with minimal utility overhead. The approach is model-agnostic and its factorial ablation validates that statefulness is essential for defense-in-depth against sophisticated multi-stage attack strategies.", "https://arxiv.org/abs/2602.21447")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.21704" style="color:#4ea8ff;">Dynamic Multimodal Activation Steering for Hallucination Mitigation in Large Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work addresses LVLM hallucinations through dynamic activation steering by identifying that truthfulness and visual perception operate via distinct attention head subsets, then proposes a training-free method that builds semantic-indexed steering vector databases and applies context-aware interventions to influential heads during inference. The key innovation is matching input semantics to pre-computed truthfulness vectors, enabling lightweight hallucination mitigation without retraining. This approach is practically significant for deployment as it operates at inference-time and could generalize across model sizes without task-specific fine-tuning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Dynamic Multimodal Activation Steering for Hallucination Mitigation in Large Vision-Language Models", "This work addresses LVLM hallucinations through dynamic activation steering by identifying that truthfulness and visual perception operate via distinct attention head subsets, then proposes a training-free method that builds semantic-indexed steering vector databases and applies context-aware interventions to influential heads during inference. The key innovation is matching input semantics to pre-computed truthfulness vectors, enabling lightweight hallucination mitigation without retraining. This approach is practically significant for deployment as it operates at inference-time and could generalize across model sizes without task-specific fine-tuning.", "https://arxiv.org/abs/2602.21704")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2508.21112" style="color:#4ea8ff;">EO-1: An Open Unified Embodied Foundation Model for General Robot Control</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>EO-1 is a unified embodied foundation model that advances beyond standard VLA architectures by integrating interleaved vision-text-action pre-training, enabling seamless multimodal reasoning alongside robot control through a unified architecture that processes images, text, video, and action tokens indiscriminately. The approach addresses a critical gap in current robotics systems—moving from sequential reasoning-then-action pipelines to truly interleaved human-like decision-making—backed by the EO-Data1.5M dataset of high-quality multimodal embodied reasoning examples. This represents a meaningful step toward general-purpose robot control by eliminating architectural bottlenecks that force separation between perception, reasoning, and motor output.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EO-1: An Open Unified Embodied Foundation Model for General Robot Control", "EO-1 is a unified embodied foundation model that advances beyond standard VLA architectures by integrating interleaved vision-text-action pre-training, enabling seamless multimodal reasoning alongside robot control through a unified architecture that processes images, text, video, and action tokens indiscriminately. The approach addresses a critical gap in current robotics systems—moving from sequential reasoning-then-action pipelines to truly interleaved human-like decision-making—backed by the EO-Data1.5M dataset of high-quality multimodal embodied reasoning examples. This represents a meaningful step toward general-purpose robot control by eliminating architectural bottlenecks that force separation between perception, reasoning, and motor output.", "https://arxiv.org/abs/2508.21112")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.23744" style="color:#4ea8ff;">Compose and Fuse: Revisiting the Foundational Bottlenecks in Multimodal Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 24</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper identifies critical bottlenecks in multimodal reasoning by introducing a logic-grounded evaluation framework that categorizes six interaction patterns across modalities, revealing that additional modalities only improve performance when providing independent reasoning paths rather than redundant information. Key finding: multimodal MLLMs suffer systematic degradation with weak modalities and chained entailment dependencies, suggesting current architectures lack proper cross-modal fusion mechanisms. The work provides actionable insights for designing better multimodal models—practitioners should prioritize modality complementarity and independent information channels over naive concatenation of diverse inputs.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Compose and Fuse: Revisiting the Foundational Bottlenecks in Multimodal Reasoning", "This paper identifies critical bottlenecks in multimodal reasoning by introducing a logic-grounded evaluation framework that categorizes six interaction patterns across modalities, revealing that additional modalities only improve performance when providing independent reasoning paths rather than redundant information. Key finding: multimodal MLLMs suffer systematic degradation with weak modalities and chained entailment dependencies, suggesting current architectures lack proper cross-modal fusion mechanisms. The work provides actionable insights for designing better multimodal models—practitioners should prioritize modality complementarity and independent information channels over naive concatenation of diverse inputs.", "https://arxiv.org/abs/2509.23744")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00288" style="color:#4ea8ff;">TimeBlind: A Spatio-Temporal Compositionality Benchmark for Video LLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-02-26
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>TimeBlind introduces a rigorous diagnostic benchmark that isolates temporal reasoning from static visual understanding in video LLMs through minimal-pairs methodology—pairing videos with identical visual content but different temporal structures to eliminate language prior confounds. The benchmark hierarchically evaluates three levels of spatio-temporal reasoning (atomic event recognition, property characterization, and causal interdependencies), revealing significant brittleness in current state-of-the-art models including GPT-4 and Gemini 3 Pro. This work directly addresses a critical gap in multimodal model evaluation and provides a compositional framework that cognitive science can inform for more robust temporal reasoning in embodied AI systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TimeBlind: A Spatio-Temporal Compositionality Benchmark for Video LLMs", "TimeBlind introduces a rigorous diagnostic benchmark that isolates temporal reasoning from static visual understanding in video LLMs through minimal-pairs methodology—pairing videos with identical visual content but different temporal structures to eliminate language prior confounds. The benchmark hierarchically evaluates three levels of spatio-temporal reasoning (atomic event recognition, property characterization, and causal interdependencies), revealing significant brittleness in current state-of-the-art models including GPT-4 and Gemini 3 Pro. This work directly addresses a critical gap in multimodal model evaluation and provides a compositional framework that cognitive science can inform for more robust temporal reasoning in embodied AI systems.", "https://arxiv.org/abs/2602.00288")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
