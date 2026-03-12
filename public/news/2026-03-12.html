@@ -1,0 +1,501 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-03-12</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-03-12</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.11042" style="color:#4ea8ff;">V2M-Zero: Zero-Pair Time-Aligned Video-to-Music Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.11042v1 Announce Type: cross 
+Abstract: Generating music that temporally aligns with video events is challenging for existing text-to-music models, which lack fine-grained temporal control. We introduce V2M-Zero, a zero-pair video-to-music generation approach that outputs time-aligned...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "V2M-Zero: Zero-Pair Time-Aligned Video-to-Music Generation", "arXiv:2603.11042v1 Announce Type: cross \nAbstract: Generating music that temporally aligns with video events is challenging for existing text-to-music models, which lack fine-grained temporal control. We introduce V2M-Zero, a zero-pair video-to-music generation approach that outputs time-aligned...", "https://arxiv.org/abs/2603.11042")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.03666" style="color:#4ea8ff;">MonitorVLM:A Vision Language Framework for Safety Violation Detection in Mining Operations</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2510.03666v2 Announce Type: replace-cross 
+Abstract: Industrial accidents, particularly in high-risk domains such as surface and underground mining, are frequently caused by unsafe worker behaviors. Traditional manual inspection remains labor-intensive, error-prone, and insufficient for...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MonitorVLM:A Vision Language Framework for Safety Violation Detection in Mining Operations", "arXiv:2510.03666v2 Announce Type: replace-cross \nAbstract: Industrial accidents, particularly in high-risk domains such as surface and underground mining, are frequently caused by unsafe worker behaviors. Traditional manual inspection remains labor-intensive, error-prone, and insufficient for...", "https://arxiv.org/abs/2510.03666")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.08823" style="color:#4ea8ff;">Fish Audio S2 Technical Report</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.08823v2 Announce Type: replace-cross 
+Abstract: We introduce Fish Audio S2, an open-sourced text-to-speech system featuring multi-speaker, multi-turn generation, and, most importantly, instruction-following control via natural-language descriptions. To scale training, we develop a...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Fish Audio S2 Technical Report", "arXiv:2603.08823v2 Announce Type: replace-cross \nAbstract: We introduce Fish Audio S2, an open-sourced text-to-speech system featuring multi-speaker, multi-turn generation, and, most importantly, instruction-following control via natural-language descriptions. To scale training, we develop a...", "https://arxiv.org/abs/2603.08823")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.11042" style="color:#4ea8ff;">V2M-Zero: Zero-Pair Time-Aligned Video-to-Music Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.11042v1 Announce Type: new 
+Abstract: Generating music that temporally aligns with video events is challenging for existing text-to-music models, which lack fine-grained temporal control. We introduce V2M-Zero, a zero-pair video-to-music generation approach that outputs time-aligned...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "V2M-Zero: Zero-Pair Time-Aligned Video-to-Music Generation", "arXiv:2603.11042v1 Announce Type: new \nAbstract: Generating music that temporally aligns with video events is challenging for existing text-to-music models, which lack fine-grained temporal control. We introduce V2M-Zero, a zero-pair video-to-music generation approach that outputs time-aligned...", "https://arxiv.org/abs/2603.11042")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2505.17862" style="color:#4ea8ff;">Daily-Omni: Towards Audio-Visual Reasoning with Temporal Alignment across Modalities</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2505.17862v2 Announce Type: cross 
+Abstract: Recent Multimodal Large Language Models (MLLMs) achieve promising performance on visual and audio benchmarks independently. However, the ability of these models to process cross-modal information synchronously remains largely unexplored. We...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Daily-Omni: Towards Audio-Visual Reasoning with Temporal Alignment across Modalities", "arXiv:2505.17862v2 Announce Type: cross \nAbstract: Recent Multimodal Large Language Models (MLLMs) achieve promising performance on visual and audio benchmarks independently. However, the ability of these models to process cross-modal information synchronously remains largely unexplored. We...", "https://arxiv.org/abs/2505.17862")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.03666" style="color:#4ea8ff;">MonitorVLM:A Vision Language Framework for Safety Violation Detection in Mining Operations</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2510.03666v2 Announce Type: replace 
+Abstract: Industrial accidents, particularly in high-risk domains such as surface and underground mining, are frequently caused by unsafe worker behaviors. Traditional manual inspection remains labor-intensive, error-prone, and insufficient for...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MonitorVLM:A Vision Language Framework for Safety Violation Detection in Mining Operations", "arXiv:2510.03666v2 Announce Type: replace \nAbstract: Industrial accidents, particularly in high-risk domains such as surface and underground mining, are frequently caused by unsafe worker behaviors. Traditional manual inspection remains labor-intensive, error-prone, and insufficient for...", "https://arxiv.org/abs/2510.03666")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2509.23610" style="color:#4ea8ff;">Efficient Audio-Visual Speech Separation with Discrete Lip Semantics and Multi-Scale Global-Local Attention</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2509.23610v2 Announce Type: replace-cross 
+Abstract: Audio-visual speech separation (AVSS) methods leverage visual cues to extract target speech and have demonstrated strong separation quality in noisy acoustic environments. However, these methods usually involve a large number of parameters...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Efficient Audio-Visual Speech Separation with Discrete Lip Semantics and Multi-Scale Global-Local Attention", "arXiv:2509.23610v2 Announce Type: replace-cross \nAbstract: Audio-visual speech separation (AVSS) methods leverage visual cues to extract target speech and have demonstrated strong separation quality in noisy acoustic environments. However, these methods usually involve a large number of parameters...", "https://arxiv.org/abs/2509.23610")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.07696" style="color:#4ea8ff;">Multi-View Based Audio Visual Target Speaker Extraction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.07696v2 Announce Type: replace 
+Abstract: Audio-Visual Target Speaker Extraction (AVTSE) aims to separate a target speaker's voice from a mixed audio signal using the corresponding visual cues. While most existing AVTSE methods rely exclusively on frontal-view videos, this limitation...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multi-View Based Audio Visual Target Speaker Extraction", "arXiv:2603.07696v2 Announce Type: replace \nAbstract: Audio-Visual Target Speaker Extraction (AVTSE) aims to separate a target speaker's voice from a mixed audio signal using the corresponding visual cues. While most existing AVTSE methods rely exclusively on frontal-view videos, this limitation...", "https://arxiv.org/abs/2603.07696")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://www.marktechpost.com/2026/03/11/google-ai-introduces-gemini-embedding-2-a-multimodal-embedding-model-that-lets-your-bring-text-images-video-audio-and-docs-into-the-embedding-space/" style="color:#4ea8ff;">Google AI Introduces Gemini Embedding 2: A Multimodal Embedding Model that Lets Your Bring Text, Images, Video, Audio, and Docs into the Embedding Space</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    MarkTechPost
+     · 2026-03-11
+  </p>
+  
+  <p>Google expanded its Gemini model family with the release of Gemini Embedding 2. This second-generation model succeeds the text-only gemini-embedding-001 and is designed specifically to address the high-dimensional storage and cross-modal retrieval challenges faced by AI developers building...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly93d3cu"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly93d3cu', "Google AI Introduces Gemini Embedding 2: A Multimodal Embedding Model that Lets Your Bring Text, Images, Video, Audio, and Docs into the Embedding Space", "Google expanded its Gemini model family with the release of Gemini Embedding 2. This second-generation model succeeds the text-only gemini-embedding-001 and is designed specifically to address the high-dimensional storage and cross-modal retrieval challenges faced by AI developers building...", "https://www.marktechpost.com/2026/03/11/google-ai-introduces-gemini-embedding-2-a-multimodal-embedding-model-that-lets-your-bring-text-images-video-audio-and-docs-into-the-embedding-space/")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly93d3cu" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.10043" style="color:#4ea8ff;">AMB-DSGDN: Adaptive Modality-Balanced Dynamic Semantic Graph Differential Network for Multimodal Emotion Recognition</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.10043v1 Announce Type: cross 
+Abstract: Multimodal dialogue emotion recognition captures emotional cues by fusing text, visual, and audio modalities. However, existing approaches still suffer from notable limitations in modeling emotional dependencies and learning multimodal...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AMB-DSGDN: Adaptive Modality-Balanced Dynamic Semantic Graph Differential Network for Multimodal Emotion Recognition", "arXiv:2603.10043v1 Announce Type: cross \nAbstract: Multimodal dialogue emotion recognition captures emotional cues by fusing text, visual, and audio modalities. However, existing approaches still suffer from notable limitations in modeling emotional dependencies and learning multimodal...", "https://arxiv.org/abs/2603.10043")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.10195" style="color:#4ea8ff;">Adaptive Activation Cancellation for Hallucination Mitigation in Large Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.10195v1 Announce Type: cross 
+Abstract: Large Language Models frequently generate fluent but factually incorrect text. We propose Adaptive Activation Cancellation (AAC), a real-time inference-time framework that treats hallucination-associated neural activations as structured...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Adaptive Activation Cancellation for Hallucination Mitigation in Large Language Models", "arXiv:2603.10195v1 Announce Type: cross \nAbstract: Large Language Models frequently generate fluent but factually incorrect text. We propose Adaptive Activation Cancellation (AAC), a real-time inference-time framework that treats hallucination-associated neural activations as structured...", "https://arxiv.org/abs/2603.10195")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.10680" style="color:#4ea8ff;">A Platform-Agnostic Multimodal Digital Human Modelling Framework: Neurophysiological Sensing in Game-Based Interaction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.10680v1 Announce Type: cross 
+Abstract: Digital Human Modelling (DHM) is increasingly shaped by advances in AI, wearable biosensing, and interactive digital environments, particularly in research addressing accessibility and inclusion. However, many AI-enabled DHM approaches remain...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Platform-Agnostic Multimodal Digital Human Modelling Framework: Neurophysiological Sensing in Game-Based Interaction", "arXiv:2603.10680v1 Announce Type: cross \nAbstract: Digital Human Modelling (DHM) is increasingly shaped by advances in AI, wearable biosensing, and interactive digital environments, particularly in research addressing accessibility and inclusion. However, many AI-enabled DHM approaches remain...", "https://arxiv.org/abs/2603.10680")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.13702" style="color:#4ea8ff;">MVCustom: Multi-View Customized Diffusion via Geometric Latent Rendering and Completion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2510.13702v2 Announce Type: replace-cross 
+Abstract: Multi-view generation with camera pose control and prompt-based customization are both essential elements for achieving controllable generative models. However, existing multi-view generation models do not support customization with...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MVCustom: Multi-View Customized Diffusion via Geometric Latent Rendering and Completion", "arXiv:2510.13702v2 Announce Type: replace-cross \nAbstract: Multi-view generation with camera pose control and prompt-based customization are both essential elements for achieving controllable generative models. However, existing multi-view generation models do not support customization with...", "https://arxiv.org/abs/2510.13702")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.19248" style="color:#4ea8ff;">No Need For Real Anomaly: MLLM Empowered Zero-Shot Video Anomaly Detection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2602.19248v2 Announce Type: replace-cross 
+Abstract: The collection and detection of video anomaly data has long been a challenging problem due to its rare occurrence and spatio-temporal scarcity. Existing video anomaly detection (VAD) methods under perform in open-world scenarios. Key...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "No Need For Real Anomaly: MLLM Empowered Zero-Shot Video Anomaly Detection", "arXiv:2602.19248v2 Announce Type: replace-cross \nAbstract: The collection and detection of video anomaly data has long been a challenging problem due to its rare occurrence and spatio-temporal scarcity. Existing video anomaly detection (VAD) methods under perform in open-world scenarios. Key...", "https://arxiv.org/abs/2602.19248")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.08819" style="color:#4ea8ff;">Beyond Relevance: On the Relationship Between Retrieval and RAG Information Coverage</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-12
+  </p>
+  
+  <p>arXiv:2603.08819v2 Announce Type: replace-cross 
+Abstract: Retrieval-augmented generation (RAG) systems combine document retrieval with a generative model to address complex information seeking tasks like report generation. While the relationship between retrieval quality and generation...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond Relevance: On the Relationship Between Retrieval and RAG Information Coverage", "arXiv:2603.08819v2 Announce Type: replace-cross \nAbstract: Retrieval-augmented generation (RAG) systems combine document retrieval with a generative model to address complex information seeking tasks like report generation. While the relationship between retrieval quality and generation...", "https://arxiv.org/abs/2603.08819")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
