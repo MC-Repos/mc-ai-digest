@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-03-16</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-03-16</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12848" style="color:#4ea8ff;">Team LEYA in 10th ABAW Competition: Multimodal Ambivalence/Hesitancy Recognition Approach</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Team LEYA proposes a comprehensive multimodal framework for ambivalence/hesitancy detection in unconstrained videos, integrating scene dynamics (VideoMAE), facial emotional embeddings, acoustic features (EmotionWav2Vec2.0 + Mamba), and linguistic cues through specialized encoders. The approach leverages prototype-augmented multimodal fusion to effectively combine these four complementary modalities, demonstrating empirical gains on the BAH corpus for capturing the subtle, context-dependent nature of behavioral ambivalence. This work is relevant for real-world applications requiring nuanced emotion/intent recognition beyond basic classification, such as conversational AI, mental health assessment, and human-computer interaction.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Team LEYA in 10th ABAW Competition: Multimodal Ambivalence/Hesitancy Recognition Approach", "Team LEYA proposes a comprehensive multimodal framework for ambivalence/hesitancy detection in unconstrained videos, integrating scene dynamics (VideoMAE), facial emotional embeddings, acoustic features (EmotionWav2Vec2.0 + Mamba), and linguistic cues through specialized encoders. The approach leverages prototype-augmented multimodal fusion to effectively combine these four complementary modalities, demonstrating empirical gains on the BAH corpus for capturing the subtle, context-dependent nature of behavioral ambivalence. This work is relevant for real-world applications requiring nuanced emotion/intent recognition beyond basic classification, such as conversational AI, mental health assessment, and human-computer interaction.", "https://arxiv.org/abs/2603.12848")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.13056" style="color:#4ea8ff;">Team RAS in 10th ABAW Competition: Multimodal Valence and Arousal Estimation Approach</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Team RAS proposes a sophisticated multimodal emotion recognition system combining face (GRADA embeddings + Transformers), behavior (Qwen3-VL-4B-Instruct + Mamba), and audio (WavLM-Large) modalities with cross-modal filtering to handle real-world challenges like occlusions and pose variation. The approach employs a Directed Cross-Modal Mixture-of-Experts fusion strategy to intelligently weight complementary modalities, addressing the critical problem that single-modality systems fail under in-the-wild conditions with high appearance and expression variability. This architecture is particularly significant for deployment in unconstrained settings, as the cross-modal filtering mechanism actively suppresses unreliable signals (e.g., non-speech audio segments), improving robustness beyond simple early/late fusion baselines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Team RAS in 10th ABAW Competition: Multimodal Valence and Arousal Estimation Approach", "Team RAS proposes a sophisticated multimodal emotion recognition system combining face (GRADA embeddings + Transformers), behavior (Qwen3-VL-4B-Instruct + Mamba), and audio (WavLM-Large) modalities with cross-modal filtering to handle real-world challenges like occlusions and pose variation. The approach employs a Directed Cross-Modal Mixture-of-Experts fusion strategy to intelligently weight complementary modalities, addressing the critical problem that single-modality systems fail under in-the-wild conditions with high appearance and expression variability. This architecture is particularly significant for deployment in unconstrained settings, as the cross-modal filtering mechanism actively suppresses unreliable signals (e.g., non-speech audio segments), improving robustness beyond simple early/late fusion baselines.", "https://arxiv.org/abs/2603.13056")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.11545" style="color:#4ea8ff;">One Supervisor, Many Modalities: Adaptive Tool Orchestration for Autonomous Queries</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper presents an adaptive agentic framework where a central Supervisor dynamically routes multimodal queries to specialized tools (text, image, audio, video, document processing) using learned routing strategies (RouteLLM for text, SLM-assisted decomposition for other modalities) rather than fixed decision trees. The approach achieves significant efficiency gains—72% faster time-to-answer, 85% less conversational rework, and 67% cost reduction—demonstrating that intelligent centralized orchestration outperforms hierarchical baselines while preserving accuracy across 15 diverse task categories.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "One Supervisor, Many Modalities: Adaptive Tool Orchestration for Autonomous Queries", "This paper presents an adaptive agentic framework where a central Supervisor dynamically routes multimodal queries to specialized tools (text, image, audio, video, document processing) using learned routing strategies (RouteLLM for text, SLM-assisted decomposition for other modalities) rather than fixed decision trees. The approach achieves significant efficiency gains—72% faster time-to-answer, 85% less conversational rework, and 67% cost reduction—demonstrating that intelligent centralized orchestration outperforms hierarchical baselines while preserving accuracy across 15 diverse task categories.", "https://arxiv.org/abs/2603.11545")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.11975" style="color:#4ea8ff;">HomeSafe-Bench: Evaluating Vision-Language Models on Unsafe Action Detection for Embodied Agents in Household Scenarios</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>HomeSafe-Bench introduces a benchmark dataset with 438 video cases across household scenarios to evaluate Vision-Language Models' ability to detect unsafe actions in embodied agents—addressing a critical gap where current safety evaluations rely on static images and fail to capture dynamic hazards in real-world robotic deployments. The benchmark combines physical simulation with generative video creation and provides fine-grained multidimensional annotations across six functional areas, enabling evaluation of perception latency and common-sense reasoning failures in household robots. This work highlights the need for context-aware safety frameworks for embodied agents operating in unstructured environments, where standard industrial safety benchmarks are inadequate.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "HomeSafe-Bench: Evaluating Vision-Language Models on Unsafe Action Detection for Embodied Agents in Household Scenarios", "HomeSafe-Bench introduces a benchmark dataset with 438 video cases across household scenarios to evaluate Vision-Language Models' ability to detect unsafe actions in embodied agents—addressing a critical gap where current safety evaluations rely on static images and fail to capture dynamic hazards in real-world robotic deployments. The benchmark combines physical simulation with generative video creation and provides fine-grained multidimensional annotations across six functional areas, enabling evaluation of perception latency and common-sense reasoning failures in household robots. This work highlights the need for context-aware safety frameworks for embodied agents operating in unstructured environments, where standard industrial safety benchmarks are inadequate.", "https://arxiv.org/abs/2603.11975")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12848" style="color:#4ea8ff;">Team LEYA in 10th ABAW Competition: Multimodal Ambivalence/Hesitancy Recognition Approach</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Team LEYA tackles ambivalence/hesitancy recognition in videos through a sophisticated multimodal fusion architecture combining VideoMAE for scene dynamics, emotion-aware facial embeddings, EmotionWav2Vec2.0 for acoustic analysis, and fine-tuned transformers for text—with Mamba-based temporal encoding and prototype-augmented fusion strategies to handle the subtle, context-dependent nature of this behavioral signal. This approach demonstrates the effectiveness of careful modality-specific feature extraction followed by multimodal fusion, offering insights into detecting nuanced emotional states where traditional single-modality methods fail. The work highlights the growing importance of temporal and prototype-based fusion mechanisms for complex emotion recognition tasks beyond basic affect classification.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Team LEYA in 10th ABAW Competition: Multimodal Ambivalence/Hesitancy Recognition Approach", "Team LEYA tackles ambivalence/hesitancy recognition in videos through a sophisticated multimodal fusion architecture combining VideoMAE for scene dynamics, emotion-aware facial embeddings, EmotionWav2Vec2.0 for acoustic analysis, and fine-tuned transformers for text—with Mamba-based temporal encoding and prototype-augmented fusion strategies to handle the subtle, context-dependent nature of this behavioral signal. This approach demonstrates the effectiveness of careful modality-specific feature extraction followed by multimodal fusion, offering insights into detecting nuanced emotional states where traditional single-modality methods fail. The work highlights the growing importance of temporal and prototype-based fusion mechanisms for complex emotion recognition tasks beyond basic affect classification.", "https://arxiv.org/abs/2603.12848")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.13056" style="color:#4ea8ff;">Team RAS in 10th ABAW Competition: Multimodal Valence and Arousal Estimation Approach</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Team RAS tackles continuous emotion recognition by integrating three modalities—facial embeddings via GRADA and Transformers, behavioral context via Qwen3-VL-4B-Instruct with Mamba temporal modeling, and audio via WavLM-Large with cross-modal filtering—to handle challenging in-the-wild conditions with appearance/pose/illumination variations. The approach employs a Directed Cross-Modal Mixture-of-Experts fusion strategy to adaptively weight modalities, addressing the core challenge that no single modality reliably captures affective expression across diverse subjects and conditions. This multimodal architecture demonstrates the practical value of combining vision transformers, VLMs, and robust audio encoders for robust affect estimation in unconstrained settings.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Team RAS in 10th ABAW Competition: Multimodal Valence and Arousal Estimation Approach", "Team RAS tackles continuous emotion recognition by integrating three modalities—facial embeddings via GRADA and Transformers, behavioral context via Qwen3-VL-4B-Instruct with Mamba temporal modeling, and audio via WavLM-Large with cross-modal filtering—to handle challenging in-the-wild conditions with appearance/pose/illumination variations. The approach employs a Directed Cross-Modal Mixture-of-Experts fusion strategy to adaptively weight modalities, addressing the core challenge that no single modality reliably captures affective expression across diverse subjects and conditions. This multimodal architecture demonstrates the practical value of combining vision transformers, VLMs, and robust audio encoders for robust affect estimation in unconstrained settings.", "https://arxiv.org/abs/2603.13056")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.11975" style="color:#4ea8ff;">HomeSafe-Bench: Evaluating Vision-Language Models on Unsafe Action Detection for Embodied Agents in Household Scenarios</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#f59e0b;">⚡ 58</span></div>
+  <p>HomeSafe-Bench introduces a comprehensive benchmark for evaluating Vision-Language Models on unsafe action detection in dynamic household robot scenarios, addressing a critical gap where current safety evaluations rely on static imagery and lack real-world contextual complexity. The benchmark combines physical simulation with video generation to create 438 annotated test cases across six functional areas, enabling fine-grained assessment of how VLMs handle perception latency and common-sense reasoning failures that pose genuine safety risks in embodied agent deployment. This work shifts robot safety evaluation from static hazard detection toward temporal, dynamic action understanding—essential for validating household robot reliability before real-world deployment.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "HomeSafe-Bench: Evaluating Vision-Language Models on Unsafe Action Detection for Embodied Agents in Household Scenarios", "HomeSafe-Bench introduces a comprehensive benchmark for evaluating Vision-Language Models on unsafe action detection in dynamic household robot scenarios, addressing a critical gap where current safety evaluations rely on static imagery and lack real-world contextual complexity. The benchmark combines physical simulation with video generation to create 438 annotated test cases across six functional areas, enabling fine-grained assessment of how VLMs handle perception latency and common-sense reasoning failures that pose genuine safety risks in embodied agent deployment. This work shifts robot safety evaluation from static hazard detection toward temporal, dynamic action understanding—essential for validating household robot reliability before real-world deployment.", "https://arxiv.org/abs/2603.11975")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12382" style="color:#4ea8ff;">SPARROW: Learning Spatial Precision and Temporal Referential Consistency in Pixel-Grounded Video MLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>SPARROW addresses the critical gap in video MLLMs by introducing temporal coherence to pixel-level grounding through Target-Specific Tracked Features (TSF) that maintain object identity across frames, and a dual-prompt mechanism that fuses geometric ([BOX]) and semantic ([SEG]) tokens—solving the spatial drift and identity switching problems plaguing frame-wise static segmentation approaches. The model's design leverages temporally aligned referent cues during training to achieve both spatial precision and temporal consistency, enabling more reliable object tracking and grounding in dynamic video scenes. This approach has direct implications for video understanding tasks requiring precise object localization, instance tracking, and spatiotemporal reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SPARROW: Learning Spatial Precision and Temporal Referential Consistency in Pixel-Grounded Video MLLMs", "SPARROW addresses the critical gap in video MLLMs by introducing temporal coherence to pixel-level grounding through Target-Specific Tracked Features (TSF) that maintain object identity across frames, and a dual-prompt mechanism that fuses geometric ([BOX]) and semantic ([SEG]) tokens—solving the spatial drift and identity switching problems plaguing frame-wise static segmentation approaches. The model's design leverages temporally aligned referent cues during training to achieve both spatial precision and temporal consistency, enabling more reliable object tracking and grounding in dynamic video scenes. This approach has direct implications for video understanding tasks requiring precise object localization, instance tracking, and spatiotemporal reasoning.", "https://arxiv.org/abs/2603.12382")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12433" style="color:#4ea8ff;">Revisiting Model Stitching In the Foundation Model Era</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper systematically investigates model stitching for heterogeneous Vision Foundation Models (CLIP, DINOv2, SigLIP 2) with different training objectives and data sources, finding that conventional feature-matching approaches fail at shallow stitch points. The key technical contribution is identifying that stitch layer training methodology is critical—simple feature-matching losses at the penultimate layer of the target model significantly outperform end-to-end task optimization, enabling efficient knowledge transfer across fundamentally different VFM architectures. This work has practical implications for efficient model composition and transfer learning in the foundation model era, enabling lightweight adapter-based integration without full model retraining.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Revisiting Model Stitching In the Foundation Model Era", "This paper systematically investigates model stitching for heterogeneous Vision Foundation Models (CLIP, DINOv2, SigLIP 2) with different training objectives and data sources, finding that conventional feature-matching approaches fail at shallow stitch points. The key technical contribution is identifying that stitch layer training methodology is critical—simple feature-matching losses at the penultimate layer of the target model significantly outperform end-to-end task optimization, enabling efficient knowledge transfer across fundamentally different VFM architectures. This work has practical implications for efficient model composition and transfer learning in the foundation model era, enabling lightweight adapter-based integration without full model retraining.", "https://arxiv.org/abs/2603.12433")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12480" style="color:#4ea8ff;">One-Step Flow Policy: Self-Distillation for Fast Visuomotor Policies</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#6b7280;">⚡ 25</span></div>
+  <p>One-Step Flow Policy (OFP) introduces a self-distillation framework that compresses iterative flow/diffusion models into single-step action generation for robotic control, eliminating the inference latency that degrades real-time manipulation performance. The method combines self-consistency loss (enforcing coherent temporal transport), self-guided regularization (mode-sharpening), and warm-start mechanisms to achieve competitive or superior performance versus 100-step diffusion policies across 56 manipulation tasks. This addresses a critical bottleneck in generative visuomotor policies: practitioners can now leverage the expressiveness of continuous, multimodal distributions without sacrificing control frequency.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "One-Step Flow Policy: Self-Distillation for Fast Visuomotor Policies", "One-Step Flow Policy (OFP) introduces a self-distillation framework that compresses iterative flow/diffusion models into single-step action generation for robotic control, eliminating the inference latency that degrades real-time manipulation performance. The method combines self-consistency loss (enforcing coherent temporal transport), self-guided regularization (mode-sharpening), and warm-start mechanisms to achieve competitive or superior performance versus 100-step diffusion policies across 56 manipulation tasks. This addresses a critical bottleneck in generative visuomotor policies: practitioners can now leverage the expressiveness of continuous, multimodal distributions without sacrificing control frequency.", "https://arxiv.org/abs/2603.12480")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12707" style="color:#4ea8ff;">Cost-Efficient Multimodal LLM Inference via Cross-Tier GPU Heterogeneity</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper identifies an optimal partitioning strategy for MLLM inference across heterogeneous GPUs by exploiting the modality boundary between vision encoding (compute-bound) and language generation (memory-bandwidth-bound), reducing cross-device transfer from GB-scale KV caches (O(L * s_ctx)) to MB-scale embeddings (O(N_v * d))—an O(L) complexity improvement that scales with model depth. The key insight enables disaggregation on lower-bandwidth interconnects than existing stage-level approaches (avoiding NVLink dependency), making multi-GPU MLLM serving significantly more cost-efficient for heterogeneous hardware setups. This has immediate practical implications for deploying MLLMs on commodity hardware clusters where compute-optimized and memory-optimized GPUs can be paired without expensive high-bandwidth networking.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Cost-Efficient Multimodal LLM Inference via Cross-Tier GPU Heterogeneity", "This paper identifies an optimal partitioning strategy for MLLM inference across heterogeneous GPUs by exploiting the modality boundary between vision encoding (compute-bound) and language generation (memory-bandwidth-bound), reducing cross-device transfer from GB-scale KV caches (O(L * s_ctx)) to MB-scale embeddings (O(N_v * d))—an O(L) complexity improvement that scales with model depth. The key insight enables disaggregation on lower-bandwidth interconnects than existing stage-level approaches (avoiding NVLink dependency), making multi-GPU MLLM serving significantly more cost-efficient for heterogeneous hardware setups. This has immediate practical implications for deploying MLLMs on commodity hardware clusters where compute-optimized and memory-optimized GPUs can be paired without expensive high-bandwidth networking.", "https://arxiv.org/abs/2603.12707")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12938" style="color:#4ea8ff;">Thinking in Streaming Video</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>**ThinkStream** introduces a streaming-first framework for real-time video understanding using a Watch-Think-Speak paradigm that enables incremental reasoning updates as new frames arrive, eliminating the latency penalties of batch processing. The key innovation is Reasoning-Compressed Streaming Memory (RCSM), which converts intermediate reasoning traces into compact semantic tokens that replace raw visual features, allowing efficient long-horizon context retention without quadratic memory growth. This approach directly addresses the deployment requirements of interactive multimodal agents in dynamic environments where latency and computational efficiency are critical constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Thinking in Streaming Video", "**ThinkStream** introduces a streaming-first framework for real-time video understanding using a Watch-Think-Speak paradigm that enables incremental reasoning updates as new frames arrive, eliminating the latency penalties of batch processing. The key innovation is Reasoning-Compressed Streaming Memory (RCSM), which converts intermediate reasoning traces into compact semantic tokens that replace raw visual features, allowing efficient long-horizon context retention without quadratic memory growth. This approach directly addresses the deployment requirements of interactive multimodal agents in dynamic environments where latency and computational efficiency are critical constraints.", "https://arxiv.org/abs/2603.12938")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.13024" style="color:#4ea8ff;">SAW: Toward a Surgical Action World Model via Controllable and Scalable Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>SAW presents a surgical world model using video diffusion conditioned on lightweight signals (language prompts, scene references, tissue affordance masks, and tool trajectories) to generate realistic laparoscopic videos with precise control over tool-tissue interactions, addressing data scarcity and sim-to-real gaps without requiring expensive annotations or complex structured intermediates. The approach tackles key limitations of prior methods—poor temporal consistency in complex surgical scenes and insufficient realism—by leveraging multimodal conditioning to enable scalable, controllable surgical video synthesis for AI training and surgical automation research.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "SAW: Toward a Surgical Action World Model via Controllable and Scalable Video Generation", "SAW presents a surgical world model using video diffusion conditioned on lightweight signals (language prompts, scene references, tissue affordance masks, and tool trajectories) to generate realistic laparoscopic videos with precise control over tool-tissue interactions, addressing data scarcity and sim-to-real gaps without requiring expensive annotations or complex structured intermediates. The approach tackles key limitations of prior methods—poor temporal consistency in complex surgical scenes and insufficient realism—by leveraging multimodal conditioning to enable scalable, controllable surgical video synthesis for AI training and surgical automation research.", "https://arxiv.org/abs/2603.13024")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.13119" style="color:#4ea8ff;">Geometry-Guided Camera Motion Understanding in VideoLLMs</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 75</span></div>
+  <p>This work identifies and addresses a critical blind spot in VideoLLMs: the lack of explicit geometric reasoning about camera motion primitives. The authors propose a three-part approach combining a synthetic benchmark (CameraMotionDataset) with diagnostic probing that reveals camera motion signals are weakly encoded in vision encoders, then demonstrate lightweight injection methods to improve recognition without expensive retraining. This has significant implications for video understanding tasks requiring fine-grained cinematic analysis, from film analysis to robotics applications needing spatial reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Geometry-Guided Camera Motion Understanding in VideoLLMs", "This work identifies and addresses a critical blind spot in VideoLLMs: the lack of explicit geometric reasoning about camera motion primitives. The authors propose a three-part approach combining a synthetic benchmark (CameraMotionDataset) with diagnostic probing that reveals camera motion signals are weakly encoded in vision encoders, then demonstrate lightweight injection methods to improve recognition without expensive retraining. This has significant implications for video understanding tasks requiring fine-grained cinematic analysis, from film analysis to robotics applications needing spatial reasoning.", "https://arxiv.org/abs/2603.13119")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.12056" style="color:#4ea8ff;">XSkill: Continual Learning from Experience and Skills in Multimodal Agents</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-16
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>XSkill introduces a dual-stream continual learning framework that enables multimodal agents to improve tool orchestration without parameter updates by extracting two complementary knowledge types: low-level experiences for action selection and high-level skills for task planning, both grounded in visual observations. The approach leverages multi-path rollout analysis with visually-grounded summarization and cross-rollout critique to consolidate reusable knowledge, addressing a critical gap in making agents adaptable across open-ended tasks. This has significant implications for reducing sample inefficiency in multimodal agents while maintaining flexibility through retrieval-based learning rather than expensive model retraining.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "XSkill: Continual Learning from Experience and Skills in Multimodal Agents", "XSkill introduces a dual-stream continual learning framework that enables multimodal agents to improve tool orchestration without parameter updates by extracting two complementary knowledge types: low-level experiences for action selection and high-level skills for task planning, both grounded in visual observations. The approach leverages multi-path rollout analysis with visually-grounded summarization and cross-rollout critique to consolidate reusable knowledge, addressing a critical gap in making agents adaptable across open-ended tasks. This has significant implications for reducing sample inefficiency in multimodal agents while maintaining flexibility through retrieval-based learning rather than expensive model retraining.", "https://arxiv.org/abs/2603.12056")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
