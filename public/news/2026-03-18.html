@@ -1,0 +1,489 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-03-18</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-03-18</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15685" style="color:#4ea8ff;">DASH: Dynamic Audio-Driven Semantic Chunking for Efficient Omnimodal Token Compression</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 24</span> <span class="score-badge" style="background:#10b981;">⚡ 92</span></div>
+  <p>DASH introduces a training-free approach to multimodal token compression by using audio embeddings as semantic anchors to detect boundary discontinuities via cosine similarity, enabling dynamic variable-length segmentation that preserves the inherent structure of audio-visual streams rather than relying on fixed partitioning. This cross-modal segmentation strategy allows selective token retention within semantically coherent segments, significantly reducing inference costs for OmniLLMs while maintaining contextual integrity that fixed-window and attention-based pruning methods fail to capture.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "DASH: Dynamic Audio-Driven Semantic Chunking for Efficient Omnimodal Token Compression", "DASH introduces a training-free approach to multimodal token compression by using audio embeddings as semantic anchors to detect boundary discontinuities via cosine similarity, enabling dynamic variable-length segmentation that preserves the inherent structure of audio-visual streams rather than relying on fixed partitioning. This cross-modal segmentation strategy allows selective token retention within semantically coherent segments, significantly reducing inference costs for OmniLLMs while maintaining contextual integrity that fixed-window and attention-based pruning methods fail to capture.", "https://arxiv.org/abs/2603.15685")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15818" style="color:#4ea8ff;">Conflict-Aware Multimodal Fusion for Ambivalence and Hesitancy Recognition</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>ConflictAwareAH tackles ambivalence/hesitancy detection by inverting the typical multimodal fusion strategy—treating cross-modal disagreements as primary signals rather than noise, using pairwise conflict features (element-wise differences between video, audio, and text embeddings) as bidirectional indicators where large conflicts flag A/H states while consistency anchors negative samples. This approach directly addresses the false-positive bias of text-dominant methods, making it particularly valuable for clinical applications where subtle affective contradictions (e.g., verbal agreement with contradictory facial expression) carry diagnostic significance.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Conflict-Aware Multimodal Fusion for Ambivalence and Hesitancy Recognition", "ConflictAwareAH tackles ambivalence/hesitancy detection by inverting the typical multimodal fusion strategy—treating cross-modal disagreements as primary signals rather than noise, using pairwise conflict features (element-wise differences between video, audio, and text embeddings) as bidirectional indicators where large conflicts flag A/H states while consistency anchors negative samples. This approach directly addresses the false-positive bias of text-dominant methods, making it particularly valuable for clinical applications where subtle affective contradictions (e.g., verbal agreement with contradictory facial expression) carry diagnostic significance.", "https://arxiv.org/abs/2603.15818")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15685" style="color:#4ea8ff;">DASH: Dynamic Audio-Driven Semantic Chunking for Efficient Omnimodal Token Compression</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>DASH introduces a training-free token compression framework for omnimodal LLMs that leverages audio as a semantic anchor to detect dynamic segment boundaries via cosine-similarity discontinuities, then applies cross-modal alignment to video tokens for coherent compression. Unlike fixed-window approaches, this piecewise semantic chunking respects the natural structure of audio-visual signals, enabling more aggressive token reduction while maintaining model performance during inference. The method's training-free nature and cross-modal grounding offer practical efficiency gains for computationally expensive omnimodal inference pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "DASH: Dynamic Audio-Driven Semantic Chunking for Efficient Omnimodal Token Compression", "DASH introduces a training-free token compression framework for omnimodal LLMs that leverages audio as a semantic anchor to detect dynamic segment boundaries via cosine-similarity discontinuities, then applies cross-modal alignment to video tokens for coherent compression. Unlike fixed-window approaches, this piecewise semantic chunking respects the natural structure of audio-visual signals, enabling more aggressive token reduction while maintaining model performance during inference. The method's training-free nature and cross-modal grounding offer practical efficiency gains for computationally expensive omnimodal inference pipelines.", "https://arxiv.org/abs/2603.15685")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15623" style="color:#4ea8ff;">Finder: A Multimodal AI-Powered Search Framework for Pharmaceutical Data Retrieval</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#f59e0b;">💼 45</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Finder addresses pharmaceutical data retrieval through a hybrid vector search architecture combining sparse lexical and dense semantic models to unify multimodal content (text, images, audio, video) across 98 languages—scaling to 291K+ documents with reasoning-aware NLP for improved contextual precision. The modular pipeline leverages metadata-aware routing, intelligent chunking, and vector-native backends to enable cross-domain search across regulatory, research, and commercial pharmaceutical datasets, significantly reducing reliance on manual curation. This approach demonstrates practical scalability for domain-specific multimodal RAG applications where traditional search systems fail, with direct applicability to life sciences knowledge retrieval workflows.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Finder: A Multimodal AI-Powered Search Framework for Pharmaceutical Data Retrieval", "Finder addresses pharmaceutical data retrieval through a hybrid vector search architecture combining sparse lexical and dense semantic models to unify multimodal content (text, images, audio, video) across 98 languages—scaling to 291K+ documents with reasoning-aware NLP for improved contextual precision. The modular pipeline leverages metadata-aware routing, intelligent chunking, and vector-native backends to enable cross-domain search across regulatory, research, and commercial pharmaceutical datasets, significantly reducing reliance on manual curation. This approach demonstrates practical scalability for domain-specific multimodal RAG applications where traditional search systems fail, with direct applicability to life sciences knowledge retrieval workflows.", "https://arxiv.org/abs/2603.15623")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16093" style="color:#4ea8ff;">Diffusion Models for Joint Audio-Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>This work addresses joint audio-video generation through diffusion models by releasing paired datasets (77 hours total across gaming and concert domains) and training MM-Diffusion to produce semantically coherent multimodal outputs with quantitative alignment metrics. The authors explore joint latent diffusion using pretrained encoder-decoders and identify key challenges in multimodal decoding consistency, while proposing a sequential two-step approach to improve generation quality. This addresses a critical gap in multimodal generation where individual modalities are well-developed but synchronized audio-video synthesis remains largely unexplored, with implications for content creation, game design, and synchronization-dependent applications.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Diffusion Models for Joint Audio-Video Generation", "This work addresses joint audio-video generation through diffusion models by releasing paired datasets (77 hours total across gaming and concert domains) and training MM-Diffusion to produce semantically coherent multimodal outputs with quantitative alignment metrics. The authors explore joint latent diffusion using pretrained encoder-decoders and identify key challenges in multimodal decoding consistency, while proposing a sequential two-step approach to improve generation quality. This addresses a critical gap in multimodal generation where individual modalities are well-developed but synchronized audio-video synthesis remains largely unexplored, with implications for content creation, game design, and synchronization-dependent applications.", "https://arxiv.org/abs/2603.16093")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16256" style="color:#4ea8ff;">When Thinking Hurts: Mitigating Visual Forgetting in Video Reasoning via Frame Repetition</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>The paper identifies "visual anchor drifting" in video reasoning MLLMs where extended Chain-of-Thought processing causes models to over-rely on generated text and hallucinate, degrading VQA performance. FrameRepeat addresses this with a lightweight repeat scoring module that automatically identifies frames requiring reinforcement during inference, avoiding expensive retraining while maintaining generalizability across architectures. This approach offers a practical, model-agnostic solution to the fundamental tension between reasoning depth and visual grounding in video understanding tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "When Thinking Hurts: Mitigating Visual Forgetting in Video Reasoning via Frame Repetition", "The paper identifies \"visual anchor drifting\" in video reasoning MLLMs where extended Chain-of-Thought processing causes models to over-rely on generated text and hallucinate, degrading VQA performance. FrameRepeat addresses this with a lightweight repeat scoring module that automatically identifies frames requiring reinforcement during inference, avoiding expensive retraining while maintaining generalizability across architectures. This approach offers a practical, model-agnostic solution to the fundamental tension between reasoning depth and visual grounding in video understanding tasks.", "https://arxiv.org/abs/2603.16256")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16093" style="color:#4ea8ff;">Diffusion Models for Joint Audio-Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>This paper addresses joint audio-video generation through diffusion models by contributing paired datasets (13 hours gaming, 64 hours concerts) and training MM-Diffusion architecture to generate semantically aligned audio-video pairs with quantitative evaluation on temporal synchronization. The work identifies critical challenges in multimodal latent space decoding and proposes a sequential two-step generation approach, advancing beyond single-modality synthesis toward coherent cross-modal content creation. Key implications for developers include reproducible benchmarks for audio-video alignment and architectural insights for building robust multimodal generative systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Diffusion Models for Joint Audio-Video Generation", "This paper addresses joint audio-video generation through diffusion models by contributing paired datasets (13 hours gaming, 64 hours concerts) and training MM-Diffusion architecture to generate semantically aligned audio-video pairs with quantitative evaluation on temporal synchronization. The work identifies critical challenges in multimodal latent space decoding and proposes a sequential two-step generation approach, advancing beyond single-modality synthesis toward coherent cross-modal content creation. Key implications for developers include reproducible benchmarks for audio-video alignment and architectural insights for building robust multimodal generative systems.", "https://arxiv.org/abs/2603.16093")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16463" style="color:#4ea8ff;">Follow the Clues, Frame the Truth: Hybrid-evidential Deductive Reasoning in Open-Vocabulary Multimodal Emotion Recognition</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>HyDRA introduces a Propose-Verify-Decide protocol for open-vocabulary multimodal emotion recognition, addressing MLLMs' tendency to prematurely commit to dominant modality priors by reconstructing emotional states through multiple evidence-grounded rationales across modalities. The framework uses reinforcement learning to internalize an abductive reasoning process, enabling synthesis of complementary affective cues from diverse latent perspectives rather than relying on surface-level associations. This hybrid-evidential approach is particularly relevant for handling ambiguous multimodal signals where situational context remains unobserved, offering a principled alternative to existing MLLM-based emotion recognition pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Follow the Clues, Frame the Truth: Hybrid-evidential Deductive Reasoning in Open-Vocabulary Multimodal Emotion Recognition", "HyDRA introduces a Propose-Verify-Decide protocol for open-vocabulary multimodal emotion recognition, addressing MLLMs' tendency to prematurely commit to dominant modality priors by reconstructing emotional states through multiple evidence-grounded rationales across modalities. The framework uses reinforcement learning to internalize an abductive reasoning process, enabling synthesis of complementary affective cues from diverse latent perspectives rather than relying on surface-level associations. This hybrid-evidential approach is particularly relevant for handling ambiguous multimodal signals where situational context remains unobserved, offering a principled alternative to existing MLLM-based emotion recognition pipelines.", "https://arxiv.org/abs/2603.16463")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16495" style="color:#4ea8ff;">ExpressMind: A Multimodal Pretrained Large Language Model for Expressway Operation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>ExpressMind introduces the first multimodal LLM specifically pre-trained for expressway operations, leveraging a novel dual-layer pre-training paradigm and a comprehensive domain-specific dataset combining traffic knowledge, emergency reasoning chains, and annotated video events to overcome general LLMs' inability to grasp expressway-specific regulations and causal relationships. This represents a shift from isolated, rule-based traffic systems toward unified cognitive intelligence capable of cross-system knowledge integration, with significant implications for autonomous traffic management and emergency response optimization in intelligent transportation infrastructure.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ExpressMind: A Multimodal Pretrained Large Language Model for Expressway Operation", "ExpressMind introduces the first multimodal LLM specifically pre-trained for expressway operations, leveraging a novel dual-layer pre-training paradigm and a comprehensive domain-specific dataset combining traffic knowledge, emergency reasoning chains, and annotated video events to overcome general LLMs' inability to grasp expressway-specific regulations and causal relationships. This represents a shift from isolated, rule-based traffic systems toward unified cognitive intelligence capable of cross-system knowledge integration, with significant implications for autonomous traffic management and emergency response optimization in intelligent transportation infrastructure.", "https://arxiv.org/abs/2603.16495")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16822" style="color:#4ea8ff;">Surg$\Sigma$: A Spectrum of Large-Scale Multimodal Data and Foundation Models for Surgical Intelligence</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Surg$\Sigma$ addresses the generalization bottleneck in surgical AI by introducing a large-scale multimodal dataset (Surg$\Sigma$-DB) consolidating heterogeneous surgical data sources to enable foundation models that can transfer across procedures and institutions—moving beyond task-specific frameworks. The framework leverages multimodal LLMs to unify diverse surgical intelligence tasks, with potential applications in real-time surgical assistance, outcome prediction, and cross-institutional knowledge transfer. This represents a critical step toward generalizable surgical AI by establishing both the data infrastructure and foundation model ecosystem needed for robust clinical deployment.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Surg$\\Sigma$: A Spectrum of Large-Scale Multimodal Data and Foundation Models for Surgical Intelligence", "Surg$\\Sigma$ addresses the generalization bottleneck in surgical AI by introducing a large-scale multimodal dataset (Surg$\\Sigma$-DB) consolidating heterogeneous surgical data sources to enable foundation models that can transfer across procedures and institutions—moving beyond task-specific frameworks. The framework leverages multimodal LLMs to unify diverse surgical intelligence tasks, with potential applications in real-time surgical assistance, outcome prediction, and cross-institutional knowledge transfer. This represents a critical step toward generalizable surgical AI by establishing both the data infrastructure and foundation model ecosystem needed for robust clinical deployment.", "https://arxiv.org/abs/2603.16822")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15724" style="color:#4ea8ff;">Meta-TTRL: A Metacognitive Framework for Self-Improving Test-Time Reinforcement Learning in Unified Multimodal Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Meta-TTRL introduces a metacognitive reinforcement learning framework that optimizes unified multimodal models at test time using intrinsic monitoring signals, enabling both instance-level and capability-level improvements across similar prompts rather than isolated inference gains. The approach generalizes across multiple architectures (Janus-Pro-7B, BAGEL, Qwen-Image) and shows significant performance gains on compositional reasoning and T2I tasks, moving beyond traditional search-based test-time scaling by accumulating knowledge across inference sessions. This represents a shift from stateless test-time sampling toward adaptive parameter optimization that leverages model introspection signals for continuous self-improvement.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Meta-TTRL: A Metacognitive Framework for Self-Improving Test-Time Reinforcement Learning in Unified Multimodal Models", "Meta-TTRL introduces a metacognitive reinforcement learning framework that optimizes unified multimodal models at test time using intrinsic monitoring signals, enabling both instance-level and capability-level improvements across similar prompts rather than isolated inference gains. The approach generalizes across multiple architectures (Janus-Pro-7B, BAGEL, Qwen-Image) and shows significant performance gains on compositional reasoning and T2I tasks, moving beyond traditional search-based test-time scaling by accumulating knowledge across inference sessions. This represents a shift from stateless test-time sampling toward adaptive parameter optimization that leverages model introspection signals for continuous self-improvement.", "https://arxiv.org/abs/2603.15724")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15880" style="color:#4ea8ff;">Electrodermal Activity as a Unimodal Signal for Aerobic Exercise Detection in Wearable Sensors</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>This work challenges the assumption that EDA requires multimodal fusion by evaluating whether electrodermal activity alone can distinguish aerobic exercise from rest in wearable sensors using subject-independent classification. Using LOSO cross-validation on a 30-subject dataset, the authors demonstrated that EDA-derived features achieve moderate performance with standard ML models, suggesting sympathetic nervous system activation patterns are sufficiently distinct between exercise and low-arousal states. The findings have practical implications for single-sensor wearable designs, though moderate (not high) performance indicates EDA's limitations as a standalone biomarker compared to multimodal approaches.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Electrodermal Activity as a Unimodal Signal for Aerobic Exercise Detection in Wearable Sensors", "This work challenges the assumption that EDA requires multimodal fusion by evaluating whether electrodermal activity alone can distinguish aerobic exercise from rest in wearable sensors using subject-independent classification. Using LOSO cross-validation on a 30-subject dataset, the authors demonstrated that EDA-derived features achieve moderate performance with standard ML models, suggesting sympathetic nervous system activation patterns are sufficiently distinct between exercise and low-arousal states. The findings have practical implications for single-sensor wearable designs, though moderate (not high) performance indicates EDA's limitations as a standalone biomarker compared to multimodal approaches.", "https://arxiv.org/abs/2603.15880")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.15965" style="color:#4ea8ff;">MoLoRA: Composable Specialization via Per-Token Adapter Routing</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>MoLoRA introduces per-token adapter routing instead of sequence-level routing, enabling dynamic specialization where individual tokens are routed to domain-specific LoRA adapters based on either vocabulary structure (multimodal) or learned gating (semantic), achieving O(N) computational complexity versus O(K·N) for traditional per-sequence approaches. This approach elegantly handles multimodal generation and mixed-capability requests (e.g., code generation for equations) by composing multiple specialized adapters within a single forward pass, with provably optimal efficiency gains.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MoLoRA: Composable Specialization via Per-Token Adapter Routing", "MoLoRA introduces per-token adapter routing instead of sequence-level routing, enabling dynamic specialization where individual tokens are routed to domain-specific LoRA adapters based on either vocabulary structure (multimodal) or learned gating (semantic), achieving O(N) computational complexity versus O(K·N) for traditional per-sequence approaches. This approach elegantly handles multimodal generation and mixed-capability requests (e.g., code generation for equations) by composing multiple specialized adapters within a single forward pass, with provably optimal efficiency gains.", "https://arxiv.org/abs/2603.15965")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16086" style="color:#4ea8ff;">Towards the Vision-Sound-Language-Action Paradigm: The HEAR Framework for Sound-Centric Manipulation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p># Summary
+
+HEAR introduces Vision-Sound-Language-Action (VSLA), a continuous control framework that addresses a critical gap in robotic manipulation by treating real-time environmental audio as continuous state feedback rather than static prompts. The framework tackles the "Blind Execution Interval" problem where acoustic events are missed between discrete audio observations during action chunking, enabling robots to catch fleeting auditory cues (e.g., collision sounds, task completion indicators) essential for closed-loop task verification. This paradigm shift from discrete to streaming audio integration represents a meaningful advance toward multimodal embodied AI that leverages all available sensory modalities for robust manipulation under latency constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Towards the Vision-Sound-Language-Action Paradigm: The HEAR Framework for Sound-Centric Manipulation", "# Summary\n\nHEAR introduces Vision-Sound-Language-Action (VSLA), a continuous control framework that addresses a critical gap in robotic manipulation by treating real-time environmental audio as continuous state feedback rather than static prompts. The framework tackles the \"Blind Execution Interval\" problem where acoustic events are missed between discrete audio observations during action chunking, enabling robots to catch fleeting auditory cues (e.g., collision sounds, task completion indicators) essential for closed-loop task verification. This paradigm shift from discrete to streaming audio integration represents a meaningful advance toward multimodal embodied AI that leverages all available sensory modalities for robust manipulation under latency constraints.", "https://arxiv.org/abs/2603.16086")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.16397" style="color:#4ea8ff;">Fanar 2.0: Arabic Generative AI Stack</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-18
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>Fanar 2.0 demonstrates how strategic data curation and model merging can overcome Arabic's severe data scarcity (~0.5% of web data) to achieve substantial benchmark gains—using only 256 H100 GPUs and 8x fewer tokens than its predecessor by prioritizing quality over quantity. The platform exemplifies sovereign AI infrastructure by building every component in-house at QCRI, offering a reproducible blueprint for resource-constrained regions seeking linguistic AI independence without massive computational budgets. Key innovation is the continual pre-training approach on 120B curated tokens leveraging a Gemma-3 backbone, delivering +9.1pts on Arabic knowledge and +7.3pts on language benchmarks despite extreme data constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Fanar 2.0: Arabic Generative AI Stack", "Fanar 2.0 demonstrates how strategic data curation and model merging can overcome Arabic's severe data scarcity (~0.5% of web data) to achieve substantial benchmark gains—using only 256 H100 GPUs and 8x fewer tokens than its predecessor by prioritizing quality over quantity. The platform exemplifies sovereign AI infrastructure by building every component in-house at QCRI, offering a reproducible blueprint for resource-constrained regions seeking linguistic AI independence without massive computational budgets. Key innovation is the continual pre-training approach on 120B curated tokens leveraging a Gemma-3 backbone, delivering +9.1pts on Arabic knowledge and +7.3pts on language benchmarks despite extreme data constraints.", "https://arxiv.org/abs/2603.16397")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
