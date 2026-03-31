@@ -1,0 +1,487 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-03-31</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-03-31</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://www.marktechpost.com/2026/03/30/alibaba-qwen-team-releases-qwen3-5-omni-a-native-multimodal-model-for-text-audio-video-and-realtime-interaction/" style="color:#4ea8ff;">Alibaba Qwen Team Releases Qwen3.5 Omni: A Native Multimodal Model for Text, Audio, Video, and Realtime Interaction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    MarkTechPost
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 75</span></div>
+  <p>Alibaba's Qwen3.5-Omni marks a shift from modular multimodal architectures to native end-to-end omnimodal design, enabling unified processing of text, audio, and video within a single model rather than combining separate specialized encoders. This approach directly addresses the latency and integration challenges inherent in wrapper-based systems, positioning it as a genuine competitor to Gemini 3.1 Pro for real-time interactive applications. The move toward true native multimodality represents a fundamental architectural evolution that could reduce deployment complexity while improving inference efficiency for production multimodal AI systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly93d3cu"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly93d3cu', "Alibaba Qwen Team Releases Qwen3.5 Omni: A Native Multimodal Model for Text, Audio, Video, and Realtime Interaction", "Alibaba's Qwen3.5-Omni marks a shift from modular multimodal architectures to native end-to-end omnimodal design, enabling unified processing of text, audio, and video within a single model rather than combining separate specialized encoders. This approach directly addresses the latency and integration challenges inherent in wrapper-based systems, positioning it as a genuine competitor to Gemini 3.1 Pro for real-time interactive applications. The move toward true native multimodality represents a fundamental architectural evolution that could reduce deployment complexity while improving inference efficiency for production multimodal AI systems.", "https://www.marktechpost.com/2026/03/30/alibaba-qwen-team-releases-qwen3-5-omni-a-native-multimodal-model-for-text-audio-video-and-realtime-interaction/")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly93d3cu" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.26772" style="color:#4ea8ff;">From Content to Audience: A Multimodal Annotation Framework for Broadcast Television Analytics</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work provides the first systematic empirical evaluation of multimodal LLMs for broadcast television annotation, establishing a domain-specific benchmark across four semantic tasks (environment/topic classification, sensitive content detection, NER) on Italian news content. The comparison of nine frontier models across different pipeline architectures reveals critical gaps in MLLM effectiveness for structured broadcast-specific patterns versus general video understanding, with direct implications for production automation and content moderation workflows. Key finding: general-purpose multimodal capabilities don't directly translate to broadcast operational requirements, necessitating domain-adapted architectures and evaluation frameworks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "From Content to Audience: A Multimodal Annotation Framework for Broadcast Television Analytics", "This work provides the first systematic empirical evaluation of multimodal LLMs for broadcast television annotation, establishing a domain-specific benchmark across four semantic tasks (environment/topic classification, sensitive content detection, NER) on Italian news content. The comparison of nine frontier models across different pipeline architectures reveals critical gaps in MLLM effectiveness for structured broadcast-specific patterns versus general video understanding, with direct implications for production automation and content moderation workflows. Key finding: general-purpose multimodal capabilities don't directly translate to broadcast operational requirements, necessitating domain-adapted architectures and evaluation frameworks.", "https://arxiv.org/abs/2603.26772")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.27918" style="color:#4ea8ff;">Adversarial Attacks on Multimodal Large Language Models: A Comprehensive Survey</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This survey systematizes adversarial vulnerabilities in MLLMs by moving beyond cataloging attacks to identify shared architectural weaknesses across modalities—organizing threats through attacker objectives and vulnerability patterns rather than attack type alone. The work reveals that multimodal integration creates amplified attack surfaces compared to unimodal models, with integrity attacks, jailbreaks, instruction hijacking, and poisoning rooted in common representational failures in how these models fuse cross-modal information. For practitioners, this taxonomy provides a framework for understanding that defenses must address fundamental fusion mechanisms rather than treating modality-specific threats in isolation.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Adversarial Attacks on Multimodal Large Language Models: A Comprehensive Survey", "This survey systematizes adversarial vulnerabilities in MLLMs by moving beyond cataloging attacks to identify shared architectural weaknesses across modalities—organizing threats through attacker objectives and vulnerability patterns rather than attack type alone. The work reveals that multimodal integration creates amplified attack surfaces compared to unimodal models, with integrity attacks, jailbreaks, instruction hijacking, and poisoning rooted in common representational failures in how these models fuse cross-modal information. For practitioners, this taxonomy provides a framework for understanding that defenses must address fundamental fusion mechanisms rather than treating modality-specific threats in isolation.", "https://arxiv.org/abs/2603.27918")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.28554" style="color:#4ea8ff;">Hydra: Unifying Document Retrieval and Generation in a Single Vision-Language Model</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Hydra unifies document retrieval and generation in a single VLM by toggling a LoRA adapter at inference time—enabling ColBERT-style late-interaction embeddings for retrieval while preserving byte-identical generation quality through careful engineering (attention restoration, lm_head preservation, KV-cache-aware decoding). This approach halves the memory and system complexity of traditional dual-model pipelines while maintaining retrieval performance and demonstrating negligible generation degradation (max delta-ANLS = 0.0044) across VQA benchmarks. The work reveals critical engineering subtleties for parameter-efficient adaptation that prevents silent generation failures—valuable insights for practitioners building efficient multimodal systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Hydra: Unifying Document Retrieval and Generation in a Single Vision-Language Model", "Hydra unifies document retrieval and generation in a single VLM by toggling a LoRA adapter at inference time—enabling ColBERT-style late-interaction embeddings for retrieval while preserving byte-identical generation quality through careful engineering (attention restoration, lm_head preservation, KV-cache-aware decoding). This approach halves the memory and system complexity of traditional dual-model pipelines while maintaining retrieval performance and demonstrating negligible generation degradation (max delta-ANLS = 0.0044) across VQA benchmarks. The work reveals critical engineering subtleties for parameter-efficient adaptation that prevents silent generation failures—valuable insights for practitioners building efficient multimodal systems.", "https://arxiv.org/abs/2603.28554")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.20633" style="color:#4ea8ff;">Seed1.8 Model Card: Towards Generalized Real-World Agency</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Seed1.8 is a foundation model extending beyond single-turn prediction to support multi-turn agentic workflows including tool use, code execution, and GUI interaction while maintaining strong LLM and vision-language capabilities. The model introduces practical deployment optimizations like configurable thinking modes and efficient visual encoding for images/video, enabling latency- and cost-aware inference across diverse real-world applications. This unified agentic interface represents a shift toward truly interactive AI systems that can handle sequential decision-making beyond traditional language completion tasks.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Seed1.8 Model Card: Towards Generalized Real-World Agency", "Seed1.8 is a foundation model extending beyond single-turn prediction to support multi-turn agentic workflows including tool use, code execution, and GUI interaction while maintaining strong LLM and vision-language capabilities. The model introduces practical deployment optimizations like configurable thinking modes and efficient visual encoding for images/video, enabling latency- and cost-aware inference across diverse real-world applications. This unified agentic interface represents a shift toward truly interactive AI systems that can handle sequential decision-making beyond traditional language completion tasks.", "https://arxiv.org/abs/2603.20633")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.10932" style="color:#4ea8ff;">BabyVLM-V2: Toward Developmentally Grounded Pretraining and Benchmarking of Vision Foundation Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>BabyVLM-V2 applies developmental psychology principles to create a sample-efficient vision-language foundation model, using longitudinal infant-centric audiovisual data that mirrors natural early learning experiences. The framework introduces DevCV Toolbox, a cognitive evaluation benchmark adapting NIH Baby Toolbox measures into ten multimodal tasks assessing spatial reasoning, memory, and vocabulary—enabling direct assessment of model capabilities against developmental milestones rather than traditional vision benchmarks. This approach suggests that biologically-grounded pretraining data curation and cognitively-aligned evaluation metrics can improve both model efficiency and interpretability for vision-language systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "BabyVLM-V2: Toward Developmentally Grounded Pretraining and Benchmarking of Vision Foundation Models", "BabyVLM-V2 applies developmental psychology principles to create a sample-efficient vision-language foundation model, using longitudinal infant-centric audiovisual data that mirrors natural early learning experiences. The framework introduces DevCV Toolbox, a cognitive evaluation benchmark adapting NIH Baby Toolbox measures into ten multimodal tasks assessing spatial reasoning, memory, and vocabulary—enabling direct assessment of model capabilities against developmental milestones rather than traditional vision benchmarks. This approach suggests that biologically-grounded pretraining data curation and cognitively-aligned evaluation metrics can improve both model efficiency and interpretability for vision-language systems.", "https://arxiv.org/abs/2512.10932")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.26772" style="color:#4ea8ff;">From Content to Audience: A Multimodal Annotation Framework for Broadcast Television Analytics</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>This paper evaluates multimodal LLMs for automated semantic annotation of broadcast television, addressing domain-specific challenges like structured composition and editorial patterns through a systematic benchmark covering visual environment, topic, sensitive content, and NER tasks across nine frontier models. The work fills a critical gap by empirically comparing MLLM pipeline architectures and input configurations specifically for broadcast news, rather than relying on general-purpose video understanding capabilities. The Italian broadcast benchmark and comparative evaluation provide actionable insights for deploying MLLMs in operational television analytics systems under real-world constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "From Content to Audience: A Multimodal Annotation Framework for Broadcast Television Analytics", "This paper evaluates multimodal LLMs for automated semantic annotation of broadcast television, addressing domain-specific challenges like structured composition and editorial patterns through a systematic benchmark covering visual environment, topic, sensitive content, and NER tasks across nine frontier models. The work fills a critical gap by empirically comparing MLLM pipeline architectures and input configurations specifically for broadcast news, rather than relying on general-purpose video understanding capabilities. The Italian broadcast benchmark and comparative evaluation provide actionable insights for deploying MLLMs in operational television analytics systems under real-world constraints.", "https://arxiv.org/abs/2603.26772")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.28366" style="color:#4ea8ff;">AutoCut: End-to-end advertisement video editing based on multimodal discretization and controllable generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>AutoCut proposes an end-to-end advertisement video editing system that unifies video, audio, and text through residual vector quantization into a shared token space, enabling a multimodal LLM to handle diverse editing tasks (shot selection, script generation, music selection) within a single framework. This approach eliminates modality-specific toolchain fragmentation and significantly reduces production costs by automating complex, interdependent editing decisions that typically require manual coordination across specialists.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "AutoCut: End-to-end advertisement video editing based on multimodal discretization and controllable generation", "AutoCut proposes an end-to-end advertisement video editing system that unifies video, audio, and text through residual vector quantization into a shared token space, enabling a multimodal LLM to handle diverse editing tasks (shot selection, script generation, music selection) within a single framework. This approach eliminates modality-specific toolchain fragmentation and significantly reduces production costs by automating complex, interdependent editing decisions that typically require manual coordination across specialists.", "https://arxiv.org/abs/2603.28366")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.28554" style="color:#4ea8ff;">Hydra: Unifying Document Retrieval and Generation in a Single Vision-Language Model</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Hydra introduces a parameter-efficient dual-head architecture that unifies document retrieval and generation in a single VLM through a togglable LoRA adapter, eliminating the need for separate models while maintaining byte-identical generation outputs. The approach achieves ColBERT-style late-interaction retrieval via multi-vector embeddings without degrading base model generation quality (max delta-ANLS of 0.0044 across VQA benchmarks), with three critical engineering requirements identified for maintaining generation fidelity when toggling between modes. This represents a significant step toward consolidated vision-language systems with reduced memory footprint and deployment complexity for enterprise document understanding pipelines.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Hydra: Unifying Document Retrieval and Generation in a Single Vision-Language Model", "Hydra introduces a parameter-efficient dual-head architecture that unifies document retrieval and generation in a single VLM through a togglable LoRA adapter, eliminating the need for separate models while maintaining byte-identical generation outputs. The approach achieves ColBERT-style late-interaction retrieval via multi-vector embeddings without degrading base model generation quality (max delta-ANLS of 0.0044 across VQA benchmarks), with three critical engineering requirements identified for maintaining generation fidelity when toggling between modes. This represents a significant step toward consolidated vision-language systems with reduced memory footprint and deployment complexity for enterprise document understanding pipelines.", "https://arxiv.org/abs/2603.28554")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.10652" style="color:#4ea8ff;">TriDF: Evaluating Perception, Detection, and Hallucination for Interpretable DeepFake Detection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>TriDF introduces a multi-modal deepfake detection benchmark that evaluates not just classification accuracy but also interpretability through three dimensions: perception of fine-grained artifacts, detection across 16 forgery types (image/video/audio), and hallucination measurement of explanation reliability. This addresses a critical gap in deepfake research by moving beyond binary detection to require transparent reasoning, essential for building trustworthy verification systems in high-stakes applications. The benchmark's coverage of advanced synthesis models and human-annotated evidence enables rigorous evaluation of whether detection systems genuinely identify manipulation artifacts or merely exploit statistical patterns.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TriDF: Evaluating Perception, Detection, and Hallucination for Interpretable DeepFake Detection", "TriDF introduces a multi-modal deepfake detection benchmark that evaluates not just classification accuracy but also interpretability through three dimensions: perception of fine-grained artifacts, detection across 16 forgery types (image/video/audio), and hallucination measurement of explanation reliability. This addresses a critical gap in deepfake research by moving beyond binary detection to require transparent reasoning, essential for building trustworthy verification systems in high-stakes applications. The benchmark's coverage of advanced synthesis models and human-annotated evidence enables rigorous evaluation of whether detection systems genuinely identify manipulation artifacts or merely exploit statistical patterns.", "https://arxiv.org/abs/2512.10652")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.10932" style="color:#4ea8ff;">BabyVLM-V2: Toward Developmentally Grounded Pretraining and Benchmarking of Vision Foundation Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>BabyVLM-V2 introduces a developmentally-grounded vision-language pretraining framework that leverages infant learning trajectories to enable sample-efficient model training, using longitudinal audiovisual corpora that naturally mirror how infants acquire visual and linguistic knowledge. The work's primary innovation is the DevCV Toolbox—a benchmark suite of ten multimodal tasks adapted from the NIH Baby Toolbox—providing rigorous cognitive evaluation metrics centered on spatial reasoning, memory, and vocabulary understanding that better align foundation models with human developmental capabilities. This approach demonstrates that compact models can achieve improved efficiency and interpretability by constraining pretraining to cognitively-grounded, infant-centric data rather than massive-scale internet corpora.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "BabyVLM-V2: Toward Developmentally Grounded Pretraining and Benchmarking of Vision Foundation Models", "BabyVLM-V2 introduces a developmentally-grounded vision-language pretraining framework that leverages infant learning trajectories to enable sample-efficient model training, using longitudinal audiovisual corpora that naturally mirror how infants acquire visual and linguistic knowledge. The work's primary innovation is the DevCV Toolbox—a benchmark suite of ten multimodal tasks adapted from the NIH Baby Toolbox—providing rigorous cognitive evaluation metrics centered on spatial reasoning, memory, and vocabulary understanding that better align foundation models with human developmental capabilities. This approach demonstrates that compact models can achieve improved efficiency and interpretability by constraining pretraining to cognitively-grounded, infant-centric data rather than massive-scale internet corpora.", "https://arxiv.org/abs/2512.10932")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.28717" style="color:#4ea8ff;">Can Hierarchical Cross-Modal Fusion Predict Human Perception of AI Dubbed Content?</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>This work proposes a hierarchical cross-modal fusion network to predict human perception of AI-dubbed content by integrating audio (speaker identity, prosody), video (facial expressions, scene context), and text (semantic information) through progressive intra and inter-modal fusion layers. The approach addresses the MOS evaluation bottleneck using parameter-efficient LoRA adapters and derives proxy ground truth by optimizing weights of aggregated objective metrics via active learning, trained on 12k samples. This enables scalable, perceptually-aligned dubbing quality assessment without costly subjective annotation, directly applicable to production evaluation pipelines for synthetic speech systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Can Hierarchical Cross-Modal Fusion Predict Human Perception of AI Dubbed Content?", "This work proposes a hierarchical cross-modal fusion network to predict human perception of AI-dubbed content by integrating audio (speaker identity, prosody), video (facial expressions, scene context), and text (semantic information) through progressive intra and inter-modal fusion layers. The approach addresses the MOS evaluation bottleneck using parameter-efficient LoRA adapters and derives proxy ground truth by optimizing weights of aggregated objective metrics via active learning, trained on 12k samples. This enables scalable, perceptually-aligned dubbing quality assessment without costly subjective annotation, directly applicable to production evaluation pipelines for synthetic speech systems.", "https://arxiv.org/abs/2603.28717")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.27341" style="color:#4ea8ff;">A Comparative Study in Surgical AI: Datasets, Foundation Models, and Barriers to Med-AGI</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This comparative analysis reveals that while AI excels in many biomedical tasks, surgical AI lags significantly due to the complexity of integrating multimodal data, human-robot interaction, and real-world physical constraints—challenges that standard scaling approaches may not adequately address. The authors highlight a critical bottleneck: surgical datasets require expert annotation and substantial computational resources for training, making the traditional "scale data and model size" paradigm economically and practically unfeasible despite abundant raw surgical video data. The work suggests that achieving surgical AGI-level capabilities demands fundamentally new approaches beyond brute-force scaling, likely requiring better domain-specific architectures and data efficiency techniques rather than simply expanding existing models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "A Comparative Study in Surgical AI: Datasets, Foundation Models, and Barriers to Med-AGI", "This comparative analysis reveals that while AI excels in many biomedical tasks, surgical AI lags significantly due to the complexity of integrating multimodal data, human-robot interaction, and real-world physical constraints—challenges that standard scaling approaches may not adequately address. The authors highlight a critical bottleneck: surgical datasets require expert annotation and substantial computational resources for training, making the traditional \"scale data and model size\" paradigm economically and practically unfeasible despite abundant raw surgical video data. The work suggests that achieving surgical AGI-level capabilities demands fundamentally new approaches beyond brute-force scaling, likely requiring better domain-specific architectures and data efficiency techniques rather than simply expanding existing models.", "https://arxiv.org/abs/2603.27341")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.26840" style="color:#4ea8ff;">Dual-branch Graph Domain Adaptation for Cross-scenario Multi-modal Emotion Recognition</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This work addresses domain shift in multimodal emotion recognition by proposing DGDA, which uses dual-branch graph neural networks (hypergraph and path-based) to model emotional dependencies across utterances while adapting to unseen conversation scenarios with different speakers, topics, and noise profiles. The key innovation is leveraging complementary graph representations—explicit multivariate relationships via HGNN and implicit global dependencies via PathNN—to improve cross-domain generalization in emotion prediction. This approach has practical implications for deploying emotion recognition systems in real-world conversational AI where training and deployment domains naturally diverge.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Dual-branch Graph Domain Adaptation for Cross-scenario Multi-modal Emotion Recognition", "This work addresses domain shift in multimodal emotion recognition by proposing DGDA, which uses dual-branch graph neural networks (hypergraph and path-based) to model emotional dependencies across utterances while adapting to unseen conversation scenarios with different speakers, topics, and noise profiles. The key innovation is leveraging complementary graph representations—explicit multivariate relationships via HGNN and implicit global dependencies via PathNN—to improve cross-domain generalization in emotion prediction. This approach has practical implications for deploying emotion recognition systems in real-world conversational AI where training and deployment domains naturally diverge.", "https://arxiv.org/abs/2603.26840")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.27240" style="color:#4ea8ff;">Diagnosing and Repairing Unsafe Channels in Vision-Language Models via Causal Discovery and Dual-Modal Safety Subspace Projection</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-03-31
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper presents CARE, a framework that uses causal mediation analysis to identify neurons responsible for unsafe outputs in Vision-Language Models, then repairs them via dual-modal safety subspace projection—learning generalized safety subspaces from benign/malicious activation pairs and dynamically projecting activations toward these spaces during inference. The approach combines causal interpretability with modal-specific safety constraints through adaptive fusion, offering a mechanistic alternative to traditional fine-tuning for mitigating jailbreaks while maintaining semantic performance. This represents a significant advancement in interpretable safety for multimodal systems, moving beyond black-box guardrails toward surgically targeted intervention on unsafe computational pathways.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Diagnosing and Repairing Unsafe Channels in Vision-Language Models via Causal Discovery and Dual-Modal Safety Subspace Projection", "This paper presents CARE, a framework that uses causal mediation analysis to identify neurons responsible for unsafe outputs in Vision-Language Models, then repairs them via dual-modal safety subspace projection—learning generalized safety subspaces from benign/malicious activation pairs and dynamically projecting activations toward these spaces during inference. The approach combines causal interpretability with modal-specific safety constraints through adaptive fusion, offering a mechanistic alternative to traditional fine-tuning for mitigating jailbreaks while maintaining semantic performance. This represents a significant advancement in interpretable safety for multimodal systems, moving beyond black-box guardrails toward surgically targeted intervention on unsafe computational pathways.", "https://arxiv.org/abs/2603.27240")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
