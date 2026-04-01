@@ -1,0 +1,489 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-04-01</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-04-01</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.29664" style="color:#4ea8ff;">CutClaw: Agentic Hours-Long Video Editing via Music Synchronization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 35</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>CutClaw introduces a multi-agent MLLM-based framework that automates hours-long video editing by performing hierarchical multimodal decomposition of visual and audio content, with a "Playwriter Agent" coordinating narrative structure and music synchronization to maintain consistency across extended footage. This addresses a critical bottleneck in content creation by replacing manual editing workflows with agentic orchestration that handles fine-grained scene analysis and global storytelling coherence simultaneously. The approach has significant implications for scaling video production—enabling filmmakers to generate publication-ready content from raw footage at orders of magnitude faster speeds while maintaining aesthetic and narrative quality.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CutClaw: Agentic Hours-Long Video Editing via Music Synchronization", "CutClaw introduces a multi-agent MLLM-based framework that automates hours-long video editing by performing hierarchical multimodal decomposition of visual and audio content, with a \"Playwriter Agent\" coordinating narrative structure and music synchronization to maintain consistency across extended footage. This addresses a critical bottleneck in content creation by replacing manual editing workflows with agentic orchestration that handles fine-grained scene analysis and global storytelling coherence simultaneously. The approach has significant implications for scaling video production—enabling filmmakers to generate publication-ready content from raw footage at orders of magnitude faster speeds while maintaining aesthetic and narrative quality.", "https://arxiv.org/abs/2603.29664")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.03590" style="color:#4ea8ff;">Beyond Boundary Frames: Context-Centric Video Interpolation with Audio-Visual Semantics</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p># Summary
+
+BBF reformulates video frame interpolation from boundary-centric to context-centric generation, incorporating auxiliary signals (endpoint-adjacent visual context, text semantics, and audio-correlated dynamics) beyond start/end frames to improve controllability in complex motion scenarios. The framework employs decoupled multimodal conditioning and multi-stream context integration to balance endpoint consistency with temporal coherence, addressing the limitations of prior interactive VFI methods that ignore contextual information and produce outputs misaligned with user intent.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond Boundary Frames: Context-Centric Video Interpolation with Audio-Visual Semantics", "# Summary\n\nBBF reformulates video frame interpolation from boundary-centric to context-centric generation, incorporating auxiliary signals (endpoint-adjacent visual context, text semantics, and audio-correlated dynamics) beyond start/end frames to improve controllability in complex motion scenarios. The framework employs decoupled multimodal conditioning and multi-stream context integration to balance endpoint consistency with temporal coherence, addressing the limitations of prior interactive VFI methods that ignore contextual information and produce outputs misaligned with user intent.", "https://arxiv.org/abs/2512.03590")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.05513" style="color:#4ea8ff;">Know-Show: Benchmarking Video-Language Models on Spatio-Temporal Grounded Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>Know-Show introduces a comprehensive benchmark for evaluating spatio-temporal grounded reasoning in Video-Language Models across five complementary spatial and temporal dimensions (2.5K questions from Charades, Action Genome, and Ego4D), revealing significant performance gaps in current models' ability to anchor reasoning in visual and temporal evidence. The authors propose GRAM, a training-free plug-in using attention-based mechanisms to enhance fine-grained grounded reasoning without requiring model retraining, addressing a critical limitation where Video-LMs struggle with simultaneously reasoning about actions and localizing them in space-time.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Know-Show: Benchmarking Video-Language Models on Spatio-Temporal Grounded Reasoning", "Know-Show introduces a comprehensive benchmark for evaluating spatio-temporal grounded reasoning in Video-Language Models across five complementary spatial and temporal dimensions (2.5K questions from Charades, Action Genome, and Ego4D), revealing significant performance gaps in current models' ability to anchor reasoning in visual and temporal evidence. The authors propose GRAM, a training-free plug-in using attention-based mechanisms to enhance fine-grained grounded reasoning without requiring model retraining, addressing a critical limitation where Video-LMs struggle with simultaneously reasoning about actions and localizing them in space-time.", "https://arxiv.org/abs/2512.05513")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2512.11423" style="color:#4ea8ff;">JoyStreamer-Flash: Real-time and Infinite Audio-Driven Avatar Generation with Autoregressive Diffusion</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>JoyStreamer-Flash addresses computational bottlenecks in audio-driven avatar generation through autoregressive diffusion with two key innovations: Progressive Step Bootstrapping (allocating more denoising steps early to prevent error accumulation) and Motion Condition Injection (using noise-corrupted previous frames to maintain temporal coherence). This approach enables real-time inference and theoretically unbounded video synthesis, overcoming the quality degradation and computational overhead limitations of existing DiT-based methods.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "JoyStreamer-Flash: Real-time and Infinite Audio-Driven Avatar Generation with Autoregressive Diffusion", "JoyStreamer-Flash addresses computational bottlenecks in audio-driven avatar generation through autoregressive diffusion with two key innovations: Progressive Step Bootstrapping (allocating more denoising steps early to prevent error accumulation) and Motion Condition Injection (using noise-corrupted previous frames to maintain temporal coherence). This approach enables real-time inference and theoretically unbounded video synthesis, overcoming the quality degradation and computational overhead limitations of existing DiT-based methods.", "https://arxiv.org/abs/2512.11423")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.17693" style="color:#4ea8ff;">DeepCoT: Deep Continual Transformers for Real-Time Inference on Data Streams</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#10b981;">⚡ 87</span></div>
+  <p>DeepCoT introduces a redundancy-free encoder attention mechanism that extends Continual Transformers to deep architectures, eliminating recomputation overhead in streaming inference by maintaining a sliding temporal window with linear computational cost. The approach demonstrates practical efficiency gains across audio, video, and text modalities while preserving baseline performance, addressing a critical bottleneck for deploying large transformer models on resource-constrained devices processing continuous data streams. This represents a meaningful advancement over prior continual transformer work, which was limited to shallow models with restricted generalization capacity.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "DeepCoT: Deep Continual Transformers for Real-Time Inference on Data Streams", "DeepCoT introduces a redundancy-free encoder attention mechanism that extends Continual Transformers to deep architectures, eliminating recomputation overhead in streaming inference by maintaining a sliding temporal window with linear computational cost. The approach demonstrates practical efficiency gains across audio, video, and text modalities while preserving baseline performance, addressing a critical bottleneck for deploying large transformer models on resource-constrained devices processing continuous data streams. This represents a meaningful advancement over prior continual transformer work, which was limited to shallow models with restricted generalization capacity.", "https://arxiv.org/abs/2511.17693")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.29252" style="color:#4ea8ff;">Scaling the Long Video Understanding of Multimodal Large Language Models via Visual Memory Mechanism</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>FlexMem introduces a training-free visual memory mechanism for MLLMs that processes long videos sequentially by leveraging KV cache compression and dual-pathway designs, enabling theoretically unbounded video understanding unlike standard approaches limited by context windows. The method mimics human video comprehension through selective memory recall rather than processing entire videos at once, offering practical scalability advantages for real-world applications requiring extended temporal reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Scaling the Long Video Understanding of Multimodal Large Language Models via Visual Memory Mechanism", "FlexMem introduces a training-free visual memory mechanism for MLLMs that processes long videos sequentially by leveraging KV cache compression and dual-pathway designs, enabling theoretically unbounded video understanding unlike standard approaches limited by context windows. The method mimics human video comprehension through selective memory recall rather than processing entire videos at once, offering practical scalability advantages for real-world applications requiring extended temporal reasoning.", "https://arxiv.org/abs/2603.29252")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.29405" style="color:#4ea8ff;">Hallucination-aware intermediate representation edit in large vision-language models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper proposes a lightweight hallucination mitigation framework for Vision-Language Models that detects and edits problematic intermediate representations in real-time, avoiding the computational overhead of retraining or dual-inference Contrastive Decoding methods. The approach achieves SOTA results on hallucination benchmarks while maintaining minimal additional computational cost, making it practically viable for deployment. The key innovation is performing targeted edits on internal model representations rather than modifying training procedures or decoding strategies, enabling efficient hallucination suppression without fundamental architectural changes.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Hallucination-aware intermediate representation edit in large vision-language models", "This paper proposes a lightweight hallucination mitigation framework for Vision-Language Models that detects and edits problematic intermediate representations in real-time, avoiding the computational overhead of retraining or dual-inference Contrastive Decoding methods. The approach achieves SOTA results on hallucination benchmarks while maintaining minimal additional computational cost, making it practically viable for deployment. The key innovation is performing targeted edits on internal model representations rather than modifying training procedures or decoding strategies, enabling efficient hallucination suppression without fundamental architectural changes.", "https://arxiv.org/abs/2603.29405")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.29450" style="color:#4ea8ff;">Few-shot Writer Adaptation via Multimodal In-Context Learning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#f59e0b;">⚡ 45</span></div>
+  <p>This paper introduces a few-shot writer adaptation framework for Handwritten Text Recognition that leverages multimodal in-context learning to personalize models to unseen handwriting styles at inference time without gradient updates or fine-tuning. The approach uses a compact 8M-parameter CNN-Transformer architecture and demonstrates that few example samples can effectively adapt recognition performance, eliminating the computational overhead and hyperparameter tuning complexity of traditional gradient-based adaptation methods. This in-context learning paradigm offers significant practical advantages for real-world HTR systems that need to handle diverse, underrepresented writing styles dynamically.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Few-shot Writer Adaptation via Multimodal In-Context Learning", "This paper introduces a few-shot writer adaptation framework for Handwritten Text Recognition that leverages multimodal in-context learning to personalize models to unseen handwriting styles at inference time without gradient updates or fine-tuning. The approach uses a compact 8M-parameter CNN-Transformer architecture and demonstrates that few example samples can effectively adapt recognition performance, eliminating the computational overhead and hyperparameter tuning complexity of traditional gradient-based adaptation methods. This in-context learning paradigm offers significant practical advantages for real-world HTR systems that need to handle diverse, underrepresented writing styles dynamically.", "https://arxiv.org/abs/2603.29450")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.29741" style="color:#4ea8ff;">BotVerse: Real-Time Event-Driven Simulation of Social Agents</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>BotVerse is an event-driven simulation framework that enables safe, controlled experimentation with LLM-based social agents by isolating them from live networks while grounding their interactions in real-time data streams from Bluesky. The system leverages asynchronous orchestration and cognitive memory mechanisms to simulate human-like temporal behavior at scale, addressing critical ethical concerns around autonomous agent research. This framework provides researchers with a sandbox environment for red-teaming, disinformation analysis, and computational social science without risking real-world harm from uncontrolled agent deployment.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "BotVerse: Real-Time Event-Driven Simulation of Social Agents", "BotVerse is an event-driven simulation framework that enables safe, controlled experimentation with LLM-based social agents by isolating them from live networks while grounding their interactions in real-time data streams from Bluesky. The system leverages asynchronous orchestration and cognitive memory mechanisms to simulate human-like temporal behavior at scale, addressing critical ethical concerns around autonomous agent research. This framework provides researchers with a sandbox environment for red-teaming, disinformation analysis, and computational social science without risking real-world harm from uncontrolled agent deployment.", "https://arxiv.org/abs/2603.29741")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.06679" style="color:#4ea8ff;">MultiGen: Level-Design for Editable Multiplayer Worlds in Diffusion Game Engines</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>MultiGen introduces an explicit external memory system decoupled from the diffusion model's context window to enable reproducible, editable multiplayer worlds—a departure from standard next-frame prediction approaches. The modular architecture (Memory, Observation, Dynamics) allows users direct control over environment state while maintaining consistency across simultaneous player viewpoints in real-time multiplayer scenarios. This addresses critical gaps in interactive simulation by enabling structured world editing and shared inference, positioning diffusion-based game engines as viable platforms for collaborative, user-controlled virtual environments.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MultiGen: Level-Design for Editable Multiplayer Worlds in Diffusion Game Engines", "MultiGen introduces an explicit external memory system decoupled from the diffusion model's context window to enable reproducible, editable multiplayer worlds—a departure from standard next-frame prediction approaches. The modular architecture (Memory, Observation, Dynamics) allows users direct control over environment state while maintaining consistency across simultaneous player viewpoints in real-time multiplayer scenarios. This addresses critical gaps in interactive simulation by enabling structured world editing and shared inference, positioning diffusion-based game engines as viable platforms for collaborative, user-controlled virtual environments.", "https://arxiv.org/abs/2603.06679")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2507.11539" style="color:#4ea8ff;">Streaming 4D Visual Geometry Transformer</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper presents a streaming 4D visual geometry transformer that enables real-time 3D reconstruction from video by adopting an autoregressive, causal attention architecture inspired by LLMs—caching historical key-value pairs to efficiently aggregate temporal context without bidirectional dependencies. The approach distills knowledge from a dense bidirectional baseline (VGGT) into the streamable model, achieving low-latency 3D geometry perception suitable for interactive applications while maintaining spatial consistency through incremental processing. This represents a significant architectural shift toward online 3D reconstruction pipelines, addressing the latency constraints of traditional batch processing methods in computer vision.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Streaming 4D Visual Geometry Transformer", "This paper presents a streaming 4D visual geometry transformer that enables real-time 3D reconstruction from video by adopting an autoregressive, causal attention architecture inspired by LLMs—caching historical key-value pairs to efficiently aggregate temporal context without bidirectional dependencies. The approach distills knowledge from a dense bidirectional baseline (VGGT) into the streamable model, achieving low-latency 3D geometry perception suitable for interactive applications while maintaining spatial consistency through incremental processing. This represents a significant architectural shift toward online 3D reconstruction pipelines, addressing the latency constraints of traditional batch processing methods in computer vision.", "https://arxiv.org/abs/2507.11539")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.12882" style="color:#4ea8ff;">Towards High-Consistency Embodied World Model with Multi-View Trajectory Videos</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>MTV-World addresses a critical gap in embodied world models by replacing low-level joint actions with multi-view trajectory videos as control signals, leveraging camera parameters and Cartesian transformations to preserve 3D spatial information that single-view projections lose. This approach significantly improves visuomotor prediction consistency and the model's ability to accurately simulate real-world robotic interactions in predicted visual frames. The multi-view framework represents a practical advancement for embodied AI systems requiring precise action-to-motion fidelity in visual world models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Towards High-Consistency Embodied World Model with Multi-View Trajectory Videos", "MTV-World addresses a critical gap in embodied world models by replacing low-level joint actions with multi-view trajectory videos as control signals, leveraging camera parameters and Cartesian transformations to preserve 3D spatial information that single-view projections lose. This approach significantly improves visuomotor prediction consistency and the model's ability to accurately simulate real-world robotic interactions in predicted visual frames. The multi-view framework represents a practical advancement for embodied AI systems requiring precise action-to-motion fidelity in visual world models.", "https://arxiv.org/abs/2511.12882")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.22715" style="color:#4ea8ff;">ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>ReAG introduces a reasoning-augmented RAG framework for knowledge-intensive VQA that combines hierarchical retrieval (coarse and fine-grained) with a critic model to filter noisy passages, addressing precision limitations in existing retrieval-augmented approaches. The system employs multi-stage training with reinforcement learning to improve reasoning over retrieved context, enabling MLLMs to handle domain-specific queries underrepresented in pre-training data. This hybrid retrieval-critique-reasoning pipeline offers practical improvements for real-world VQA applications requiring external knowledge integration.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "ReAG: Reasoning-Augmented Generation for Knowledge-based Visual Question Answering", "ReAG introduces a reasoning-augmented RAG framework for knowledge-intensive VQA that combines hierarchical retrieval (coarse and fine-grained) with a critic model to filter noisy passages, addressing precision limitations in existing retrieval-augmented approaches. The system employs multi-stage training with reinforcement learning to improve reasoning over retrieved context, enabling MLLMs to handle domain-specific queries underrepresented in pre-training data. This hybrid retrieval-critique-reasoning pipeline offers practical improvements for real-world VQA applications requiring external knowledge integration.", "https://arxiv.org/abs/2511.22715")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2601.06572" style="color:#4ea8ff;">Hellinger Multimodal Variational Autoencoders</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper proposes HELVAE, a multimodal VAE that replaces standard product/mixture-of-experts aggregation with Hellinger divergence-based opinion pooling, enabling symmetric and efficient multimodal posterior inference without sub-sampling. The approach leverages moment-matching approximations derived from Hölder pooling (α=0.5) to learn more expressive latent representations that improve with additional modalities while achieving better generative-inference trade-offs. This represents a theoretically grounded alternative to existing aggregation schemes with practical efficiency gains for weakly-supervised multimodal learning scenarios.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Hellinger Multimodal Variational Autoencoders", "This paper proposes HELVAE, a multimodal VAE that replaces standard product/mixture-of-experts aggregation with Hellinger divergence-based opinion pooling, enabling symmetric and efficient multimodal posterior inference without sub-sampling. The approach leverages moment-matching approximations derived from Hölder pooling (α=0.5) to learn more expressive latent representations that improve with additional modalities while achieving better generative-inference trade-offs. This represents a theoretically grounded alternative to existing aggregation schemes with practical efficiency gains for weakly-supervised multimodal learning scenarios.", "https://arxiv.org/abs/2601.06572")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.22779" style="color:#4ea8ff;">KARMA: Knowledge-Action Regularized Multimodal Alignment for Personalized Search at Taobao</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-01
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#6b7280;">⚡ 35</span></div>
+  <p>KARMA addresses the "Knowledge-Action Gap" in applying LLMs to personalized search by using semantic reconstruction as a training regularizer, preventing semantic collapse (attention sinks) that occurs when fine-tuning on discriminative objectives alone. The framework enables LLMs to simultaneously preserve pre-trained semantic knowledge while aligning with task-specific personalization objectives, demonstrating improved generalization on Taobao's next-item prediction task. This approach reveals a critical training stability challenge in deploying large language models to industrial recommendation systems and offers a practical solution through multi-objective regularization.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "KARMA: Knowledge-Action Regularized Multimodal Alignment for Personalized Search at Taobao", "KARMA addresses the \"Knowledge-Action Gap\" in applying LLMs to personalized search by using semantic reconstruction as a training regularizer, preventing semantic collapse (attention sinks) that occurs when fine-tuning on discriminative objectives alone. The framework enables LLMs to simultaneously preserve pre-trained semantic knowledge while aligning with task-specific personalization objectives, demonstrating improved generalization on Taobao's next-item prediction task. This approach reveals a critical training stability challenge in deploying large language models to industrial recommendation systems and offers a practical solution through multi-objective regularization.", "https://arxiv.org/abs/2603.22779")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
