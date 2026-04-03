@@ -1,0 +1,491 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-04-03</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-04-03</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.11579" style="color:#4ea8ff;">MS-Mix: Sentiment-Guided Adaptive Augmentation for Multimodal Sentiment Analysis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p>MS-Mix addresses data scarcity in Multimodal Sentiment Analysis by introducing a sentiment-aware adaptive Mixup augmentation that filters incompatible text-audio-video pairs via latent-space semantic similarity and guides mixing intensity through attention mechanisms, preventing emotionally contradictory synthetic samples. The framework tackles a critical gap in existing augmentation—naive Mixup produces label noise by ignoring emotional semantics across modalities—enabling more robust MSA systems for real-world deployment in social media and HCI applications despite limited labeled data.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MS-Mix: Sentiment-Guided Adaptive Augmentation for Multimodal Sentiment Analysis", "MS-Mix addresses data scarcity in Multimodal Sentiment Analysis by introducing a sentiment-aware adaptive Mixup augmentation that filters incompatible text-audio-video pairs via latent-space semantic similarity and guides mixing intensity through attention mechanisms, preventing emotionally contradictory synthetic samples. The framework tackles a critical gap in existing augmentation—naive Mixup produces label noise by ignoring emotional semantics across modalities—enabling more robust MSA systems for real-world deployment in social media and HCI applications despite limited labeled data.", "https://arxiv.org/abs/2510.11579")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00994" style="color:#4ea8ff;">Multimodal Analysis of State-Funded News Coverage of the Israel-Hamas War on YouTube Shorts</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>Researchers developed a multimodal analysis pipeline combining automatic transcription, aspect-based sentiment analysis (ABSA), and semantic scene classification to systematically examine how state-funded news outlets cover the Israel-Hamas conflict on YouTube Shorts—analyzing 2,300+ videos and 94,000 frames to detect sentiment variations and visual consistency across broadcasters. The study demonstrates that smaller, domain-adapted models outperform larger transformers and LLMs for sentiment analysis on short-form video, suggesting architectural efficiency matters more than model scale for this specialized task. This work establishes a reproducible methodology for analyzing geopolitical representation in short-form platforms and highlights the effectiveness of fine-tuned models for aspect-specific content analysis at scale.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Multimodal Analysis of State-Funded News Coverage of the Israel-Hamas War on YouTube Shorts", "Researchers developed a multimodal analysis pipeline combining automatic transcription, aspect-based sentiment analysis (ABSA), and semantic scene classification to systematically examine how state-funded news outlets cover the Israel-Hamas conflict on YouTube Shorts—analyzing 2,300+ videos and 94,000 frames to detect sentiment variations and visual consistency across broadcasters. The study demonstrates that smaller, domain-adapted models outperform larger transformers and LLMs for sentiment analysis on short-form video, suggesting architectural efficiency matters more than model scale for this specialized task. This work establishes a reproducible methodology for analyzing geopolitical representation in short-form platforms and highlights the effectiveness of fine-tuned models for aspect-specific content analysis at scale.", "https://arxiv.org/abs/2604.00994")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.02226" style="color:#4ea8ff;">TempoControl: Temporal Attention Guidance for Text-to-Video Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>TempoControl enables fine-grained temporal control in text-to-video generation by optimizing cross-attention maps during inference without retraining, using three principles: correlation (aligning temporal patterns with control signals), magnitude (adjusting attention strength), and entropy (preserving semantic consistency). This approach allows users to precisely specify when visual concepts appear in generated videos while maintaining quality, addressing a critical limitation in current diffusion-based video models. The method's inference-only design makes it practical for deployment across existing pre-trained models.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "TempoControl: Temporal Attention Guidance for Text-to-Video Models", "TempoControl enables fine-grained temporal control in text-to-video generation by optimizing cross-attention maps during inference without retraining, using three principles: correlation (aligning temporal patterns with control signals), magnitude (adjusting attention strength), and entropy (preserving semantic consistency). This approach allows users to precisely specify when visual concepts appear in generated videos while maintaining quality, addressing a critical limitation in current diffusion-based video models. The method's inference-only design makes it practical for deployment across existing pre-trained models.", "https://arxiv.org/abs/2510.02226")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.01421" style="color:#4ea8ff;">EgoFlow: Gradient-Guided Flow Matching for Egocentric 6DoF Object Motion Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>EgoFlow introduces a flow-matching framework with hybrid Mamba-Transformer-Perceiver architecture for generating physically plausible 6DoF object trajectories from egocentric video, uniquely leveraging gradient-guided inference to enforce differentiable physical constraints like collision avoidance without post-hoc filtering. The approach addresses key challenges in embodied AI by jointly modeling temporal dynamics, scene geometry, and semantic intent while handling occlusions and fast motion—demonstrated on HD-EPIC, EgoExo4D, and HOT3D datasets. This represents a meaningful advancement in physics-aware generative modeling for embodied perception systems, combining modern architectural innovations with explicit physical reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EgoFlow: Gradient-Guided Flow Matching for Egocentric 6DoF Object Motion Generation", "EgoFlow introduces a flow-matching framework with hybrid Mamba-Transformer-Perceiver architecture for generating physically plausible 6DoF object trajectories from egocentric video, uniquely leveraging gradient-guided inference to enforce differentiable physical constraints like collision avoidance without post-hoc filtering. The approach addresses key challenges in embodied AI by jointly modeling temporal dynamics, scene geometry, and semantic intent while handling occlusions and fast motion—demonstrated on HD-EPIC, EgoExo4D, and HOT3D datasets. This represents a meaningful advancement in physics-aware generative modeling for embodied perception systems, combining modern architectural innovations with explicit physical reasoning.", "https://arxiv.org/abs/2604.01421")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.01569" style="color:#4ea8ff;">VideoZeroBench: Probing the Limits of Video MLLMs with Spatio-Temporal Evidence Verification</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>VideoZeroBench introduces a rigorous evaluation framework for video MLLMs that decouples answer correctness from evidence verification through a five-level hierarchical protocol requiring temporal intervals and spatial bounding boxes—revealing significant gaps between reported performance and actual fine-grained understanding even in frontier models like Gemini-3-Pro. This addresses a critical blind spot in current benchmarks where models can generate correct answers without demonstrating genuine spatio-temporal reasoning, providing developers with a more reliable diagnostic tool for identifying failure modes in video understanding systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "VideoZeroBench: Probing the Limits of Video MLLMs with Spatio-Temporal Evidence Verification", "VideoZeroBench introduces a rigorous evaluation framework for video MLLMs that decouples answer correctness from evidence verification through a five-level hierarchical protocol requiring temporal intervals and spatial bounding boxes—revealing significant gaps between reported performance and actual fine-grained understanding even in frontier models like Gemini-3-Pro. This addresses a critical blind spot in current benchmarks where models can generate correct answers without demonstrating genuine spatio-temporal reasoning, providing developers with a more reliable diagnostic tool for identifying failure modes in video understanding systems.", "https://arxiv.org/abs/2604.01569")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.02073" style="color:#4ea8ff;">PLUME: Latent Reasoning Based Universal Multimodal Embedding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 32</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>PLUME introduces a latent reasoning framework for universal multimodal embedding that replaces costly explicit chain-of-thought with efficient continuous latent state rollouts, avoiding the textual bottleneck while maintaining multimodal reasoning capacity. The approach incorporates a semantic-anchor-guided transition adapter to enable diverse reasoning trajectories within fixed computation budgets, and uses a progressive curriculum during training that gradually transitions from explicit to latent reasoning. This method addresses a key inefficiency in recent CoT-enhanced embedding models by maintaining reasoning quality while reducing inference overhead—critical for production-scale multimodal retrieval systems.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PLUME: Latent Reasoning Based Universal Multimodal Embedding", "PLUME introduces a latent reasoning framework for universal multimodal embedding that replaces costly explicit chain-of-thought with efficient continuous latent state rollouts, avoiding the textual bottleneck while maintaining multimodal reasoning capacity. The approach incorporates a semantic-anchor-guided transition adapter to enable diverse reasoning trajectories within fixed computation budgets, and uses a progressive curriculum during training that gradually transitions from explicit to latent reasoning. This method addresses a key inefficiency in recent CoT-enhanced embedding models by maintaining reasoning quality while reducing inference overhead—critical for production-scale multimodal retrieval systems.", "https://arxiv.org/abs/2604.02073")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.02241" style="color:#4ea8ff;">UAV-Track VLA: Embodied Aerial Tracking via Vision-Language-Action Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 28</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>UAV-Track VLA introduces a Vision-Language-Action framework specifically optimized for aerial tracking in complex urban environments, addressing key limitations of existing VLA models through temporal compression networks and dual-branch decoders that leverage spatial-geometric priors and flow matching. The work is anchored by a substantial benchmark dataset (890K+ frames across 176 tasks) designed to evaluate multimodal tracking performance, making it a significant resource for embodied AI research. The temporal redundancy mitigation and geometric-aware architecture improvements suggest practical gains for real-time UAV autonomy tasks requiring semantic understanding and precise continuous control.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "UAV-Track VLA: Embodied Aerial Tracking via Vision-Language-Action Models", "UAV-Track VLA introduces a Vision-Language-Action framework specifically optimized for aerial tracking in complex urban environments, addressing key limitations of existing VLA models through temporal compression networks and dual-branch decoders that leverage spatial-geometric priors and flow matching. The work is anchored by a substantial benchmark dataset (890K+ frames across 176 tasks) designed to evaluate multimodal tracking performance, making it a significant resource for embodied AI research. The temporal redundancy mitigation and geometric-aware architecture improvements suggest practical gains for real-time UAV autonomy tasks requiring semantic understanding and precise continuous control.", "https://arxiv.org/abs/2604.02241")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.11147" style="color:#4ea8ff;">Catalogue Grounded Multimodal Attribution for Museum Video under Resource and Regulatory Constraints</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 15</span> <span class="score-badge" style="background:#3b82f6;">⚡ 78</span></div>
+  <p>This paper proposes an automated pipeline using open-source video-language models to generate catalogue-style metadata for museum audiovisual archives, addressing the bottleneck of manual metadata curation through a three-stage approach: artwork summarization, description generation with genre labels, and conservative similarity-based attribution to existing collection databases. The locally-deployable framework is designed to respect institutional constraints (resource limitations and regulatory requirements) while improving discoverability of previously "locked away" archival content. Early results on painting collections demonstrate feasibility, suggesting this approach could significantly reduce manual effort in audiovisual archive cataloging workflows.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Catalogue Grounded Multimodal Attribution for Museum Video under Resource and Regulatory Constraints", "This paper proposes an automated pipeline using open-source video-language models to generate catalogue-style metadata for museum audiovisual archives, addressing the bottleneck of manual metadata curation through a three-stage approach: artwork summarization, description generation with genre labels, and conservative similarity-based attribution to existing collection databases. The locally-deployable framework is designed to respect institutional constraints (resource limitations and regulatory requirements) while improving discoverability of previously \"locked away\" archival content. Early results on painting collections demonstrate feasibility, suggesting this approach could significantly reduce manual effort in audiovisual archive cataloging workflows.", "https://arxiv.org/abs/2603.11147")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00319" style="color:#4ea8ff;">Collaborative AI Agents and Critics for Fault Detection and Cause Analysis in Network Telemetry</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>This paper presents a federated multi-agent system where AI agents and critics collaboratively solve multimodal tasks (fault detection, diagnostics, content generation) through iterative feedback loops, with each entity maintaining private cost functions while coordinating through a central server using multi-timescale stochastic approximation. The key innovation is enabling distributed optimization without direct inter-agent communication, applicable to network telemetry analysis and cross-domain diagnostic problems where data privacy and decentralized model deployment are critical constraints.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Collaborative AI Agents and Critics for Fault Detection and Cause Analysis in Network Telemetry", "This paper presents a federated multi-agent system where AI agents and critics collaboratively solve multimodal tasks (fault detection, diagnostics, content generation) through iterative feedback loops, with each entity maintaining private cost functions while coordinating through a central server using multi-timescale stochastic approximation. The key innovation is enabling distributed optimization without direct inter-agent communication, applicable to network telemetry analysis and cross-domain diagnostic problems where data privacy and decentralized model deployment are critical constraints.", "https://arxiv.org/abs/2604.00319")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00007" style="color:#4ea8ff;">Dynin-Omni: Omnimodal Unified Large Diffusion Language Model</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#10b981;">⚡ 92</span></div>
+  <p>Dynin-Omni introduces a masked-diffusion architecture for omnimodal AI that unifies text, image, speech, and video in a single model by discretizing all modalities into a shared token space, enabling bidirectional context and iterative refinement—fundamentally departing from serialization-based (autoregressive) or modular (compositional) approaches. The multi-stage training with model-merging for modality expansion demonstrates competitive performance across 19 benchmarks (87.6 GSM8K, 1733.6 MME-P, 2.1 WER), suggesting masked diffusion is viable for end-to-end omnimodal generation. This approach has significant implications for unified AI systems, potentially reducing engineering complexity of external decoder orchestration while enabling more coherent cross-modal reasoning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Dynin-Omni: Omnimodal Unified Large Diffusion Language Model", "Dynin-Omni introduces a masked-diffusion architecture for omnimodal AI that unifies text, image, speech, and video in a single model by discretizing all modalities into a shared token space, enabling bidirectional context and iterative refinement—fundamentally departing from serialization-based (autoregressive) or modular (compositional) approaches. The multi-stage training with model-merging for modality expansion demonstrates competitive performance across 19 benchmarks (87.6 GSM8K, 1733.6 MME-P, 2.1 WER), suggesting masked diffusion is viable for end-to-end omnimodal generation. This approach has significant implications for unified AI systems, potentially reducing engineering complexity of external decoder orchestration while enabling more coherent cross-modal reasoning.", "https://arxiv.org/abs/2604.00007")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00013" style="color:#4ea8ff;">MSA-Thinker: Discrimination-Calibration Reasoning with Hint-Guided Reinforcement Learning for Multimodal Sentiment Analysis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 22</span> <span class="score-badge" style="background:#10b981;">⚡ 85</span></div>
+  <p># MSA-Thinker Summary
+
+MSA-Thinker addresses interpretability limitations in Multimodal Large Language Models for sentiment analysis by proposing a Discrimination-Calibration (DC) reasoning framework combined with hint-guided reinforcement learning, replacing expensive CoT annotations with synthetic training data from teacher models. The approach tackles key RL challenges—low exploration efficiency and sparse rewards on difficult samples—through structured reasoning that enables the model to decompose sentiment analysis into interpretable discrimination and calibration steps. This method bridges the gap between SFT performance and explainability, offering practical advantages for deploying emotionally-aware AI systems with human-interpretable decision processes.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MSA-Thinker: Discrimination-Calibration Reasoning with Hint-Guided Reinforcement Learning for Multimodal Sentiment Analysis", "# MSA-Thinker Summary\n\nMSA-Thinker addresses interpretability limitations in Multimodal Large Language Models for sentiment analysis by proposing a Discrimination-Calibration (DC) reasoning framework combined with hint-guided reinforcement learning, replacing expensive CoT annotations with synthetic training data from teacher models. The approach tackles key RL challenges—low exploration efficiency and sparse rewards on difficult samples—through structured reasoning that enables the model to decompose sentiment analysis into interpretable discrimination and calibration steps. This method bridges the gap between SFT performance and explainability, offering practical advantages for deploying emotionally-aware AI systems with human-interpretable decision processes.", "https://arxiv.org/abs/2604.00013")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00310" style="color:#4ea8ff;">Robust Multimodal Safety via Conditional Decoding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p># Summary
+
+Researchers propose CASA, a conditional decoding strategy that detects malicious multimodal queries by predicting a binary safety token before generation, leveraging internal MLLM representations with a novel safety attention module. This approach achieves 97%+ attack success rate reduction across text, image, and audio modalities without requiring external classifiers or modality-specific fine-tuning, addressing a critical vulnerability where MLLMs' cross-modal interactions bypass text-only safety alignment. The lightweight, integrated design makes it practically deployable across diverse multimodal threat vectors without computational overhead.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Robust Multimodal Safety via Conditional Decoding", "# Summary\n\nResearchers propose CASA, a conditional decoding strategy that detects malicious multimodal queries by predicting a binary safety token before generation, leveraging internal MLLM representations with a novel safety attention module. This approach achieves 97%+ attack success rate reduction across text, image, and audio modalities without requiring external classifiers or modality-specific fine-tuning, addressing a critical vulnerability where MLLMs' cross-modal interactions bypass text-only safety alignment. The lightweight, integrated design makes it practically deployable across diverse multimodal threat vectors without computational overhead.", "https://arxiv.org/abs/2604.00310")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00416" style="color:#4ea8ff;">Learning Humanoid Navigation from Human Data</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 25</span> <span class="score-badge" style="background:#f59e0b;">⚡ 42</span></div>
+  <p>EgoNav demonstrates a novel approach to humanoid robot navigation by training a diffusion model exclusively on 5 hours of human egocentric walking data, eliminating the need for robot-specific training data or domain adaptation. The system leverages multi-modal visual conditioning (color, depth, semantics, and frozen DINOv3 features) combined with trajectory history to predict distributions of plausible future paths, enabling real-time inference through a hybrid sampling scheme and receding-horizon planning. Zero-shot deployment on a Unitree G1 humanoid validates the approach's effectiveness for complex navigation behaviors (crowd avoidance, obstacle detection) in unseen environments, suggesting human-centric imitation learning can directly transfer to embodied robot control without explicit finetuning.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Learning Humanoid Navigation from Human Data", "EgoNav demonstrates a novel approach to humanoid robot navigation by training a diffusion model exclusively on 5 hours of human egocentric walking data, eliminating the need for robot-specific training data or domain adaptation. The system leverages multi-modal visual conditioning (color, depth, semantics, and frozen DINOv3 features) combined with trajectory history to predict distributions of plausible future paths, enabling real-time inference through a hybrid sampling scheme and receding-horizon planning. Zero-shot deployment on a Unitree G1 humanoid validates the approach's effectiveness for complex navigation behaviors (crowd avoidance, obstacle detection) in unseen environments, suggesting human-centric imitation learning can directly transfer to embodied robot control without explicit finetuning.", "https://arxiv.org/abs/2604.00416")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.00455" style="color:#4ea8ff;">First Logit Boosting: Visual Grounding Method to Mitigate Object Hallucination in Large Vision-Language Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 23</span> <span class="score-badge" style="background:#3b82f6;">⚡ 72</span></div>
+  <p>First Logit Boosting (FLB) addresses object hallucination in Large Vision-Language Models through a training-free mechanism that mitigates "long-term decay"—where visual grounding weakens as generation progresses and language priors dominate. By storing and boosting the logit of the first generated token, FLB achieves visual grounding improvements without additional training data or external models, offering a computationally efficient alternative to existing approaches like Contrastive Decoding. This technique is particularly valuable for practitioners seeking to reduce hallucinations in production LVLMs while maintaining inference efficiency.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "First Logit Boosting: Visual Grounding Method to Mitigate Object Hallucination in Large Vision-Language Models", "First Logit Boosting (FLB) addresses object hallucination in Large Vision-Language Models through a training-free mechanism that mitigates \"long-term decay\"—where visual grounding weakens as generation progresses and language priors dominate. By storing and boosting the logit of the first generated token, FLB achieves visual grounding improvements without additional training data or external models, offering a computationally efficient alternative to existing approaches like Contrastive Decoding. This technique is particularly valuable for practitioners seeking to reduce hallucinations in production LVLMs while maintaining inference efficiency.", "https://arxiv.org/abs/2604.00455")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.01002" style="color:#4ea8ff;">Query-Conditioned Evidential Keyframe Sampling for MLLM-Based Long-Form Video Understanding</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-03
+  </p>
+  <div style="margin:0.5rem 0;"><span class="score-badge" style="background:#6b7280;">💼 18</span> <span class="score-badge" style="background:#10b981;">⚡ 82</span></div>
+  <p>This paper introduces an evidence-driven keyframe sampling framework for long-form video understanding with MLLMs, grounded in information bottleneck theory that maximizes conditional mutual information between selected frames and the query. The key innovation is decomposing the combinatorial optimization problem into tractable frame-level scoring, avoiding inefficiencies of prior semantic relevance or RL-based approaches. This principled approach directly measures each frame's evidential contribution to query resolution, promising more efficient context utilization for resource-constrained MLLM deployment on extended videos.</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Query-Conditioned Evidential Keyframe Sampling for MLLM-Based Long-Form Video Understanding", "This paper introduces an evidence-driven keyframe sampling framework for long-form video understanding with MLLMs, grounded in information bottleneck theory that maximizes conditional mutual information between selected frames and the query. The key innovation is decomposing the combinatorial optimization problem into tractable frame-level scoring, avoiding inefficiencies of prior semantic relevance or RL-based approaches. This principled approach directly measures each frame's evidential contribution to query resolution, promising more efficient context utilization for resource-constrained MLLM deployment on extended videos.", "https://arxiv.org/abs/2604.01002")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
