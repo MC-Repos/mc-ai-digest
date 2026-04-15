@@ -1,0 +1,502 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Daily Digest – 2026-04-15</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { background:#0b0c10; color:#e5e5e5; font-family:system-ui; padding:2rem; }
+    a { color:#4ea8ff; }
+    .score-badge {
+      display:inline-block;
+      color:#fff;
+      padding:2px 10px;
+      border-radius:4px;
+      font-size:0.75rem;
+      margin-right:0.5rem;
+      font-weight:500;
+    }
+    .analysis-box {
+      background:#1a1b26;
+      border-left:4px solid #8b5cf6;
+      padding:1rem;
+      border-radius:6px;
+      color:#c9d1d9;
+    }
+    .loading {
+      color:#888;
+      font-style:italic;
+    }
+  </style>
+  <script>
+    async function analyzeForMVP(articleId, title, summary, link) {
+      const container = document.getElementById('analysis-' + articleId);
+      const modelSelect = document.getElementById('model-select-' + articleId);
+      const selectedModel = modelSelect ? modelSelect.value : 'claude';
+
+      const modelNames = {
+        'claude': 'Claude Sonnet 4.5',
+        'gemini': 'Gemini 3.0 Flash'
+      };
+
+      container.innerHTML = '<p class="loading">Analyzing with ' + modelNames[selectedModel] + '...</p>';
+
+      try {
+        const response = await fetch('/api/analyze-mvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, summary, link, model: selectedModel })
+        });
+
+        if (!response.ok) {
+          throw new Error('Analysis failed');
+        }
+
+        const data = await response.json();
+        container.innerHTML = '<div class="analysis-box"><p style="color:#888;font-size:0.85rem;margin-bottom:1rem;">Analyzed by ' + modelNames[data.model] + '</p>' + data.analysis + '</div>';
+      } catch (error) {
+        container.innerHTML = '<p style="color:#ef4444;">Error: ' + error.message + '</p>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Daily Digest – 2026-04-15</h1>
+  
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2602.00181v3 Announce Type: replace-cross 
+Abstract: Understanding camera dynamics is a fundamental pillar of video spatial intelligence. However, existing multimodal models predominantly treat this task as a black-box classification, often confusing physically distinct motions by relying on...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "arXiv:2602.00181v3 Announce Type: replace-cross \nAbstract: Understanding camera dynamics is a fundamental pillar of video spatial intelligence. However, existing multimodal models predominantly treat this task as a black-box classification, often confusing physically distinct motions by relying on...", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12650" style="color:#4ea8ff;">Listening Deepfake Detection: A New Perspective Beyond Speaking-Centric Forgery Analysis</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12650v1 Announce Type: new 
+Abstract: Existing deepfake detection research has primarily focused on scenarios where the manipulated subject is actively speaking, i.e., generating fabricated content by altering the speaker's appearance or voice. However, in realistic interaction settings,...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Listening Deepfake Detection: A New Perspective Beyond Speaking-Centric Forgery Analysis", "arXiv:2604.12650v1 Announce Type: new \nAbstract: Existing deepfake detection research has primarily focused on scenarios where the manipulated subject is actively speaking, i.e., generating fabricated content by altering the speaker's appearance or voice. However, in realistic interaction settings,...", "https://arxiv.org/abs/2604.12650")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2602.00181" style="color:#4ea8ff;">CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2602.00181v3 Announce Type: replace 
+Abstract: Understanding camera dynamics is a fundamental pillar of video spatial intelligence. However, existing multimodal models predominantly treat this task as a black-box classification, often confusing physically distinct motions by relying on...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "CamReasoner: Reinforcing Camera Movement Understanding via Structured Spatial Reasoning", "arXiv:2602.00181v3 Announce Type: replace \nAbstract: Understanding camera dynamics is a fundamental pillar of video spatial intelligence. However, existing multimodal models predominantly treat this task as a black-box classification, often confusing physically distinct motions by relying on...", "https://arxiv.org/abs/2602.00181")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.11730" style="color:#4ea8ff;">Ambivalence/Hesitancy Recognition in Videos for Personalized Digital Health Interventions</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.CV updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.11730v2 Announce Type: replace 
+Abstract: Using behavioural science, health interventions focus on behaviour change by providing a framework to help patients acquire and maintain healthy habits that improve medical outcomes. In-person interventions are costly and difficult to scale,...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Ambivalence/Hesitancy Recognition in Videos for Personalized Digital Health Interventions", "arXiv:2604.11730v2 Announce Type: replace \nAbstract: Using behavioural science, health interventions focus on behaviour change by providing a framework to help patients acquire and maintain healthy habits that improve medical outcomes. In-person interventions are costly and difficult to scale,...", "https://arxiv.org/abs/2604.11730")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12145" style="color:#4ea8ff;">Why Your Tokenizer Fails in Information Fusion: A Timing-Aware Pre-Quantization Fusion for Video-Enhanced Audio Tokenization</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    eess.AS updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12145v1 Announce Type: new 
+Abstract: Audio tokenization has emerged as a critical component in end-to-end audio language models, enabling efficient discrete representation learning for both audio understanding and generation tasks. However, existing audio tokenizers face fundamental...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Why Your Tokenizer Fails in Information Fusion: A Timing-Aware Pre-Quantization Fusion for Video-Enhanced Audio Tokenization", "arXiv:2604.12145v1 Announce Type: new \nAbstract: Audio tokenization has emerged as a critical component in end-to-end audio language models, enabling efficient discrete representation learning for both audio understanding and generation tasks. However, existing audio tokenizers face fundamental...", "https://arxiv.org/abs/2604.12145")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12700" style="color:#4ea8ff;">MISID: A Multimodal Multi-turn Dataset for Complex Intent Recognition in Strategic Deception Games</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12700v1 Announce Type: new 
+Abstract: Understanding human intent in complex multi-turn interactions remains a fundamental challenge in human-computer interaction and behavioral analysis. While existing intent recognition datasets focus mainly on single utterances or simple dialogues,...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MISID: A Multimodal Multi-turn Dataset for Complex Intent Recognition in Strategic Deception Games", "arXiv:2604.12700v1 Announce Type: new \nAbstract: Understanding human intent in complex multi-turn interactions remains a fundamental challenge in human-computer interaction and behavioral analysis. While existing intent recognition datasets focus mainly on single utterances or simple dialogues,...", "https://arxiv.org/abs/2604.12700")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12820" style="color:#4ea8ff;">RePAIR: Interactive Machine Unlearning through Prompt-Aware Model Repair</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12820v1 Announce Type: new 
+Abstract: Large language models (LLMs) inherently absorb harmful knowledge, misinformation, and personal data during pretraining on large-scale web corpora, with no native mechanism for selective removal. While machine unlearning offers a principled solution,...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "RePAIR: Interactive Machine Unlearning through Prompt-Aware Model Repair", "arXiv:2604.12820v1 Announce Type: new \nAbstract: Large language models (LLMs) inherently absorb harmful knowledge, misinformation, and personal data during pretraining on large-scale web corpora, with no native mechanism for selective removal. While machine unlearning offers a principled solution,...", "https://arxiv.org/abs/2604.12820")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.13017" style="color:#4ea8ff;">PAL: Personal Adaptive Learner</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.13017v1 Announce Type: new 
+Abstract: AI-driven education platforms have made some progress in personalisation, yet most remain constrained to static adaptation--predefined quizzes, uniform pacing, or generic feedback--limiting their ability to respond to learners' evolving...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "PAL: Personal Adaptive Learner", "arXiv:2604.13017v1 Announce Type: new \nAbstract: AI-driven education platforms have made some progress in personalisation, yet most remain constrained to static adaptation--predefined quizzes, uniform pacing, or generic feedback--limiting their ability to respond to learners' evolving...", "https://arxiv.org/abs/2604.13017")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12219" style="color:#4ea8ff;">Ride the Wave: Precision-Allocated Sparse Attention for Smooth Video Generation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12219v1 Announce Type: cross 
+Abstract: Video Diffusion Transformers have revolutionized high-fidelity video generation but suffer from the massive computational burden of self-attention. While sparse attention provides a promising acceleration solution, existing methods frequently...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Ride the Wave: Precision-Allocated Sparse Attention for Smooth Video Generation", "arXiv:2604.12219v1 Announce Type: cross \nAbstract: Video Diffusion Transformers have revolutionized high-fidelity video generation but suffer from the massive computational burden of self-attention. While sparse attention provides a promising acceleration solution, existing methods frequently...", "https://arxiv.org/abs/2604.12219")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12424" style="color:#4ea8ff;">Decoding by Perturbation: Mitigating MLLM Hallucinations via Dynamic Textual Perturbation</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12424v1 Announce Type: cross 
+Abstract: Multimodal Large Language Models frequently suffer from inference hallucinations, partially stemming from language priors dominating visual evidence. Existing training-free mitigation methods either perturb the visual representation and deviate...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Decoding by Perturbation: Mitigating MLLM Hallucinations via Dynamic Textual Perturbation", "arXiv:2604.12424v1 Announce Type: cross \nAbstract: Multimodal Large Language Models frequently suffer from inference hallucinations, partially stemming from language priors dominating visual evidence. Existing training-free mitigation methods either perturb the visual representation and deviate...", "https://arxiv.org/abs/2604.12424")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.12456" style="color:#4ea8ff;">X-VC: Zero-shot Streaming Voice Conversion in Codec Space</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.12456v1 Announce Type: cross 
+Abstract: Zero-shot voice conversion (VC) aims to convert a source utterance into the voice of an unseen target speaker while preserving its linguistic content. Although recent systems have improved conversion quality, building zero-shot VC systems for...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "X-VC: Zero-shot Streaming Voice Conversion in Codec Space", "arXiv:2604.12456v1 Announce Type: cross \nAbstract: Zero-shot voice conversion (VC) aims to convert a source utterance into the voice of an unseen target speaker while preserving its linguistic content. Although recent systems have improved conversion quality, building zero-shot VC systems for...", "https://arxiv.org/abs/2604.12456")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2510.24168" style="color:#4ea8ff;">MGA: Memory-Driven GUI Agent for Observation-Centric Interaction</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2510.24168v3 Announce Type: replace 
+Abstract: Multimodal Large Language Models (MLLMs) have significantly advanced GUI agents, yet long-horizon automation remains constrained by two critical bottlenecks: context overload from raw sequential trajectory dependence and architectural redundancy...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "MGA: Memory-Driven GUI Agent for Observation-Centric Interaction", "arXiv:2510.24168v3 Announce Type: replace \nAbstract: Multimodal Large Language Models (MLLMs) have significantly advanced GUI agents, yet long-horizon automation remains constrained by two critical bottlenecks: context overload from raw sequential trajectory dependence and architectural redundancy...", "https://arxiv.org/abs/2510.24168")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2604.11043" style="color:#4ea8ff;">EmergentBridge: Improving Zero-Shot Cross-Modal Transfer in Unified Multimodal Embedding Models</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2604.11043v2 Announce Type: replace 
+Abstract: Unified multimodal embedding spaces underpin practical applications such as cross-modal retrieval and zero-shot recognition. In many real deployments, however, supervision is available only for a small subset of modality pairs (e.g.,...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "EmergentBridge: Improving Zero-Shot Cross-Modal Transfer in Unified Multimodal Embedding Models", "arXiv:2604.11043v2 Announce Type: replace \nAbstract: Unified multimodal embedding spaces underpin practical applications such as cross-modal retrieval and zero-shot recognition. In many real deployments, however, supervision is available only for a small subset of modality pairs (e.g.,...", "https://arxiv.org/abs/2604.11043")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2511.22364" style="color:#4ea8ff;">BINDER: Instantly Adaptive Mobile Manipulation with Open-Vocabulary Commands</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2511.22364v2 Announce Type: replace-cross 
+Abstract: Open-vocabulary mobile manipulation (OVMM) requires robots to follow language instructions, navigate, and manipulate while updating their world representation under dynamic environmental changes. However, most prior approaches update their...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "BINDER: Instantly Adaptive Mobile Manipulation with Open-Vocabulary Commands", "arXiv:2511.22364v2 Announce Type: replace-cross \nAbstract: Open-vocabulary mobile manipulation (OVMM) requires robots to follow language instructions, navigate, and manipulate while updating their world representation under dynamic environmental changes. However, most prior approaches update their...", "https://arxiv.org/abs/2511.22364")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+
+<article style="margin-bottom:1.5rem;">
+  <h2><a href="https://arxiv.org/abs/2603.08819" style="color:#4ea8ff;">Beyond Relevance: On the Relationship Between Retrieval and RAG Information Coverage</a></h2>
+  <p style="color:#888;font-size:0.85rem;">
+    cs.AI updates on arXiv.org
+     · 2026-04-15
+  </p>
+  
+  <p>arXiv:2603.08819v3 Announce Type: replace-cross 
+Abstract: Retrieval-augmented generation (RAG) systems combine document retrieval with a generative model to address complex information seeking tasks like report generation. While the relationship between retrieval quality and generation...</p>
+  <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;">
+    <select
+      id="model-select-aHR0cHM6Ly9hcnhp"
+      style="background:#1a1b26;color:#e5e5e5;border:1px solid #444;padding:6px 10px;border-radius:6px;font-size:0.85rem;cursor:pointer;"
+    >
+      <option value="claude">Claude Sonnet 4.5</option>
+      <option value="gemini">Gemini 3.0 Flash</option>
+    </select>
+    <button
+      onclick="analyzeForMVP('aHR0cHM6Ly9hcnhp', "Beyond Relevance: On the Relationship Between Retrieval and RAG Information Coverage", "arXiv:2603.08819v3 Announce Type: replace-cross \nAbstract: Retrieval-augmented generation (RAG) systems combine document retrieval with a generative model to address complex information seeking tasks like report generation. While the relationship between retrieval quality and generation...", "https://arxiv.org/abs/2603.08819")"
+      style="background:#8b5cf6;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;"
+      onmouseover="this.style.background='#7c3aed'"
+      onmouseout="this.style.background='#8b5cf6'"
+    >
+      💡 Analyze for MVP
+    </button>
+  </div>
+  <div id="analysis-aHR0cHM6Ly9hcnhp" style="margin-top:1rem;"></div>
+</article>
+</body>
+</html>
