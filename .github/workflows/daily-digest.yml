@@ -2,9 +2,9 @@ name: Daily AI Digest
 
 on:
   schedule:
-    # Run at 6:00 AM UTC (7:00 AM Malta time) - 2hr buffer until we have real timing data
-    # TODO: Optimize timing once we know actual podcast generation duration with ElevenLabs
-    - cron: '0 6 * * *'
+    # Run at 09:00 UTC, which is 11:00 Malta during summer time.
+    # GitHub cron is UTC-only; revisit if we need wall-clock 11:00 year-round.
+    - cron: '0 9 * * *'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
           mkdir -p config
           cat > config/config.yaml << 'EOF'
           timeZone: "Europe/Malta"
-          runTime: "09:00"
+          runTime: "11:00"
 
           email:
             from: "Matt's AI Daily Digest <digest@mattcarpenter.com>"
