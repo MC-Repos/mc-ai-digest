@@ -1,10 +1,13 @@
 import nodemailer from "nodemailer";
 import { dateSlug } from "./page.js";
 import { logInfo, logError } from "./logger.js";
+import { renderRobEmailHtml } from "./robRenderers.js";
 
-export async function sendDigestEmail(date, items, cfg) {
+export async function sendDigestEmail(date, items, cfg, brief = null) {
   const slug = dateSlug(date, cfg.timeZone);
-  const subject = `AI Daily Digest – ${slug}`;
+  const subject = brief
+    ? `ROB - ${brief.date}: ${brief.top_actions.length || "no"} things worth your attention`
+    : `AI Daily Digest – ${slug}`;
 
   const tx = nodemailer.createTransport({
     host: cfg.smtp.host,
@@ -13,7 +16,7 @@ export async function sendDigestEmail(date, items, cfg) {
     auth: { user: cfg.smtp.user, pass: cfg.smtp.pass }
   });
 
-  const html = buildHtml(date, items, cfg);
+  const html = brief ? renderRobEmailHtml(brief) : buildHtml(date, items, cfg);
 
   try {
     const info = await tx.sendMail({

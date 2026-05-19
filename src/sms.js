@@ -2,7 +2,12 @@ import twilio from "twilio";
 import { dateSlug } from "./page.js";
 import { logInfo, logError } from "./logger.js";
 
-export async function sendDigestSms(date, items, cfg, podcastUrl = null) {
+export async function sendDigestSms(date, items, cfg, podcastUrl = null, brief = null) {
+  if (!cfg.sms?.enabled) {
+    logInfo("SMS disabled for ROB, skipping SMS");
+    return;
+  }
+
   const sid = cfg.twilio.accountSid;
   const token = cfg.twilio.authToken;
 
