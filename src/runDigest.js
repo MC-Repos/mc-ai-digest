@@ -11,6 +11,7 @@ import { generatePodcast } from "./podcast.js";
 import { buildRobBrief } from "./rob.js";
 import { renderRobText } from "./robRenderers.js";
 import { sendRobTelegram } from "./telegram.js";
+import { sendRobOpenWebUI } from "./openwebui.js";
 
 async function run() {
   logInfo("Starting daily digest…");
@@ -76,6 +77,7 @@ async function run() {
 
     await sendDigestEmail(now, items, cfg, brief);
     await sendRobTelegram(brief, cfg);
+    await sendRobOpenWebUI(brief, cfg);
     await sendDigestSms(now, items, cfg, podcastUrl, brief);
 
     logInfo(`Digest completed for ${slug}`);
