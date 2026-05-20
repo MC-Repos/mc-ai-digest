@@ -4,9 +4,14 @@ import { logInfo, logError } from "./logger.js";
 import { renderRobEmailHtml } from "./robRenderers.js";
 
 export async function sendDigestEmail(date, items, cfg, brief = null) {
+  if (cfg.email?.enabled === false) {
+    logInfo("Email disabled, skipping digest email");
+    return;
+  }
+
   const slug = dateSlug(date, cfg.timeZone);
   const subject = brief
-    ? `ROB - ${brief.date}: ${brief.top_actions.length || "no"} things worth your attention`
+    ? `The ROB Report - ${brief.date}: ${brief.top_actions.length || "no"} things worth your attention`
     : `AI Daily Digest – ${slug}`;
 
   const tx = nodemailer.createTransport({

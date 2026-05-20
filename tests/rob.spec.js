@@ -75,7 +75,7 @@ test("renderRobEmailHtml has no website footer", () => {
   };
 
   const html = renderRobEmailHtml(brief);
-  expect(html).toContain("ROB - 2026-05-19");
+  expect(html).toContain("The ROB Report - 2026-05-19");
   expect(html).toContain("Top Actions");
   expect(html).toContain("Code:</strong> attached");
   expect(html).not.toMatch(/View online/i);
@@ -95,7 +95,7 @@ test("renderRobText is Hermes and Telegram friendly", () => {
   ], new Date("2026-05-19T06:00:00Z"));
 
   const text = renderRobText(brief);
-  expect(text).toContain("ROB - 2026-05-19");
+  expect(text).toContain("The ROB Report - 2026-05-19");
   expect(text).toContain("Next move:");
   expect(text.length).toBeLessThan(3900);
 });

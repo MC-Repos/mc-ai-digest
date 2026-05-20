@@ -1,0 +1,10 @@
+[Unit]
+Description=Generate and post The ROB Report from Workshop
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/sysop/projects/mc-ai-digest
+Environment=DIGEST_CONFIG_PATH=/home/sysop/projects/mc-ai-digest/config/workshop.yaml
+ExecStart=/usr/bin/infisical run --env=dev --path=/ --path=/openwebui/channel-webhooks -- /usr/bin/pnpm digest

@@ -57,6 +57,6 @@ test("sendRobTelegram posts ROB text when credentials are present", async () => 
   expect(payload.url).toContain("https://api.telegram.org/bottest-token/sendMessage");
   const body = JSON.parse(payload.options.body);
   expect(body.chat_id).toBe("test-chat");
-  expect(body.text).toContain("ROB - 2026-05-19");
+  expect(body.text).toContain("The ROB Report - 2026-05-19");
   expect(body.disable_web_page_preview).toBe(true);
 });

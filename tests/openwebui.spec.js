@@ -56,5 +56,5 @@ test("sendRobOpenWebUI posts ROB text to the configured webhook", async () => {
 
   expect(payload.url).toBe("https://openwebui.example/channels/webhooks/id/token");
   const body = JSON.parse(payload.options.body);
-  expect(body.content).toContain("ROB - 2026-05-19");
+  expect(body.content).toContain("The ROB Report - 2026-05-19");
 });

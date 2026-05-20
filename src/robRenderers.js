@@ -11,7 +11,7 @@ export function renderRobEmailHtml(brief) {
 <html>
 <body style="background:#0b0c10;padding:20px;">
   <table width="600" align="center" style="background:#11141a;padding:20px;border-radius:12px;color:#e5e5e5;font-family:system-ui;">
-    <tr><td style="font-weight:bold;font-size:18px;padding-bottom:10px;">ROB - ${esc(brief.date)}</td></tr>
+    <tr><td style="font-weight:bold;font-size:18px;padding-bottom:10px;">The ROB Report - ${esc(brief.date)}</td></tr>
     <tr><td><h2 style="font-size:16px;margin-top:0;">Top Actions</h2>${top || "<p>No strong action candidates today.</p>"}${watch}${drift}</td></tr>
   </table>
 </body>
@@ -19,7 +19,7 @@ export function renderRobEmailHtml(brief) {
 }
 
 export function renderRobText(brief) {
-  const lines = [`ROB - ${brief.date}`, "", "Top Actions", ""];
+  const lines = [`The ROB Report - ${brief.date}`, "", "Top Actions", ""];
 
   if (!brief.top_actions.length) {
     lines.push("No strong action candidates today.", "");

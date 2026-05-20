@@ -1,0 +1,52 @@
+timeZone: "Europe/Malta"
+runTime: "11:00"
+
+email:
+  enabled: false
+  from: "The ROB Report <digest@mattcarpenter.com>"
+  to: "matt@mattcarpenter.com"
+
+smtp:
+  host: "mail.privateemail.com"
+  port: 587
+  secure: false
+
+twilio:
+  fromNumber: "+16466635100"
+  toNumber: "+35679420492"
+
+feeds:
+  - url: "https://openai.com/blog/rss/"
+  - url: "https://ai.googleblog.com/feeds/posts/default"
+  - url: "https://venturebeat.com/category/ai/feed/"
+  - url: "https://www.marktechpost.com/feed/"
+  - url: "https://rss.arxiv.org/rss/cs.AI"
+  - url: "https://rss.arxiv.org/rss/cs.CV"
+  - url: "https://rss.arxiv.org/rss/eess.AS"
+
+keywords:
+  - audio
+  - video
+  - multimodal
+  - "signal processing"
+  - "media asset"
+  - "sentiment analysis"
+  - "data centre"
+  - "data center"
+  - "compute infrastructure"
+  - "datacenter"
+  - inference
+
+ai:
+  provider: "openrouter"
+  model: "openai/gpt-5.5"
+
+output:
+  baseUrl: "https://mattcarpenter.com/news"
+  webDir: "./public/news"
+  maxItems: 15
+
+podcast:
+  enabled: false
+  audioDir: "./public/news/audio"
+  audioBaseUrl: "https://mattcarpenter.com/news/audio"
