@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { loadConfig } from "./config.js";
 import { fetchAllFeeds } from "./feeds.js";
 import { filterAndScoreItems } from "./filter.js";
@@ -54,6 +56,9 @@ async function run() {
     logInfo(`Hermes/Telegram ROB preview:\n${renderRobText(brief)}`);
 
     const { slug } = writeHtmlPage(now, items, cfg);
+    const robTextPath = path.join(cfg.output.webDir, `${slug}.rob.txt`);
+    fs.writeFileSync(robTextPath, renderRobText(brief), "utf8");
+    logInfo(`Wrote ROB text artifact ${robTextPath}`);
 
     // Generate podcast if enabled
     let podcastUrl = null;
