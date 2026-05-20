@@ -7,4 +7,4 @@ After=network-online.target
 Type=oneshot
 WorkingDirectory=/home/sysop/projects/mc-ai-digest
 Environment=DIGEST_CONFIG_PATH=/home/sysop/projects/mc-ai-digest/config/workshop.yaml
-ExecStart=/usr/bin/infisical run --env=dev --path=/ --path=/openwebui/channel-webhooks -- /usr/bin/pnpm digest
+ExecStart=/usr/bin/infisical run --project-config-dir=/home/sysop/projects/mc-the-kraken --env=dev --path=/ --path=/openwebui/channel-webhooks -- /usr/bin/pnpm digest
