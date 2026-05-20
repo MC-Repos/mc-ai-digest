@@ -1,0 +1,18 @@
+ROB - 2026-05-21
+
+Top Actions
+
+No strong action candidates today.
+
+Watchlist
+
+- AffectVerse: Emotional World Models for Multimodal Affective Computing: none
+- Alibaba Qwen Team Introduces Qwen3.5-LiveTranslate-Flash: Real-Time Multimodal Interpretation Across 60 Languages at 2.8-Second Latency: none
+- OmniGUI: Benchmarking GUI Agents in Omni-Modal Smartphone Environments: none
+- CounterFlow: A Two-Phase Inference-Time Sampling for Counterfactual Video Foley Generation: none
+- AffectAI-Capture: A Reproducible Multimodal Protocol for Small-Group Meeting Research: none
+
+Market Drift
+
+- audio-video: 13 signals in today's research/news flow.
+- multimodal: 12 signals in today's research/news flow.
