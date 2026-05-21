@@ -6,6 +6,7 @@
   "scripts": {
     "digest": "node src/runDigest.js",
     "api": "node api-server.js",
+    "feeds:check": "node scripts/check-feeds.mjs",
     "test": "playwright test"
   },
   "dependencies": {
