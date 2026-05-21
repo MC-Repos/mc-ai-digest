@@ -16,8 +16,8 @@ twilio:
   toNumber: "+35679420492"
 
 feeds:
-  - url: "https://openai.com/blog/rss/"
-  - url: "https://ai.googleblog.com/feeds/posts/default"
+  - url: "https://openai.com/news/rss.xml"
+  - url: "https://blog.google/technology/ai/rss/"
   - url: "https://venturebeat.com/category/ai/feed/"
   - url: "https://www.marktechpost.com/feed/"
   - url: "https://rss.arxiv.org/rss/cs.AI"
