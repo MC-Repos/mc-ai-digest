@@ -8,7 +8,7 @@ import { writeHtmlPage } from "./page.js";
 import { sendDigestEmail } from "./email.js";
 import { sendDigestSms } from "./sms.js";
 import { logInfo, logError } from "./logger.js";
-import { initializeAI, analyzeArticle, getAIClient, validateAIProvider } from "./ai.js";
+import { initializeAI, analyzeArticle, consumeProviderWarnings, getAIClient, validateAIProvider } from "./ai.js";
 import { generatePodcast } from "./podcast.js";
 import { buildRobBrief } from "./rob.js";
 import { renderRobText } from "./robRenderers.js";
@@ -87,6 +87,7 @@ async function run() {
     await sendRobTelegram(brief, cfg);
     await sendRobOpenWebUI(brief, cfg);
     await sendDigestSms(now, items, cfg, podcastUrl, brief);
+    await postProviderWarnings(consumeProviderWarnings());
 
     logInfo(`Digest completed for ${slug}`);
   } catch (err) {
@@ -108,6 +109,27 @@ async function postIncident(err) {
     `Reason: ${err.message}`,
     "",
     "This should be treated as a loud failure: provider auth, credits, rate limits, feeds, or webhook delivery may need attention.",
+  ].join("\n");
+  const res = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content }),
+  });
+  if (!res.ok) throw new Error(`Incident webhook HTTP ${res.status}: ${await res.text()}`);
+}
+
+async function postProviderWarnings(warnings) {
+  if (!warnings.length) return;
+  const webhookUrl = process.env.OPENWEBUI_CHANNEL_WEBHOOK_INCIDENTS_URL;
+  if (!webhookUrl) return;
+  const content = [
+    "The ROB Report used an AI fallback",
+    "",
+    `Time: ${new Date().toISOString()}`,
+    "",
+    ...warnings.map((warning) => `- ${warning}`),
+    "",
+    "The report completed, but the primary AI route needs attention.",
   ].join("\n");
   const res = await fetch(webhookUrl, {
     method: "POST",

@@ -6,6 +6,9 @@ import { logInfo, logError } from './logger.js';
  */
 
 let config = null;
+let activeModel = null;
+let providerWarnings = [];
+const recordedWarnings = new Set();
 
 /**
  * Initialize AI client with configuration
@@ -13,6 +16,9 @@ let config = null;
  */
 export function initializeAI(aiConfig) {
   config = aiConfig;
+  activeModel = null;
+  providerWarnings = [];
+  recordedWarnings.clear();
 
   if (config.provider === 'openai' || config.provider === 'openai-compatible' || config.provider === 'openrouter') {
     assertProviderKey();
@@ -63,7 +69,26 @@ function classifyProviderFailure(error) {
 }
 
 function isFatalProviderError(error) {
-  return /auth failure|credit\/billing failure|rate limit/i.test(error.message);
+  return /auth failure|credit\/billing failure|rate limit|All AI model routes failed/i.test(error.message);
+}
+
+function shouldTryModelFallback(error) {
+  const status = error.response?.status;
+  if ([402, 404, 408, 429, 500, 502, 503, 504].includes(status)) return true;
+  return ['ECONNABORTED', 'ETIMEDOUT', 'ECONNRESET'].includes(error.code);
+}
+
+function recordProviderWarning(message) {
+  if (recordedWarnings.has(message)) return;
+  recordedWarnings.add(message);
+  providerWarnings.push(message);
+  logError(message);
+}
+
+export function consumeProviderWarnings() {
+  const warnings = providerWarnings;
+  providerWarnings = [];
+  return warnings;
 }
 
 export async function validateAIProvider() {
@@ -72,7 +97,9 @@ export async function validateAIProvider() {
 }
 
 function configuredModels() {
-  return [config.model, ...(config.fallbackModels ?? [])].filter(Boolean);
+  const models = [config.model, ...(config.fallbackModels ?? [])].filter(Boolean);
+  if (!activeModel || !models.includes(activeModel)) return models;
+  return [activeModel, ...models.filter((model) => model !== activeModel)];
 }
 
 /**
@@ -83,8 +110,9 @@ function configuredModels() {
  */
 async function callLLM(systemPrompt, userPrompt) {
   if (config.provider === 'openai' || config.provider === 'openai-compatible' || config.provider === 'openrouter') {
-    let lastError;
-    for (const model of configuredModels()) {
+    const modelErrors = [];
+    const models = configuredModels();
+    for (const [index, model] of models.entries()) {
       try {
         const response = await axios.post(
           `${providerBaseUrl().replace(/\/$/, '')}/chat/completions`,
@@ -107,14 +135,17 @@ async function callLLM(systemPrompt, userPrompt) {
         if (model !== config.model) {
           logInfo(`AI model fallback succeeded with ${model}`);
         }
+        activeModel = model;
         return response.data.choices[0].message.content;
       } catch (error) {
-        lastError = error;
-        if (error.response?.status !== 404) break;
-        logError(`AI model unavailable, trying fallback: ${model}`);
+        const reason = classifyProviderFailure(error);
+        modelErrors.push(`${model}: ${reason}`);
+        const hasFallback = index < models.length - 1;
+        if (!hasFallback || !shouldTryModelFallback(error)) break;
+        recordProviderWarning(`AI route failed, trying fallback: ${model}: ${reason}`);
       }
     }
-    throw new Error(classifyProviderFailure(lastError));
+    throw new Error(`All AI model routes failed: ${modelErrors.join('; ')}`);
   }
   throw new Error(`Unknown provider: ${config.provider}`);
 }
