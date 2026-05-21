@@ -24,10 +24,14 @@ export function loadConfig() {
 
   // AI configuration - env vars override YAML
   if (cfg.ai) {
-    cfg.ai.apiKey =
-      process.env.ANTHROPIC_API_KEY ||
-      process.env.OPENROUTER_API_KEY ||
-      cfg.ai.apiKey;
+    if (cfg.ai.provider === "openrouter") {
+      cfg.ai.apiKey = process.env.OPENROUTER_API_KEY || cfg.ai.apiKey;
+    } else if (
+      cfg.ai.provider === "openai" ||
+      cfg.ai.provider === "openai-compatible"
+    ) {
+      cfg.ai.apiKey = process.env.OPENAI_API_KEY || cfg.ai.apiKey;
+    }
   }
 
   return cfg;
