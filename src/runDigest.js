@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { loadConfig } from "./config.js";
-import { fetchAllFeeds } from "./feeds.js";
+import { consumeFeedWarnings, fetchAllFeeds } from "./feeds.js";
 import { filterAndScoreItems } from "./filter.js";
 import { summarizeItem } from "./summarize.js";
 import { writeHtmlPage } from "./page.js";
@@ -87,7 +87,16 @@ async function run() {
     await sendRobTelegram(brief, cfg);
     await sendRobOpenWebUI(brief, cfg);
     await sendDigestSms(now, items, cfg, podcastUrl, brief);
-    await postProviderWarnings(consumeProviderWarnings());
+    await postOperationalWarnings(
+      "The ROB Report had source feed failures",
+      consumeFeedWarnings(),
+      "The report completed, but source coverage needs attention."
+    );
+    await postOperationalWarnings(
+      "The ROB Report used an AI fallback",
+      consumeProviderWarnings(),
+      "The report completed, but the primary AI route needs attention."
+    );
 
     logInfo(`Digest completed for ${slug}`);
   } catch (err) {
@@ -118,18 +127,18 @@ async function postIncident(err) {
   if (!res.ok) throw new Error(`Incident webhook HTTP ${res.status}: ${await res.text()}`);
 }
 
-async function postProviderWarnings(warnings) {
+async function postOperationalWarnings(title, warnings, footer) {
   if (!warnings.length) return;
   const webhookUrl = process.env.OPENWEBUI_CHANNEL_WEBHOOK_INCIDENTS_URL;
   if (!webhookUrl) return;
   const content = [
-    "The ROB Report used an AI fallback",
+    title,
     "",
     `Time: ${new Date().toISOString()}`,
     "",
     ...warnings.map((warning) => `- ${warning}`),
     "",
-    "The report completed, but the primary AI route needs attention.",
+    footer,
   ].join("\n");
   const res = await fetch(webhookUrl, {
     method: "POST",
