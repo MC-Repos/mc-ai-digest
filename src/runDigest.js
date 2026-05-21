@@ -8,7 +8,7 @@ import { writeHtmlPage } from "./page.js";
 import { sendDigestEmail } from "./email.js";
 import { sendDigestSms } from "./sms.js";
 import { logInfo, logError } from "./logger.js";
-import { initializeAI, analyzeArticle, getAIClient } from "./ai.js";
+import { initializeAI, analyzeArticle, getAIClient, validateAIProvider } from "./ai.js";
 import { generatePodcast } from "./podcast.js";
 import { buildRobBrief } from "./rob.js";
 import { renderRobText } from "./robRenderers.js";
@@ -25,6 +25,9 @@ async function run() {
     // Initialize AI if configured
     if (cfg.ai) {
       initializeAI(cfg.ai);
+      if (cfg.ai.preflight !== false) {
+        await validateAIProvider();
+      }
     }
 
     const raw = await fetchAllFeeds(cfg.feeds);
@@ -88,8 +91,32 @@ async function run() {
     logInfo(`Digest completed for ${slug}`);
   } catch (err) {
     logError("Digest run failed", err);
+    await postIncident(err).catch((incidentErr) => {
+      logError("Incident post failed", incidentErr);
+    });
     process.exitCode = 1;
   }
 }
 
-run();
+async function postIncident(err) {
+  const webhookUrl = process.env.OPENWEBUI_CHANNEL_WEBHOOK_INCIDENTS_URL;
+  if (!webhookUrl) return;
+  const content = [
+    "The ROB Report failed",
+    "",
+    `Time: ${new Date().toISOString()}`,
+    `Reason: ${err.message}`,
+    "",
+    "This should be treated as a loud failure: provider auth, credits, rate limits, feeds, or webhook delivery may need attention.",
+  ].join("\n");
+  const res = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content }),
+  });
+  if (!res.ok) throw new Error(`Incident webhook HTTP ${res.status}: ${await res.text()}`);
+}
+
+run().finally(() => {
+  process.exit(process.exitCode ?? 0);
+});

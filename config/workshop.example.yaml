@@ -38,8 +38,14 @@ keywords:
   - inference
 
 ai:
-  provider: "openrouter"
-  model: "openai/gpt-5.5"
+  provider: "openai"
+  model: "gpt-5.5"
+  fallbackModels:
+    - "gpt-5.4"
+    - "gpt-5.2"
+    - "gpt-4.1"
+  timeoutMs: 20000
+  preflight: true
 
 output:
   baseUrl: "https://mattcarpenter.com/news"

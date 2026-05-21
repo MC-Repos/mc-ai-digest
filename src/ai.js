@@ -1,12 +1,10 @@
-import Anthropic from '@anthropic-ai/sdk';
 import axios from 'axios';
 import { logInfo, logError } from './logger.js';
 
 /**
- * AI-powered article analysis using Claude via Anthropic or OpenRouter
+ * AI-powered article analysis using OpenAI-compatible chat completions.
  */
 
-let client = null;
 let config = null;
 
 /**
@@ -16,14 +14,9 @@ let config = null;
 export function initializeAI(aiConfig) {
   config = aiConfig;
 
-  if (config.provider === 'anthropic') {
-    client = new Anthropic({
-      apiKey: config.apiKey || process.env.ANTHROPIC_API_KEY,
-    });
-    logInfo(`AI initialized with Anthropic (model: ${config.model})`);
-  } else if (config.provider === 'openrouter') {
-    // OpenRouter uses custom axios client
-    logInfo(`AI initialized with OpenRouter (model: ${config.model})`);
+  if (config.provider === 'openai' || config.provider === 'openai-compatible' || config.provider === 'openrouter') {
+    assertProviderKey();
+    logInfo(`AI initialized with ${config.provider} (model: ${config.model})`);
   } else {
     throw new Error(`Unknown AI provider: ${config.provider}`);
   }
@@ -34,10 +27,46 @@ export function initializeAI(aiConfig) {
  * @returns {Object} - AI client instance
  */
 export function getAIClient() {
-  if (!client) {
-    throw new Error('AI client not initialized. Call initializeAI() first.');
+  throw new Error('Podcast generation needs an explicit TTS/LLM client adapter; generic OpenAI-compatible chat client is not enough.');
+}
+
+function providerBaseUrl() {
+  if (config.provider === 'openrouter') return 'https://openrouter.ai/api/v1';
+  return config.baseUrl || process.env.OPENAI_API_BASE_URL || 'https://api.openai.com/v1';
+}
+
+function providerApiKey() {
+  if (config.provider === 'openrouter') return config.apiKey || process.env.OPENROUTER_API_KEY;
+  return config.apiKey || process.env.OPENAI_API_KEY;
+}
+
+function assertProviderKey() {
+  if (!providerApiKey()) {
+    const envName = config.provider === 'openrouter' ? 'OPENROUTER_API_KEY' : 'OPENAI_API_KEY';
+    throw new Error(`Missing ${envName} for ${config.provider}`);
   }
-  return client;
+}
+
+function classifyProviderFailure(error) {
+  const status = error.response?.status;
+  if ([401, 403].includes(status)) return `auth failure from ${config.provider} (${status})`;
+  if (status === 402) return `credit/billing failure from ${config.provider} (402)`;
+  if (status === 429) return `rate limit from ${config.provider} (429)`;
+  if (status) return `${config.provider} HTTP ${status}`;
+  return error.message;
+}
+
+function isFatalProviderError(error) {
+  return /auth failure|credit\/billing failure|rate limit/i.test(error.message);
+}
+
+export async function validateAIProvider() {
+  await callLLM("Reply with ok.", "ok");
+  logInfo(`AI provider preflight passed for ${config.provider}`);
+}
+
+function configuredModels() {
+  return [config.model, ...(config.fallbackModels ?? [])].filter(Boolean);
 }
 
 /**
@@ -47,33 +76,39 @@ export function getAIClient() {
  * @returns {Promise<string>} - LLM response
  */
 async function callLLM(systemPrompt, userPrompt) {
-  if (config.provider === 'anthropic') {
-    const response = await client.messages.create({
-      model: config.model,
-      max_tokens: 1024,
-      system: systemPrompt,
-      messages: [{ role: 'user', content: userPrompt }],
-    });
-    return response.content[0].text;
-  } else if (config.provider === 'openrouter') {
-    const response = await axios.post(
-      'https://openrouter.ai/api/v1/chat/completions',
-      {
-        model: config.model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-        max_tokens: 1024,
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${config.apiKey || process.env.OPENROUTER_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
+  if (config.provider === 'openai' || config.provider === 'openai-compatible' || config.provider === 'openrouter') {
+    let lastError;
+    for (const model of configuredModels()) {
+      try {
+        const response = await axios.post(
+          `${providerBaseUrl().replace(/\/$/, '')}/chat/completions`,
+          {
+            model,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: userPrompt },
+            ],
+            max_tokens: 1024,
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${providerApiKey()}`,
+              'Content-Type': 'application/json',
+            },
+            timeout: config.timeoutMs || 20000,
+          }
+        );
+        if (model !== config.model) {
+          logInfo(`AI model fallback succeeded with ${model}`);
+        }
+        return response.data.choices[0].message.content;
+      } catch (error) {
+        lastError = error;
+        if (error.response?.status !== 404) break;
+        logError(`AI model unavailable, trying fallback: ${model}`);
       }
-    );
-    return response.data.choices[0].message.content;
+    }
+    throw new Error(classifyProviderFailure(lastError));
   }
   throw new Error(`Unknown provider: ${config.provider}`);
 }
@@ -102,6 +137,7 @@ Focus on technical details, novel approaches, and practical implications.`;
     return summary.trim();
   } catch (error) {
     logError(`Failed to summarize article: ${error.message}`);
+    if (isFatalProviderError(error)) throw error;
     // Fallback to simple truncation
     return item.content
       ? item.content.substring(0, 300).replace(/\s+\S*$/, '') + '...'
@@ -149,6 +185,7 @@ Score (0-100):`;
     return clampedScore;
   } catch (error) {
     logError(`Failed to score business viability: ${error.message}`);
+    if (isFatalProviderError(error)) throw error;
     return 0; // Default to 0 on error
   }
 }
@@ -194,6 +231,7 @@ Score (0-100):`;
     return clampedScore;
   } catch (error) {
     logError(`Failed to score technical relevance: ${error.message}`);
+    if (isFatalProviderError(error)) throw error;
     return 0; // Default to 0 on error
   }
 }
@@ -221,6 +259,7 @@ export async function analyzeArticle(item, keywords) {
     };
   } catch (error) {
     logError(`Failed to analyze article "${item.title}": ${error.message}`);
+    if (isFatalProviderError(error)) throw error;
     // Return item with fallback values
     return {
       ...item,
