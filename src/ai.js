@@ -49,7 +49,13 @@ function assertProviderKey() {
 
 function classifyProviderFailure(error) {
   const status = error.response?.status;
+  const providerError = error.response?.data?.error ?? {};
+  const providerMessage = providerError.message ?? error.response?.data?.message ?? '';
+  const providerType = providerError.type ?? error.response?.data?.type ?? '';
   if ([401, 403].includes(status)) return `auth failure from ${config.provider} (${status})`;
+  if (status === 429 && /insufficient[_ -]?quota|billing|credits/i.test(`${providerType} ${providerMessage}`)) {
+    return `credit/billing failure from ${config.provider} (429)`;
+  }
   if (status === 402) return `credit/billing failure from ${config.provider} (402)`;
   if (status === 429) return `rate limit from ${config.provider} (429)`;
   if (status) return `${config.provider} HTTP ${status}`;
