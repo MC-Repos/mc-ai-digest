@@ -14,6 +14,7 @@ import { buildRobBrief } from "./rob.js";
 import { renderRobText } from "./robRenderers.js";
 import { sendRobTelegram } from "./telegram.js";
 import { sendRobOpenWebUI } from "./openwebui.js";
+import { formatIncidentTime } from "./time.js";
 
 async function run() {
   logInfo("Starting daily digest…");
@@ -114,7 +115,7 @@ async function postIncident(err) {
   const content = [
     "The ROB Report failed",
     "",
-    `Time: ${new Date().toISOString()}`,
+    `Time: ${formatIncidentTime(new Date())}`,
     `Reason: ${err.message}`,
     "",
     "This should be treated as a loud failure: provider auth, credits, rate limits, feeds, or webhook delivery may need attention.",
@@ -135,7 +136,7 @@ async function postOperationalWarnings(title, warnings, footer) {
   const content = [
     title,
     "",
-    `Time: ${new Date().toISOString()}`,
+    `Time: ${formatIncidentTime(new Date())}`,
     "",
     ...warnings.map((warning) => `- ${warning}`),
     "",
