@@ -11,7 +11,7 @@ export async function sendDigestEmail(date, items, cfg, brief = null) {
 
   const slug = dateSlug(date, cfg.timeZone);
   const subject = brief
-    ? `The ROB Report - ${brief.date}: ${brief.top_actions.length || "no"} things worth your attention`
+    ? `The ROB Report - ${brief.generated_at || brief.date}: ${brief.top_actions.length || "no"} things worth your attention`
     : `AI Daily Digest – ${slug}`;
 
   const tx = nodemailer.createTransport({

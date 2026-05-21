@@ -87,6 +87,7 @@ export function buildRobBrief(items, date = new Date(), timeZone = "Europe/Malta
 
   return {
     date: dateSlug(date, timeZone),
+    generated_at: formatGeneratedAt(date, timeZone),
     top_actions: candidates.filter(item => item.rankScore >= 55).slice(0, 3),
     watchlist: candidates.filter(item => item.rankScore < 55).slice(0, 5),
     market_drift: deriveMarketDrift(candidates),
@@ -149,5 +150,18 @@ function dateSlug(date, timeZone) {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
+  }).format(date);
+}
+
+function formatGeneratedAt(date, timeZone) {
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZoneName: "short",
   }).format(date);
 }

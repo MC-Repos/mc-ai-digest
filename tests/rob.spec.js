@@ -54,6 +54,8 @@ test("buildRobBrief returns top actions before watchlist items", () => {
   ], new Date("2026-05-19T06:00:00Z"));
 
   expect(brief.top_actions[0].title).toMatch(/Speech recovery/);
+  expect(brief.generated_at).toContain("19/05/2026");
+  expect(brief.generated_at).toContain("08:00");
   expect(brief.watchlist.map(item => item.title)).toContain("Generic AI funding news");
 });
 
@@ -95,7 +97,9 @@ test("renderRobText is Hermes and Telegram friendly", () => {
   ], new Date("2026-05-19T06:00:00Z"));
 
   const text = renderRobText(brief);
-  expect(text).toContain("The ROB Report - 2026-05-19");
+  expect(text).toContain("The ROB Report - 19/05/2026");
+  expect(text).toContain("08:00");
+  expect(text).toContain("Source: https://example.com/paper");
   expect(text).toContain("Next move:");
   expect(text.length).toBeLessThan(3900);
 });
