@@ -125,6 +125,7 @@ async function postIncident(err) {
     body: JSON.stringify({ content }),
   });
   if (!res.ok) throw new Error(`Incident webhook HTTP ${res.status}: ${await res.text()}`);
+  logInfo(`Posted operational warning: ${title}`);
 }
 
 async function postOperationalWarnings(title, warnings, footer) {
